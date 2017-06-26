@@ -1,0 +1,2 @@
+# APP_SMARTSTAY
+K_Hackathon_smart_accommodation_application_project
