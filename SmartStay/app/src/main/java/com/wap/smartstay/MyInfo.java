@@ -1,0 +1,19 @@
+package com.wap.smartstay;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
+/**
+ * Created by limjinha on 2017. 6. 27..
+ */
+
+public class MyInfo extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.myinfo);
+    }
+}
