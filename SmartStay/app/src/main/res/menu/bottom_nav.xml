@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/home"
+        android:id="@+id/Home"
         android:checked="true"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home"
+        android:title="@string/Home"
         app:showAsAction="ifRoom" />
-
     <item
-        android:id="@+id/key"
+        android:id="@+id/Key"
         android:checked="false"
         android:icon="@drawable/ic_screen_lock_portrait_black_24dp"
-        android:title="@string/title_smartkey"
+        android:title="@string/SmartKey"
         app:showAsAction="ifRoom" />
-
     <item
-        android:id="@+id/myPage"
+        android:id="@+id/Mypage"
         android:checked="false"
         android:icon="@drawable/ic_person_outline_black_24dp"
-        android:title="@string/title_mypage"
-        app:showAsAction="ifRoom"/>
-
+        android:title="@string/MyPage"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -1,16 +1,13 @@
 package com.wap.smartstay;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.wap.smartstay.Fragment.HomeFragment;
 import com.wap.smartstay.Fragment.MypageFragment;
@@ -25,15 +22,22 @@ public class Main extends AppCompatActivity {
     private ViewPager viewPager;
 
     private int[] tabIcons = {
-            R.drawable.home,
-            R.drawable.key,
-            R.drawable.people
+            R.drawable.ic_home_black_24dp,
+            R.drawable.ic_screen_lock_portrait_black_24dp,
+            R.drawable.ic_person_outline_black_24dp
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setTitleTextColor(Color.parseColor("#000000")); //제목의
+        toolbar.setNavigationIcon(R.drawable.ic_app_logo); //제목앞에 아이콘 넣기
+        setSupportActionBar(toolbar);
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
