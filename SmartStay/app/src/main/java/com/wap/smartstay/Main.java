@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,17 +25,15 @@ public class Main extends AppCompatActivity {
     private ViewPager viewPager;
 
     private int[] tabIcons = {
-            R.drawable.ic_home_black_24dp,
-            R.drawable.ic_screen_lock_portrait_black_24dp,
-            R.drawable.ic_person_outline_black_24dp
+            R.drawable.home,
+            R.drawable.key,
+            R.drawable.people
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        startActivity(new Intent(this, Splash.class));
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -49,13 +46,13 @@ public class Main extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.home:
+                            case R.id.Home:
                                 viewPager.setCurrentItem(0);
                                 break;
-                            case R.id.key:
+                            case R.id.Key:
                                 viewPager.setCurrentItem(1);
                                 break;
-                            case R.id.myPage:
+                            case R.id.Mypage:
                                 viewPager.setCurrentItem(2);
                                 break;
                         }

@@ -1,16 +1,10 @@
 package com.wap.smartstay;
-
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by limjinha on 2017. 7. 2..
- */
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
