@@ -1,6 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="268dp"
+        android:orientation="horizontal"
+        android:background="#EEEE">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="268dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  House Reservation"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_weight="0.38" />
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="206dp"
+                android:background="@drawable/one"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="239dp"
+        android:orientation="horizontal"
+        android:background="#EFC86A"
+        android:layout_weight="1.17">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="357dp"
+            android:background="#EFC86A"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.29" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="71dp"
+                android:orientation="vertical"></LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="266dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.38" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:orientation="vertical"
+                android:layout_weight="0.20"></LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="20,000￦  "
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:background="#EAEAEA"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:background="#EAEAEA"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="294dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#4197e2"
+                android:textColor="@color/white"
+                android:text="예약하기"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

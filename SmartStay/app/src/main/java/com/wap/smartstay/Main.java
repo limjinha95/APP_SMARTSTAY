@@ -42,8 +42,7 @@ public class Main extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 
-        toolbar.setTitleTextColor(Color.parseColor("#000000")); //제목의
-        //toolbar.setNavigationIcon(R.drawable.ic_app_logo); //제목앞에 아이콘 넣기
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
         setSupportActionBar(toolbar);
 
 
@@ -75,9 +74,6 @@ public class Main extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // 두 줄 코드
-        //MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.item_tool, menu);
         // 한 줄 코드
         getMenuInflater().inflate(R.menu.item_tool, menu);
         return super.onCreateOptionsMenu(menu);

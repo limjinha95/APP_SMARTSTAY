@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wap.smartstay.Main"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context="com.wap.smartstay.Main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.05"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="154dp"
-        android:layout_weight="0.21"
+        android:layout_weight="0.20"
         android:padding="15dp"
         android:background="#EAEAEA"
         android:gravity="center"
@@ -35,12 +41,14 @@
                 android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="부경 대연 호텔"
                 android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="부산광역시 대연3동"
                 android:textSize="15dp" />
 
@@ -49,6 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="#2f3849"
+                android:textColor="@color/white"
                 android:text="예약" />
 
         </LinearLayout>
@@ -58,7 +68,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_weight="0.45"
+        android:layout_weight="0.40"
         android:padding="15dp"
         android:background="#EFC86A"
         android:orientation="horizontal"
@@ -77,12 +87,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" 부경 용당 호텔"
+                android:textStyle="bold"
                 android:textSize="20dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                android:textStyle="bold"
                 android:text=" 부산광역시 남구 신선로 365"
                 android:textSize="15dp" />
 
@@ -90,6 +102,8 @@
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#2f3849"
+                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:text="예약" />
 
@@ -129,6 +143,7 @@
 
             <TextView
                 android:id="@+id/textView17"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="부경 용당 호텔"
@@ -137,6 +152,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text=" 부산광역시 남구 신선로 365"
                 android:textSize="15dp" />
 
@@ -144,6 +160,8 @@
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#2f3849"
+                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:text="예약" />
 
