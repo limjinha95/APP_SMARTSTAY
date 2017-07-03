@@ -1,13 +1,21 @@
 package com.wap.smartstay;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+
 
 import com.wap.smartstay.Fragment.HomeFragment;
 import com.wap.smartstay.Fragment.MypageFragment;
@@ -32,17 +40,17 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
 
         toolbar.setTitleTextColor(Color.parseColor("#000000")); //제목의
-        toolbar.setNavigationIcon(R.drawable.ic_app_logo); //제목앞에 아이콘 넣기
+        //toolbar.setNavigationIcon(R.drawable.ic_app_logo); //제목앞에 아이콘 넣기
         setSupportActionBar(toolbar);
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
 
@@ -65,6 +73,34 @@ public class Main extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 두 줄 코드
+        //MenuInflater inflater = getMenuInflater();
+        //inflater.inflate(R.menu.item_tool, menu);
+        // 한 줄 코드
+        getMenuInflater().inflate(R.menu.item_tool, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        switch (item.getItemId()) {
+            case R.id.local_main:
+                Intent intent = new Intent(this, Login.class);
+                startActivity(intent);
+                return true;
+            case R.id.login_main:
+                Intent intent2 = new Intent(this, Login.class);
+                startActivity(intent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
@@ -72,4 +108,5 @@ public class Main extends AppCompatActivity {
         adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
+
 }

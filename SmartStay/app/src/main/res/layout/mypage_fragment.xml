@@ -12,6 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical">
 
             <LinearLayout
@@ -22,8 +23,8 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/ic_person_outline_black_24dp"/>
 
@@ -38,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="임지짜"
-                        android:textSize="23dp"/>
+                        android:textSize="20dp"/>
 
                     <TextView
                         android:id="@+id/mypageIdEdit"
@@ -81,19 +82,24 @@
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:layout_marginRight="5dp"
-                        android:text="Usage List"/>
+                        android:text="Usage List"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimaryDark"/>
 
                     <Button
                         android:id="@+id/mycouponBtn"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
-                        android:text="My Coupon"/>
+                        android:text="My Coupon"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimaryDark"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
@@ -102,13 +108,17 @@
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:layout_marginRight="5dp"
-                        android:text="Alarm Setting"/>
+                        android:text="Alarm Setting"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimaryDark"/>
 
                     <Button
                         android:id="@+id/inquireBtn"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
-                        android:text="1 : 1 Inquire"/>
+                        android:text="1 : 1 Inquire"
+                        android:textColor="@color/white"
+                        android:background="@color/colorPrimaryDark"/>
 
                 </LinearLayout>
 

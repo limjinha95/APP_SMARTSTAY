@@ -21,6 +21,6 @@ public class Splash extends Activity {
                 startActivity(intent);   // Intent 시작
                 finish();
             }
-        }, 1000);  // 로딩화면 시간
+        }, 2000);  // 로딩화면 시간
     }
 }
