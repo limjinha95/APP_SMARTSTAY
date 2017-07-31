@@ -46,13 +46,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/loginPwEdit"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="PW"
                 android:textSize="25dp" />
 
             <EditText
+                android:id="@+id/loginPwEdit"
                 android:layout_width="210dp"
                 android:layout_height="match_parent" />
 
@@ -67,17 +67,21 @@
 
             <Button
                 android:id="@+id/startJoinBtn"
-                android:layout_width="110dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"
                 android:layout_marginRight="10dp"
-                android:text="Sign up"
+                android:text="회원가입"
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/loginBtn"
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:text="Sign in"
+                android:id="@+id/loginStartBtn"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"
+                android:text="로그인"
                 android:textSize="18dp" />
 
         </LinearLayout>

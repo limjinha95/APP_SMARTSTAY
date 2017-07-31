@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/addgroupListItemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/xml_border"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <TextView
+        android:id="@+id/addgroupName"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:gravity="center_vertical"
+        android:text="김두수"
+        android:textSize="17dp" />
+
+    <TextView
+    android:id="@+id/addgroupId"
+    android:layout_width="130dp"
+    android:layout_height="24dp"
+    android:gravity="center_vertical"
+    android:text="sexyboyds"
+    android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/addgroupAccommodationName"
+        android:layout_width="150dp"
+        android:layout_height="24dp"
+        android:gravity="center_vertical"
+        android:text="지니하우스 (101)"
+        android:textSize="17dp" />
+
+</LinearLayout>
