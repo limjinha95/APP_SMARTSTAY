@@ -8,7 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true">
 
         <activity android:name=".Main"></activity>
 
@@ -44,6 +46,37 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
         </activity>
+
+        <activity android:name=".UsageList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
+
+        <activity android:name=".CouponList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
+
+        <activity android:name=".AlarmSet">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
+
+        <activity android:name=".AddGroup">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
+
+        <activity android:name=".Manual">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
+
 
     </application>
 

@@ -7,52 +7,81 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
+import com.wap.smartstay.AlarmSet;
+import com.wap.smartstay.CouponList;
 import com.wap.smartstay.Join;
+import com.wap.smartstay.MyInfo;
 import com.wap.smartstay.R;
+import com.wap.smartstay.UsageList;
 
 public class MypageFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        Button.OnClickListener onClickListener = new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.usagelistBtn:
-                        //Intent intent = new Intent(this, Join.class);
-                        //startActivity(intent);
-                        break;
-                    case R.id.mycouponBtn:
-                        //
-                        break;
-                    case R.id.alarmsetBtn:
-                        //
-                        break;
-                    case R.id.inquireBtn:
-                        //
-                        break;
-                }
-            }
-        };
-//        Button usageListBtn = (Button) findViewById(R.id.usagelistBtn);
-//        usageListBtn.setOnClickListener(onClickListener);
-//        Button myCouponBtn = (Button) findViewById(R.id.mycouponBtn);
-//        myCouponBtn.setOnClickListener(onClickListener);
-//        Button alarmSetBtn = (Button) findViewById(R.id.alarmsetBtn);
-//        alarmSetBtn.setOnClickListener(onClickListener);
-//        Button inquireBtn = (Button) findViewById(R.id.inquireBtn);
-//        inquireBtn.setOnClickListener(onClickListener);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.mypage_fragment, container, false);
+
+        View view = inflater.inflate(R.layout.mypage_fragment, container, false);
+
+        // TODO: 2017. 7. 31. 마이페이지 버튼 이벤트들 여기다가 추가 
+
+        ImageButton mypageMyInfoBtn = (ImageButton) view.findViewById(R.id.mypageMyInfoBtn);
+        mypageMyInfoBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent mypageMyInfo = new Intent(getContext(), MyInfo.class);
+                        startActivity(mypageMyInfo);
+                    }
+                }
+        );
+
+        Button usagelistBtn = (Button) view.findViewById(R.id.usagelistBtn);
+        usagelistBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent usagelist = new Intent(getContext(), UsageList.class);
+                        startActivity(usagelist);
+                    }
+                }
+        );
+
+        Button mycouponBtn = (Button) view.findViewById(R.id.mycouponBtn);
+        mycouponBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent mycoupon = new Intent(getContext(), CouponList.class);
+                        startActivity(mycoupon);
+                    }
+                }
+        );
+
+        Button alarmsetBtn = (Button) view.findViewById(R.id.alarmsetBtn);
+        alarmsetBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent alarmset = new Intent(getContext(), AlarmSet.class);
+                        startActivity(alarmset);
+                    }
+                }
+        );
+
+        Button inquireBtn = (Button) view.findViewById(R.id.inquireBtn);
+        inquireBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent inquire = new Intent(getContext(), AlarmSet.class);
+                        startActivity(inquire);
+                    }
+                }
+        );
+
+        return view;
     }
 
 }

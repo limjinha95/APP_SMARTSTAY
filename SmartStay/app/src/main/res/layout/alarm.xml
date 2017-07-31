@@ -6,6 +6,20 @@
     android:orientation="vertical"
     tools:context="com.wap.smartstay.Main">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +41,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/xml_border"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -49,7 +63,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/xml_border"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -77,7 +91,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/xml_border"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -99,7 +113,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/xml_border"
                     android:gravity="center_vertical"
                     android:padding="10dp">
@@ -127,7 +141,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/xml_border"
                     android:gravity="center_vertical"
                     android:padding="10dp">

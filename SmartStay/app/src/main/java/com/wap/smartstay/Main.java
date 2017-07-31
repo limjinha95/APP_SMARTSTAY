@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 
 import com.wap.smartstay.Fragment.HomeFragment;
@@ -23,6 +25,8 @@ import com.wap.smartstay.Fragment.SmartkeyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class Main extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -41,16 +45,13 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         setSupportActionBar(toolbar);
-
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(
 
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,7 +71,11 @@ public class Main extends AppCompatActivity {
                         return false;
                     }
                 });
+
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,12 +90,12 @@ public class Main extends AppCompatActivity {
         // TODO Auto-generated method stub
         switch (item.getItemId()) {
             case R.id.local_main:
-                Intent intent = new Intent(this, Login.class);
-                startActivity(intent);
+                Intent local_main = new Intent(this, Login.class);
+                startActivity(local_main);
                 return true;
             case R.id.login_main:
-                Intent intent2 = new Intent(this, Login.class);
-                startActivity(intent2);
+                Intent login_main = new Intent(this, Login.class);
+                startActivity(login_main);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

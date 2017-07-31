@@ -19,7 +19,8 @@ public class Join extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_other);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
 
         toolbar.setTitle("회원가입");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,7 +42,7 @@ public class Join extends AppCompatActivity {
             }
         });
 
-        Button joinBtn = (Button) findViewById(R.id.joinBtn) ;
+        Button joinBtn = (Button) findViewById(R.id.joinSaveBtn) ;
         joinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
