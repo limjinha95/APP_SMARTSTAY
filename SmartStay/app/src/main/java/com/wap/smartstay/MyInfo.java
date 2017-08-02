@@ -2,10 +2,12 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,10 +26,15 @@ public class MyInfo extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("내 정보");
 
         Logout = (Button)findViewById(R.id.logoutBtn);
         Delete = (Button)findViewById(R.id.deleteUser);
@@ -53,7 +60,7 @@ public class MyInfo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                Intent i = new Intent(MyInfo.this,ChangePnum.class);
+                Intent i = new Intent(MyInfo.this,ChangePhone.class);
                 startActivity(i);
             }
         });
@@ -102,7 +109,9 @@ public class MyInfo extends AppCompatActivity {
                 }
             }
         });
+
     }
+
     public void connect(){
 
         thread = new Thread(){
@@ -119,4 +128,6 @@ public class MyInfo extends AppCompatActivity {
         };
         thread.start();
     }
+
+
 }

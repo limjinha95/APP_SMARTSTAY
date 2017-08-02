@@ -37,9 +37,15 @@ public class Join extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.join);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("회원가입");
 
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -105,6 +111,7 @@ public class Join extends AppCompatActivity {
             }
         });
     }
+
     public void connect(){
 
         thread = new Thread(){
@@ -121,4 +128,6 @@ public class Join extends AppCompatActivity {
         };
         thread.start();
     }
+
+
 }

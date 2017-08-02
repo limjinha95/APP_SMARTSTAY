@@ -2,21 +2,22 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.net.Socket;
-
-import static android.R.attr.port;
 
 public class Login extends AppCompatActivity {
     EditText Eid,Epwd;
@@ -29,10 +30,18 @@ public class Login extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cont = this;
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("로그인");
+
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -95,6 +104,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
     public void connect(){
 
         thread = new Thread(){
