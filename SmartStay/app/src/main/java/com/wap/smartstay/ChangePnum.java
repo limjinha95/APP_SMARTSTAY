@@ -12,14 +12,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.Socket;
 
 import static android.R.attr.port;
 
-public class ChangePw extends AppCompatActivity {
-    EditText Opw,Npw,Cpw;
+public class ChangePnum extends AppCompatActivity {
+    EditText Npn;
+    TextView Opn;
     Context cont;
     Socket client;
     String ip = "192.168.43.179";
@@ -39,11 +41,10 @@ public class ChangePw extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        setContentView(R.layout.changepw);
-        Opw = (EditText)findViewById(R.id.changpwOriginalPw);
-        Npw = (EditText)findViewById(R.id.changpwNewPw);
-        Cpw = (EditText)findViewById(R.id.changpwCheckNewPw);
-
+        setContentView(R.layout.changepnum);
+        Opn = (TextView)findViewById(R.id.changpnumOriginalPnum);
+        Npn = (EditText)findViewById(R.id.changpwNewPnum);
+        Opn.setText(Login.Pnum);
 
         handler = new Handler(){
             public void handleMessage(Message msg) {
@@ -52,33 +53,26 @@ public class ChangePw extends AppCompatActivity {
             }
         };
         connect();
-        Button changeBtn = (Button) findViewById(R.id.changpwSaveBtn) ;
+        Button changeBtn = (Button) findViewById(R.id.changpnumSaveBtn) ;
         changeBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                if(Npw.getText().toString().equals(Cpw.getText().toString()))
-                {
-                    clientThread.send("ChagnePwd/" +Login.Id + "-" + Npw.getText().toString());
-                    while (check == 0)
-                        Log.i("test",logined+"");
-                    Log.i("test","대기끝");
+                clientThread.send("ChagnePnum/" +Login.Id + "-" + Npn.getText().toString());
+                while (check == 0)
+                    Log.i("test",logined+"");
+                Log.i("test","대기끝");
 
-                    if (check == 1) {
-                        Toast.makeText(ChangePw.this, "비밀번호 변경에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                        check = 0;
-                        Intent i = new Intent(ChangePw.this,MyInfo.class);
-                        startActivity(i);
-                    } else if (check == 2) {
-                        Toast.makeText(ChangePw.this, "비밀번호 변경에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                        check = 0;
-                        Intent i = new Intent(ChangePw.this,MyInfo.class);
-                        startActivity(i);
-                    }
-                }
-                else
-                {
-                    Toast.makeText(ChangePw.this,"비밀번호를 다시 확인해 주세요.",Toast.LENGTH_SHORT).show();
+                if (check == 1) {
+                    Toast.makeText(ChangePnum.this, "비밀번호 변경에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                    check = 0;
+                    Intent i = new Intent(ChangePnum.this,MyInfo.class);
+                    startActivity(i);
+                } else if (check == 2) {
+                    Toast.makeText(ChangePnum.this, "비밀번호 변경에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    check = 0;
+                    Intent i = new Intent(ChangePnum.this,MyInfo.class);
+                    startActivity(i);
                 }
             }
         });
