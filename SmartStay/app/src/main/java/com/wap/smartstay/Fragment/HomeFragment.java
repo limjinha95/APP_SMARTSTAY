@@ -17,12 +17,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
-
-        // TODO: 2017. 7. 31. 홈에서 동작할 버튼 여기다가 구현
-
-        return view;
+        return inflater.inflate(R.layout.home_fragment, container, false);
     }
 }
 

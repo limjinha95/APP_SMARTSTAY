@@ -20,18 +20,22 @@ class UserThread extends Thread {
     Socket serverSocket;
     List<UserInfo> li = new ArrayList<UserInfo>();
  
-    UserThread(Socket serverSocket, List li) {
+    @SuppressWarnings("rawtypes")
+	UserThread(Socket serverSocket, List li) {
         this.serverSocket = serverSocket;
         this.li = li;
     }
-    public void sendmsg(String data, Socket soc) {
-		try {
-			byte[] sendByteArray = data.getBytes();
-			OutputStream outputStream = soc.getOutputStream();
-			outputStream.write(sendByteArray);
-		} catch (Exception e) {
-		}
-	}
+    public void sendmsg(String data, Socket soc)
+    {
+    	try
+    	{
+    		data+="\r\n";
+    		byte[] sendByteArray = data.getBytes("UTF-8");
+    		OutputStream outputStream = soc.getOutputStream();
+    		outputStream.write(sendByteArray);
+    	}catch (Exception e) {
+        }
+    }
     @Override
     public void run() {
         try {
@@ -41,99 +45,154 @@ class UserThread extends Thread {
                 byte[] byteArray = new byte[256];
                 int size = inputStream.read(byteArray);
                 
-                if (size == -1) {
-                    break;
-                }
+                if (size == -1) break;
                 
                 String sendMessage = new String(byteArray, 0, size, "UTF-8");
-				System.out.println(sendMessage);
-				String[] inputdata;
-				inputdata = sendMessage.split("/");
-				System.out.println(inputdata[0]+" "+inputdata[1]);
-				String[] data = inputdata[1].split("-");
-				for(int i=0;i<data.length;i++)
-					System.out.print(data[i]+" ");
-				System.out.println();
-				JdbcConnect jc = new JdbcConnect("smartstay");
-
-				if (inputdata[0].equals("L")) {
-					System.out.println(" login");
-					String loginData = jc.Login(data[0], data[1]);
-					sendmsg(loginData,serverSocket);
-				} else if (inputdata[0].equals("R")) {
-					String RegistData;
-					if (jc.isUniqueID(data[0])) {
-						if (jc.registUser(data[0], data[1], data[2], data[3]))
-							RegistData = "success";
-						else
-							RegistData = "failed";
-					} else {
-						RegistData = "duplication";
-					}
-					sendmsg(RegistData, serverSocket);
-				} else if (inputdata[0].equals("D")) {
-					String ip = jc.search_ip(data[0], data[1]);
-					String doorData;
-					if (ip.equals("-")) {
-						doorData = "failed";
-					} else {
-						for (int i = 0; i < li.size(); i++) {
-							if (li.get(i).serverSocket.getInetAddress().equals(ip)) {
-								sendmsg("1", li.get(i).serverSocket);
-								break;
-							}
-						}
-						doorData = "success";
-					}
-					sendmsg(doorData, serverSocket);
-				} else if (inputdata[0].equals("FP")) {
-					int fcheck = 0;
-					String faillist = "";
-					for (int i = 1; i < data.length; i++) {
-						if (jc.FriendPlus(data[i], data[0]) == false) {
-							faillist += data[i];
-							faillist += "/";
-							fcheck++;
-						}
-					}
-					if (fcheck > 0) {
-						sendmsg(faillist, serverSocket);
-					} else {
-						sendmsg("success", serverSocket);
-					}
-				} else if (inputdata[0].equals("ROC")) {
-					sendmsg(jc.ROC(data[0], data[1]), serverSocket);
-				} else if (inputdata[0].equals("ARC")) {
-					sendmsg(jc.RSC(data[0]), serverSocket);
-				} else if (inputdata[0].equals("RCC")) {
-					String Ridx = jc.CheckRidx(data[0], data[1]);
-					if (!Ridx.equals("-")) {
-						sendmsg("failed", serverSocket);
-					} else {
-						if (jc.RCC(Ridx))
-							sendmsg("success", serverSocket);
-						else
-							sendmsg("failed", serverSocket);
-					}
-				} else if (inputdata[0].equals("RSV")) {
-					String officeCode = jc.CheckOfficeCode(data[0]);
-					if (officeCode.equals("-"))
-						sendmsg("failed", serverSocket);
-					else {
-						if (jc.registReservation(data[2], data[3], data[4], officeCode, data[1]))
-							sendmsg("success", serverSocket);
-						else
-							sendmsg("failed", serverSocket);
-					}
-				} else if (inputdata[0].equals("RSC")) {
-					sendmsg(jc.RSC(data[0]), serverSocket);
-				} else if (inputdata[0].equals("Klist")) {
-					sendmsg(jc.Klist(data[0]), serverSocket);
-				}
-				jc.closeDB();
-			}
+                System.out.println(sendMessage);
+                String[] inputdata;
+                inputdata = sendMessage.split("/");
+                String[] data = inputdata[1].split("-");
+                JdbcConnect jc = new JdbcConnect("smartstay");
+                
+                if(inputdata[0].equals("L"))
+                {
+                	String loginData = jc.Login(data[0], data[1]);
+                	System.out.println(loginData);
+                	sendmsg(loginData,serverSocket);
+                }
+                else if(inputdata[0].equals("ID"))
+                {
+                	String RegistData;
+                	if(jc.isUniqueID(data[0]))
+                		RegistData="Y";
+                	else
+                		RegistData="N";
+                	sendmsg(RegistData,serverSocket);
+                }
+                else if(inputdata[0].equals("R"))
+                {
+                	String RegistData;
+                	System.out.println("d");
+            		if(jc.registUser(data[0], data[1], data[2], data[3])) RegistData = "success";
+            		else RegistData = "failed";
+                	sendmsg(RegistData,serverSocket);
+                	System.out.println(RegistData);
+                }
+                else if(inputdata[0].equals("Delete"))
+                {
+                	String RegistData;
+                	System.out.println("d");
+            		if(jc.deleteUser(data[0])) 
+            			RegistData = "success";
+            		else 
+            			RegistData = "failed";
+                	sendmsg(RegistData,serverSocket);
+                	System.out.println(RegistData);
+                }
+                else if(inputdata[0].equals("ChangePwd"))
+                {
+                	String RegistData;
+                	System.out.println("d");
+            		if(jc.ChangePwd(data[0],data[1])) 
+            			RegistData = "success";
+            		else 
+            			RegistData = "failed";
+            		System.out.println(RegistData);
+                	sendmsg(RegistData,serverSocket);
+                	
+                }
+                else if(inputdata[0].equals("ChangePnum"))
+                {
+                	String RegistData;
+                	System.out.println("d");
+            		if(jc.ChangePnum(data[0],data[1])) 
+            			RegistData = "success";
+            		else 
+            			RegistData = "failed";
+            		System.out.println(RegistData);
+                	sendmsg(RegistData,serverSocket);	
+                }
+                else if(inputdata[0].equals("D"))
+                {
+                	String ip=jc.search_ip(data[0], data[1]);
+                	String doorData;
+                	if(ip.equals("-"))
+                	{
+                		doorData="failed";
+                	}
+                	else
+                	{
+                		for (int i = 0; i < li.size(); i++) {
+                			if (li.get(i).serverSocket.getInetAddress().equals(ip)) {
+                				String openData = "open";
+                				sendmsg(openData,li.get(i).serverSocket);
+                				break;
+                			}
+                		}	
+                		doorData="success";
+                	}
+                	sendmsg(doorData,serverSocket);
+                }
+                else if(inputdata[0].equals("FP"))
+                {
+                	int fcheck=0;
+                	String faillist="";
+                	for(int i=1; i<data.length;i++)
+                	{
+                		if(jc.FriendPlus(data[i], data[0])==false)
+                		{
+                			faillist+=data[i];
+                			faillist+="/";
+                			fcheck++;
+                		}
+                	}
+                	if(fcheck>0)
+                	{
+                    	sendmsg(faillist,serverSocket);
+                	}
+                	else
+                	{
+                    	sendmsg("success",serverSocket);
+                	}
+                }
+                else if(inputdata[0].equals("ROC"))
+                {
+                	sendmsg(jc.ROC(data[0], data[1]),serverSocket);
+                }
+                else if(inputdata[0].equals("ARC"))
+                {
+                	sendmsg(jc.RSC(data[0]),serverSocket);
+                }
+                else if(inputdata[0].equals("RCC"))
+                {
+                	String Ridx = jc.CheckRidx(data[0], data[1]);
+                	if(!Ridx.equals("-"))
+                	{
+                		sendmsg("failed",serverSocket);
+                	}
+                	else
+                	{
+                		if(jc.RCC(Ridx)) sendmsg("success",serverSocket);
+                		else sendmsg("failed",serverSocket);
+                	}
+                }
+                else if(inputdata[0].equals("RSV"))
+                {
+                	String officeCode = jc.CheckOfficeCode(data[0]);
+                	if(officeCode.equals("-")) sendmsg("failed",serverSocket);
+                	else
+                	{
+                		if(jc.registReservation(data[2], data[3],data[4],officeCode,data[1])) sendmsg("success",serverSocket);
+                		else sendmsg("failed",serverSocket);
+                	}
+                }
+                else if(inputdata[0].equals("RSC"))
+                {
+                	sendmsg(jc.RSC(data[0]),serverSocket);
+                }
+                jc.closeDB();
+            }
         } catch (Exception e) {
-            System.out.println("Client Ï†ëÏÜçÏ¢ÖÎ£å");
             for (int i = 0; i < li.size();   ) {
                 if(serverSocket == li.get(i).serverSocket) {
                     li.remove(i);
@@ -159,22 +218,19 @@ class ConnectThread extends Thread {
         try {
             while (true) {
                 Socket serverSocket = mainServerSocket.accept();
-                System.out.println("-Client Ï†ëÏÜç");
- 
+                System.out.println(serverSocket.getRemoteSocketAddress().toString());
                 li.add(new UserInfo(serverSocket));
                 UserThread userThread = new UserThread(serverSocket, li);
                 userThread.start();
- 
             }
         } catch (Exception e) {}
     }
-}//
+}
  
 public class Server {
     public static void main(String[] args) {        
-        System.out.println("-SERVER ÏãúÏûë");
-        
         try {
+        	System.out.println("Ω««‡µ«æ˙Ω¿¥œ¥Ÿ.");
             ServerSocket mainServerSocket = null;
             mainServerSocket = new ServerSocket();
             mainServerSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 4040));
@@ -185,7 +241,5 @@ public class Server {
             Scanner input = new Scanner(System.in);
             int temp = input.nextInt();
         } catch (Exception e) {}
-        
-        System.out.println("-SERVER Ï¢ÖÎ£å");
     }
-}//
+}

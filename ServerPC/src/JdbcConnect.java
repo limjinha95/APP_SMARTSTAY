@@ -1,9 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;                      
+import java.sql.*;                      
 
 public class JdbcConnect {
 
@@ -13,7 +8,7 @@ public class JdbcConnect {
  
         public JdbcConnect(String dbName) throws Exception{
             try {
-                //sql ÎìúÎùºÏù¥Î≤ÑÎ•º Î°úÎî©ÌïòÎäî Î¨∏Íµ¨ÏûÖÎãàÎã§.
+                //sql µÂ∂Û¿Ãπˆ∏¶ ∑Œµ˘«œ¥¬ πÆ±∏¿‘¥œ¥Ÿ.
                 Class.forName("org.gjt.mm.mysql.Driver");
                 System.out.println("Driver Install Complete");
             }catch(ClassNotFoundException cnfe) {
@@ -21,7 +16,7 @@ public class JdbcConnect {
             }
             
             Connection con = null;
-            String url = "jdbc:mysql://localhost:3306/smartstay";
+            String url = "jdbc:mysql://localhost:3306/hack";
             String id = "root";
             String pw = "ckdgns1016!";
             
@@ -44,42 +39,55 @@ public class JdbcConnect {
                         return false;
                 }
         }
-        public String Login(String id,String pwd){
-        	String loginData="";
-        	try{
-            rs=stmt.executeQuery("SELECT NAME, PNUM FROM user where ID='"+id+"' AND PWD=PASSWORD('"+pwd+"');");
-            if(rs==null){
+        public String Login(String id,String pwd)throws SQLException{
+
+            rs=stmt.executeQuery("SELECT ID, NAME, PNUM FROM user where ID='"+id+"' AND PWD=PASSWORD('"+pwd+"');");
+            if(rs.next()==false){
                 return "-";  
             }
+            String loginData="";
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
-            String[] columName = new String[numberColumn];
-            if(rs.next())
+            String[] columName = new String[numberColumn]; 
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            for(int i=0;i<numberColumn;i++)
             {
-            	for(int i=0;i<numberColumn;i++)
-            	{
-            		columName[i]=rsmd.getColumnName(i+1);
-            		loginData+=rs.getString(columName[i]);
-            		loginData+="/";
-            	}
+            	loginData+=rs.getString(columName[i]);
+            	loginData+="/";
             }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
-        	return loginData;
+            return loginData;
         }
-        public boolean isUniqueID(String id)throws SQLException{
 
-            rs=stmt.executeQuery("SELECT * FROM user where ID='"+id+"';");
-            if(rs==null)return true;
+        public boolean isUniqueID(String id)throws SQLException{
+            rs=stmt.executeQuery("SELECT COUNT(*) FROM user where ID='"+id+"';");
+            int rowcount=0;
+            if(rs.next()) {
+                rowcount = rs.getInt(1);
+            } 
+            if(rowcount==0)return true;
             else return false;
         }
         public boolean registUser(String id,String name, String pwd, String Pnum) throws SQLException{
-
-                int check=stmt.executeUpdate("insert into user values('"+id+"', '"+name+"', PASSWORD('"+pwd+"'), '"+Pnum+";");
+                int check=stmt.executeUpdate("insert into user values('"+id+"', '"+name+"', PASSWORD('"+pwd+"'), '"+Pnum+"');");
                 if(check>0)return true;  
                 else return false;
+        }
+        public boolean deleteUser(String id) throws SQLException{
+            int check=stmt.executeUpdate("delete from user where ID = '"+id+"';");
+            if(check>0)return true;  
+            else return false;
+        }
+        public boolean ChangePwd(String id,String Pwd) throws SQLException{
+            int check=stmt.executeUpdate("update user set PWD=PASSWORD('"+Pwd+"') where ID = '"+id+"';");
+            if(check>0)return true;  
+            else return false;
+        }
+        public boolean ChangePnum(String id,String Pnum)throws SQLException{
+        	int check=stmt.executeUpdate("update user set Pnum='"+Pnum+"' where ID = '"+id+"';");
+        	System.out.println(check+"");
+            if(check>0)return true;  
+            else return false;
         }
         public boolean FriendPlus(String id,String Rnum) throws SQLException{
 
@@ -87,175 +95,113 @@ public class JdbcConnect {
             if(check>0)return true;  
             else return false;
         }
-        public String search_ip(String OFFICECODE, String RNUM){
-        	String ipdata="";
-        	try{
+        public String search_ip(String OFFICECODE, String RNUM) throws SQLException{
+
             rs=stmt.executeQuery("SELECT IP FROM doorlock where OFFICECODE='"+OFFICECODE+"' AND RNUM = '"+RNUM+";");
-            if(rs==null){
+            if(rs.next()==false){
                 return "-";  
             }
-            
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
-            if(rs.next())
-            {
-            	columName[0]=rsmd.getColumnName(1);
-        		ipdata+=rs.getString(columName[0]);
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
-        	return ipdata;
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            return rs.getString(columName[0]);
         }
-        public String Klist(String ID){
-        	String KData="";
-        	try{
+        public String RSC(String ID) throws SQLException{
+
             rs=stmt.executeQuery("select office.name, doorlock.rnum, reservation.startdate, reservation.enddate from ((reservation join doorlock on reservation.officecode = doorlock.officecode and reservation.rnum = doorlock.rnum) join usekey on reservation.IDX = usekey.reservationidx) join office on doorlock.officecode = office.officecode where usekey.userid='"+ID+"';");
-            if(rs==null){
+            if(rs.next()==false){
                 return "-";  
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
-            
-            while(rs.next())
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            String RSCData="";
+            do
             {
             	for(int i=0;i<numberColumn;i++)
             	{
-            		columName[i]=rsmd.getColumnName(i+1);
-            		KData+=rs.getString(columName[i]);
-            		KData+="/";
-            	}
-            	KData+="|";
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
-            return KData;
-        }
-        public String RSC(String ID){
-        	String RSCData="";
-        	try{
-            rs=stmt.executeQuery("select office.name, reservation.rnum, reservation.startdate, reservation.enddate from reservation join office on reservation.officecode = office.officecode where reservation.userid='"+ID+"';");
-            if(rs==null){
-                return "-";  
-            }
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int numberColumn = rsmd.getColumnCount();
-            String[] columName = new String[numberColumn];
-            while(rs.next())
-            {
-            	for(int i=0;i<numberColumn;i++)
-            	{
-            		columName[i]=rsmd.getColumnName(i+1);
             		RSCData+=rs.getString(columName[i]);
             		RSCData+="/";
             	}
             	RSCData+="|";
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
+            }while(rs.next());
             return RSCData;
         }
         public String ROC(String Oname, String Rnum) throws SQLException{
-        	String ROCData="";
-        	try{
+
             rs=stmt.executeQuery("select office.name, reservation.Rnum, reservation.startdate, reservation.enddate from reservation join office on reservation.officecode = office.officecode where office.name='"+Oname+"' and reservation.rnum='"+Rnum+"';");
-            if(rs==null){
+            if(rs.next()==false){
                 return "-";  
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
-            while(rs.next())
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            String ROCData="";
+            do
             {
             	for(int i=0;i<numberColumn;i++)
             	{
-            		columName[i]=rsmd.getColumnName(i+1);
             		ROCData+=rs.getString(columName[i]);
             		ROCData+="/";
             	}
             	ROCData+="|";
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
+            }while(rs.next());
             return ROCData;
         }
-        public String ARC(){
-        	String ARCData="";
-        	try{
+        public String ARC() throws SQLException{
+
             rs=stmt.executeQuery("select office.name, doorlock.rnum from doorlock join office on doorlock.officecode = office.officecode;");
-            if(rs==null){
+            if(rs.next()==false){
                 return "-";  
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
-            while(rs.next())
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            String ARCData="";
+            do
             {
             	for(int i=0;i<numberColumn;i++)
             	{
-            		columName[i]=rsmd.getColumnName(i+1);
             		ARCData+=rs.getString(columName[i]);
             		ARCData+="/";
             	}
             	ARCData+="|";
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
+            }while(rs.next());
             return ARCData;
         }
-        public String CheckRidx(String officename, String rnum){
-        	String CRdata="";
-        	try{
+        public String CheckRidx(String officename, String rnum) throws SQLException{
+
         	rs=stmt.executeQuery("select idx from reservation where rnum='"+rnum+"' and officecode = (select officecode from office where name='"+officename+"');");
-            if(rs==null){
+            if(rs.next()==false){
                 return "-";  
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
-            if(rs.next())
-            {
-            	columName[0]=rsmd.getColumnName(1);
-        		CRdata+=rs.getString(columName[0]);
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
-        	return CRdata;
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            return rs.getString(columName[0]);
         }
-        public String CheckOfficeCode(String officename){
-        	String COCdata="";
-        	try
-        	{
+        public String CheckOfficeCode(String officename) throws SQLException{
+
         	rs=stmt.executeQuery("select officecode from office where name='"+officename+"';");
-            if(rs==null){
+            if(rs.next()==false){
                 return "-";  
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
-            if(rs.next())
-            {
-            	columName[0]=rsmd.getColumnName(1);
-        		COCdata+=rs.getString(columName[0]);
-            }
-        	}catch(Exception e)
-        	{
-        		e.printStackTrace();
-        	}
-            return COCdata;
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            return rs.getString(columName[0]);
         }
         public boolean RCC(String Ridx) throws SQLException{
 
@@ -267,7 +213,7 @@ public class JdbcConnect {
         }
         public boolean registReservation(String officecode,String rnum, String id, String start, String end) throws SQLException{
 
-            int check=stmt.executeUpdate("insert into reservation (userid, startdate, enddate, officecode, rnum) values('"+id+"', '"+start+"', '"+end+"', '"+officecode+"', '"+rnum+";");
+            int check=stmt.executeUpdate("insert into reservation (userid, startdate, enddate, officecode, rnum) values('"+id+"', '"+start+"', '"+end+"', '"+officecode+"', '"+rnum+"');");
             if(check>0)return true;  
             else return false;
         }

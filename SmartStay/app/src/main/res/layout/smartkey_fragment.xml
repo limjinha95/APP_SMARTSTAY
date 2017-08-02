@@ -20,7 +20,7 @@
                 android:background="#EAEAEA"
                 android:gravity="center">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/manualBtn"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
