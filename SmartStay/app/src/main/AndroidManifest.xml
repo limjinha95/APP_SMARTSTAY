@@ -77,19 +77,12 @@
                 android:value=".Main" />
         </activity>
 
-        <activity android:name=".ChangePhone">
+        <activity android:name=".Inquire">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Main" />
+                android:value=".Main"/>
         </activity>
-
-        <activity android:name=".ChangePw">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Main" />
-        </activity>
-
 
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

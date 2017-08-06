@@ -3,4 +3,11 @@
     <string name="Home">Home</string>
     <string name="SmartKey">SmartKey</string>
     <string name="MyPage">MyPage</string>
+    <string name="reservation">예약</string>
+    <string name="name1">부경 대연 호텔</string>
+    <string name="name2">부경 용당 호텔</string>
+    <string name="name3">Pknu 호텔</string>
+    <string name="location1">부산광역시 남구 신선로</string>
+    <string name="location2">부산광역시 남구 신선로</string>
+    <string name="location3">부산광역시 대연3동</string>
 </resources>

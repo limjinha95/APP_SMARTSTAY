@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="payment">
+        <item>결제 방법 선택</item>
+        <item>카드</item>
+        <item>휴대폰 결제</item>
+        <item>계좌이체</item>
+        <item>카카오페이</item>
+        <item>페이코</item>
+    </string-array>
+</resources>
