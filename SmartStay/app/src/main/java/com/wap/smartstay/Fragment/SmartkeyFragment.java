@@ -1,6 +1,5 @@
 package com.wap.smartstay.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,16 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.wap.smartstay.AddGroup;
-import com.wap.smartstay.AlarmSet;
-import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
 
 public class SmartkeyFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
 
     }
 

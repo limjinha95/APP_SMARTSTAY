@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 
 import com.wap.smartstay.Fragment.HomeFragment;
@@ -91,24 +90,12 @@ public class Main extends AppCompatActivity {
         // TODO Auto-generated method stub
         switch (item.getItemId()) {
             case R.id.local_main:
-                if(Login.logined==0) {
-                    Intent local_main = new Intent(this, Login.class);
-                    startActivity(local_main);
-                }
-                else if(Login.logined==1)
-                {
-                    Toast.makeText(this,"이미 로그인 하였습니다.",Toast.LENGTH_SHORT).show();
-                }
+                Intent local_main = new Intent(this, Login.class);
+                startActivity(local_main);
                 return true;
             case R.id.login_main:
-                if(Login.logined==0) {
-                    Intent local_main = new Intent(this, Login.class);
-                    startActivity(local_main);
-                }
-                else if(Login.logined==1)
-                {
-                    Toast.makeText(this,"이미 로그인 하였습니다.",Toast.LENGTH_SHORT).show();
-                }
+                Intent login_main = new Intent(this, Login.class);
+                startActivity(login_main);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -119,9 +106,7 @@ public class Main extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new SmartkeyFragment(), "SmartKey");
-        if(Login.logined==1) {
-            adapter.addFragment(new MypageFragment(), "Mypage");
-        }
+        adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
 

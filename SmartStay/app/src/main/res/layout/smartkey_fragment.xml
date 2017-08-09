@@ -63,18 +63,32 @@
                 android:layout_marginBottom="40dp"
                 android:gravity="center">
 
-                <ImageButton
-                    android:id="@+id/smartkeyBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="40dp"
-                    android:background="@drawable/lock"/>
+                <ImageView
+                    android:id="@+id/manualBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/ic_help_black_24dp"/>
 
-                <ImageButton
-                    android:id="@+id/smartlightBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/light"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SmartStay Manual >>"
+                        android:textSize="18dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Before using this key, surely read it !"
+                        android:textSize="15dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

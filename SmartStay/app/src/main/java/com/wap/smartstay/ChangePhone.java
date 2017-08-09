@@ -9,15 +9,11 @@ public class ChangePhone extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.changephonenumber);
+        setContentView(R.layout.changephone);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("휴대폰 인증");
-
     }
-
-
 }

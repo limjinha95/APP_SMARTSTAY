@@ -26,16 +26,15 @@
                 android:layout_width="100dp"
                 android:layout_height="45dp"
                 android:gravity="center_vertical"
-                android:text="현재 비밀번호"
+                android:text="현재 전화번호"
                 android:textSize="16dp" />
 
-            <EditText
-                android:id="@+id/changpwOriginalPw"
+            <TextView
+                android:id="@+id/changpnumOriginalPnum"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:hint="현재 비밀번호를 입력하세요"
                 android:textSize="16dp" />
 
         </LinearLayout>
@@ -51,42 +50,16 @@
                 android:layout_width="100dp"
                 android:layout_height="45dp"
                 android:gravity="center_vertical"
-                android:text="새 비밀번호"
+                android:text="새 전화번호"
                 android:textSize="16dp" />
 
             <EditText
-                android:id="@+id/changpwNewPw"
+                android:id="@+id/changpwNewPnum"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:hint="새 비밀번호를 입력하세요"
-                android:textSize="16dp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/xml_border"
-            android:gravity="center_vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="45dp"
-                android:gravity="center_vertical"
-                android:text="재입력"
-                android:textSize="16dp" />
-
-            <EditText
-                android:id="@+id/changpwCheckNewPw"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:hint="새 비밀번호를 재입력하세요"
+                android:hint="새 전화번호를 입력하세요"
                 android:textSize="16dp" />
 
 
@@ -94,7 +67,7 @@
 
 
         <Button
-            android:id="@+id/changpwSaveBtn"
+            android:id="@+id/changpnumSaveBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
@@ -103,11 +76,6 @@
             android:textColor="@color/white"
             android:textSize="18dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="30dp"
-            android:text="* 비밀번호는 영문/숫자가 모두 포함되어야 합니다." />
 
 
     </LinearLayout>
