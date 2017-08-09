@@ -3,6 +3,7 @@ package com.wap.smartstay.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,11 @@ import com.wap.smartstay.R;
 import com.wap.smartstay.UsageList;
 
 public class MypageFragment extends Fragment {
-
+    TextView name, id;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -29,8 +31,15 @@ public class MypageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.mypage_fragment, container, false);
+        id = (TextView)view.findViewById(R.id.mypageUserId);
+        name = (TextView)view.findViewById(R.id.mypageUserName);
 
-        // TODO: 2017. 7. 31. 마이페이지 버튼 이벤트들 여기다가 추가 
+        if(Login.logined==1)
+        {
+            id.setText(Login.Id);
+            name.setText(Login.Name);
+        }
+        // TODO: 2017. 7. 31. 마이페이지 버튼 이벤트들 여기다가 추가
 
         ImageButton mypageMyInfoBtn = (ImageButton) view.findViewById(R.id.mypageMyInfoBtn);
         mypageMyInfoBtn.setOnClickListener(

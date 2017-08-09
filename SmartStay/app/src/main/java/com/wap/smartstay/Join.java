@@ -13,6 +13,7 @@ import android.widget.Button;
 
 
 public class Join extends AppCompatActivity {
+<<<<<<< HEAD
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,25 @@ public class Join extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // ↓툴바의 홈버튼의 이미지를 변경(기본 이미지는 뒤로가기 화살표)
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_search_black_24dp);
+=======
+    EditText Eid;
+    EditText Ename;
+    EditText Epwd;
+    EditText EpwdCheck;
+    EditText Epnum;
+    static int check=0;
+    static int check2=0;
+    Context cont;
+    Socket client;
+    String ip = "192.168.43.179";
+    int port = 4040;
+    Thread thread;
+    ClientThread clientThread;
+    Handler handler;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+>>>>>>> parent of ae014c3... add changePhoneNumber UI
 
 
 
@@ -50,12 +70,16 @@ public class Join extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_tool, menu);
         return true;
     }
+=======
+    public void connect(){
+>>>>>>> parent of ae014c3... add changePhoneNumber UI
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -70,5 +94,9 @@ public class Join extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> parent of ae014c3... add changePhoneNumber UI
