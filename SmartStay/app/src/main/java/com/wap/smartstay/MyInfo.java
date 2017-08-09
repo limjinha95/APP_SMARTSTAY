@@ -1,12 +1,20 @@
 package com.wap.smartstay;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.Socket;
 
 public class MyInfo extends AppCompatActivity {
     Button Logout, Delete, ChangePwd, ChangePnum;
@@ -15,32 +23,37 @@ public class MyInfo extends AppCompatActivity {
     Socket client;
     String ip = "192.168.43.179";
     int port = 4040;
-    static int delete=0;
+    static int delete = 0;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo);
 
-        Logout = (Button)findViewById(R.id.logoutBtn);
-        Delete = (Button)findViewById(R.id.deleteUser);
-        ChangePnum = (Button)findViewById(R.id.ChangeUserPhoneNumberBtn);
-        ChangePwd = (Button)findViewById(R.id.ChangeUserPwBtn);
-        Id = (TextView)findViewById(R.id.userId);
-        Name = (TextView)findViewById(R.id.userName);
-        Pnum = (TextView)findViewById(R.id.userPhoneNumber);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("내 정보");
+
+        Logout = (Button) findViewById(R.id.logoutBtn);
+        Delete = (Button) findViewById(R.id.deleteUser);
+        ChangePnum = (Button) findViewById(R.id.ChangeUserPhoneNumberBtn);
+        ChangePwd = (Button) findViewById(R.id.ChangeUserPwBtn);
+        Id = (TextView) findViewById(R.id.userId);
+        Name = (TextView) findViewById(R.id.userName);
+        Pnum = (TextView) findViewById(R.id.userPhoneNumber);
 
         Id.setText(Login.Id);
         Name.setText(Login.Name);
         Pnum.setText(Login.Pnum);
 
-        handler = new Handler(){
+        handler = new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 Bundle bundle = msg.getData();
-                Toast.makeText (MyInfo.this, bundle.getString("msg"),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyInfo.this, bundle.getString("msg"), Toast.LENGTH_SHORT).show();
 
             }
         };
@@ -48,7 +61,7 @@ public class MyInfo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                Intent i = new Intent(MyInfo.this,ChangePnum.class);
+                Intent i = new Intent(MyInfo.this, ChangePhone.class);
                 startActivity(i);
             }
         });
@@ -56,7 +69,7 @@ public class MyInfo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                Intent i = new Intent(MyInfo.this,ChangePw.class);
+                Intent i = new Intent(MyInfo.this, ChangePw.class);
                 startActivity(i);
             }
         });
@@ -70,7 +83,7 @@ public class MyInfo extends AppCompatActivity {
             }
         });
 
-        Button ChangeUserPhoneNumberBtn = (Button) findViewById(R.id.ChangeUserPhoneNumberBtn) ;
+        Button ChangeUserPhoneNumberBtn = (Button) findViewById(R.id.ChangeUserPhoneNumberBtn);
         ChangeUserPhoneNumberBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +91,8 @@ public class MyInfo extends AppCompatActivity {
             }
         });
     }
-    public void connect(){
+
+    public void connect() {
 
     }
 }

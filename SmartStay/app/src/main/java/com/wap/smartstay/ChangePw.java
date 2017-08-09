@@ -3,10 +3,14 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
-import anroid.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +18,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.net.Socket;
-
-import static android.R.attr.port;
 
 public class ChangePw extends AppCompatActivity {
     EditText Opw,Npw,Cpw;
@@ -29,6 +31,7 @@ public class ChangePw extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cont = this;
@@ -39,10 +42,14 @@ public class ChangePw extends AppCompatActivity {
         }
 
         setContentView(R.layout.changepw);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("비밀번호 변경");
+
         Opw = (EditText)findViewById(R.id.changpwOriginalPw);
         Npw = (EditText)findViewById(R.id.changpwNewPw);
         Cpw = (EditText)findViewById(R.id.changpwCheckNewPw);
-
 
         handler = new Handler(){
             public void handleMessage(Message msg) {
@@ -50,14 +57,14 @@ public class ChangePw extends AppCompatActivity {
                 Bundle bundle = msg.getData();
             }
         };
+
         connect();
         Button changeBtn = (Button) findViewById(R.id.changpwSaveBtn) ;
         changeBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                if(Npw.getText().toString().equals(Cpw.getText().toString()))
-                {
+                if(Npw.getText().toString().equals(Cpw.getText().toString())) {
                     clientThread.send("ChagnePwd/" +Login.Id + "-" + Npw.getText().toString());
                     while (check == 0)
                         Log.i("test",logined+"");
@@ -75,16 +82,14 @@ public class ChangePw extends AppCompatActivity {
                         startActivity(i);
                     }
                 }
-                else
-                {
+                else {
                     Toast.makeText(ChangePw.this,"비밀번호를 다시 확인해 주세요.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
-    public void connect(){
 
+    public void connect(){
         thread = new Thread(){
             public void run() {
                 super.run();

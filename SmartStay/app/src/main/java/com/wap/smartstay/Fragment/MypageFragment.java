@@ -3,27 +3,27 @@ package com.wap.smartstay.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.wap.smartstay.AlarmSet;
 import com.wap.smartstay.CouponList;
 import com.wap.smartstay.Inquire;
-import com.wap.smartstay.Join;
+import com.wap.smartstay.Login;
 import com.wap.smartstay.MyInfo;
 import com.wap.smartstay.R;
 import com.wap.smartstay.UsageList;
 
 public class MypageFragment extends Fragment {
     TextView name, id;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -31,11 +31,10 @@ public class MypageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.mypage_fragment, container, false);
-        id = (TextView)view.findViewById(R.id.mypageUserId);
-        name = (TextView)view.findViewById(R.id.mypageUserName);
+        id = (TextView) view.findViewById(R.id.mypageUserId);
+        name = (TextView) view.findViewById(R.id.mypageUserName);
 
-        if(Login.logined==1)
-        {
+        if (Login.logined == 1) {
             id.setText(Login.Id);
             name.setText(Login.Name);
         }
@@ -83,13 +82,13 @@ public class MypageFragment extends Fragment {
 
         Button inquireBtn = (Button) view.findViewById(R.id.inquireBtn);
         inquireBtn.setOnClickListener(
-                new Button.OnClickListener(){
-                    public void onClick(View v){
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
                         Intent inquire = new Intent(getContext(), Inquire.class);
                         startActivity(inquire);
                     }
                 }
-            );
+        );
 
         return view;
     }
