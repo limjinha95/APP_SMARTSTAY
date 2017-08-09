@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wap.smartstay.Main">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EAEAEA"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/xml_border"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="현재 전화번호"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/changpnumOriginalPnum"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/xml_border"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="새 전화번호"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/changpwNewPnum"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:hint="새 전화번호를 입력하세요"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/changpnumSaveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="변경완료"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+
+
+    </LinearLayout>
+</LinearLayout>
