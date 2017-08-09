@@ -3,18 +3,12 @@ package com.wap.smartstay;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-=======
->>>>>>> parent of ae014c3... add changePhoneNumber UI
 import android.view.View;
 import android.widget.Button;
 
 public class MyInfo extends AppCompatActivity {
-<<<<<<< HEAD
-
-=======
     Button Logout, Delete, ChangePwd, ChangePnum;
     TextView Id, Name, Pnum;
     Context cont;
@@ -25,20 +19,11 @@ public class MyInfo extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
->>>>>>> parent of ae014c3... add changePhoneNumber UI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo);
 
-<<<<<<< HEAD
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
-        toolbar.setTitle("내 정보");
-
-        Button ChangeUserPwBtn = (Button) findViewById(R.id.ChangeUserPwBtn) ;
-        ChangeUserPwBtn.setOnClickListener(new Button.OnClickListener() {
-=======
         Logout = (Button)findViewById(R.id.logoutBtn);
         Delete = (Button)findViewById(R.id.deleteUser);
         ChangePnum = (Button)findViewById(R.id.ChangeUserPhoneNumberBtn);
@@ -77,7 +62,6 @@ public class MyInfo extends AppCompatActivity {
         });
         connect();
         Logout.setOnClickListener(new Button.OnClickListener() {
->>>>>>> parent of ae014c3... add changePhoneNumber UI
             @Override
             public void onClick(View view) {
                 // TODO: 2017. 7. 31. 비밀번호 변경 구현
@@ -93,13 +77,8 @@ public class MyInfo extends AppCompatActivity {
                 // TODO: 2017. 7. 31. 전화번호 변경 구현
             }
         });
-<<<<<<< HEAD
-
-
-=======
     }
     public void connect(){
->>>>>>> parent of ae014c3... add changePhoneNumber UI
 
     }
 }

@@ -1,19 +1,14 @@
 package com.wap.smartstay;
 
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
 import android.os.Build;
->>>>>>> parent of ae014c3... add changePhoneNumber UI
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-=======
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,32 +16,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.net.Socket;
->>>>>>> parent of ae014c3... add changePhoneNumber UI
 
 import static android.R.attr.port;
 
 public class Login extends AppCompatActivity {
-<<<<<<< HEAD
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
-        toolbar.setTitle("로그인");
-
-        Button joinStartBtn = (Button) findViewById(R.id.joinStartBtn);
-        joinStartBtn.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent joinStart = new Intent(getBaseContext(), Join.class);
-                        startActivity(joinStart);
-                    }
-                }
-        );
-=======
     EditText Eid,Epwd;
     Context cont;
     Socket client;
@@ -90,7 +63,6 @@ public class Login extends AppCompatActivity {
                 startActivity(i);
             }
         });
->>>>>>> parent of ae014c3... add changePhoneNumber UI
 
         Button loginStartBtn = (Button) findViewById(R.id.loginStartBtn) ;
         loginStartBtn.setOnClickListener(new Button.OnClickListener() {
@@ -102,8 +74,6 @@ public class Login extends AppCompatActivity {
         });
 
     }
-<<<<<<< HEAD
-=======
     public void connect(){
 
         thread = new Thread(){
@@ -120,5 +90,4 @@ public class Login extends AppCompatActivity {
         };
         thread.start();
     }
->>>>>>> parent of ae014c3... add changePhoneNumber UI
 }
