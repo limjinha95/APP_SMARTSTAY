@@ -25,144 +25,143 @@
         android:layout_height="match_parent"
         android:background="#EAEAEA">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EAEAEA"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="어플 알림 설정" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#EAEAEA"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_height="45dp"
+                android:background="@drawable/xml_border"
+                android:gravity="center_vertical"
+                android:padding="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="어플 알림 설정" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/xml_border"
+                    android:layout_width="270dp"
+                    android:layout_height="45dp"
                     android:gravity="center_vertical"
-                    android:padding="10dp">
+                    android:text="어플 알림 허용"
+                    android:textSize="17dp" />
 
-                    <TextView
-                        android:layout_width="270dp"
-                        android:layout_height="45dp"
-                        android:gravity="center_vertical"
-                        android:text="어플 알림 허용"
-                        android:textSize="17dp" />
-
-                    <Switch
-                        android:id="@+id/appAlarmSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/xml_border"
-                    android:gravity="center_vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="270dp"
-                        android:layout_height="45dp"
-                        android:gravity="center_vertical"
-                        android:text="무음시 진동"
-                        android:textSize="17dp" />
-
-                    <Switch
-                        android:id="@+id/appSlienceAlarmSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="어플 실행 중 알림 방법" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/xml_border"
-                    android:gravity="center_vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="270dp"
-                        android:layout_height="45dp"
-                        android:gravity="center_vertical"
-                        android:text="소리"
-                        android:textSize="17dp" />
-
-                    <Switch
-                        android:id="@+id/appRunningSoundAlarmSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/xml_border"
-                    android:gravity="center_vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="270dp"
-                        android:layout_height="45dp"
-                        android:gravity="center_vertical"
-                        android:text="진동"
-                        android:textSize="17dp" />
-
-                    <Switch
-                        android:id="@+id/appRunningSlienceAlarmSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="도어락 해제시 알림 설정" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/xml_border"
-                    android:gravity="center_vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="270dp"
-                        android:layout_height="45dp"
-                        android:gravity="center_vertical"
-                        android:text="알림 받기"
-                        android:textSize="17dp" />
-
-                    <Switch
-                        android:id="@+id/openDoorAlarmSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
-
-                </LinearLayout>
-
+                <Switch
+                    android:id="@+id/appAlarmSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_border"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="270dp"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:text="무음시 진동"
+                    android:textSize="17dp" />
+
+                <Switch
+                    android:id="@+id/appSlienceAlarmSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="어플 실행 중 알림 방법" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_border"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="270dp"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:text="소리"
+                    android:textSize="17dp" />
+
+                <Switch
+                    android:id="@+id/appRunningSoundAlarmSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_border"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="270dp"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:text="진동"
+                    android:textSize="17dp" />
+
+                <Switch
+                    android:id="@+id/appRunningSlienceAlarmSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:text="도어락 해제시 알림 설정" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_border"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="270dp"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:text="알림 받기"
+                    android:textSize="17dp" />
+
+                <Switch
+                    android:id="@+id/openDoorAlarmSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
     </ScrollView>
 

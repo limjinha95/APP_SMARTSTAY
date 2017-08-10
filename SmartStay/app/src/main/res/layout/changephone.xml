@@ -20,12 +20,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EAEAEA"
         android:orientation="vertical"
         android:padding="15dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,34 +40,65 @@
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:gravity="center_vertical"
-                android:text="동숙객 ID"
+                android:text="전화번호"
                 android:textSize="16dp" />
 
             <EditText
-                android:id="@+id/addgroupInputId"
-                android:layout_width="185dp"
+                android:id="@+id/phoneNumber"
+                android:layout_width="170dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:hint="동숙객 ID를 입력하세요"
+                android:hint="전화번호를 입력하세요"
                 android:textSize="16dp" />
 
             <Button
-                android:id="@+id/addgroupCheckIdBtn"
-                android:layout_width="65dp"
+                android:id="@+id/phoneSendKeyBtn"
+                android:layout_width="90dp"
                 android:layout_height="25dp"
                 android:background="@drawable/xml_border"
-                android:text="ID확인" />
+                android:text="인증번호 발송" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/xml_border"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="인증번호"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/phoneKeyNumber"
+                android:layout_width="170dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:hint="인증번호를 입력하세요"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/phoneCheckKeyBtn"
+                android:layout_width="90dp"
+                android:layout_height="25dp"
+                android:background="@drawable/xml_border"
+                android:text="인증번호 확인" />
+
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/addgroupSaveBtn"
+            android:id="@+id/phoneSaveBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimaryDark"
-            android:text="동숙객으로 지정"
+            android:text="휴대폰인증 완료"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -73,29 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="30dp"
-            android:text="동숙객" />
+            android:text="* ㅇㅇㅇㅇ" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/xml_border"
-                >
-
-            </ListView>
-
-        </LinearLayout>
-
-        </ScrollView>
 
     </LinearLayout>
-
 </LinearLayout>
