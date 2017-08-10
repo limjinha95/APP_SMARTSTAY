@@ -15,7 +15,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class ClientThread extends Thread {
-
     Class clas;
     BufferedReader bufferR;
     BufferedWriter bufferW;
@@ -33,7 +32,6 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
     }
-
     public void send(String data) {
         try {
             bufferW.write(data);
@@ -43,7 +41,6 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
     }
-
     public String listen() {
         String msg = null;
         try {
@@ -51,9 +48,8 @@ public class ClientThread extends Thread {
                 msg = bufferR.readLine();
                 Log.i("test", msg);
                 if(clas.getName().equals("com.wap.smartstay.Login")) {
-                    if(msg.toString().equals("-"))
-                    {
-                        Login.logined=2;
+                    if(msg.toString().equals("-")) {
+                        Login.Islogin=2;
                     }
                     else {
                         String[] loginData = new String[3];
@@ -61,11 +57,10 @@ public class ClientThread extends Thread {
                         Login.Id = loginData[0];
                         Login.Name = loginData[1];
                         Login.Pnum = loginData[2];
-                        Login.logined=1;
+                        Login.Islogin=1;
                     }
                 }
-                else if(clas.getName().equals("com.wap.smartstay.Join"))
-                {
+                else if(clas.getName().equals("com.wap.smartstay.Join")) {
                     if(msg.equals("Y"))
                         Join.check = 1;
                     else if(msg.equals("N"))
@@ -75,26 +70,23 @@ public class ClientThread extends Thread {
                     else if(msg.equals("failed"))
                         Join.check2=2;
                 }
-                else if(clas.getName().equals("com.wap.smartstay.MyInfo"))
-                {
+                else if(clas.getName().equals("com.wap.smartstay.MyInfo")) {
                     if(msg.equals("success"))
                         MyInfo.delete=1;
                     else if(msg.equals("failed"))
                         MyInfo.delete=2;
                 }
-                else if(clas.getName().equals("com.wap.smartstay.ChagnePwd"))
-                {
+                else if(clas.getName().equals("com.wap.smartstay.ChagnePwd")) {
                     if(msg.equals("success"))
                         ChangePw.check=1;
                     else if(msg.equals("failed"))
                         ChangePw.check=2;
                 }
-                else if(clas.getName().equals("com.wap.smartstay.ChangePnum"))
-                {
-                    if(msg.equals("success"))
-                        ChangePnum.check=1;
-                    else if(msg.equals("failed"))
-                        ChangePnum.check=2;
+                else if(clas.getName().equals("com.wap.smartstay.ChangePnum")) {
+//                    if(msg.equals("success"))
+//                        ChangePhone.check=1;
+//                    else if(msg.equals("failed"))
+//                        ChangePhone.check=2;
                 }
             }
         } catch (IOException e) {
