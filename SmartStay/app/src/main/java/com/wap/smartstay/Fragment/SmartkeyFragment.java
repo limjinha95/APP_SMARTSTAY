@@ -1,18 +1,18 @@
 package com.wap.smartstay.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
 import android.widget.Button;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-=======
->>>>>>> 4d97b645176379f0dc99c0c5e5e256f17033f6a2
 
+import com.wap.smartstay.AddGroup;
+import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
 
 public class SmartkeyFragment extends Fragment {
