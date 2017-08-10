@@ -32,7 +32,6 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
     }
-
     public void send(String data) {
         try {
             bufferW.write(data);
@@ -42,7 +41,6 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
     }
-
     public String listen() {
         String msg = null;
         try {
@@ -51,7 +49,7 @@ public class ClientThread extends Thread {
                 Log.i("test", msg);
                 if(clas.getName().equals("com.wap.smartstay.Login")) {
                     if(msg.toString().equals("-")) {
-                        Login.logined=2;
+                        Login.Islogin=2;
                     }
                     else {
                         String[] loginData = new String[3];
@@ -59,7 +57,7 @@ public class ClientThread extends Thread {
                         Login.Id = loginData[0];
                         Login.Name = loginData[1];
                         Login.Pnum = loginData[2];
-                        Login.logined=1;
+                        Login.Islogin=1;
                     }
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Join")) {
@@ -97,7 +95,6 @@ public class ClientThread extends Thread {
         }
         return msg;
     }
-
     public void run() {
         super.run();
         listen();

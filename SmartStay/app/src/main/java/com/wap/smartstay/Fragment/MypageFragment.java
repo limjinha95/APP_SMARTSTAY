@@ -33,14 +33,15 @@ public class MypageFragment extends Fragment {
         View view = inflater.inflate(R.layout.mypage_fragment, container, false);
         id = (TextView) view.findViewById(R.id.mypageUserId);
         name = (TextView) view.findViewById(R.id.mypageUserName);
-
-        if (Login.logined == 1) {
+        ImageButton mypageMyInfoBtn = (ImageButton) view.findViewById(R.id.mypageMyInfoBtn);
+        mypageMyInfoBtn.setEnabled(false);
+        if (Login.Islogin == 1) {
             id.setText(Login.Id);
             name.setText(Login.Name);
+            mypageMyInfoBtn.setEnabled(true);
         }
         // TODO: 2017. 7. 31. 마이페이지 버튼 이벤트들 여기다가 추가
 
-        ImageButton mypageMyInfoBtn = (ImageButton) view.findViewById(R.id.mypageMyInfoBtn);
         mypageMyInfoBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
