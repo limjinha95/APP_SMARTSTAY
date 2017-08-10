@@ -147,24 +147,24 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv5"
+                        android:id="@+id/tv6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="13dp"
                         android:layout_weight="1"
                         android:text="9:00"
-                        android:textStyle="bold"
-                        android:textSize="15dp"/>
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv6"
+                        android:id="@+id/tv7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
                         android:text="12:00"
-                        android:textStyle="bold"
-                        android:textSize="15dp"/>
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -179,14 +179,14 @@
                 android:layout_weight="1.05">
 
                 <TextView
-                    android:id="@+id/tv7"
+                    android:id="@+id/tv8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="쿠폰 선택"
-                    android:textStyle="bold"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/couponBtn"
@@ -216,15 +216,17 @@
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
-             q       <TextView
-                        android:id="@+id/tv8"
+             q
+
+                    <TextView
+                        android:id="@+id/tv9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:text="결제 금액"
-                        android:textStyle="bold"
-                        android:textSize="20dp" />
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -244,29 +246,29 @@
                         android:background="#e1958b">
 
                         <TextView
-                            android:id="@+id/tv9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="2dp"
-                            android:text="숙박금액"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="15dp" />
-
-                        <TextView
                             android:id="@+id/tv10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
                             android:layout_gravity="center"
+                            android:layout_marginLeft="2dp"
+                            android:layout_weight="1"
+                            android:text="숙박금액"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="1"
                             android:text="원"
                             android:textAlignment="textEnd"
-                            android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15dp" />
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -277,29 +279,29 @@
                         android:background="#e1958b">
 
                         <TextView
-                            android:id="@+id/tv11"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="3dp"
-                            android:text="사용쿠폰"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="15dp" />
-
-                        <TextView
                             android:id="@+id/tv12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
                             android:layout_weight="1"
+                            android:text="사용쿠폰"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
+                            android:layout_weight="1"
                             android:text="원"
-                            android:textStyle="bold"
                             android:textAlignment="textEnd"
                             android:textColor="@color/white"
-                            android:textSize="15dp" />
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -313,29 +315,29 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="3dp"
-                            android:text="결제금액"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="15dp" />
-
-                        <TextView
                             android:id="@+id/tv14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginRight="3dp"
                             android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="1"
+                            android:text="결제금액"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="1"
                             android:text="원"
                             android:textAlignment="textEnd"
-                            android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15dp" />
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -351,15 +353,15 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv15"
+                    android:id="@+id/tv16"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
                     android:text="결제 방법 선택"
-                    android:textStyle="bold"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/Spinner"
