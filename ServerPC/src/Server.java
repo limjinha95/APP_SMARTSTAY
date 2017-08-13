@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.doosoo.MessagePush;
  
 class UserInfo {
     Socket serverSocket;
@@ -132,6 +134,11 @@ class UserThread extends Thread {
                 			}
                 		}
                 		//서버의 리스트에 각각 클라이언트들의 소켓정보가 저정될 것이기 때문에 우리는 디비에 저정된 원하는 방의 정보를 통해 원하는 소켓을 찾아내어 문열기 요청을 보낸다.
+                		
+                		MessageService ms = new MessageService();
+                		String token = "clsKk9CWB0M:APA91bEwqzPZocFCX1QYQSjhaVNiZjunNlew2aKFdoeMQ6fXaW1X4yuIq5NGpS4EW8PjgaJynOXtgaRYJM4T8GmCCPNTfGnZA7VFCkipzZrLlYt_pEWFk4uVL6k4VzdkyaPQbZHsUTUB";
+                		ms.push(token);
+                		
                 		doorData="success";
                 	}
                 	sendmsg(doorData,serverSocket);
@@ -226,7 +233,7 @@ class ConnectThread extends Thread {
 }
  
 public class Server {
-    public static void main(String[] args) {        
+	public static void main(String[] args) {        
         try {
         	//최초 서버 가동시 시작 부분
         	System.out.println("실행되었습니다.");
@@ -240,3 +247,4 @@ public class Server {
         } catch (Exception e) {}
     }
 }
+
