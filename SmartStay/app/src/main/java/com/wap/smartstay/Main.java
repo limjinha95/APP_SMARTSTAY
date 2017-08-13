@@ -29,6 +29,8 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         setSupportActionBar(toolbar);

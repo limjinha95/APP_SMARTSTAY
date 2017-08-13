@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wap.smartstay">
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+
 
     <application
         android:allowBackup="true"
@@ -95,6 +98,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
         </activity>
+
+        <service
+            android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
