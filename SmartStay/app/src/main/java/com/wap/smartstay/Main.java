@@ -93,7 +93,7 @@ public class Main extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new SmartkeyFragment(), "SmartKey");
-        if(Login.Islogin==1)
+        //if(Login.Islogin==1)
             adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
