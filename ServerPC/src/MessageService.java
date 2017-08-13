@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 public class MessageService {
 	MessagePush messagePush;
-	String message = "Opend Door! Please Check your Room";
+	String message = "The Door Opend! Please Check your Room";
 	public void push(String token) {
 		if(messagePush ==null) {
 			messagePush = new MessagePush();

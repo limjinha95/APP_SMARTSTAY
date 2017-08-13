@@ -69,11 +69,11 @@ class UserThread extends Thread {
                 		IdData="N";
                 	sendmsg(IdData,serverSocket);
                 }
-                else if(inputdata[0].equals("Regist"))
+                else if(inputdata[0].equals("Register"))
                 {
                 	String RegistData;
                 	System.out.println("d");
-            		if(jc.RegisterUser(data[0], data[1], data[2], data[3])) RegistData = "success";
+            		if(jc.RegisterUser(data[0], data[1], data[2], data[3], data[4])) RegistData = "success";
             		else RegistData = "failed";
                 	sendmsg(RegistData,serverSocket);
                 	System.out.println(RegistData);
@@ -137,6 +137,7 @@ class UserThread extends Thread {
                 		
                 		MessageService ms = new MessageService();
                 		String token = "clsKk9CWB0M:APA91bEwqzPZocFCX1QYQSjhaVNiZjunNlew2aKFdoeMQ6fXaW1X4yuIq5NGpS4EW8PjgaJynOXtgaRYJM4T8GmCCPNTfGnZA7VFCkipzZrLlYt_pEWFk4uVL6k4VzdkyaPQbZHsUTUB";
+                		// 문을 연 사용자 Token을 가져와서 Token을 보내야됨
                 		ms.push(token);
                 		
                 		doorData="success";
