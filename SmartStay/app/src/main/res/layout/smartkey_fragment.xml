@@ -36,14 +36,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SmartStay Manual >>"
-                    android:textSize="18dp"/>
+                    android:text="SmartStay 매뉴얼 확인 >>"
+                    android:textSize="17dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Before using this key, surely read it !"
-                    android:textSize="15dp"/>
+                    android:text="스마트 키를 사용하기 전에 매뉴얼을 읽으세요 !"
+                    android:textSize="13dp"/>
 
             </LinearLayout>
 
@@ -64,9 +64,9 @@
 
                 <ImageButton
                     android:id="@+id/smartkeyBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_marginRight="30dp"
                     android:background="@drawable/lock"/>
 
                 <ImageButton
@@ -85,15 +85,15 @@
 
                 <ImageButton
                     android:id="@+id/addgroupBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_marginRight="30dp"
                     android:background="@drawable/addgroup"/>
 
                 <ImageButton
                     android:id="@+id/callBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
                     android:background="@drawable/phone1"/>
 
             </LinearLayout>

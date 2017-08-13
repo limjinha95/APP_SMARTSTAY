@@ -10,14 +10,7 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/local_main"
-        android:icon="@drawable/ic_place_black_24dp"
-        android:orderInCategory="1"
-        android:title="menu"
-        app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/home"
+        android:id="@+id/search_main"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="menu"
         app:showAsAction="always"/>

@@ -31,9 +31,11 @@ public class MypageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.mypage_fragment, container, false);
+
         id = (TextView) view.findViewById(R.id.mypageUserId);
         name = (TextView) view.findViewById(R.id.mypageUserName);
         ImageButton mypageMyInfoBtn = (ImageButton) view.findViewById(R.id.mypageMyInfoBtn);
+
         mypageMyInfoBtn.setEnabled(false);
         if (Login.Islogin == 1) {
             id.setText(Login.Id);

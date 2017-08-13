@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cont = this;

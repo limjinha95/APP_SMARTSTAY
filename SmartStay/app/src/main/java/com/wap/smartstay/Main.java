@@ -67,7 +67,7 @@ public class Main extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub
         switch (item.getItemId()) {
-            case R.id.local_main:
+            case R.id.search_main:
                 if(Login.Islogin==0) {
                     Intent local_main = new Intent(this, Login.class);
                     startActivity(local_main);
@@ -93,8 +93,8 @@ public class Main extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new SmartkeyFragment(), "SmartKey");
-        if(Login.Islogin==1)
-            adapter.addFragment(new MypageFragment(), "Mypage");
+        //if(Login.Islogin==1)
+        adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
 

@@ -61,6 +61,7 @@ public class Join extends AppCompatActivity {
         Button joinCheckIdBtn = (Button) findViewById(R.id.joinCheckIdBtn) ;
         final Button joinBtn = (Button) findViewById(R.id.joinSaveBtn) ;
         joinBtn.setEnabled(false);
+
         joinCheckIdBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
