@@ -2,8 +2,10 @@ package com.wap.smartstay;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 
 public class UsageList extends AppCompatActivity {
 
@@ -15,5 +17,28 @@ public class UsageList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("이용 내역");
+
+        ListView listview ;
+        ReserveListViewAdapter adapter;
+
+        // Adapter 생성
+        adapter = new ReserveListViewAdapter() ;
+
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.listview_reserve);
+        listview.setAdapter(adapter);
+
+        // 첫 번째 아이템 추가.
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.one),
+                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.two),
+                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.two),
+                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.two),
+                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
+
     }
+
+
 }
