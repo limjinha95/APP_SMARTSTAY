@@ -8,10 +8,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.wap.smartstay.Fragment.HomeFragment;
 import com.wap.smartstay.Fragment.MypageFragment;
 import com.wap.smartstay.Fragment.SmartkeyFragment;
@@ -28,6 +30,11 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("KDS", "Refreshed token: " + refreshedToken);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
@@ -93,8 +100,8 @@ public class Main extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new SmartkeyFragment(), "SmartKey");
-        //if(Login.Islogin==1)
-        adapter.addFragment(new MypageFragment(), "Mypage");
+        if(Login.Islogin==1)
+            adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
 

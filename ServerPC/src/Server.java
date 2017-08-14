@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.doosoo.MessagePush;
  
 class UserInfo {
     Socket serverSocket;
@@ -67,11 +69,11 @@ class UserThread extends Thread {
                 		IdData="N";
                 	sendmsg(IdData,serverSocket);
                 }
-                else if(inputdata[0].equals("Regist"))
+                else if(inputdata[0].equals("Register"))
                 {
                 	String RegistData;
                 	System.out.println("d");
-            		if(jc.RegisterUser(data[0], data[1], data[2], data[3])) RegistData = "success";
+            		if(jc.RegisterUser(data[0], data[1], data[2], data[3], data[4])) RegistData = "success";
             		else RegistData = "failed";
                 	sendmsg(RegistData,serverSocket);
                 	System.out.println(RegistData);
@@ -132,6 +134,12 @@ class UserThread extends Thread {
                 			}
                 		}
                 		//서버의 리스트에 각각 클라이언트들의 소켓정보가 저정될 것이기 때문에 우리는 디비에 저정된 원하는 방의 정보를 통해 원하는 소켓을 찾아내어 문열기 요청을 보낸다.
+                		
+                		MessageService ms = new MessageService();
+                		String token = "clsKk9CWB0M:APA91bEwqzPZocFCX1QYQSjhaVNiZjunNlew2aKFdoeMQ6fXaW1X4yuIq5NGpS4EW8PjgaJynOXtgaRYJM4T8GmCCPNTfGnZA7VFCkipzZrLlYt_pEWFk4uVL6k4VzdkyaPQbZHsUTUB";
+                		// 문을 연 사용자 Token을 가져와서 Token을 보내야됨
+                		ms.push(token);
+                		
                 		doorData="success";
                 	}
                 	sendmsg(doorData,serverSocket);
@@ -226,7 +234,7 @@ class ConnectThread extends Thread {
 }
  
 public class Server {
-    public static void main(String[] args) {        
+	public static void main(String[] args) {        
         try {
         	//최초 서버 가동시 시작 부분
         	System.out.println("실행되었습니다.");
@@ -240,3 +248,4 @@ public class Server {
         } catch (Exception e) {}
     }
 }
+

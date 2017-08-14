@@ -93,13 +93,14 @@ public class JdbcConnect {
             if(rowcount==0)return true;
             else return false;
         }
-        public boolean RegisterUser(String id,String name, String pwd, String Pnum) throws SQLException{
+        public boolean RegisterUser(String id,String name, String pwd, String Pnum, String token) throws SQLException{
 	        	String query="insert into user values(?, ?, PASSWORD(?), ?)";
 	        	psmt = con.prepareStatement(query);
 	        	psmt.setString(1, id);
 	        	psmt.setString(2, name);
 	        	psmt.setString(3, pwd);
 	        	psmt.setString(4, Pnum);
+	        	psmt.setString(5, token);
                 int check=psmt.executeUpdate();
                 if(check>0)return true;  
                 else return false;

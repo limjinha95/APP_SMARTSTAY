@@ -1,14 +1,12 @@
 package com.wap.smartstay;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.net.Socket;
 
@@ -87,7 +87,8 @@ public class Join extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("test",Epwd.getText()+" "+EpwdCheck.getText());
                 if(Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
-                    clientThread.send("R/" + Eid.getText().toString() + "-" + Ename.getText().toString() + "-" + Epwd.getText().toString() + "-" + Epnum.getText().toString());
+                    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+                    clientThread.send("Register/" + Eid.getText().toString() + "-" + Ename.getText().toString() + "-" + Epwd.getText().toString() + "-" + Epnum.getText().toString()+ "-"+refreshedToken );
                     while(check2==0);
                     if(check2==1) {
                         Toast.makeText(Join.this, "가입 축하 드립니다.", Toast.LENGTH_SHORT).show();
