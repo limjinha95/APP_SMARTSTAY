@@ -30,48 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#EAEAEA"
-            android:orientation="vertical"
-            android:padding="15dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="30dp"
-                android:text="사용가능한 쿠폰 목록" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:orientation="vertical">
 
                 <ListView
+                    android:id="@+id/listview_coupon"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/xml_border">
+                    android:layout_height="510dp">
                 </ListView>
 
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="30dp"
-                android:text="만료된 쿠폰 목록" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/xml_border">
-
-                </ListView>
-
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
