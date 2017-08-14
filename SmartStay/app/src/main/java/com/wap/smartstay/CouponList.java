@@ -24,7 +24,7 @@ public class CouponList extends AppCompatActivity {
         adapter = new CouponListViewAdapter();
 
         // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView) findViewById(R.id.listview_unusable_coupon);
+        listview = (ListView) findViewById(R.id.listview_coupon);
         listview.setAdapter(adapter);
 
         // 첫 번째 아이템 추가.

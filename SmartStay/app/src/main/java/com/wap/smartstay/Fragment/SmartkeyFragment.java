@@ -1,13 +1,16 @@
 package com.wap.smartstay.Fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.wap.smartstay.AddGroup;
 import com.wap.smartstay.Manual;
@@ -28,6 +31,7 @@ public class SmartkeyFragment extends Fragment {
 
         // TODO: 2017. 7. 31. 스마트키 페이지 버튼 이벤트들 여기다가 추가
 
+        /** 매뉴얼 이미지 버튼을 눌렀을 때 이벤트*/
         ImageButton manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBtn.setOnClickListener(
                 new Button.OnClickListener() {
@@ -38,6 +42,16 @@ public class SmartkeyFragment extends Fragment {
                 }
         );
 
+        /** 매뉴얼 배경 눌렀을때도 넘어가게 하기위해서 이벤트 적용*/
+        LinearLayout manualBackground = (LinearLayout)view.findViewById(R.id.manualBackground);
+        manualBackground.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent manual = new Intent(getContext(), Manual.class);
+                startActivity(manual);
+            }
+        });
+        /** 동숙객 추가 버튼을 눌렀을 때 이벤트*/
         ImageButton addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         addgroupBtn.setOnClickListener(
                 new Button.OnClickListener() {
@@ -48,6 +62,35 @@ public class SmartkeyFragment extends Fragment {
                 }
         );
 
+
+        /** 전화 버튼 눌렀을 때 이벤트  */
+        ImageButton callBtn = (ImageButton)view.findViewById(R.id.callBtn);
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callBtnEvent();
+            }
+        });
         return view;
+    }
+
+    public void callBtnEvent(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setTitle("Call")
+                .setMessage("전화를 하시겠습니까?")
+                .setCancelable(false)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int whichButton) {
+                        //finish();
+                    }
+                }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int whichButton) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog dialog = alertDialogBuilder.create(); //알림 창 객체 생성
+        dialog.show();
     }
 }
