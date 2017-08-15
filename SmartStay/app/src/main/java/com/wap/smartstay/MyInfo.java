@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.net.Socket;
 
 public class MyInfo extends AppCompatActivity {
@@ -23,7 +25,6 @@ public class MyInfo extends AppCompatActivity {
     Socket client;
     String ip = "192.168.43.179";
     int port = 4040;
-    public static int delete = 0;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
@@ -88,23 +89,23 @@ public class MyInfo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : click event
-                clientThread.send("Delete/" + Login.Id);
+                JSONObject jo = new JSONObject();
+                try{
+                    jo.put("head","Delete");
+                    jo.put("ID",Login.Id);
+                }catch (Exception e)
+                {
+
+                }
+                String data = jo.toString();
+                clientThread.send(data);
                 Login.Islogin=0;
                 Login.Name="";
                 Login.Id="";
                 Login.Pnum="";
-                while (delete == 0) ;
-                if(delete==1) {
-                    delete=0;
-                    Toast.makeText(MyInfo.this, "탈퇴 성공 하였습니다.", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MyInfo.this, Main.class);
-                    startActivity(i);
-                }
-                else if(delete==2)
-                {
-                    delete=0;
-                    Toast.makeText(MyInfo.this, "탈퇴 실패 하였습니다.", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(MyInfo.this, "탈퇴 성공 하였습니다.", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MyInfo.this, Main.class);
+                startActivity(i);
             }
         });
     }

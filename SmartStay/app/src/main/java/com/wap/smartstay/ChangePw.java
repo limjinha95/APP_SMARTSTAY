@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.net.Socket;
 
 public class ChangePw extends AppCompatActivity {
@@ -27,7 +29,6 @@ public class ChangePw extends AppCompatActivity {
     int port = 4040;
     public static int check=0;
     public static String Id,Pnum,Name;
-    public static int logined=0;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
@@ -65,24 +66,22 @@ public class ChangePw extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO : click event
                 if(Npw.getText().toString().equals(Cpw.getText().toString())) {
-                    clientThread.send("ChagnePwd/" +Login.Id + "-" + Npw.getText().toString());
-                    while (check == 0)
-                        Log.i("test",logined+"");
-                    Log.i("test","대기끝");
+                    JSONObject jo = new JSONObject();
+                    try{
+                        jo.put("head","ChagnePwd");
+                        jo.put("ID",Login.Id);
+                        jo.put("PWD",Npw.getText().toString());
+                    }catch (Exception e)
+                    {
 
-                    if (check == 1) {
-                        Toast.makeText(ChangePw.this, "비밀번호 변경에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                        check = 0;
-                        Intent i = new Intent(ChangePw.this,MyInfo.class);
-                        startActivity(i);
-                        finish();
-                    } else if (check == 2) {
-                        Toast.makeText(ChangePw.this, "비밀번호 변경에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                        check = 0;
-                        Intent i = new Intent(ChangePw.this,MyInfo.class);
-                        startActivity(i);
-                        finish();
                     }
+                    String data = jo.toString();
+                    clientThread.send(data);
+                    Toast.makeText(ChangePw.this, "비밀번호 변경에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                    check = 0;
+                    Intent i = new Intent(ChangePw.this,MyInfo.class);
+                    startActivity(i);
+                    finish();
                 }
                 else {
                     Toast.makeText(ChangePw.this,"비밀번호를 다시 확인해 주세요.",Toast.LENGTH_SHORT).show();

@@ -14,10 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.net.Socket;
 
 import static android.R.attr.port;
-import static com.wap.smartstay.ChangePw.logined;
 
 public class Login extends AppCompatActivity {
     EditText Eid,Epwd;
@@ -75,7 +76,17 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    clientThread.send("L/" + Eid.getText().toString() + "-" + Epwd.getText().toString());
+                    JSONObject jo = new JSONObject();
+                    try{
+                        jo.put("head","Login");
+                        jo.put("ID",Eid.getText().toString());
+                        jo.put("PWD",Epwd.getText().toString());
+                    }catch (Exception e)
+                    {
+
+                    }
+                    String data = jo.toString();
+                    clientThread.send(data);
                     Eid.setText("");
                     Epwd.setText("");
                     Log.i("test","대기");
@@ -91,7 +102,7 @@ public class Login extends AppCompatActivity {
                         finish();
                     } else if (Islogin == 2) {
                         Toast.makeText(Login.this, "잘못된 ID 혹은 PWD 입니다.", Toast.LENGTH_SHORT).show();
-                        logined = 0;
+                        Islogin = 0;
                     }
                 }
             }
