@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -18,24 +19,39 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.wap.smartstay.AddGroup;
+import com.wap.smartstay.ClientThread;
+import com.wap.smartstay.Login;
 import com.wap.smartstay.Manifest;
 import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
 
+import java.io.IOException;
+import java.net.Socket;
+
 public class SmartkeyFragment extends Fragment {
+    Socket client;
+    String ip = "192.168.43.179";
+    int port = 4040;
+    Thread thread;
+    ClientThread clientThread;
+    Handler handler;
+
+    public static String phoneNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+        connect();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.smartkey_fragment, container, false);
-
-        // TODO: 2017. 7. 31. 스마트키 페이지 버튼 이벤트들 여기다가 추가
 
         /** 매뉴얼 이미지 버튼을 눌렀을 때 이벤트*/
         ImageButton manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
@@ -101,17 +117,44 @@ public class SmartkeyFragment extends Fragment {
     }
 
     public void calling() {
-        if(Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        clientThread.send("SearchOfficePnum");
+        String phone = "tel:" + phoneNumber;
+
         Uri number;
         Intent intent;
-        number = Uri.parse("tel:010-6634-9154"); // 번호 수정해주시면 됩니다.
+        number = Uri.parse(phone); // 번호 수정해주시면 됩니다.
         intent = new Intent(Intent.ACTION_DIAL, number); // ACTION_CALL : 바로걸기
         startActivity(intent);
+    }
+
+    public void connect() {
+        thread = new Thread() {
+            public void run() {
+                super.run();
+                try {
+                    client = new Socket(ip, port);
+                    clientThread = new ClientThread(client, handler, SmartkeyFragment.class);
+                    clientThread.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+    }
 
 
+    public void disconnect() {
+        try {
+            if (client != null)
+                client.close();
+            if (thread != null)
+                thread.interrupt();
+            if (clientThread != null)
+                clientThread.interrupt();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

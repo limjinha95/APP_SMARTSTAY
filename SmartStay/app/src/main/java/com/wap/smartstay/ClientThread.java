@@ -14,6 +14,8 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.wap.smartstay.Fragment.SmartkeyFragment;
+
 public class ClientThread extends Thread {
     Class clas;
     BufferedReader bufferR;
@@ -76,7 +78,7 @@ public class ClientThread extends Thread {
                     else if(msg.equals("failed"))
                         MyInfo.delete=2;
                 }
-                else if(clas.getName().equals("com.wap.smartstay.ChagnePwd")) {
+                else if(clas.getName().equals("com.wap.smartstay.ChagnePw")) {
                     if(msg.equals("success"))
                         ChangePw.check=1;
                     else if(msg.equals("failed"))
@@ -87,6 +89,9 @@ public class ClientThread extends Thread {
 //                        ChangePhone.check=1;
 //                    else if(msg.equals("failed"))
 //                        ChangePhone.check=2;
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
+                    SmartkeyFragment.phoneNumber = msg;
                 }
             }
         } catch (IOException e) {
