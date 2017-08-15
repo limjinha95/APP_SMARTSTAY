@@ -3,7 +3,9 @@
     package="com.wap.smartstay">
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"></uses-permission>
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -112,5 +114,6 @@
         </service>
 
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
+
 </manifest>
