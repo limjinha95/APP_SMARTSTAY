@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.wap.smartstay.Login;
 import com.wap.smartstay.Manifest;
 import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
+import com.wap.smartstay.SmartkeyPopupList;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -73,6 +75,19 @@ public class SmartkeyFragment extends Fragment {
                 startActivity(manual);
             }
         });
+
+        ImageButton smartkeyBtn = (ImageButton) view.findViewById(R.id.smartkeyBtn);
+        smartkeyBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent smartkey = new Intent(getContext(), SmartkeyPopupList.class);
+                        startActivity(smartkey);
+                    }
+                }
+        );
+
+
+
         /** 동숙객 추가 버튼을 눌렀을 때 이벤트*/
         ImageButton addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         addgroupBtn.setOnClickListener(
@@ -83,6 +98,7 @@ public class SmartkeyFragment extends Fragment {
                     }
                 }
         );
+
 
 
         /** 전화 버튼 눌렀을 때 이벤트  */
