@@ -5,6 +5,7 @@
     tools:context="com.wap.smartstay.manualFragment.useManualFragment">
 
     <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="25dp"
@@ -36,10 +37,10 @@
                 android:background="#5A5A5A" />
 
             <TextView
-                android:id="@+id/bottomText3"
-                android:layout_width="150dp"
+                android:id="@+id/bottomText4"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_alignParentBottom="true"
                 android:text="#SMART STAY"
                 android:textSize="20dp"
