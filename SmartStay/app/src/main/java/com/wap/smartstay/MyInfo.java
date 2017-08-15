@@ -23,7 +23,7 @@ public class MyInfo extends AppCompatActivity {
     TextView Id, Name, Pnum;
     Context cont;
     Socket client;
-    String ip = "192.168.43.179";
+    String ip = "172.31.27.181";
     int port = 4040;
     Thread thread;
     ClientThread clientThread;
@@ -33,9 +33,11 @@ public class MyInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("내 정보");
+
         Logout = (Button) findViewById(R.id.logoutBtn);
         Delete = (Button) findViewById(R.id.deleteUser);
         ChangeUserPhoneNumberBtn = (Button) findViewById(R.id.ChangeUserPhoneNumberBtn);

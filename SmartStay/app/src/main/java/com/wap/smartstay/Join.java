@@ -30,7 +30,7 @@ public class Join extends AppCompatActivity {
     static int check=0;
     Context cont;
     Socket client;
-    String ip = "192.168.43.179";
+    String ip = "172.31.27.181";
     int port = 4040;
     Thread thread;
     ClientThread clientThread;
