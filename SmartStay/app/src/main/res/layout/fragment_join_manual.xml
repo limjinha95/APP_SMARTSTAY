@@ -77,11 +77,11 @@
                 android:layout_alignBaseline="@+id/content3"
                 android:layout_alignBottom="@+id/content3"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/content1"
                 android:text="스마트 회원으로"
                 android:textColor="#0054FF"
                 android:textSize="22dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignEnd="@+id/bottomText1" />
 
             <TextView
                 android:id="@+id/content5"
