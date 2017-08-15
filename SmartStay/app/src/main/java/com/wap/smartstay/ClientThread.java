@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.wap.smartstay.Fragment.SmartkeyFragment;
 
+import org.json.JSONObject;
+
 public class ClientThread extends Thread {
     Class clas;
     BufferedReader bufferR;
@@ -54,12 +56,16 @@ public class ClientThread extends Thread {
                         Login.Islogin=2;
                     }
                     else {
-                        String[] loginData = new String[3];
-                        loginData = msg.toString().split("/");
-                        Login.Id = loginData[0];
-                        Login.Name = loginData[1];
-                        Login.Pnum = loginData[2];
-                        Login.Islogin=1;
+                        try {
+                            JSONObject jo = new JSONObject(msg);
+                            Login.Id = jo.getString("ID");
+                            Login.Name = jo.getString("NAME");
+                            Login.Pnum = jo.getString("Pnum");
+                            Login.Islogin = 1;
+                        }catch (Exception e)
+                        {
+
+                        }
                     }
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Join")) {
@@ -67,28 +73,6 @@ public class ClientThread extends Thread {
                         Join.check = 1;
                     else if(msg.equals("N"))
                         Join.check=2;
-                    else if(msg.equals("success"))
-                        Join.check2=1;
-                    else if(msg.equals("failed"))
-                        Join.check2=2;
-                }
-                else if(clas.getName().equals("com.wap.smartstay.MyInfo")) {
-                    if(msg.equals("success"))
-                        MyInfo.delete=1;
-                    else if(msg.equals("failed"))
-                        MyInfo.delete=2;
-                }
-                else if(clas.getName().equals("com.wap.smartstay.ChagnePw")) {
-                    if(msg.equals("success"))
-                        ChangePw.check=1;
-                    else if(msg.equals("failed"))
-                        ChangePw.check=2;
-                }
-                else if(clas.getName().equals("com.wap.smartstay.ChangePnum")) {
-//                    if(msg.equals("success"))
-//                        ChangePhone.check=1;
-//                    else if(msg.equals("failed"))
-//                        ChangePhone.check=2;
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
                     SmartkeyFragment.phoneNumber = msg;
