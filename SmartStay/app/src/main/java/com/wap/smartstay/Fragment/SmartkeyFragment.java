@@ -143,18 +143,4 @@ public class SmartkeyFragment extends Fragment {
         thread.start();
     }
 
-
-    public void disconnect() {
-        try {
-            if (client != null)
-                client.close();
-            if (thread != null)
-                thread.interrupt();
-            if (clientThread != null)
-                clientThread.interrupt();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
