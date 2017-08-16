@@ -25,6 +25,9 @@ public class MyInfo extends AppCompatActivity {
     Socket client;
     String ip = "13.124.213.57";
     int port = 9010;
+
+    public static int delete = 0;
+
     Thread thread;
     ClientThread clientThread;
     Handler handler;
