@@ -70,7 +70,6 @@ public class SmartkeyPopupList extends AppCompatActivity {
 
         for (int i = 0; i < smartkeyRoomList.size(); i++) {
             smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
-
             adapter.addItem(smartKeyRoomInfo);
         }
 

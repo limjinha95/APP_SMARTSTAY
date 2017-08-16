@@ -39,6 +39,9 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
     }
+
+
+
     public void send(String data) {
         try {
             bufferW.write(data);
@@ -78,7 +81,15 @@ public class ClientThread extends Thread {
                         Join.check=2;
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
-                    SmartkeyFragment.phoneNumber = msg;
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+                        SmartkeyFragment smartkey = new SmartkeyFragment();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.UsageList")){
                     try {
@@ -101,9 +112,7 @@ public class ClientThread extends Thread {
                             reserveList.add(item);
                         }
 
-
                     } catch(JSONException e) {}
-
 
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.CouponList")){

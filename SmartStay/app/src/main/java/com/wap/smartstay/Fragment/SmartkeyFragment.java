@@ -2,7 +2,6 @@ package com.wap.smartstay.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,33 +11,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.wap.smartstay.AddGroup;
 import com.wap.smartstay.ClientThread;
-import com.wap.smartstay.Login;
-import com.wap.smartstay.Manifest;
 import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
+import com.wap.smartstay.SmartKeyCallingList;
 import com.wap.smartstay.SmartkeyPopupList;
 
-import java.io.IOException;
+import org.json.JSONObject;
+
 import java.net.Socket;
 
 public class SmartkeyFragment extends Fragment {
-    Socket client;
-    String ip = "13.124.213.57";
-    int port = 9010;
-    Thread thread;
-    ClientThread clientThread;
-    Handler handler;
-
     public static String phoneNumber;
 
     @Override
@@ -48,7 +38,6 @@ public class SmartkeyFragment extends Fragment {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        connect();
     }
 
     @Override
@@ -105,60 +94,13 @@ public class SmartkeyFragment extends Fragment {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callBtnEventDialog();
+                Intent loomInfo = new Intent(getContext(), SmartKeyCallingList.class);
+                startActivity(loomInfo);
             }
         });
         return view;
     }
 
-    public void callBtnEventDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-        alertDialogBuilder.setTitle("Call")
-                .setMessage("전화를 하시겠습니까?")
-                .setCancelable(false)
-                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int whichButton) {
-                        calling();
-                    }
-                }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int whichButton) {
-                dialogInterface.cancel();
-            }
-        });
-        AlertDialog dialog = alertDialogBuilder.create(); //알림 창 객체 생성
-        dialog.show();
-    }
-
-    public void calling() {
-        clientThread.send("SearchOfficePnum");
-        String phone = "tel:" + phoneNumber;
-        Log.e("error", phone);
-
-
-        Uri number;
-        Intent intent;
-        number = Uri.parse(phone); // 번호 수정해주시면 됩니다.
-        intent = new Intent(Intent.ACTION_DIAL, number); // ACTION_CALL : 바로걸기
-        startActivity(intent);
-    }
-
-    public void connect() {
-        thread = new Thread() {
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, SmartkeyFragment.class);
-                    clientThread.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
 
 
 }
