@@ -59,9 +59,7 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
 
     public void addItem(String roomInfo) {
         SmartkeyPopupListViewItem roomInfoItem = new SmartkeyPopupListViewItem();
-
         roomInfoItem.setSmartkeyRoomInfo(roomInfo);
-
         smartkeyPopupListViewItemList.add(roomInfoItem);
     }
 

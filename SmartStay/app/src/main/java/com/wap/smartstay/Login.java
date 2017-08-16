@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -84,12 +86,13 @@ public class Login extends AppCompatActivity {
                         jo.put("head","Login");
                         jo.put("ID",Eid.getText().toString());
                         jo.put("PWD",Epwd.getText().toString());
+                        String myToken = FirebaseInstanceId.getInstance().getToken();
+                        jo.put("Token", myToken);
                     }catch (Exception e)
                     {
 
                     }
                     String data = jo.toString();
-                    Log.i("tttt",data);
                     clientThread.send(data);
 
                     Eid.setText("");
@@ -137,5 +140,22 @@ public class Login extends AppCompatActivity {
         super.onDestroy();
         ClientThread.setRunningState(false);
         thread.interrupt();
+    }
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        connect();
+    }
+    @Override
+    protected  void onRestart(){
+        super.onRestart();
+        connect();
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(Login.this,Main.class);
+        startActivity(i);
+        finish();
     }
 }

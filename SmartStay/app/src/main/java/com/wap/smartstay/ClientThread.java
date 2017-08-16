@@ -57,11 +57,20 @@ public class ClientThread extends Thread {
         try {
             while (isRunning) {
                 msg = bufferR.readLine();
+<<<<<<< HEAD
                 Log.i("test", msg);
                 if (clas.getName().equals("com.wap.smartstay.Login")) {
                     if (msg.toString().equals("-")) {
                         Login.Islogin = 2;
                     } else {
+=======
+                Log.i("testmsg", msg);
+                if(clas.getName().equals("com.wap.smartstay.Login")) {
+                    if(msg.toString().equals("-")) {
+                        Login.Islogin=2;
+                    }
+                    else {
+>>>>>>> master
                         try {
                             JSONObject jo = new JSONObject(msg);
                             Login.Id = jo.getString("ID");
@@ -72,6 +81,7 @@ public class ClientThread extends Thread {
 
                         }
                     }
+<<<<<<< HEAD
                 } else if (clas.getName().equals("com.wap.smartstay.Join")) {
                     if (msg.equals("Y"))
                         Join.check = 1;
@@ -109,6 +119,27 @@ public class ClientThread extends Thread {
                     }
 
                 } else if (clas.getName().equals("com.wap.smartstay.Fragment.UsageList")) {
+=======
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Join")) {
+                    String msg2="";
+                    try {
+                        JSONObject jo = new JSONObject(msg);
+                        msg2 = jo.getString("Unique");
+                    }catch (Exception e)
+                    {
+
+                    }
+                    if(msg2.equals("Y"))
+                        Join.check = 1;
+                    else if(msg2.equals("N"))
+                        Join.check=2;
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
+                    SmartkeyFragment.phoneNumber = msg;
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.UsageList")){
+>>>>>>> master
                     try {
                         JSONObject wrapObject = new JSONObject(msg);
                         JSONArray ja = new JSONArray(wrapObject);
@@ -163,11 +194,8 @@ public class ClientThread extends Thread {
 
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
-
+                            String smartKeyRoomInfo = dataJsonObject.getString("officecode") + " " + dataJsonObject.getString("rnum");
                             item.setSmartkeyRoomInfo(smartKeyRoomInfo);
-
                             smartkeyRoomList.add(item);
                         }
 

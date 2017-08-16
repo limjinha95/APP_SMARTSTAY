@@ -2,13 +2,17 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -33,6 +37,11 @@ public class SmartkeyPopupList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.smartkey_list_pop);
 
+        if(Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("스마트키 방 목록");
@@ -40,7 +49,7 @@ public class SmartkeyPopupList extends AppCompatActivity {
         connect();
         JSONObject jo = new JSONObject();
         try {
-            jo.put("head","ReservationCheck");
+            jo.put("head","MyKey");
             jo.put("ID", Login.Id);
             String data = jo.toString();
             clientThread.send(data);
@@ -49,7 +58,7 @@ public class SmartkeyPopupList extends AppCompatActivity {
         }
 
 
-        Log.i("test","대기");
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -60,20 +69,33 @@ public class SmartkeyPopupList extends AppCompatActivity {
         getWindow().setLayout((int)(width*.7), (int)(height*.3));
 
         ListView listview ;
-        SmartkeyPopupListViewAdapter adapter;
+        final SmartkeyPopupListViewAdapter adapter;
 
-        // Adapter 생성
         adapter = new SmartkeyPopupListViewAdapter() ;
 
-        // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview_smartkey);
-        listview.setAdapter(adapter);
-
         for (int i = 0; i < smartkeyRoomList.size(); i++) {
             smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
             adapter.addItem(smartKeyRoomInfo);
         }
+        listview.setAdapter(adapter);
 
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String json = adapter.getItem(position).toString();
+                String [] datas = json.split(" ");
+                JSONObject jo2 = new JSONObject();
+
+                try {
+                    jo2.put("head","Search_Room_Ip");
+                    jo2.put("OfficeCode", datas[0]);
+                    jo2.put("RoomNumber", datas[1]);
+                } catch (Exception e) {}
+                String data2 = jo2.toString();
+                clientThread.send(data2);
+            }
+        });
     }
 
     public void connect(){
@@ -92,7 +114,10 @@ public class SmartkeyPopupList extends AppCompatActivity {
         };
         thread.start();
     }
-
-
-
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        //ClientThread.setRunningState(false);
+        thread.interrupt();
+    }
 }

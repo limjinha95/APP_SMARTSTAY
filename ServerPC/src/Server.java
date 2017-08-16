@@ -12,8 +12,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-//import org.doosoo.MessagePush;
- 
 class UserInfo {
     Socket serverSocket;
     UserInfo(Socket serverSocket) {
@@ -60,7 +58,9 @@ class UserThread extends Thread {
                 {
                 	String Id = (String) jsonObj.get("ID");
                 	String Pwd = (String) jsonObj.get("PWD");
-                	String loginData = jc.Login(Id, Pwd);
+                	String Token = (String) jsonObj.get("Token");
+                	String loginData = jc.Login(Id, Pwd, Token);
+                	System.out.println(loginData);
                 	sendmsg(loginData,serverSocket);
                 }
                 else if(head.equals("ID"))
@@ -73,6 +73,7 @@ class UserThread extends Thread {
                 	else
                 		jo.put("Unique", "N");
                 	IdData = jo.toString();
+                	System.out.println(IdData);
                 	sendmsg(IdData,serverSocket);
                 }
                 else if(head.equals("Register"))
@@ -86,6 +87,7 @@ class UserThread extends Thread {
                 	do
                 		check=jc.RegisterUser(Id, Name, Pwd, Pnum, Token);
             		while(check==false);
+                	System.out.println("ok");
                 }
                 else if(head.equals("Delete"))
                 {
@@ -175,6 +177,16 @@ class UserThread extends Thread {
                 	String ID = (String) jsonObj.get("ID");
                 	sendmsg(jc.ReservationCheck(ID),serverSocket);
                 }
+                else if(head.equals("MyCoupon"))
+                {
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.MyCoupon(ID),serverSocket);
+                }
+                else if(head.equals("MyKey"))
+                {
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.MyKey(ID),serverSocket);
+                }
                 jc.closeDB();
             }
         } catch (Exception e) {
@@ -213,7 +225,6 @@ class ConnectThread extends Thread {
 public class Server {
 	public static void main(String[] args) {        
         try {
-        	System.out.println("실행되었습니다.");
             ServerSocket mainServerSocket = null;
             mainServerSocket = new ServerSocket();
             mainServerSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 4040));

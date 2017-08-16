@@ -162,4 +162,9 @@ public class Join extends AppCompatActivity {
         ClientThread.setRunningState(false);
         thread.interrupt();
     }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        connect();
+    }
 }
