@@ -94,6 +94,12 @@
                 android:value=".Main" />
         </activity>
 
+        <activity android:name=".ChangePw">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
+
         <activity android:name=".Inquire">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -105,7 +111,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
         </activity>
-        <activity android:name=".Payment">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />

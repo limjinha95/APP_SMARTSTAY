@@ -58,7 +58,15 @@ class UserThread extends Thread {
                 {
                 	String Id = (String) jsonObj.get("ID");
                 	String Pwd = (String) jsonObj.get("PWD");
-                	String loginData = jc.Login(Id, Pwd);
+                	String Token = (String) jsonObj.get("Token");
+                	String loginData = jc.Login(Id, Pwd, Token);
+                	System.out.println(loginData);
+                	sendmsg(loginData,serverSocket);
+                }
+                else if(head.equals("SelectUser"))
+                {
+                	String Id = (String) jsonObj.get("ID");
+                	String loginData = jc.SelectUser(Id);
                 	System.out.println(loginData);
                 	sendmsg(loginData,serverSocket);
                 }
@@ -104,6 +112,7 @@ class UserThread extends Thread {
                 	do
                 		check=jc.ChangePwd(Id,Pwd);
             		while(check==false);
+                	System.out.println("ok");
                 }
                 else if(head.equals("SearchOfficePnum"))
                 {
@@ -175,6 +184,16 @@ class UserThread extends Thread {
                 {
                 	String ID = (String) jsonObj.get("ID");
                 	sendmsg(jc.ReservationCheck(ID),serverSocket);
+                }
+                else if(head.equals("MyCoupon"))
+                {
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.MyCoupon(ID),serverSocket);
+                }
+                else if(head.equals("MyKey"))
+                {
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.MyKey(ID),serverSocket);
                 }
                 jc.closeDB();
             }

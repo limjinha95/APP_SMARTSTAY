@@ -2,6 +2,7 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v7.util.AsyncListUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +59,10 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
 
     public void addItem(String roomInfo) {
         SmartkeyPopupListViewItem roomInfoItem = new SmartkeyPopupListViewItem();
-
         roomInfoItem.setSmartkeyRoomInfo(roomInfo);
-
         smartkeyPopupListViewItemList.add(roomInfoItem);
     }
+
+
 
 }
