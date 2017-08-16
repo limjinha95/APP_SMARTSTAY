@@ -33,8 +33,8 @@ public class ClientThread extends Thread {
         isRunning=true;
         try {
             this.client = client;
-            bufferR = new BufferedReader(new InputStreamReader(client.getInputStream(),"UTF8"));
-            bufferW = new BufferedWriter(new OutputStreamWriter(client.getOutputStream(),"UTF8"));
+            bufferR = new BufferedReader(new InputStreamReader(client.getInputStream(),"UTF-8"));
+            bufferW = new BufferedWriter(new OutputStreamWriter(client.getOutputStream(),"UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,7 +134,6 @@ public class ClientThread extends Thread {
 
                             couponList.add(item);
                         }
-
 
                     } catch(JSONException e) {}
                 }

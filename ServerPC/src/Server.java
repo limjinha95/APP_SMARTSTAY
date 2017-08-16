@@ -63,6 +63,13 @@ class UserThread extends Thread {
                 	System.out.println(loginData);
                 	sendmsg(loginData,serverSocket);
                 }
+                else if(head.equals("SelectUser"))
+                {
+                	String Id = (String) jsonObj.get("ID");
+                	String loginData = jc.SelectUser(Id);
+                	System.out.println(loginData);
+                	sendmsg(loginData,serverSocket);
+                }
                 else if(head.equals("ID"))
                 {
                 	String Id = (String) jsonObj.get("ID");
@@ -105,6 +112,7 @@ class UserThread extends Thread {
                 	do
                 		check=jc.ChangePwd(Id,Pwd);
             		while(check==false);
+                	System.out.println("ok");
                 }
                 else if(head.equals("SearchOfficePnum"))
                 {

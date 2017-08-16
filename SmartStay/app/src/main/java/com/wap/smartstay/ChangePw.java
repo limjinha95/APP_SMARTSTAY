@@ -68,7 +68,7 @@ public class ChangePw extends AppCompatActivity {
                 if(Npw.getText().toString().equals(Cpw.getText().toString())) {
                     JSONObject jo = new JSONObject();
                     try{
-                        jo.put("head","ChagnePwd");
+                        jo.put("head","ChangePwd");
                         jo.put("ID",Login.Id);
                         jo.put("PWD",Npw.getText().toString());
                     }catch (Exception e)
@@ -76,6 +76,7 @@ public class ChangePw extends AppCompatActivity {
 
                     }
                     String data = jo.toString();
+                    Log.i("test",data);
                     clientThread.send(data);
                     Toast.makeText(ChangePw.this, "비밀번호 변경에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                     check = 0;
