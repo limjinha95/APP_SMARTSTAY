@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.wap.smartstay.Fragment.HomeFragment;
 import com.wap.smartstay.Fragment.MypageFragment;
 import com.wap.smartstay.Fragment.SmartkeyFragment;
 
@@ -98,7 +97,7 @@ public class Main extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "Home");
+        adapter.addFragment(new HotelList(), "Home");
         adapter.addFragment(new SmartkeyFragment(), "SmartKey");
         //if(Login.Islogin==1)
         adapter.addFragment(new MypageFragment(), "Mypage");
