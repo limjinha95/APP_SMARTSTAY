@@ -104,5 +104,4 @@ public class Main extends AppCompatActivity {
         adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
-
 }

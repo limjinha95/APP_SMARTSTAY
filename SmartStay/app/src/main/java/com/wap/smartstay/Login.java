@@ -89,7 +89,6 @@ public class Login extends AppCompatActivity {
 
                     }
                     String data = jo.toString();
-                    Log.i("tttt",data);
                     clientThread.send(data);
                     Eid.setText("");
                     Epwd.setText("");
