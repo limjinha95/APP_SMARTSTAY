@@ -34,8 +34,8 @@ public class ClientThread extends Thread {
         isRunning = true;
         try {
             this.client = client;
-            bufferR = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF8"));
-            bufferW = new BufferedWriter(new OutputStreamWriter(client.getOutputStream(), "UTF8"));
+            bufferR = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            bufferW = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,10 +74,17 @@ public class ClientThread extends Thread {
                         }
                     }
                 } else if (clas.getName().equals("com.wap.smartstay.Join")) {
-                    if (msg.equals("Y"))
-                        Join.check = 1;
-                    else if (msg.equals("N"))
-                        Join.check = 2;
+                    try{
+                        JSONObject jo = new JSONObject(msg);
+                        String data = jo.get("Unique").toString();
+                        if(data.equals("Y"))
+                            Join.check=1;
+                        else
+                            Join.check=2;
+                    }catch(Exception e)
+                    {
+
+                    }
                 } else if (clas.getName().equals("com.wap.smartstay.SmartkeyCallingList")) {
                     if(SmartKeyCallingList.number == 1) {
                         try {
@@ -111,25 +118,27 @@ public class ClientThread extends Thread {
 
                 } else if (clas.getName().equals("com.wap.smartstay.UsageList")) {
                     try {
-                        JSONObject wrapObject = new JSONObject(msg);
-                        JSONArray ja = new JSONArray(wrapObject);
-
-                        ReserveListViewItem item = new ReserveListViewItem();
-
+                        JSONArray ja = new JSONArray(msg);
+                        ReserveListViewItem item;
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                            String roomName = dataJsonObject.getString("NAME");
+                            String roomNumber = dataJsonObject.getString("RNUM");
+                            String officeCode = dataJsonObject.getString("OFFICECODE");
                             String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
                             String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "원 / 최대 " + dataJsonObject.getString("MAXNUM");
 
-                            item.setAccomodationName(roomName);
+                            item = new ReserveListViewItem();
+
+                            item.setAccomodationOfficeCode(officeCode);
+                            item.setAccomodationRoomNumber(roomNumber);
                             item.setReservationDuty(reservationDuty);
                             item.setAccomodationInfo(roomInfo);
 
                             reserveList.add(item);
-                        }
 
+                        }
+                        UsageList.check2=true;
                     } catch (JSONException e) {
                     }
 
@@ -182,11 +191,9 @@ public class ClientThread extends Thread {
                     } else {
                         try {
                             JSONObject jo = new JSONObject(msg);
-
                             AddGroup.groupName = jo.getString("NAME");
                             AddGroup.groupId = jo.getString("ID");
                             AddGroup.groupPnum = jo.getString("Pnum");
-
                             AddGroup.idCheck = 2;
                         } catch (Exception e) {
 

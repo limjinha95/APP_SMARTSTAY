@@ -45,7 +45,7 @@ public class ReserveListViewAdapter extends BaseAdapter {
         ReserveListViewItem reserveListViewItem = reserveListViewItemList.get(position);
 
         accomodationImageView.setImageDrawable(reserveListViewItem.getAccomodationImg());
-        accomodationNameTextView.setText(reserveListViewItem.getAccomodationName());
+        accomodationNameTextView.setText(reserveListViewItem.getAccomodationOfficeCode()+reserveListViewItem.getAccomodationRoomnumber());
         reservationDutyTextView.setText(reserveListViewItem.getReservationDuty());
         accomodationInfoTextView.setText(reserveListViewItem.getAccomodationInfo());
 
@@ -62,11 +62,12 @@ public class ReserveListViewAdapter extends BaseAdapter {
         return reserveListViewItemList.get(position);
     }
 
-    public void addItem(Drawable img, String name, String duty, String info) {
+    public void addItem(Drawable img, String officecode, String roomnumber, String duty, String info) {
         ReserveListViewItem reserveItem = new ReserveListViewItem();
 
         reserveItem.setAccomodationImg(img);
-        reserveItem.setAccomodationName(name);
+        reserveItem.setAccomodationOfficeCode(officecode);
+        reserveItem.setAccomodationRoomNumber(roomnumber);
         reserveItem.setReservationDuty(duty);
         reserveItem.setAccomodationInfo(info);
 

@@ -1,4 +1,5 @@
 package com.wap.smartstay;
+
 import android.graphics.drawable.Drawable;
 
 /**
@@ -7,33 +8,48 @@ import android.graphics.drawable.Drawable;
 
 public class ReserveListViewItem {
     private Drawable accomodationImg;
-    private String accomodationName;
+    private String accomodationOfficecode;
+    private String accomodationRoomnumber;
     private String reservationDuty;
     private String accomodationInfo;
 
     public void setAccomodationImg(Drawable img) {
-        accomodationImg = img ;
+        accomodationImg = img;
     }
-    public void setAccomodationName(String name) {
-        accomodationName = name ;
+
+    public void setAccomodationOfficeCode(String officecode) {
+        accomodationOfficecode = officecode;
     }
+
+    public void setAccomodationRoomNumber(String roomnumber) {
+        accomodationRoomnumber = roomnumber;
+    }
+
     public void setReservationDuty(String duty) {
-        reservationDuty = duty ;
+        reservationDuty = duty;
     }
+
     public void setAccomodationInfo(String info) {
-        accomodationInfo = info ;
+        accomodationInfo = info;
     }
 
     public Drawable getAccomodationImg() {
-        return this.accomodationImg ;
+        return this.accomodationImg;
     }
-    public String getAccomodationName() {
-        return this.accomodationName ;
+
+    public String getAccomodationOfficeCode() {
+        return this.accomodationOfficecode;
     }
+
+    public String getAccomodationRoomnumber() {
+        return this.accomodationRoomnumber;
+    }
+
     public String getReservationDuty() {
-        return this.reservationDuty ;
+        return this.reservationDuty;
     }
+
     public String getAccomodationInfo() {
-        return this.accomodationInfo ;
+        return this.accomodationInfo;
     }
 }

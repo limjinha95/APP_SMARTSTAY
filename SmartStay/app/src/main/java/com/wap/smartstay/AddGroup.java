@@ -44,7 +44,7 @@ public class AddGroup extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
+        connect();
         inputId = (EditText) findViewById(R.id.addgroupInputId);
         addGroupInfo = (TextView) findViewById(R.id.addGroupInfo);
 
@@ -68,6 +68,7 @@ public class AddGroup extends AppCompatActivity {
                 }
 
                 String data = jo.toString();
+                Log.i("test",data);
                 clientThread.send(data);
 
                 if (idCheck == 1) {
