@@ -73,6 +73,27 @@ public class JdbcConnect {
 		loginData = jo.toString();
 		return loginData;
 	}
+	
+	public String SelectUser(String id) throws SQLException {
+		String query = "SELECT ID, NAME, PNUM FROM user where ID=?";
+		psmt = con.prepareStatement(query);
+		psmt.setString(1, id);
+		rs = psmt.executeQuery();
+		if (rs.next() == false) {
+			return "-";
+		}
+		JSONObject jo = new JSONObject();
+		String loginData;
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int numberColumn = rsmd.getColumnCount();
+		String[] columName = new String[numberColumn];
+		for (int i = 0; i < numberColumn; i++)
+			columName[i] = rsmd.getColumnName(i + 1);
+		for (int i = 0; i < numberColumn; i++)
+			jo.put(columName[i], rs.getString(columName[i]));
+		loginData = jo.toString();
+		return loginData;
+	}
 
 	public String OfficePnum(String OfficeCode) throws SQLException {
 		String query = "SELECT OfficePnum FROM office where OFFICECODE= ?";
@@ -143,7 +164,7 @@ public class JdbcConnect {
 	}
 
 	public boolean ChangePwd(String id, String Pwd) throws SQLException {
-		String query = "update user set PWD=PASSWORD(?) where ID = ?";
+		String query = "update user set PWD = PASSWORD(?) where ID = ?";
 		psmt = con.prepareStatement(query);
 		psmt.setString(2, id);
 		psmt.setString(1, Pwd);

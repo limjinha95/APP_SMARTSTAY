@@ -111,6 +111,7 @@ public class Join extends AppCompatActivity {
 
                     }
                     String data = jo.toString();
+                    Log.i("test",data);
                     clientThread.send(data);
                     Toast.makeText(Join.this, "가입 축하 드립니다.", Toast.LENGTH_SHORT).show();
                     finish();

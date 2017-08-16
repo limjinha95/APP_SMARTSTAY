@@ -36,6 +36,7 @@ public class ClientThread extends Thread {
             this.client = client;
             bufferR = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF8"));
             bufferW = new BufferedWriter(new OutputStreamWriter(client.getOutputStream(), "UTF8"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,7 +155,7 @@ public class ClientThread extends Thread {
                         }
                     } catch (JSONException e) {
                     }
-                } else if (clas.getName().equals("com.wap.smartstay.Fragment.SmartKeyPopupList")) {
+                } else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartKeyPopupList")){
                     try {
                         JSONObject wrapObject = new JSONObject(msg);
                         JSONArray ja = new JSONArray(wrapObject);
