@@ -235,7 +235,7 @@ public class Server {
         try {
             ServerSocket mainServerSocket = null;
             mainServerSocket = new ServerSocket();
-            mainServerSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 4040));
+            mainServerSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 9010));
             ConnectThread connectThread = new ConnectThread(mainServerSocket);
             connectThread.start();
         } catch (Exception e) {}
