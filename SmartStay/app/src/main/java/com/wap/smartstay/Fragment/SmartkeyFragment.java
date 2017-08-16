@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -87,7 +88,6 @@ public class SmartkeyFragment extends Fragment {
         );
 
 
-
         /** 동숙객 추가 버튼을 눌렀을 때 이벤트*/
         ImageButton addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         addgroupBtn.setOnClickListener(
@@ -98,7 +98,6 @@ public class SmartkeyFragment extends Fragment {
                     }
                 }
         );
-
 
 
         /** 전화 버튼 눌렀을 때 이벤트  */
@@ -135,6 +134,8 @@ public class SmartkeyFragment extends Fragment {
     public void calling() {
         clientThread.send("SearchOfficePnum");
         String phone = "tel:" + phoneNumber;
+        Log.e("error", phone);
+
 
         Uri number;
         Intent intent;
