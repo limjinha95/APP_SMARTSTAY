@@ -14,10 +14,11 @@ public class ReserveSpinnerAdapter extends BaseAdapter {
     String[] roomType;
     LayoutInflater inflter;
 
-    public ReserveSpinnerAdapter(Context applicationContext, int[] pic, String[] countryNames) {
+    public ReserveSpinnerAdapter(Context applicationContext, int[] pic, String[] roomType) {
         this.context = applicationContext;
         this.pic = pic;
-        this.roomType = countryNames;
+        this.roomType = roomType;
+
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -39,10 +40,11 @@ public class ReserveSpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.reserve_spinner_item, null);
-        ImageView icon = (ImageView) view.findViewById(R.id.imageView);
-        TextView names = (TextView) view.findViewById(R.id.textView);
+        ImageView icon = (ImageView) view.findViewById(R.id.pic);
+        TextView information = (TextView) view.findViewById(R.id.information);
+
         icon.setImageResource(pic[i]);
-        names.setText(roomType[i]);
+        information.setText(roomType[i]);
         return view;
     }
 }

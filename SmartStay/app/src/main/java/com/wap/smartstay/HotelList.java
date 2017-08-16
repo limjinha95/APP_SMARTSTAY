@@ -32,10 +32,10 @@ public class HotelList extends ListFragment {
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.one),
                 "부경 대연 호텔", "부산광역시 대연3동") ;
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.two),
-                "부경 대연 호텔", "부산광역시 대연3동") ;
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.three),
-                "부경 대연 호텔", "부산광역시 대연3동") ;
+                "부경 용당 호텔", "부산광역시") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.one),
+                "부경 호텔", "부산광역시 대연동") ;
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.three),
                 "부경 대연 호텔", "부산광역시 대연3동") ;
         return super.onCreateView(inflater, container, savedInstanceState);
