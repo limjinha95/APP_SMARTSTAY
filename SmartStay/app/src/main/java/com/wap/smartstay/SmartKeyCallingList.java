@@ -29,7 +29,7 @@ import java.util.logging.Handler;
  */
 
 
-public class SmartKeyCallingList extends AppCompatActivity{
+public class SmartKeyCallingList extends AppCompatActivity {
     Context cont;
     Socket client;
     String ip = "13.124.213.57";
@@ -40,9 +40,11 @@ public class SmartKeyCallingList extends AppCompatActivity{
 
     public static String phoneNumber;
     public static String officeCode;
-
-    public static ArrayList<SmartkeyPopupListViewItem> smartkeyRoomList = new java.util.ArrayList<SmartkeyPopupListViewItem>() ;
-    public static String smartKeyRoomInfo;
+    public static int number = 0;
+    public static ArrayList<SmartkeyPopupListViewItem> smartkeyRoomList = new java.util.ArrayList<SmartkeyPopupListViewItem>();
+    public static ArrayList<String> pnumList = new java.util.ArrayList<String>();
+    public static String smartKeyRoomInfo, officePnum;
+    public ArrayList<String> officeCodeList = new java.util.ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,71 +55,74 @@ public class SmartKeyCallingList extends AppCompatActivity{
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("스마트키 방 목록");
 
-//        connect();
+        connect();
 
-//        JSONObject jo = new JSONObject();
-//
-//        try {
-//            jo.put("head","ReservationCheck");
-//            jo.put("ID", Login.Id);
-//        } catch (Exception e) {}
-//
-//        String data = jo.toString();
-//        clientThread.send(data);
-//        Log.i("test","대기");
-//
+        JSONObject jo = new JSONObject();
+        number = 1;
+        try {
+            jo.put("head", "ReservationCheck");
+            jo.put("ID", Login.Id);
+            String data = jo.toString();
+            clientThread.send(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Log.i("test", "대기");
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.7), (int)(height*.3));
+        getWindow().setLayout((int) (width * .7), (int) (height * .3));
 
-        final ListView listview ;
+        final ListView listview;
         final SmartkeyPopupListViewAdapter adapter;
 
         // Adapter 생성
-        adapter = new SmartkeyPopupListViewAdapter() ;
+        adapter = new SmartkeyPopupListViewAdapter();
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview_smartkey);
         listview.setAdapter(adapter);
-        smartKeyRoomInfo = "1호";
-        adapter.addItem(smartKeyRoomInfo);
 
-        smartKeyRoomInfo = "2호";
-        adapter.addItem(smartKeyRoomInfo);
 
+//        smartKeyRoomInfo = "1호";
+//        adapter.addItem(smartKeyRoomInfo);
+//
+//        smartKeyRoomInfo = "2호";
+//        adapter.addItem(smartKeyRoomInfo);
+
+        for (int i = 0; i < smartkeyRoomList.size(); i++) {
+            smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
+            officeCode = smartkeyRoomList.get(i).getSmartkeyOfficeCode();
+            adapter.addItem(smartKeyRoomInfo);
+            officeCodeList.add(officeCode);
+        }
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                ListView listView = (ListView) adapterView;
-                SmartkeyPopupListViewItem item = (SmartkeyPopupListViewItem) listView.getItemAtPosition(position);
-                String roomNum = item.getSmartkeyRoomInfo();
-                callBtnEventDialog(roomNum);
+                String office = officeCodeList.get(position);
+                callBtnEventDialog(office);
             }
         });
 
 
-//        for (int i = 0; i < smartkeyRoomList.size(); i++) {
-//            smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
-//            adapter.addItem(smartKeyRoomInfo);
-//        }
-
     }
 
 
-    public void callBtnEventDialog(final String roomInformation) {
+    public void callBtnEventDialog(final String office1) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Call")
-                .setMessage(roomInformation + " 전화를 하시겠습니까?")
+                .setMessage("전화를 하시겠습니까?")
                 .setCancelable(false)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int whichButton) {
-                        calling(roomInformation);
+                        calling(office1);
                     }
                 }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
@@ -129,30 +134,46 @@ public class SmartKeyCallingList extends AppCompatActivity{
         dialog.show();
     }
 
-    public void calling(String roomName) {
+    public void calling(String officeCode) {
+        number = 2;
         JSONObject jo = new JSONObject();
 
-        try{
-            jo.put("head","SearchOfficePnum");
-            jo.put("OfficeCode", roomName);
-
-        }catch (Exception e) {
+        try {
+            jo.put("head", "SearchOfficePnum");
+            jo.put("OfficeName", officeCode);
+            String data = jo.toString();
+            clientThread.send(data);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        String data = jo.toString();
-
-        clientThread.send(data);
 
 
         String phone = "tel:" + phoneNumber;
-        Log.e("error", phone);
-
+        Log.e("error : ", phone);
 
         Uri number;
         Intent intent;
         number = Uri.parse(phone); // 번호 수정해주시면 됩니다.
         intent = new Intent(Intent.ACTION_DIAL, number); // ACTION_CALL : 바로걸기
         startActivity(intent);
+    }
+
+
+    public void connect() {
+
+        thread = new Thread() {
+            public void run() {
+                super.run();
+                try {
+                    client = new Socket(ip, port);
+                    clientThread = new ClientThread(client, handler, Join.class);
+                    clientThread.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
     }
 
 }

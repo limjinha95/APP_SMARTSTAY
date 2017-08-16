@@ -38,16 +38,17 @@ public class SmartkeyPopupList extends AppCompatActivity {
         toolbar.setTitle("스마트키 방 목록");
 
         connect();
-
         JSONObject jo = new JSONObject();
-
         try {
             jo.put("head","ReservationCheck");
             jo.put("ID", Login.Id);
-        } catch (Exception e) {}
+            String data = jo.toString();
+            clientThread.send(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        String data = jo.toString();
-        clientThread.send(data);
+
         Log.i("test","대기");
 
         DisplayMetrics dm = new DisplayMetrics();
