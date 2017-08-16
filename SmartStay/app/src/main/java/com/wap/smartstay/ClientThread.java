@@ -57,20 +57,17 @@ public class ClientThread extends Thread {
         try {
             while (isRunning) {
                 msg = bufferR.readLine();
-<<<<<<< HEAD
                 Log.i("test", msg);
                 if (clas.getName().equals("com.wap.smartstay.Login")) {
                     if (msg.toString().equals("-")) {
                         Login.Islogin = 2;
                     } else {
-=======
                 Log.i("testmsg", msg);
                 if(clas.getName().equals("com.wap.smartstay.Login")) {
                     if(msg.toString().equals("-")) {
                         Login.Islogin=2;
                     }
                     else {
->>>>>>> master
                         try {
                             JSONObject jo = new JSONObject(msg);
                             Login.Id = jo.getString("ID");
@@ -81,7 +78,6 @@ public class ClientThread extends Thread {
 
                         }
                     }
-<<<<<<< HEAD
                 } else if (clas.getName().equals("com.wap.smartstay.Join")) {
                     if (msg.equals("Y"))
                         Join.check = 1;
@@ -119,7 +115,6 @@ public class ClientThread extends Thread {
                     }
 
                 } else if (clas.getName().equals("com.wap.smartstay.Fragment.UsageList")) {
-=======
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Join")) {
                     String msg2="";
@@ -139,7 +134,6 @@ public class ClientThread extends Thread {
                     SmartkeyFragment.phoneNumber = msg;
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.UsageList")){
->>>>>>> master
                     try {
                         JSONObject wrapObject = new JSONObject(msg);
                         JSONArray ja = new JSONArray(wrapObject);
