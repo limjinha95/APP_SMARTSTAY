@@ -225,7 +225,7 @@ public class JdbcConnect {
 	}
 	
 	public String MyKey(String ID) throws SQLException {
-		String query = "select reservation.officecode, reservation.rnum, reservation.startdate, reservation.enddate, room.minnum, room.maxnum from reservation join room on reservation.rnum = room.roomnumber and reservation.officecode = room.officecode where userid = ? and reservation.startdate <= CURDATE() and reservation.enddate >= CURDATE();";
+		String query = "select reservation.officecode, reservation.rnum, reservation.startdate, reservation.enddate, room.minnum, room.maxnum from reservation join room on reservation.rnum = room.roomnumber and reservation.officecode = room.officecode where userid = ? and reservation.startdate <= CURDATE() and reservation.enddate >= CURDATE()";
 		psmt = con.prepareStatement(query);
 		psmt.setString(1, ID);
 		rs = psmt.executeQuery();
