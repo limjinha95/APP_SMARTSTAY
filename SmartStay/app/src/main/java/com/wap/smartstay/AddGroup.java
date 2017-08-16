@@ -2,8 +2,10 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,19 +26,24 @@ public class AddGroup extends AppCompatActivity {
 
     Context cont;
     Socket client;
-    String ip = "210.114.91.91";
+    String ip = "13.124.213.57";
     int port = 9010;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
 
-    static int idCheck = 0;
+    public static int idCheck = 0;
     public static String groupId, groupName, groupPnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addgroup);
+
+        if(Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         inputId = (EditText) findViewById(R.id.addgroupInputId);
         addGroupInfo = (TextView) findViewById(R.id.addGroupInfo);
@@ -93,7 +100,22 @@ public class AddGroup extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    public void connect(){
 
+        thread = new Thread(){
+            public void run() {
+                super.run();
+                try {
+                    client = new Socket(ip, port);
+                    clientThread = new ClientThread(client,handler,AddGroup.class);
+                    clientThread.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
     }
 }

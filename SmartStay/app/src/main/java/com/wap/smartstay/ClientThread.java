@@ -109,7 +109,7 @@ public class ClientThread extends Thread {
 
                     }
 
-                } else if (clas.getName().equals("com.wap.smartstay.Fragment.UsageList")) {
+                } else if (clas.getName().equals("com.wap.smartstay.UsageList")) {
                     try {
                         JSONObject wrapObject = new JSONObject(msg);
                         JSONArray ja = new JSONArray(wrapObject);
@@ -133,7 +133,7 @@ public class ClientThread extends Thread {
                     } catch (JSONException e) {
                     }
 
-                } else if (clas.getName().equals("com.wap.smartstay.Fragment.CouponList")) {
+                } else if (clas.getName().equals("com.wap.smartstay.CouponList")) {
                     try {
                         JSONObject wrapObject = new JSONObject(msg);
                         JSONArray ja = new JSONArray(wrapObject);
@@ -155,7 +155,7 @@ public class ClientThread extends Thread {
                         }
                     } catch (JSONException e) {
                     }
-                } else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartKeyPopupList")){
+                } else if(clas.getName().equals("com.wap.smartstay.SmartKeyPopupList")){
                     try {
                         JSONObject wrapObject = new JSONObject(msg);
                         JSONArray ja = new JSONArray(wrapObject);
@@ -176,7 +176,7 @@ public class ClientThread extends Thread {
                     } catch (JSONException e) {
                     }
                 }
-                else if (clas.getName().equals("com.wap.smartstay.Fragment.AddGroup")) {
+                else if (clas.getName().equals("com.wap.smartstay.AddGroup")) {
                     if (msg.toString().equals("-")) {
                         AddGroup.idCheck = 1;
                     } else {

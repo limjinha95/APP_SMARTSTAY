@@ -105,7 +105,7 @@ public class SmartkeyPopupList extends AppCompatActivity {
                 super.run();
                 try {
                     client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler,Login.class);
+                    clientThread = new ClientThread(client,handler,SmartkeyPopupList.class);
                     clientThread.start();
                 } catch (Exception e) {
                     e.printStackTrace();
