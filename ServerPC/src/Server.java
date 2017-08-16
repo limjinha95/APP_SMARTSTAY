@@ -176,6 +176,16 @@ class UserThread extends Thread {
                 	String ID = (String) jsonObj.get("ID");
                 	sendmsg(jc.ReservationCheck(ID),serverSocket);
                 }
+                else if(head.equals("MyCoupon"))
+                {
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.MyCoupon(ID),serverSocket);
+                }
+                else if(head.equals("MyKey"))
+                {
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.MyCoupon(ID),serverSocket);
+                }
                 jc.closeDB();
             }
         } catch (Exception e) {
