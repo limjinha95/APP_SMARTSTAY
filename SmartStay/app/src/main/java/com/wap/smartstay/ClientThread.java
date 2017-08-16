@@ -24,10 +24,11 @@ public class ClientThread extends Thread {
     BufferedWriter bufferW;
     Socket client;
     Handler handler;
-
+    static private boolean isRunning;
     public ClientThread(Socket client, Handler handler, Class clas) {
         this.handler = handler;
         this.clas=clas;
+        isRunning=true;
         try {
             this.client = client;
             bufferR = new BufferedReader(new InputStreamReader(client.getInputStream(),"UTF8"));
@@ -48,7 +49,7 @@ public class ClientThread extends Thread {
     public String listen() {
         String msg = null;
         try {
-            while (true) {
+            while (isRunning) {
                 msg = bufferR.readLine();
                 Log.i("test", msg);
                 if(clas.getName().equals("com.wap.smartstay.Login")) {
@@ -83,6 +84,9 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
         return msg;
+    }
+    static public void setRunningState(boolean state){
+        isRunning = state;
     }
     public void run() {
         super.run();

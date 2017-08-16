@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.Socket;
@@ -24,8 +25,8 @@ public class Login extends AppCompatActivity {
     EditText Eid,Epwd;
     Context cont;
     Socket client;
-    String ip = "192.168.43.179";
-    int port = 4040;
+    String ip = "13.124.213.57";
+    int port = 9010;
     public static String Id,Pnum,Name;
     public static int Islogin=0;
     Thread thread;
@@ -40,6 +41,7 @@ public class Login extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        JSONArray ja = new JSONArray();
 
         setContentView(R.layout.login);
         Eid = (EditText)findViewById(R.id.loginIdEdit);
@@ -86,6 +88,7 @@ public class Login extends AppCompatActivity {
 
                     }
                     String data = jo.toString();
+                    Log.i("tttt",data);
                     clientThread.send(data);
                     Eid.setText("");
                     Epwd.setText("");
@@ -115,8 +118,10 @@ public class Login extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
+                    Log.i("11","11");
                     client = new Socket(ip, port);
                     clientThread = new ClientThread(client,handler,Login.class);
+                    Log.i("11","11");
                     clientThread.start();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -124,5 +129,11 @@ public class Login extends AppCompatActivity {
             }
         };
         thread.start();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
     }
 }
