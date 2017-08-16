@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONObject;
+
 import java.net.Socket;
 
 public class Join extends AppCompatActivity {
@@ -26,7 +28,6 @@ public class Join extends AppCompatActivity {
     EditText EpwdCheck;
     EditText Epnum;
     static int check=0;
-    static int check2=0;
     Context cont;
     Socket client;
     String ip = "13.124.213.57";
@@ -67,7 +68,16 @@ public class Join extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO : click event
                 Log.i("test",check+"");
-                clientThread.send("ID/"+Eid.getText().toString());
+                JSONObject jo = new JSONObject();
+                try{
+                    jo.put("head","ID");
+                    jo.put("ID",Eid.getText().toString());
+                }catch (Exception e)
+                {
+
+                }
+                String data = jo.toString();
+                clientThread.send(data);
                 while(check==0)
                     Log.i("test",check+"");
                 if(check==1)
@@ -88,16 +98,22 @@ public class Join extends AppCompatActivity {
                 Log.i("test",Epwd.getText()+" "+EpwdCheck.getText());
                 if(Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
                     String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                    clientThread.send("Register/" + Eid.getText().toString() + "-" + Ename.getText().toString() + "-" + Epwd.getText().toString() + "-" + Epnum.getText().toString()+ "-"+refreshedToken );
-                    while(check2==0);
-                    if(check2==1) {
-                        Toast.makeText(Join.this, "가입 축하 드립니다.", Toast.LENGTH_SHORT).show();
-                        finish();
+                    JSONObject jo = new JSONObject();
+                    try{
+                        jo.put("head","Register");
+                        jo.put("ID",Eid.getText().toString());
+                        jo.put("PWD",Epwd.getText().toString());
+                        jo.put("Name",Ename.getText().toString());
+                        jo.put("Pnum",Epnum.getText().toString());
+                        jo.put("Token",refreshedToken);
+                    }catch (Exception e)
+                    {
+
                     }
-                    else if(check2==2) {
-                        Toast.makeText(Join.this, "가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                        check2=0;
-                    }
+                    String data = jo.toString();
+                    clientThread.send(data);
+                    Toast.makeText(Join.this, "가입 축하 드립니다.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else
                     Toast.makeText(Join.this,"비밀번호를 다시 확인해 주세요.",Toast.LENGTH_SHORT).show();
@@ -139,5 +155,16 @@ public class Join extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        connect();
     }
 }

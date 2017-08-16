@@ -7,14 +7,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.wap.smartstay.Fragment.SmartkeyFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.wap.smartstay.CouponList.couponList;
+import static com.wap.smartstay.SmartkeyPopupList.smartkeyRoomList;
+import static com.wap.smartstay.UsageList.reserveList;
 
 public class ClientThread extends Thread {
     Class clas;
@@ -22,10 +26,11 @@ public class ClientThread extends Thread {
     BufferedWriter bufferW;
     Socket client;
     Handler handler;
-
+    static private boolean isRunning;
     public ClientThread(Socket client, Handler handler, Class clas) {
         this.handler = handler;
         this.clas=clas;
+        isRunning=true;
         try {
             this.client = client;
             bufferR = new BufferedReader(new InputStreamReader(client.getInputStream(),"UTF8"));
@@ -46,52 +51,112 @@ public class ClientThread extends Thread {
     public String listen() {
         String msg = null;
         try {
-            while (true) {
+            while (isRunning) {
                 msg = bufferR.readLine();
-                Log.i("test", msg);
+                Log.i("testmsg", msg);
                 if(clas.getName().equals("com.wap.smartstay.Login")) {
                     if(msg.toString().equals("-")) {
                         Login.Islogin=2;
                     }
                     else {
-                        String[] loginData = new String[3];
-                        loginData = msg.toString().split("/");
-                        Login.Id = loginData[0];
-                        Login.Name = loginData[1];
-                        Login.Pnum = loginData[2];
-                        Login.Islogin=1;
+                        try {
+                            JSONObject jo = new JSONObject(msg);
+                            Login.Id = jo.getString("ID");
+                            Login.Name = jo.getString("NAME");
+                            Login.Pnum = jo.getString("Pnum");
+                            Login.Islogin = 1;
+                        }catch (Exception e)
+                        {
+
+                        }
                     }
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Join")) {
-                    if(msg.equals("Y"))
+                    String msg2="";
+                    try {
+                        JSONObject jo = new JSONObject(msg);
+                        msg2 = jo.getString("Unique");
+                    }catch (Exception e)
+                    {
+
+                    }
+                    if(msg2.equals("Y"))
                         Join.check = 1;
-                    else if(msg.equals("N"))
+                    else if(msg2.equals("N"))
                         Join.check=2;
-                    else if(msg.equals("success"))
-                        Join.check2=1;
-                    else if(msg.equals("failed"))
-                        Join.check2=2;
-                }
-                else if(clas.getName().equals("com.wap.smartstay.MyInfo")) {
-                    if(msg.equals("success"))
-                        MyInfo.delete=1;
-                    else if(msg.equals("failed"))
-                        MyInfo.delete=2;
-                }
-                else if(clas.getName().equals("com.wap.smartstay.ChagnePw")) {
-                    if(msg.equals("success"))
-                        ChangePw.check=1;
-                    else if(msg.equals("failed"))
-                        ChangePw.check=2;
-                }
-                else if(clas.getName().equals("com.wap.smartstay.ChangePnum")) {
-//                    if(msg.equals("success"))
-//                        ChangePhone.check=1;
-//                    else if(msg.equals("failed"))
-//                        ChangePhone.check=2;
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
                     SmartkeyFragment.phoneNumber = msg;
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.UsageList")){
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+
+                        ReserveListViewItem item = new ReserveListViewItem();
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String roomName = dataJsonObject.getString("NAME");
+                            String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+                            String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "원 / 최대 " + dataJsonObject.getString("MAXNUM");
+
+                            item.setAccomodationName(roomName);
+                            item.setReservationDuty(reservationDuty);
+                            item.setAccomodationInfo(roomInfo);
+
+                            reserveList.add(item);
+                        }
+
+
+                    } catch(JSONException e) {}
+
+
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.CouponList")){
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+
+                        CouponListViewItem item = new CouponListViewItem();
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String couponName = dataJsonObject.getString("NAME");
+                            String couponInfo = dataJsonObject.getString("INFO");
+                            String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
+                            item.setCouponName(couponName);
+                            item.setCouponInfo(couponInfo);
+                            item.setCouponDuty(couponDuty);
+
+                            couponList.add(item);
+                        }
+
+
+                    } catch(JSONException e) {}
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartKeyPopupList")){
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+
+                        SmartkeyPopupListViewItem item = new SmartkeyPopupListViewItem();
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+
+                            item.setSmartkeyRoomInfo(smartKeyRoomInfo);
+
+                            smartkeyRoomList.add(item);
+                        }
+
+
+                    } catch(JSONException e) {}
                 }
             }
         } catch (IOException e) {
@@ -99,6 +164,9 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         }
         return msg;
+    }
+    static public void setRunningState(boolean state){
+        isRunning = state;
     }
     public void run() {
         super.run();

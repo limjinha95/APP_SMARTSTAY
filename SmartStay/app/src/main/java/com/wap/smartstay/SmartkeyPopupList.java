@@ -2,25 +2,21 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class UsageList extends AppCompatActivity {
+public class SmartkeyPopupList extends AppCompatActivity {
     Context cont;
     Socket client;
     String ip = "13.124.213.57";
@@ -29,26 +25,17 @@ public class UsageList extends AppCompatActivity {
     ClientThread clientThread;
     Handler handler;
 
-    TextView accomodationName;
-    TextView accomodationDuty;
-    TextView accomodationInfo;
-
-    public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>() ;
-
-    public static String roomName, reservationDuty, roomInfo;
+    public static ArrayList<SmartkeyPopupListViewItem> smartkeyRoomList = new java.util.ArrayList<SmartkeyPopupListViewItem>() ;
+    public static String smartKeyRoomInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reserve_list);
+        setContentView(R.layout.smartkey_list_pop);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
-        toolbar.setTitle("이용 내역");
-
-        accomodationName = (TextView) findViewById(R.id.reserveAccommodationName);
-        accomodationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
-        accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
+        toolbar.setTitle("스마트키 방 목록");
 
         connect();
 
@@ -63,25 +50,30 @@ public class UsageList extends AppCompatActivity {
         clientThread.send(data);
         Log.i("test","대기");
 
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        getWindow().setLayout((int)(width*.7), (int)(height*.3));
+
         ListView listview ;
-        ReserveListViewAdapter adapter;
+        SmartkeyPopupListViewAdapter adapter;
 
         // Adapter 생성
-        adapter = new ReserveListViewAdapter() ;
+        adapter = new SmartkeyPopupListViewAdapter() ;
 
         // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView) findViewById(R.id.listview_reserve);
+        listview = (ListView) findViewById(R.id.listview_smartkey);
         listview.setAdapter(adapter);
 
-        Drawable img = ContextCompat.getDrawable(this, R.drawable.one);
+        for (int i = 0; i < smartkeyRoomList.size(); i++) {
+            smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
 
-        for (int i = 0; i < reserveList.size(); i++) {
-            roomName = reserveList.get(i).getAccomodationName();
-            reservationDuty = reserveList.get(i).getReservationDuty();
-            roomInfo = reserveList.get(i).getAccomodationInfo();
-
-            adapter.addItem(img, roomName, reservationDuty, roomInfo);
+            adapter.addItem(smartKeyRoomInfo);
         }
+
     }
 
     public void connect(){
@@ -100,6 +92,7 @@ public class UsageList extends AppCompatActivity {
         };
         thread.start();
     }
+
 
 
 }

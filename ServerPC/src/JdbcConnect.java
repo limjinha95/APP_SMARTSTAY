@@ -1,4 +1,7 @@
-import java.sql.*;                      
+import java.sql.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;                      
 
 public class JdbcConnect {
         private Connection con = null;
@@ -7,19 +10,15 @@ public class JdbcConnect {
         
         public JdbcConnect(String dbName) throws Exception{
             try {
-                //sql 드라이버를 로딩하는 문구입니다.
                 Class.forName("org.gjt.mm.mysql.Driver");
                 System.out.println("Driver Install Complete");
             }catch(ClassNotFoundException cnfe) {
                 System.err.println("Error : " + cnfe);
             }
             
-            Connection con = null;
             String url = "jdbc:mysql://localhost:3306/hack";
             String id = "root";
             String pw = "ckdgns1016!";
-            //우선은 실험하던 내 컴퓨터 위주로 진행하였으니 지금은 각자 형편에 맞게 위를 수정해주고 대회가 다가오면 정해진 서버에 맞게 수정 요함.
-            
             try {
                 con = DriverManager.getConnection(url, id, pw);
                 System.out.println("Connection Complete");
@@ -39,7 +38,7 @@ public class JdbcConnect {
                 }
         }
         public String Login(String id,String pwd)throws SQLException{
-        	String query="SELECT ID, NAME, PNUM FROM user where ID= ? AND PWD=PASSWORD( ? )";
+        	String query="SELECT ID, NAME, PNUM FROM user where ID=? AND PWD=PASSWORD(?)";
         	psmt = con.prepareStatement(query);
         	psmt.setString(1, id);
         	psmt.setString(2, pwd);
@@ -47,17 +46,16 @@ public class JdbcConnect {
             if(rs.next()==false){
                 return "-";  
             }
-            String loginData="";
+            JSONObject jo = new JSONObject();
+            String loginData;
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn]; 
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
             for(int i=0;i<numberColumn;i++)
-            {
-            	loginData+=rs.getString(columName[i]);
-            	loginData+="/";
-            }
+            	jo.put(columName[i],rs.getString(columName[i]));
+            loginData=jo.toString();
             return loginData;
         }
         public String OfficePnum(String OfficeCode)throws SQLException{
@@ -68,17 +66,16 @@ public class JdbcConnect {
             if(rs.next()==false){
                 return "-";  
             }
-            String PnumData="";
+            JSONObject jo = new JSONObject();
+            String PnumData;
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn]; 
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
             for(int i=0;i<numberColumn;i++)
-            {
-            	PnumData+=rs.getString(columName[i]);
-            	PnumData+="/";
-            }
+            	jo.put(columName[i],rs.getString(columName[i]));
+            PnumData=jo.toString();
             return PnumData;
         }
         public boolean IsUniqueID(String id)throws SQLException{
@@ -93,8 +90,9 @@ public class JdbcConnect {
             if(rowcount==0)return true;
             else return false;
         }
-        public boolean RegisterUser(String id,String name, String pwd, String Pnum, String token) throws SQLException{
-	        	String query="insert into user values(?, ?, PASSWORD(?), ?)";
+        public boolean RegisterUser(String id,String name, String pwd, String Pnum, String token){
+        	try {
+	        	String query="insert into user values(?, ?, PASSWORD(?), ?, ?)";
 	        	psmt = con.prepareStatement(query);
 	        	psmt.setString(1, id);
 	        	psmt.setString(2, name);
@@ -104,6 +102,12 @@ public class JdbcConnect {
                 int check=psmt.executeUpdate();
                 if(check>0)return true;  
                 else return false;
+        	}catch(Exception e)
+        	{
+        		System.out.println(e.getMessage());
+        		return false;
+        	}
+                
         }
         public boolean DeleteUser(String id) throws SQLException{
         	String query="delete from user where ID = ?";
@@ -119,16 +123,6 @@ public class JdbcConnect {
         	psmt.setString(2, id);
         	psmt.setString(1, Pwd);
             int check=psmt.executeUpdate();
-            if(check>0)return true;  
-            else return false;
-        }
-        public boolean ChangePnum(String id,String Pnum)throws SQLException{
-        	String query="update user set Pnum=? where ID = ?";
-        	psmt = con.prepareStatement(query);
-        	psmt.setString(2, id);
-        	psmt.setString(1, Pnum);
-            int check=psmt.executeUpdate();
-        	System.out.println(check+"");
             if(check>0)return true;  
             else return false;
         }
@@ -155,7 +149,8 @@ public class JdbcConnect {
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            return rs.getString(columName[0]);
+            String Ip = rs.getString(columName[0]);
+            return Ip;
         }
         public String ReservationCheck(String ID) throws SQLException{
         	String query="select office.name, doorlock.rnum, reservation.startdate, reservation.enddate from ((reservation join doorlock on reservation.officecode = doorlock.officecode and reservation.rnum = doorlock.rnum) join usekey on reservation.IDX = usekey.reservationidx) join office on doorlock.officecode = office.officecode where usekey.userid= ?";
@@ -165,21 +160,20 @@ public class JdbcConnect {
             if(rs.next()==false){
                 return "-";  
             }
+            JSONArray ja = new JSONArray();
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            String RSCData="";
+            String RSCData;
             do
-            {
+            {	JSONObject jo = new JSONObject();
             	for(int i=0;i<numberColumn;i++)
-            	{
-            		RSCData+=rs.getString(columName[i]);
-            		RSCData+="/";
-            	}
-            	RSCData+="|";
+            		jo.put(columName[i],rs.getString(columName[i]));
+            	ja.add(jo);
             }while(rs.next());
+            RSCData = ja.toString();
             return RSCData;
         }
         public String RoomCheck(String Oname, String Rnum) throws SQLException{
@@ -193,19 +187,19 @@ public class JdbcConnect {
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
+            JSONArray ja = new JSONArray();
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            String ROCData="";
+            String ROCData;
             do
             {
+            	JSONObject jo = new JSONObject();
             	for(int i=0;i<numberColumn;i++)
-            	{
-            		ROCData+=rs.getString(columName[i]);
-            		ROCData+="/";
-            	}
-            	ROCData+="|";
+            		jo.put(columName[i], rs.getString(columName[i]));
+            	ja.add(jo);
             }while(rs.next());
+            ROCData = ja.toString();
             return ROCData;
         }
         public String RoomList() throws SQLException{
@@ -217,19 +211,19 @@ public class JdbcConnect {
             }
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
+            JSONArray ja = new JSONArray();
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            String ARCData="";
+            String ARCData;
             do
             {
+            	JSONObject jo = new JSONObject();
             	for(int i=0;i<numberColumn;i++)
-            	{
-            		ARCData+=rs.getString(columName[i]);
-            		ARCData+="/";
-            	}
-            	ARCData+="|";
+            		jo.put(columName[i],rs.getString(columName[i]));
+            	ja.add(jo);
             }while(rs.next());
+            ARCData = ja.toString();
             return ARCData;
         }
         public String CheckRidx(String officename, String rnum) throws SQLException{
@@ -246,7 +240,33 @@ public class JdbcConnect {
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            return rs.getString(columName[0]);
+            JSONObject jo = new JSONObject();
+            jo.put(columName[0],rs.getString(columName[0]));
+            String data = jo.toString();
+            return data;
+        }
+        public String GetToken(String officename, String rnum) throws SQLException{
+        	String query="select user.token from (reservation join usekey on reservation.idx=usekey.reservationidx) join user on usekey.userid = user.id where reservation.startdate<=curdate() and reservation.enddate>=curdate() and reservation.officecode = ? and reservation.rnum= ? ;";
+        	psmt = con.prepareStatement(query);
+        	psmt.setString(2, rnum);
+        	psmt.setString(1, officename);
+            rs=psmt.executeQuery();
+            if(rs.next()==false){
+                return "-";  
+            }
+            String data="";
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int numberColumn = rsmd.getColumnCount();
+            String[] columName = new String[numberColumn];
+            for(int i=0;i<numberColumn;i++)
+            	columName[i]=rsmd.getColumnName(i+1);
+            JSONArray ja = new JSONArray();
+            do
+            {
+            	data+=rs.getString(columName[0]);
+            	data+="|";
+            }while(rs.next());
+            return data;
         }
         public String CheckOfficeCode(String officename) throws SQLException{
         	String query="select officecode from office where name= ?";
@@ -261,7 +281,10 @@ public class JdbcConnect {
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            return rs.getString(columName[0]);
+            JSONObject jo = new JSONObject();
+            jo.put(columName[0],rs.getString(columName[0]));
+            String data = jo.toString();
+            return data;
         }
         public boolean ReservationCancel(String Ridx) throws SQLException{
         	String query="delete from reservation where idx = ?";

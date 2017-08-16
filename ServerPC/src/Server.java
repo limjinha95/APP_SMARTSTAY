@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.doosoo.MessagePush;
- 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 class UserInfo {
     Socket serverSocket;
     UserInfo(Socket serverSocket) {
@@ -30,10 +32,8 @@ class UserThread extends Thread {
     {
     	try
     	{
-    		//안드로이드와 자바간의 통신에서 utf인코딩의 경우 마침표 역활을 해주는 캐리지 리턴과 개행을 포함시켜 보낸다. 문자열에서의 \0과 비슷한 역활
     		data+="\r\n";
     		byte[] sendByteArray = data.getBytes("UTF-8");
-    		//데이터 간의 통일된 형식인 utf-8로 인코딩한 데이터를 전송한다.
     		OutputStream outputStream = soc.getOutputStream();
     		outputStream.write(sendByteArray);
     	}catch (Exception e) {
@@ -49,151 +49,132 @@ class UserThread extends Thread {
                 if (size == -1) break;
                 String sendMessage = new String(byteArray, 0, size, "UTF-8");
                 System.out.println(sendMessage);
-                String[] inputdata;
-                inputdata = sendMessage.split("/");
-                String[] data = inputdata[1].split("-");
-                //받아들일 데이터들은 모두 명령어/데이터1-데이터2-...-데이터n의 구조이기 때문에 /과-로 분리한 문자열을 사용한다.
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse( sendMessage );
+                JSONObject jsonObj = (JSONObject)obj;
+                String head = (String) jsonObj.get("head");
                 JdbcConnect jc = new JdbcConnect("smartstay");
-                if(inputdata[0].equals("Login"))
+                if(head.equals("Login"))
                 {
-                	String loginData = jc.Login(data[0], data[1]);
+                	String Id = (String) jsonObj.get("ID");
+                	String Pwd = (String) jsonObj.get("PWD");
+                	String loginData = jc.Login(Id, Pwd);
                 	System.out.println(loginData);
                 	sendmsg(loginData,serverSocket);
                 }
-                else if(inputdata[0].equals("ID"))
+                else if(head.equals("ID"))
                 {
+                	String Id = (String) jsonObj.get("ID");
                 	String IdData;
-                	if(jc.IsUniqueID(data[0]))
-                		IdData="Y";
+                	JSONObject jo = new JSONObject();
+                	if(jc.IsUniqueID(Id))
+                		jo.put("Unique", "Y");
                 	else
-                		IdData="N";
+                		jo.put("Unique", "N");
+                	IdData = jo.toString();
+                	System.out.println(IdData);
                 	sendmsg(IdData,serverSocket);
                 }
-                else if(inputdata[0].equals("Register"))
+                else if(head.equals("Register"))
                 {
-                	String RegistData;
-                	System.out.println("d");
-            		if(jc.RegisterUser(data[0], data[1], data[2], data[3], data[4])) RegistData = "success";
-            		else RegistData = "failed";
-                	sendmsg(RegistData,serverSocket);
-                	System.out.println(RegistData);
+                	String Id = (String) jsonObj.get("ID");
+                	String Pwd = (String) jsonObj.get("PWD");
+                	String Name = (String) jsonObj.get("Name");
+                	String Pnum = (String) jsonObj.get("Pnum");
+                	String Token = (String) jsonObj.get("Token");
+                	boolean check=false;
+                	do
+                		check=jc.RegisterUser(Id, Name, Pwd, Pnum, Token);
+            		while(check==false);
+                	System.out.println("ok");
                 }
-                else if(inputdata[0].equals("Delete"))
+                else if(head.equals("Delete"))
                 {
-                	String DeleteData;
-                	System.out.println("d");
-            		if(jc.DeleteUser(data[0])) 
-            			DeleteData = "success";
-            		else 
-            			DeleteData = "failed";
-                	sendmsg(DeleteData,serverSocket);
-                	System.out.println(DeleteData);
+                	String Id = (String) jsonObj.get("ID");
+                	boolean check=false;
+                	do
+                		check=jc.DeleteUser(Id);
+            		while(check==false);
                 }
-                else if(inputdata[0].equals("ChangePwd"))
+                else if(head.equals("ChangePwd"))
                 {
-                	String PwdData;
-                	System.out.println("d");
-            		if(jc.ChangePwd(data[0],data[1])) 
-            			PwdData = "success";
-            		else 
-            			PwdData = "failed";
-            		System.out.println(PwdData);
-                	sendmsg(PwdData,serverSocket);
-                	
+                	String Id = (String) jsonObj.get("ID");
+                	String Pwd = (String) jsonObj.get("PWD");
+                	boolean check=false;
+                	do
+                		check=jc.ChangePwd(Id,Pwd);
+            		while(check==false);
                 }
-                else if(inputdata[0].equals("ChangePnum"))
+                else if(head.equals("SearchOfficePnum"))
                 {
-                	String PnumData;
-                	System.out.println("d");
-            		if(jc.ChangePnum(data[0],data[1])) 
-            			PnumData = "success";
-            		else 
-            			PnumData = "failed";
-            		System.out.println(PnumData);
+                	String OfficeCode = (String) jsonObj.get("OfficeCode");
+                	String PnumData = jc.OfficePnum(OfficeCode);
                 	sendmsg(PnumData,serverSocket);	
                 }
-                else if(inputdata[0].equals("SearchOfficePnum"))
+                else if(head.equals("Search_Room_Ip"))
                 {
-                	String PnumData = jc.OfficePnum(data[0]);
-                	System.out.println(PnumData);
-                	sendmsg(PnumData,serverSocket);	
+                	String OfficeCode = (String) jsonObj.get("OfficeCode");
+                	String RoomNumber = (String) jsonObj.get("RoomNumber");
+                	String ip=jc.Search_ip(OfficeCode, RoomNumber);
+                	for (int i = 0; i < li.size(); i++) {
+            			if (li.get(i).serverSocket.getInetAddress().equals(ip)) {
+            				String openData = "open";
+            				sendmsg(openData,li.get(i).serverSocket);
+            				break;
+            			}
+            		}
+            		MessageService ms = new MessageService();
+            		String tok = jc.GetToken(OfficeCode, RoomNumber);
+            		String [] token = tok.split("|");
+            		for(int i=0;i<token.length;i++)
+            			ms.push(token[i]);
                 }
-                else if(inputdata[0].equals("Search_Room_Ip"))
+                else if(head.equals("FriendPlus"))
                 {
-                	String ip=jc.Search_ip(data[0], data[1]);
-                	String doorData;
-                	if(ip.equals("-"))
-                		doorData="failed";
-                	else
-                	{
-                		for (int i = 0; i < li.size(); i++) {
-                			if (li.get(i).serverSocket.getInetAddress().equals(ip)) {
-                				String openData = "open";
-                				sendmsg(openData,li.get(i).serverSocket);
-                				break;
-                			}
-                		}
-                		//서버의 리스트에 각각 클라이언트들의 소켓정보가 저정될 것이기 때문에 우리는 디비에 저정된 원하는 방의 정보를 통해 원하는 소켓을 찾아내어 문열기 요청을 보낸다.
-                		
-                		MessageService ms = new MessageService();
-                		String token = "clsKk9CWB0M:APA91bEwqzPZocFCX1QYQSjhaVNiZjunNlew2aKFdoeMQ6fXaW1X4yuIq5NGpS4EW8PjgaJynOXtgaRYJM4T8GmCCPNTfGnZA7VFCkipzZrLlYt_pEWFk4uVL6k4VzdkyaPQbZHsUTUB";
-                		// 문을 연 사용자 Token을 가져와서 Token을 보내야됨
-                		ms.push(token);
-                		
-                		doorData="success";
-                	}
-                	sendmsg(doorData,serverSocket);
+                	String RoomNumber = (String) jsonObj.get("RoomNumber");
+                	String FriendId = (String) jsonObj.get("FriendId");
+                	boolean check=false;
+                	do
+                		check=jc.FriendPlus(FriendId, RoomNumber);
+            		while(check==false);
                 }
-                else if(inputdata[0].equals("FriendPlus"))
+                else if(head.equals("RoomCheck"))
                 {
-                	int fcheck=0;
-                	String faillist="";
-                	for(int i=1; i<data.length;i++)
-                	{
-                		if(jc.FriendPlus(data[i], data[0])==false)
-                		{
-                			faillist+=data[i];
-                			faillist+="/";
-                			fcheck++;
-                		}
-                	}
-                	if(fcheck>0)
-                    	sendmsg(faillist,serverSocket);
-                	else
-                    	sendmsg("success",serverSocket);
+                	String OfficeCode = (String) jsonObj.get("OfficeCode");
+                	String RoomNumber = (String) jsonObj.get("RoomNumber");
+                	sendmsg(jc.RoomCheck(OfficeCode,RoomNumber),serverSocket);
                 }
-                else if(inputdata[0].equals("RoomCheck"))
-                {
-                	sendmsg(jc.RoomCheck(data[0], data[1]),serverSocket);
-                }
-                else if(inputdata[0].equals("RoomList"))
+                else if(head.equals("RoomList"))
                 {
                 	sendmsg(jc.RoomList(),serverSocket);
                 }
-                else if(inputdata[0].equals("ReservationCancle"))
+                else if(head.equals("ReservationCancle"))
                 {
-                	String Ridx = jc.CheckRidx(data[0], data[1]);
-                	if(!Ridx.equals("-"))
-                		sendmsg("failed",serverSocket);
-                	else
-                	{
-                		if(jc.ReservationCancel(Ridx)) sendmsg("success",serverSocket);
-                		else sendmsg("failed",serverSocket);
-                	}
+                	String OfficeCode = (String) jsonObj.get("OfficeCode");
+                	String RoomNumber = (String) jsonObj.get("RoomNumber");
+                	String Ridx = jc.CheckRidx(OfficeCode, RoomNumber);
+                	boolean check=false;
+                	do
+                		check=jc.ReservationCancel(Ridx);
+            		while(check==false);
                 }
-                else if(inputdata[0].equals("Reservation"))
+                else if(head.equals("Reservation"))
                 {
-                	String officeCode = jc.CheckOfficeCode(data[0]);
-                	if(officeCode.equals("-")) sendmsg("failed",serverSocket);
-                	else
-                	{
-                		if(jc.RegisterReservation(officeCode,data[1],data[2], data[3],data[4])) sendmsg("success",serverSocket);
-                		else sendmsg("failed",serverSocket);
-                	}
+                	String OfficeName = (String) jsonObj.get("OfficeName");
+                	String RoomNumber = (String) jsonObj.get("RoomNumber");
+                	String ID = (String) jsonObj.get("ID");
+                	String StartDate = (String) jsonObj.get("StartDate");
+                	String EndDate = (String) jsonObj.get("EndDate");
+                	String officeCode = jc.CheckOfficeCode(OfficeName);
+                	boolean check=false;
+                	do
+                		check=jc.RegisterReservation(officeCode,RoomNumber,ID,StartDate,EndDate);
+            		while(check==false);
                 }
-                else if(inputdata[0].equals("ReservationCheck"))
+                else if(head.equals("ReservationCheck"))
                 {
-                	sendmsg(jc.ReservationCheck(data[0]),serverSocket);
+                	String ID = (String) jsonObj.get("ID");
+                	sendmsg(jc.ReservationCheck(ID),serverSocket);
                 }
                 jc.closeDB();
             }
@@ -207,13 +188,11 @@ class UserThread extends Thread {
             }
         }
     }
-}//
- 
+}
  
 class ConnectThread extends Thread {
     ServerSocket mainServerSocket = null;
     List<UserInfo> li = new ArrayList<UserInfo>();
-    
     ConnectThread(ServerSocket mainServerSocket) {
         this.mainServerSocket = mainServerSocket;
     }
@@ -224,7 +203,6 @@ class ConnectThread extends Thread {
             while (true) {
                 Socket serverSocket = mainServerSocket.accept();
                 System.out.println(serverSocket.getRemoteSocketAddress().toString());
-                //1대n통신의 서버 이면서 동시에 한 클라이언트가 다른 클라이언트에 직접 메시지 전송을 할 필요(문열기)가 필요하기 때문에 각 클라이언트들의 주소를 가질 리스트를 가지고 각각의 클라이언트들과 통신을 수행한다.
                 li.add(new UserInfo(serverSocket));
                 UserThread userThread = new UserThread(serverSocket, li);
                 userThread.start();
@@ -236,13 +214,9 @@ class ConnectThread extends Thread {
 public class Server {
 	public static void main(String[] args) {        
         try {
-        	//최초 서버 가동시 시작 부분
-        	System.out.println("실행되었습니다.");
             ServerSocket mainServerSocket = null;
             mainServerSocket = new ServerSocket();
             mainServerSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 4040));
-            //서버의 내부망 ip주소와 포트를 메인서버 소켓에 바인딩 하여 통신준비를 한다.
-            //ip는 자동으로 받아오겠지만 포트는 임시로 지정.
             ConnectThread connectThread = new ConnectThread(mainServerSocket);
             connectThread.start();
         } catch (Exception e) {}

@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.Socket;
 
 import static android.R.attr.port;
-import static com.wap.smartstay.ChangePw.logined;
 
 public class Login extends AppCompatActivity {
     EditText Eid,Epwd;
@@ -39,6 +41,7 @@ public class Login extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        JSONArray ja = new JSONArray();
 
         setContentView(R.layout.login);
         Eid = (EditText)findViewById(R.id.loginIdEdit);
@@ -55,6 +58,7 @@ public class Login extends AppCompatActivity {
             }
         };
         connect();
+
         Button startJoinBtn = (Button) findViewById(R.id.joinStartBtn) ;
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -75,7 +79,17 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    clientThread.send("L/" + Eid.getText().toString() + "-" + Epwd.getText().toString());
+                    JSONObject jo = new JSONObject();
+                    try{
+                        jo.put("head","Login");
+                        jo.put("ID",Eid.getText().toString());
+                        jo.put("PWD",Epwd.getText().toString());
+                    }catch (Exception e)
+                    {
+
+                    }
+                    String data = jo.toString();
+                    clientThread.send(data);
                     Eid.setText("");
                     Epwd.setText("");
                     Log.i("test","대기");
@@ -91,7 +105,7 @@ public class Login extends AppCompatActivity {
                         finish();
                     } else if (Islogin == 2) {
                         Toast.makeText(Login.this, "잘못된 ID 혹은 PWD 입니다.", Toast.LENGTH_SHORT).show();
-                        logined = 0;
+                        Islogin = 0;
                     }
                 }
             }
@@ -104,8 +118,10 @@ public class Login extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
+                    Log.i("11","11");
                     client = new Socket(ip, port);
                     clientThread = new ClientThread(client,handler,Login.class);
+                    Log.i("11","11");
                     clientThread.start();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -113,5 +129,11 @@ public class Login extends AppCompatActivity {
             }
         };
         thread.start();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
     }
 }
