@@ -94,6 +94,7 @@ public class Login extends AppCompatActivity {
                     }
                     String data = jo.toString();
                     clientThread.send(data);
+
                     Eid.setText("");
                     Epwd.setText("");
                     Log.i("test","대기");
