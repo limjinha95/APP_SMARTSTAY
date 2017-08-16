@@ -24,8 +24,8 @@ public class Login extends AppCompatActivity {
     EditText Eid,Epwd;
     Context cont;
     Socket client;
-    String ip = "172.31.27.181";
-    int port = 4040;
+    String ip = "13.124.213.57";
+    int port = 9010;
     public static String Id,Pnum,Name;
     public static int Islogin=0;
     Thread thread;

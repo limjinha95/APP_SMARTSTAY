@@ -23,8 +23,8 @@ public class MyInfo extends AppCompatActivity {
     TextView Id, Name, Pnum;
     Context cont;
     Socket client;
-    String ip = "172.31.27.181";
-    int port = 4040;
+    String ip = "13.124.213.57";
+    int port = 9010;
     Thread thread;
     ClientThread clientThread;
     Handler handler;

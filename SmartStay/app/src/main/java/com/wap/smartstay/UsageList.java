@@ -14,6 +14,17 @@ import android.widget.TextView;
 import java.net.Socket;
 
 public class UsageList extends AppCompatActivity {
+    Context cont;
+    Socket client;
+    String ip = "13.124.213.57";
+    int port = 9010;
+    Thread thread;
+    ClientThread clientThread;
+    Handler handler;
+
+    TextView accomodationName;
+    TextView accomodationDuty;
+    TextView accomodationInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +35,10 @@ public class UsageList extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("이용 내역");
 
+        accomodationName = (TextView) findViewById(R.id.reserveAccommodationName);
+        accomodationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
+        accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
+
         ListView listview ;
         ReserveListViewAdapter adapter;
 
@@ -33,8 +48,6 @@ public class UsageList extends AppCompatActivity {
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview_reserve);
         listview.setAdapter(adapter);
-
-
 
         // 첫 번째 아이템 추가.
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.one),

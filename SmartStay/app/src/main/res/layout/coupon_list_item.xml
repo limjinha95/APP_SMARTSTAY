@@ -26,12 +26,12 @@
 
         <TextView
             android:layout_width="80dp"
-            android:layout_height="15dp"
+            android:layout_height="17dp"
             android:text="조건" />
         <TextView
             android:id="@+id/couponInfo"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="17dp"
             android:text="결제 금액 2만원 이상 적용 가능" />
 
     </LinearLayout>
@@ -44,12 +44,12 @@
 
         <TextView
             android:layout_width="80dp"
-            android:layout_height="15dp"
+            android:layout_height="17dp"
             android:text="유효 기간" />
         <TextView
             android:id="@+id/couponDuty"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="17dp"
             android:text="17.07.01 ~ 17.07.31" />
 
     </LinearLayout>
