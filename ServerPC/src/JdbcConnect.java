@@ -42,7 +42,7 @@ public class JdbcConnect {
 		}
 	}
 
-	public String Login(String id, String pwd) throws SQLException {
+	public String Login(String id, String pwd, String token) throws SQLException {
 		String query = "SELECT ID, NAME, PNUM FROM user where ID=? AND PWD=PASSWORD(?)";
 		psmt = con.prepareStatement(query);
 		psmt.setString(1, id);
@@ -60,6 +60,16 @@ public class JdbcConnect {
 			columName[i] = rsmd.getColumnName(i + 1);
 		for (int i = 0; i < numberColumn; i++)
 			jo.put(columName[i], rs.getString(columName[i]));
+		
+		String query2 = "update user set Token=? where ID = ?";
+		psmt = con.prepareStatement(query2);
+		psmt.setString(1, token);
+		psmt.setString(2, id);
+		int check;
+		do {
+		check = psmt.executeUpdate();
+		}
+		while(check<=0);
 		loginData = jo.toString();
 		return loginData;
 	}

@@ -58,7 +58,8 @@ class UserThread extends Thread {
                 {
                 	String Id = (String) jsonObj.get("ID");
                 	String Pwd = (String) jsonObj.get("PWD");
-                	String loginData = jc.Login(Id, Pwd);
+                	String Token = (String) jsonObj.get("Token");
+                	String loginData = jc.Login(Id, Pwd, Token);
                 	System.out.println(loginData);
                 	sendmsg(loginData,serverSocket);
                 }
