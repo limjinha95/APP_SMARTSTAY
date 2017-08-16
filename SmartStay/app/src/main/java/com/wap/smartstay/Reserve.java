@@ -35,8 +35,6 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
     String[] roomType={"스위트룸","스탠다드","슈페리얼"};
     int pic[] = {R.drawable.one, R.drawable.two, R.drawable.three };
 
-    int roomNumber;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +59,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
         Spinner spin = (Spinner) findViewById(R.id.spinner);
         spin.setPrompt("방을 고르세요");
 
-        ArrayAdapter<String> spinAdap = new ArrayAdapter<String>(this, R.layout.reserve_spinner_item, roomType);
+        ArrayAdapter<String> spinAdap = new ArrayAdapter<String>(this, R.layout.reserve_spinner_item,R.id.information, roomType);
         spin.setAdapter(spinAdap);
 
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
