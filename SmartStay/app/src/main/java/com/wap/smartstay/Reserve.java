@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,8 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
     private int from_Year, from_Month, from_Day;
     private int to_Year, to_Month, to_Day;
 
+    private int start_Year, start_Month, start_Day;
+    private int end_Year, end_Month, end_Day;
     String str_startDate, str_endDate;
     Long diffDate;
     String period;
@@ -75,33 +78,39 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
             from_Month = startCal.get(Calendar.MONTH);
             from_Day = startCal.get(Calendar.DAY_OF_MONTH);
 
+
             DatePickerDialog dp1 = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
-
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            textFrom.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + " ~"); //N월 N일 ~ N월 N일
+                            textFrom.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + " ~"); //N월 N일 ~ N월 N
+                            start_Year=year;
+                            start_Month=monthOfYear+1;
+                            start_Day=dayOfMonth;
+                            str_startDate="";
+
+                            if (start_Month < 10) {
+                                str_startDate+="0" + start_Month + "/";
+                                if (start_Day < 10) {
+                                    str_startDate+="0" + start_Day + "/" + start_Year;
+                                }
+                                else
+                                    str_startDate+=start_Day + "/" + start_Year;
+                            } else {
+                                str_startDate+=start_Month + "/";
+                                if (start_Day < 10) {
+                                    str_startDate+="0" + start_Day + "/" + start_Year;
+                                }
+                                else
+                                    str_startDate+=start_Day + "/" + start_Year;
+                            }
+
+                            Log.i("start", str_startDate);
                         }
                     }, from_Year, from_Month, from_Day);
+
             dp1.getDatePicker().setMinDate(startCal.getTimeInMillis());
             dp1.show();
-
-            StringBuilder startDate = new StringBuilder();
-
-            if(from_Month < 10){
-                startDate.append("0" + from_Month + "/");
-                if(from_Day < 10){
-                    startDate.append("0" + from_Day + "/" + from_Year);
-                }
-            }else {
-                startDate.append(from_Month + "/");
-                if(from_Day < 10){
-                    startDate.append("0" + from_Day + "/" + from_Year);
-                }
-            }
-
-            str_startDate = startDate.toString();
-
         }
         if (view == btnToPicker) {  // endDate
 
@@ -116,55 +125,58 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             textTo.setText(year + "."+ (monthOfYear + 1) + "." + dayOfMonth ); //N월 N일 ~ N월 N일
+                            end_Year=year;
+                            end_Month=monthOfYear+1;
+                            end_Day=dayOfMonth;
+                            str_endDate="";
+                            if(to_Month < 10){
+                                str_endDate+="0" + end_Month + "/";
+                                if(to_Day < 10){
+                                    str_endDate+="0" + end_Day + "/" + end_Year;
+                                }
+                                else
+                                    str_endDate+=end_Day + "/" + end_Year;
+                            }else {
+                                str_endDate+=end_Month + "/";
+                                if(to_Day < 10){
+                                    str_endDate+="0" + end_Day + "/" + end_Year;
+                                }
+                                else
+                                    str_endDate+=end_Day + "/" + end_Year;
+                            }
 
+                            Log.i("end",str_endDate);
+                            // get date period
+                            try{
+                                Date start;
+                                Date end;
+
+                                SimpleDateFormat date = new SimpleDateFormat("MM/dd/yyyy");
+
+                                start = date.parse(str_startDate);
+                                end = date.parse(str_endDate);
+
+                                long diff = Math.abs((int)(start.getTime()) - (int)(end.getTime()) );
+                                diffDate = diff / (24 * 60 * 60 * 1000);
+
+                                period = Long.toString(diffDate);
+
+                                if(diffDate == 0){
+                                    textPeriod.setText("1박");
+                                }else if(diffDate > 0){
+                                    textPeriod.setText(diffDate + "박" + (diffDate + 1) + "일");
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"잘못된 날짜입니다",Toast.LENGTH_SHORT).show();
+                                }
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                         }
                     }, to_Year, to_Month, to_Day);
 
             dp2.getDatePicker().setMinDate(endCal.getTimeInMillis());
             dp2.show();
-
-            StringBuilder endDate = new StringBuilder();
-
-            if(to_Month < 10){
-                endDate.append("0" + to_Month + "/");
-                if(to_Day < 10){
-                    endDate.append("0" + to_Day + "/" + to_Year);
-                }
-            }else {
-                endDate.append(to_Month + "/");
-                if(to_Day < 10){
-                    endDate.append("0" + to_Day + "/" + to_Year);
-                }
-            }
-
-            str_endDate = endDate.toString();
-
-            // get date period
-            try{
-                Date start;
-                Date end;
-
-                SimpleDateFormat date = new SimpleDateFormat("MM/dd/yyyy");
-
-                start = date.parse(str_startDate);
-                end = date.parse(str_endDate);
-
-                long diff = Math.abs((int)(start.getTime()) - (int)(end.getTime()) );
-                diffDate = diff / (24 * 60 * 60 * 1000);
-
-                period = Long.toString(diffDate);
-
-                if(diffDate == 0){
-                    textPeriod.setText("1박");
-                }else if(diffDate > 0){
-                    textPeriod.setText(diffDate + "박" + (diffDate - 1) + "일");
-                }else{
-                    Toast.makeText(getApplicationContext(),"잘못된 날짜입니다",Toast.LENGTH_SHORT).show();
-                }
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
         }
 
         if (view == btnCoupon) {
