@@ -33,6 +33,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -43,12 +44,113 @@
                     android:layout_weight="1"
                     android:background="@color/white"
                     app:srcCompat="@drawable/one" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cardview_dark_background"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/tv9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="방정보"
+                            android:textSize="19dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/t9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="부산 광역시"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/colorPrimary"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:text="방종류"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="방종류"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="196dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -147,7 +249,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="1dp"
-                    android:background="#fffdf2"
+                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -205,190 +307,6 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:paddingRight="10dp"
-                    android:layout_marginTop="1dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv8"
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:gravity="center_vertical"
-                        android:text="쿠폰 선택"
-                        android:textSize="18dp"
-                        android:textStyle="bold"/>
-
-                    <Button
-                        android:id="@+id/couponBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="33dp"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="쿠폰"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="1dp"
-                    android:background="#fffdf2"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:orientation="horizontal"
-                        android:background="@color/white"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:id="@+id/tv9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="결제 금액"
-                            android:textSize="19dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:background="#fffdf2"
-                        android:orientation="vertical"
-                        android:paddingLeft="7dp"
-                        android:paddingRight="7dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="38dp"
-                            android:background="@color/colorPrimary"
-                            android:orientation="horizontal"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp">
-
-                            <TextView
-                                android:id="@+id/textStayPrice"
-                                android:layout_width="135dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="숙박금액"
-                                android:textColor="@color/white"
-                                android:textSize="17dp" />
-
-                            <TextView
-                                android:id="@+id/tv11"
-                                android:layout_width="180dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="원"
-                                android:textAlignment="textEnd"
-                                android:textColor="@color/white"
-                                android:textSize="17dp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="38dp"
-                            android:background="@color/colorPrimary"
-                            android:orientation="horizontal"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp">
-
-                            <TextView
-                                android:id="@+id/textCouponPrice"
-                                android:layout_width="135dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="사용쿠폰"
-                                android:textColor="@color/white"
-                                android:textSize="17dp" />
-
-                            <TextView
-                                android:id="@+id/tv13"
-                                android:layout_width="180dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="원"
-                                android:textAlignment="textEnd"
-                                android:textColor="@color/white"
-                                android:textSize="17dp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="right"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="2dp"
-                            android:background="@color/colorPrimary"
-                            android:orientation="horizontal"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp">
-
-                            <TextView
-                                android:id="@+id/textTotalPrice"
-                                android:layout_width="135dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="결제금액"
-                                android:textColor="@color/white"
-                                android:textSize="17dp" />
-
-                            <TextView
-                                android:id="@+id/tv15"
-                                android:layout_width="180dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="원"
-                                android:textAlignment="textEnd"
-                                android:textColor="@color/white"
-                                android:textSize="17dp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="1dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv16"
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="5dp"
-                        android:text="결제 방법 선택"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <Spinner
-                        android:id="@+id/Spinner"
-                        android:layout_width="200dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center" />
                 </LinearLayout>
 
                 <LinearLayout
