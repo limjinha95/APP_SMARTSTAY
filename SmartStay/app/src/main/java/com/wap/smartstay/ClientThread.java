@@ -176,6 +176,24 @@ public class ClientThread extends Thread {
                     } catch (JSONException e) {
                     }
                 }
+                else if (clas.getName().equals("com.wap.smartstay.Fragment.AddGroup")) {
+                    if (msg.toString().equals("-")) {
+                        AddGroup.idCheck = 1;
+                    } else {
+                        try {
+                            JSONObject jo = new JSONObject(msg);
+
+                            AddGroup.groupName = jo.getString("NAME");
+                            AddGroup.groupId = jo.getString("ID");
+                            AddGroup.groupPnum = jo.getString("Pnum");
+
+                            AddGroup.idCheck = 2;
+                        } catch (Exception e) {
+
+                        }
+                    }
+
+                }
             }
         } catch (
                 IOException e)
