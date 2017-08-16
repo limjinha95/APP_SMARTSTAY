@@ -141,14 +141,12 @@ public class JdbcConnect {
             if(rs.next()==false){
                 return "-";  
             }
-            JSONObject jo = new JSONObject();
             ResultSetMetaData rsmd = rs.getMetaData();
             int numberColumn = rsmd.getColumnCount();
             String[] columName = new String[numberColumn];
             for(int i=0;i<numberColumn;i++)
             	columName[i]=rsmd.getColumnName(i+1);
-            jo.put(columName[0],rs.getString(columName[0]));
-            String Ip = jo.toString();
+            String Ip = rs.getString(columName[0]);
             return Ip;
         }
         public String ReservationCheck(String ID) throws SQLException{

@@ -131,15 +131,11 @@ class UserThread extends Thread {
                 else if(head.equals("FriendPlus"))
                 {
                 	String RoomNumber = (String) jsonObj.get("RoomNumber");
-                	JSONArray ja = (JSONArray)jsonObj.get("Friend");
-                	for(int i=0; i<ja.size();i++)
-                	{
-                		JSONObject jo = (JSONObject)ja.get(i);
-                		boolean check=false;
-                    	do
-                    		check=jc.FriendPlus((String) jo.get("Id"), RoomNumber);
-                		while(check==false);
-                	}
+                	String FriendId = (String) jsonObj.get("FriendId");
+                	boolean check=false;
+                	do
+                		check=jc.FriendPlus(FriendId, RoomNumber);
+            		while(check==false);
                 }
                 else if(head.equals("RoomCheck"))
                 {

@@ -105,4 +105,10 @@ public class ChangePw extends AppCompatActivity {
         };
         thread.start();
     }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
+    }
 }
