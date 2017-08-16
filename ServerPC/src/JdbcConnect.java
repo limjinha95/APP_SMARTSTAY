@@ -10,19 +10,15 @@ public class JdbcConnect {
         
         public JdbcConnect(String dbName) throws Exception{
             try {
-                //sql 드라이버를 로딩하는 문구입니다.
                 Class.forName("org.gjt.mm.mysql.Driver");
                 System.out.println("Driver Install Complete");
             }catch(ClassNotFoundException cnfe) {
                 System.err.println("Error : " + cnfe);
             }
             
-            Connection con = null;
             String url = "jdbc:mysql://localhost:3306/hack";
             String id = "root";
             String pw = "ckdgns1016!";
-            //우선은 실험하던 내 컴퓨터 위주로 진행하였으니 지금은 각자 형편에 맞게 위를 수정해주고 대회가 다가오면 정해진 서버에 맞게 수정 요함.
-            
             try {
                 con = DriverManager.getConnection(url, id, pw);
                 System.out.println("Connection Complete");
@@ -42,7 +38,7 @@ public class JdbcConnect {
                 }
         }
         public String Login(String id,String pwd)throws SQLException{
-        	String query="SELECT ID, NAME, PNUM FROM user where ID= ? AND PWD=PASSWORD( ? )";
+        	String query="SELECT ID, NAME, PNUM FROM user where ID=? AND PWD=PASSWORD(?)";
         	psmt = con.prepareStatement(query);
         	psmt.setString(1, id);
         	psmt.setString(2, pwd);
@@ -94,8 +90,9 @@ public class JdbcConnect {
             if(rowcount==0)return true;
             else return false;
         }
-        public boolean RegisterUser(String id,String name, String pwd, String Pnum, String token) throws SQLException{
-	        	String query="insert into user values(?, ?, PASSWORD(?), ?)";
+        public boolean RegisterUser(String id,String name, String pwd, String Pnum, String token){
+        	try {
+	        	String query="insert into user values(?, ?, PASSWORD(?), ?, ?)";
 	        	psmt = con.prepareStatement(query);
 	        	psmt.setString(1, id);
 	        	psmt.setString(2, name);
@@ -105,6 +102,12 @@ public class JdbcConnect {
                 int check=psmt.executeUpdate();
                 if(check>0)return true;  
                 else return false;
+        	}catch(Exception e)
+        	{
+        		System.out.println(e.getMessage());
+        		return false;
+        	}
+                
         }
         public boolean DeleteUser(String id) throws SQLException{
         	String query="delete from user where ID = ?";

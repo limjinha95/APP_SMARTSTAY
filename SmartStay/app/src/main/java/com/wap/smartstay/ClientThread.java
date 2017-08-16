@@ -51,7 +51,7 @@ public class ClientThread extends Thread {
         try {
             while (isRunning) {
                 msg = bufferR.readLine();
-                Log.i("test", msg);
+                Log.i("testmsg", msg);
                 if(clas.getName().equals("com.wap.smartstay.Login")) {
                     if(msg.toString().equals("-")) {
                         Login.Islogin=2;
@@ -70,9 +70,17 @@ public class ClientThread extends Thread {
                     }
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Join")) {
-                    if(msg.equals("Y"))
+                    String msg2="";
+                    try {
+                        JSONObject jo = new JSONObject(msg);
+                        msg2 = jo.getString("Unique");
+                    }catch (Exception e)
+                    {
+
+                    }
+                    if(msg2.equals("Y"))
                         Join.check = 1;
-                    else if(msg.equals("N"))
+                    else if(msg2.equals("N"))
                         Join.check=2;
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
