@@ -184,7 +184,7 @@ class UserThread extends Thread {
                 else if(head.equals("MyKey"))
                 {
                 	String ID = (String) jsonObj.get("ID");
-                	sendmsg(jc.MyCoupon(ID),serverSocket);
+                	sendmsg(jc.MyKey(ID),serverSocket);
                 }
                 jc.closeDB();
             }

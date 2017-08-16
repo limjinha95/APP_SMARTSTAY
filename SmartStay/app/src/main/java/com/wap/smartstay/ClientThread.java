@@ -147,11 +147,8 @@ public class ClientThread extends Thread {
 
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
-
+                            String smartKeyRoomInfo = dataJsonObject.getString("officecode") + " " + dataJsonObject.getString("rnum");
                             item.setSmartkeyRoomInfo(smartKeyRoomInfo);
-
                             smartkeyRoomList.add(item);
                         }
 
