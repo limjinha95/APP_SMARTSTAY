@@ -7,16 +7,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.wap.smartstay.Fragment.SmartkeyFragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.wap.smartstay.CouponList.couponList;
+import static com.wap.smartstay.SmartkeyPopupList.smartkeyRoomList;
+import static com.wap.smartstay.UsageList.reserveList;
 
 public class ClientThread extends Thread {
     Class clas;
@@ -76,6 +78,76 @@ public class ClientThread extends Thread {
                 }
                 else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartkeyFragment")){
                     SmartkeyFragment.phoneNumber = msg;
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.UsageList")){
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+
+                        ReserveListViewItem item = new ReserveListViewItem();
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String roomName = dataJsonObject.getString("NAME");
+                            String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+                            String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "원 / 최대 " + dataJsonObject.getString("MAXNUM");
+
+                            item.setAccomodationName(roomName);
+                            item.setReservationDuty(reservationDuty);
+                            item.setAccomodationInfo(roomInfo);
+
+                            reserveList.add(item);
+                        }
+
+
+                    } catch(JSONException e) {}
+
+
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.CouponList")){
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+
+                        CouponListViewItem item = new CouponListViewItem();
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String couponName = dataJsonObject.getString("NAME");
+                            String couponInfo = dataJsonObject.getString("INFO");
+                            String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
+                            item.setCouponName(couponName);
+                            item.setCouponInfo(couponInfo);
+                            item.setCouponDuty(couponDuty);
+
+                            couponList.add(item);
+                        }
+
+
+                    } catch(JSONException e) {}
+                }
+                else if(clas.getName().equals("com.wap.smartstay.Fragment.SmartKeyPopupList")){
+                    try {
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray ja = new JSONArray(wrapObject);
+
+                        SmartkeyPopupListViewItem item = new SmartkeyPopupListViewItem();
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+
+                            item.setSmartkeyRoomInfo(smartKeyRoomInfo);
+
+                            smartkeyRoomList.add(item);
+                        }
+
+
+                    } catch(JSONException e) {}
                 }
             }
         } catch (IOException e) {

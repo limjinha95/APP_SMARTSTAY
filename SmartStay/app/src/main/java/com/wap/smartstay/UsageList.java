@@ -2,16 +2,23 @@ package com.wap.smartstay;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class UsageList extends AppCompatActivity {
     Context cont;
@@ -26,6 +33,10 @@ public class UsageList extends AppCompatActivity {
     TextView accomodationDuty;
     TextView accomodationInfo;
 
+    public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>() ;
+
+    public static String roomName, reservationDuty, roomInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +50,19 @@ public class UsageList extends AppCompatActivity {
         accomodationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
         accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
 
+        connect();
+
+        JSONObject jo = new JSONObject();
+
+        try {
+            jo.put("head","ReservationCheck");
+            jo.put("ID", Login.Id);
+        } catch (Exception e) {}
+
+        String data = jo.toString();
+        clientThread.send(data);
+        Log.i("test","대기");
+
         ListView listview ;
         ReserveListViewAdapter adapter;
 
@@ -49,16 +73,32 @@ public class UsageList extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listview_reserve);
         listview.setAdapter(adapter);
 
-        // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.one),
-                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.two),
-                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.two),
-                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.two),
-                "Box", "Account Box Black 36dp","Account Box Black 36dp") ;
+        Drawable img = ContextCompat.getDrawable(this, R.drawable.one);
 
+        for (int i = 0; i < reserveList.size(); i++) {
+            roomName = reserveList.get(i).getAccomodationName();
+            reservationDuty = reserveList.get(i).getReservationDuty();
+            roomInfo = reserveList.get(i).getAccomodationInfo();
+
+            adapter.addItem(img, roomName, reservationDuty, roomInfo);
+        }
+    }
+
+    public void connect(){
+
+        thread = new Thread(){
+            public void run() {
+                super.run();
+                try {
+                    client = new Socket(ip, port);
+                    clientThread = new ClientThread(client,handler,Login.class);
+                    clientThread.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
     }
 
 

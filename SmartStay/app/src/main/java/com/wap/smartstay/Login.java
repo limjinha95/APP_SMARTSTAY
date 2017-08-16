@@ -56,6 +56,7 @@ public class Login extends AppCompatActivity {
             }
         };
         connect();
+
         Button startJoinBtn = (Button) findViewById(R.id.joinStartBtn) ;
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
