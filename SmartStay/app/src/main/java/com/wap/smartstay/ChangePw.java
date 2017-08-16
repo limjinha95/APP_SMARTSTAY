@@ -23,8 +23,8 @@ public class ChangePw extends AppCompatActivity {
     EditText Opw,Npw,Cpw;
     Context cont;
     Socket client;
-    String ip = "192.168.43.179";
-    int port = 4040;
+    String ip = "13.124.213.57";
+    int port = 9010;
     public static int check=0;
     public static String Id,Pnum,Name;
     public static int logined=0;
