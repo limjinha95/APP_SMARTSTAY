@@ -105,7 +105,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Main" />
         </activity>
-
+        <activity android:name=".Payment">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Main" />
+        </activity>
         <service
             android:name=".MyFirebaseMessagingService">
             <intent-filter>
