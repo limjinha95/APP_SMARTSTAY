@@ -27,12 +27,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="160dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -54,32 +54,50 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.38"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:paddingRight="10dp"
-                        android:background="#fffdf2"
-                        android:gravity="center_vertical"
+                        android:layout_marginTop="1dp"
+                        android:background="@color/white"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv2"
-                            android:layout_width="170dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
                             android:text="날짜 선택"
-                            android:textSize="18dp"
-                            android:textStyle="bold"/>
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
 
                         <Button
-                            android:id="@+id/dateBtn"
-                            android:layout_width="match_parent"
-                            android:layout_height="33dp"
+                            android:id="@+id/setFromBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="0.12"
                             android:background="@color/colorPrimaryDark"
-                            android:text="날짜 선택"
+                            android:text="From"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/setToBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="0.12"
+                            android:background="@color/colorPrimaryDark"
+                            android:text="To"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
@@ -87,18 +105,40 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="1dp"
-                        android:background="#fffdf2">
+                        android:layout_height="40dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
                         <TextView
-                            android:id="@+id/tv3"
+                            android:id="@+id/textFrom"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:text="N박"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.04"
+                            android:text="숙박기간"
                             android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/textTo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.52"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/textPeriod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.45"
+                            android:text="N박 N일"
+                            android:textAlignment="textEnd"
+                            android:textSize="15dp" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -114,6 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:gravity="center_vertical"
+                        android:background="@color/white"
                         android:orientation="horizontal">
 
                         <TextView
@@ -139,7 +180,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:background="@color/white">
 
                         <TextView
                             android:id="@+id/tv6"
@@ -170,7 +212,7 @@
                     android:layout_height="40dp"
                     android:paddingRight="10dp"
                     android:layout_marginTop="1dp"
-                    android:background="#fffdf2"
+                    android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -206,6 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:orientation="horizontal"
+                        android:background="@color/white"
                         android:padding="5dp">
 
                         <TextView
@@ -229,13 +272,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="38dp"
-                            android:background="#b6b8c3"
+                            android:background="@color/colorPrimary"
                             android:orientation="horizontal"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp">
 
                             <TextView
-                                android:id="@+id/tv10"
+                                android:id="@+id/textStayPrice"
                                 android:layout_width="135dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -259,13 +302,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="38dp"
-                            android:background="#b6b8c3"
+                            android:background="@color/colorPrimary"
                             android:orientation="horizontal"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp">
 
                             <TextView
-                                android:id="@+id/tv12"
+                                android:id="@+id/textCouponPrice"
                                 android:layout_width="135dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -292,13 +335,13 @@
                             android:layout_gravity="right"
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="2dp"
-                            android:background="#b6b8c3"
+                            android:background="@color/colorPrimary"
                             android:orientation="horizontal"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp">
 
                             <TextView
-                                android:id="@+id/tv14"
+                                android:id="@+id/textTotalPrice"
                                 android:layout_width="135dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -327,7 +370,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="1dp"
-                    android:background="#fffdf2"
+                    android:background="@color/white"
                     android:orientation="horizontal">
 
                     <TextView
@@ -352,7 +395,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="1dp"
-                    android:background="#fffde5">
+                    android:background="@color/white">
 
                     <Button
                         android:id="@+id/paymentBtn"
