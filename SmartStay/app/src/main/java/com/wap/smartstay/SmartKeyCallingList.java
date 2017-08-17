@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class SmartkeyCallingList extends AppCompatActivity {
     Socket client;
+
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
     Thread thread;

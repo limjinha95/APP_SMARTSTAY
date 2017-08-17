@@ -89,118 +89,121 @@ public class ClientThread extends Thread {
                     if (SmartkeyCallingList.number == 1) {
                         try {
                             JSONArray ja = new JSONArray(msg);
-                            SmartkeyPopupListViewItem item;
 
+                            SmartkeyPopupListViewItem item = new SmartkeyPopupListViewItem();
                             for (int i = 0; i < ja.length(); i++) {
                                 JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                                String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " (" + dataJsonObject.getString("RNUM") + ")";
+                                String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
                                 String smartKeyOfficeCode = dataJsonObject.getString("OfficeCode");
-
-                                item = new SmartkeyPopupListViewItem();
-
                                 item.setSmartkeyRoomInfo(smartKeyRoomInfo);
                                 item.setSmartkeyOfficeCode(smartKeyOfficeCode);
-
                                 smartkeyRoomList.add(item);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     } else if (SmartkeyCallingList.number == 2) {
                         try {
                             JSONArray ja = new JSONArray(msg);
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(0);
-
                             SmartkeyCallingList.phoneNumber = dataJsonObject.getString("OfficePnum");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    } else if (clas.getName().equals("com.wap.smartstay.UsageList")) {
-                        try {
-                            JSONArray ja = new JSONArray(msg);
-                            ReserveListViewItem item;
-
-                            for (int i = 0; i < ja.length(); i++) {
-                                JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                                String accomodationName = dataJsonObject.getString("NAME") + " (" + dataJsonObject.getString("RNUM") + ")";
-                                String reservationDuty = dataJsonObject.getString("STARTDATE") + " ~ " + dataJsonObject.getString("ENDDATE");
-                                String accomodationInfo = "기준 " + dataJsonObject.getString("MINNUM") + "인 / 최대 " + dataJsonObject.getString("MAXNUM") + "인";
-
-                                item = new ReserveListViewItem();
-
-                                item.setAccomodationName(accomodationName);
-                                item.setReservationDuty(reservationDuty);
-                                item.setAccomodationInfo(accomodationInfo);
-
-                                reserveList.add(item);
-                            }
-                            UsageList.check2 = true;
-                        } catch (JSONException e) {
-                        }
-                    } else if (clas.getName().equals("com.wap.smartstay.CouponList")) {
-                        try {
-                            JSONArray ja = new JSONArray(msg);
-                            CouponListViewItem item;
-
-                            for (int i = 0; i < ja.length(); i++) {
-                                JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                                String couponName = dataJsonObject.getString("NAME");
-                                String couponInfo = dataJsonObject.getString("INFO");
-                                String couponDuty = dataJsonObject.getString("STARTDATE") + " ~ " + dataJsonObject.getString("ENDDATE");
-
-                                item = new CouponListViewItem();
-
-                                item.setCouponName(couponName);
-                                item.setCouponInfo(couponInfo);
-                                item.setCouponDuty(couponDuty);
-
-                                couponList.add(item);
-                            }
-                            CouponList.check2 = true;
-                        } catch (JSONException e) {
-                        }
-                    } else if (clas.getName().equals("com.wap.smartstay.SmartkeyPopupList")) {
-                        try {
-                            JSONArray ja = new JSONArray(msg);
-                            SmartkeyPopupListViewItem item;
-                            SmartkeyPopupList.check2 = false;
-
-                            for (int i = 0; i < ja.length(); i++) {
-                                JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                                String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " (" + dataJsonObject.getString("RNUM") + ")";
-
-                                item = new SmartkeyPopupListViewItem();
-                                item.setSmartkeyRoomInfo(smartKeyRoomInfo);
-
-                                smartkeyRoomList.add(item);
-                            }
-                            SmartkeyPopupList.check2 = true;
-                        } catch (JSONException e) {
-                        }
-                    } else if (clas.getName().equals("com.wap.smartstay.AddGroup")) {
-                        if (msg.toString().equals("-")) {
-                            AddGroup.idCheck = 1;
-                        } else {
-                            try {
-                                JSONObject jo = new JSONObject(msg);
-
-                                AddGroup.groupName = jo.getString("NAME");
-                                AddGroup.groupId = jo.getString("ID");
-                                AddGroup.groupPnum = jo.getString("Pnum");
-                                AddGroup.idCheck = 2;
-                            } catch (Exception e) {
-
-                            }
-                        }
 
                     }
+
+                } else if (clas.getName().equals("com.wap.smartstay.UsageList")) {
+                    try {
+                        JSONArray ja = new JSONArray(msg);
+                        ReserveListViewItem item;
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+                            String roomName = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+                            String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
+                            String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "인 / 최대 " + dataJsonObject.getString("MAXNUM") + "인";
+
+                            item = new ReserveListViewItem();
+
+                            item.setAccomodationName(roomName);
+                            item.setReservationDuty(reservationDuty);
+                            item.setAccomodationInfo(roomInfo);
+
+                            reserveList.add(item);
+
+                        }
+                        UsageList.check2 = true;
+                    } catch (JSONException e) {
+                    }
+
+                } else if (clas.getName().equals("com.wap.smartstay.CouponList")) {
+                    try {
+                        JSONArray ja = new JSONArray(msg);
+
+                        CouponListViewItem item;
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String couponName = dataJsonObject.getString("NAME");
+                            String couponInfo = dataJsonObject.getString("INFO");
+                            String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
+                            item = new CouponListViewItem();
+
+                            item.setCouponName(couponName);
+                            item.setCouponInfo(couponInfo);
+                            item.setCouponDuty(couponDuty);
+
+                            couponList.add(item);
+                        }
+                    } catch (JSONException e) {
+                    }
+                } else if (clas.getName().equals("com.wap.smartstay.SmartkeyPopupList")) {
+                    try {
+                        JSONArray ja = new JSONArray(msg);
+
+                        SmartkeyPopupListViewItem item;
+
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+
+                            item = new SmartkeyPopupListViewItem();
+                            item.setSmartkeyRoomInfo(smartKeyRoomInfo);
+
+                            smartkeyRoomList.add(item);
+                        }
+
+
+                    } catch (JSONException e) {
+                    }
+                } else if (clas.getName().equals("com.wap.smartstay.AddGroup")) {
+                    if (msg.toString().equals("-")) {
+                        AddGroup.idCheck = 1;
+                    } else {
+                        try {
+                            JSONObject jo = new JSONObject(msg);
+                            AddGroup.groupName = jo.getString("NAME");
+                            AddGroup.groupId = jo.getString("ID");
+                            AddGroup.groupPnum = jo.getString("Pnum");
+                            AddGroup.idCheck = 2;
+                        } catch (Exception e) {
+
+                        }
+                    }
+
                 }
             }
-        } catch (IOException e) {
+
+        } catch (
+                IOException e)
+
+        {
             e.printStackTrace();
         }
         return msg;

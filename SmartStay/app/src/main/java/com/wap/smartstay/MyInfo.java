@@ -23,6 +23,7 @@ public class MyInfo extends AppCompatActivity {
     TextView Id, Name, Pnum;
 
     Socket client;
+
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
 

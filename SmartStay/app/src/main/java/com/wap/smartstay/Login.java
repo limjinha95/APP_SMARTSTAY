@@ -26,6 +26,7 @@ public class Login extends AppCompatActivity {
     Context cont;
 
     Socket client;
+
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
     Thread thread;
@@ -153,12 +154,5 @@ public class Login extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         connect();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(Login.this, Main.class);
-        startActivity(i);
-        finish();
     }
 }

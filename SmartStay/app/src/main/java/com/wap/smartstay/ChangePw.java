@@ -24,6 +24,7 @@ public class ChangePw extends AppCompatActivity {
     Context cont;
 
     Socket client;
+
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
     Thread thread;

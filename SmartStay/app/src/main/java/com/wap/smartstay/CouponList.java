@@ -18,6 +18,7 @@ public class CouponList extends AppCompatActivity {
     Socket client;
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
+
     Thread thread;
     ClientThread clientThread;
     Handler handler;

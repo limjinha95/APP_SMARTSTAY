@@ -19,21 +19,22 @@ import java.util.ArrayList;
 
 public class UsageList extends AppCompatActivity {
     Socket client;
+
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
 
-    boolean check=false;
+    boolean check = false;
 
     TextView accomodationName;
-    TextView accomodationDuty;
+    TextView reservationDuty;
     TextView accomodationInfo;
 
     public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>() ;
     public static boolean check2=false;
-    String officeName, reservationDuty, roomInfo;
+    String name, duty, info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class UsageList extends AppCompatActivity {
         connect();
 
         accomodationName = (TextView) findViewById(R.id.reserveAccommodationName);
-        accomodationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
+        reservationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
         accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
 
         JSONObject jo = new JSONObject();
@@ -62,9 +63,9 @@ public class UsageList extends AppCompatActivity {
         } catch (Exception e) {}
 
         String data = jo.toString();
-        while(check==false);
+        while(check == false);
         clientThread.send(data);
-        while(check2==false);
+        while(check2 == false);
 
         ListView listview ;
         ReserveListViewAdapter adapter;
@@ -76,11 +77,11 @@ public class UsageList extends AppCompatActivity {
         Drawable img = ContextCompat.getDrawable(this, R.drawable.one);
 
         for (int i = 0; i < reserveList.size(); i++) {
-            officeName = reserveList.get(i).getAccomodationName();
-            reservationDuty = reserveList.get(i).getReservationDuty();
-            roomInfo = reserveList.get(i).getAccomodationInfo();
+            name = reserveList.get(i).getAccomodationName();
+            duty = reserveList.get(i).getReservationDuty();
+            info = reserveList.get(i).getAccomodationInfo();
 
-            adapter.addItem(img, officeName, reservationDuty, roomInfo);
+            adapter.addItem(img, name, duty, info);
         }
     }
 
@@ -90,9 +91,9 @@ public class UsageList extends AppCompatActivity {
                 super.run();
                 try {
                     client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler,UsageList.class);
+                    clientThread = new ClientThread(client,handler, UsageList.class);
                     clientThread.start();
-                    check=true;
+                    check = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

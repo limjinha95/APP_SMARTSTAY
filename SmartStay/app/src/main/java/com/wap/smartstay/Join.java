@@ -29,6 +29,7 @@ public class Join extends AppCompatActivity {
     static int check=0;
 
     Socket client;
+
     String ip = ServerInformation.serverIP;
     int port = ServerInformation.port;
     Thread thread;
