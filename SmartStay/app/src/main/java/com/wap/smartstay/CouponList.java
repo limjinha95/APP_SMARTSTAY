@@ -22,11 +22,11 @@ public class CouponList extends AppCompatActivity {
     Thread thread;
     ClientThread clientThread;
     Handler handler;
-    boolean check=false;
+    boolean check = false;
 
     public static ArrayList<CouponListViewItem> couponList = new ArrayList<CouponListViewItem>();
     public static String couponName, couponInfo, couponDuty;
-    public static boolean check2=false;
+    public static boolean check2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class CouponList extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("내 쿠폰함");
 
-        if(Build.VERSION.SDK_INT > 9) {
+        if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
@@ -47,14 +47,15 @@ public class CouponList extends AppCompatActivity {
         JSONObject jo = new JSONObject();
 
         try {
-            jo.put("head","MyCoupon");
+            jo.put("head", "MyCoupon");
             jo.put("ID", Login.Id);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         String data = jo.toString();
-        while(check==false);
+        while (check == false) ;
         clientThread.send(data);
-        while(check2==false);
+        while (check2 == false) ;
 
         ListView listview;
         CouponListViewAdapter adapter;
@@ -72,15 +73,15 @@ public class CouponList extends AppCompatActivity {
         }
     }
 
-    public void connect(){
-        thread = new Thread(){
+    public void connect() {
+        thread = new Thread() {
             public void run() {
                 super.run();
                 try {
                     client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler,CouponList.class);
+                    clientThread = new ClientThread(client, handler, CouponList.class);
                     clientThread.start();
-                    check=true;
+                    check = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -90,7 +91,7 @@ public class CouponList extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         ClientThread.setRunningState(false);
         thread.interrupt();

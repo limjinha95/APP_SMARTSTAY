@@ -52,7 +52,7 @@ public class CouponListViewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return couponListViewItemList.get(position) ;
+        return couponListViewItemList.get(position);
     }
 
     public void addItem(String name, String info, String duty) {

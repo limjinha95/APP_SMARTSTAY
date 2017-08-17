@@ -67,7 +67,6 @@ public class AddGroup extends AppCompatActivity {
                 }
 
                 String data = jo.toString();
-                Log.i("test",data);
                 clientThread.send(data);
 
                 if (idCheck == 1) {
