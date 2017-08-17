@@ -10,7 +10,6 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,8 +24,9 @@ public class ChangePw extends AppCompatActivity {
     Context cont;
 
     Socket client;
-    String ip = "52.78.227.27";
-    int port = 9010;
+
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     Handler handler;

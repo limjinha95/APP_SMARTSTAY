@@ -1,16 +1,13 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,8 +19,8 @@ import java.util.ArrayList;
 
 public class SmartkeyPopupList extends AppCompatActivity {
     Socket client;
-    String ip = "52.78.227.27";
-    int port = 9010;
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     Handler handler;

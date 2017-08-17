@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -10,7 +9,6 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,8 +23,9 @@ public class MyInfo extends AppCompatActivity {
     TextView Id, Name, Pnum;
 
     Socket client;
-    String ip = "52.78.227.27";
-    int port = 9010;
+
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
 
     public static int delete = 0;
 
