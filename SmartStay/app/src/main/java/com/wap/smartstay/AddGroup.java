@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class AddGroup extends AppCompatActivity {
     EditText inputId;
@@ -32,6 +33,7 @@ public class AddGroup extends AppCompatActivity {
 
     public static int idCheck = 0;
     public static String groupId, groupName, groupPnum;
+    public static ArrayList<AddGroupListViewItem> groupList = new java.util.ArrayList<AddGroupListViewItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +86,13 @@ public class AddGroup extends AppCompatActivity {
                         public void onClick(View view) {
                             ListView listview;
                             AddGroupListViewAdapter adapter;
-
                             adapter = new AddGroupListViewAdapter();
 
                             listview = (ListView) findViewById(R.id.listview_addgroup);
                             listview.setAdapter(adapter);
 
                             adapter.addItem(groupName, groupId, groupPnum);
+                            adapter.notifyDataSetChanged();
 
                             idCheck = 0;
                         }

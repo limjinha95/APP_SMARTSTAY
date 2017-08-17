@@ -169,19 +169,22 @@ public class ClientThread extends Thread {
                 } else if (clas.getName().equals("com.wap.smartstay.SmartkeyPopupList")) {
                     try {
                         JSONArray ja = new JSONArray(msg);
-                        SmartkeyPopupListViewItem item;
 
                         SmartkeyPopupList.check2 = false;
+                        SmartkeyPopupListViewItem item;
+
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
 
-                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " (" + dataJsonObject.getString("RNUM") + ")";
+                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
 
                             item = new SmartkeyPopupListViewItem();
                             item.setSmartkeyRoomInfo(smartKeyRoomInfo);
+
                             smartkeyRoomList.add(item);
                         }
                         SmartkeyPopupList.check2 = true;
+
                     } catch (JSONException e) {
                     }
                 } else if (clas.getName().equals("com.wap.smartstay.AddGroup")) {
