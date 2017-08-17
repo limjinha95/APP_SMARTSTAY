@@ -49,14 +49,15 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public SmartkeyPopupListViewItem getItem(int position) {
         return smartkeyPopupListViewItemList.get(position);
     }
 
-    public void addItem(String roomInfo) {
+    public void addItem(String roomInfo, String officeCode) {
         SmartkeyPopupListViewItem roomInfoItem = new SmartkeyPopupListViewItem();
 
         roomInfoItem.setSmartkeyRoomInfo(roomInfo);
+        roomInfoItem.setSmartkeyOfficeCode(officeCode);
         smartkeyPopupListViewItemList.add(roomInfoItem);
     }
 

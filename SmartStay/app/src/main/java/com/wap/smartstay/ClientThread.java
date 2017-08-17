@@ -86,7 +86,7 @@ public class ClientThread extends Thread {
 
                     }
                 } else if (clas.getName().equals("com.wap.smartstay.SmartkeyCallingList")) {
-                    if (SmartkeyCallingList.number == 1) {
+                    if (SmartKeyCallingList.number == 1) {
                         try {
                             JSONObject wrapObject = new JSONObject(msg);
                             JSONArray ja = new JSONArray(wrapObject);
@@ -105,12 +105,12 @@ public class ClientThread extends Thread {
                             e.printStackTrace();
                         }
 
-                    } else if (SmartkeyCallingList.number == 2) {
+                    } else if (SmartKeyCallingList.number == 2) {
                         try {
                             JSONObject wrapObject = new JSONObject(msg);
                             JSONArray ja = new JSONArray(wrapObject);
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(0);
-                            SmartkeyCallingList.phoneNumber = dataJsonObject.getString("OfficePnum");
+                            SmartKeyCallingList.phoneNumber = dataJsonObject.getString("OfficePnum");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -176,10 +176,12 @@ public class ClientThread extends Thread {
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
 
+                            String smartKeyOfficeCode = dataJsonObject.getString("OFFICECODE");
                             String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
 
                             item = new SmartkeyPopupListViewItem();
                             item.setSmartkeyRoomInfo(smartKeyRoomInfo);
+                            item.setSmartkeyOfficeCode(smartKeyOfficeCode);
 
                             smartkeyRoomList.add(item);
                         }
