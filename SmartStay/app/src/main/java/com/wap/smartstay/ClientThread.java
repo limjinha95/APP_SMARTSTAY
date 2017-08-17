@@ -8,7 +8,6 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 import android.os.Handler;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -205,6 +204,92 @@ public class ClientThread extends Thread {
                     }
 
                 }
+
+                else if (clas.getName().equals("com.wap.smartstay.SelectCouponList")) {
+                    try {
+                        JSONArray ja = new JSONArray(msg);
+
+                        CouponListViewItem item;
+
+                        CouponList.check2 = false;
+                        for (int i = 0; i < ja.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
+                            String couponName = dataJsonObject.getString("NAME");
+                            String couponInfo = dataJsonObject.getString("INFO");
+                            String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
+                            item = new CouponListViewItem();
+
+                            item.setCouponName(couponName);
+                            item.setCouponInfo(couponInfo);
+                            item.setCouponDuty(couponDuty);
+
+                            couponList.add(item);
+                        }
+                        CouponList.check2 = true;
+                    } catch (JSONException e) {
+                    }
+                }
+
+                else if (clas.getName().equals("com.wap.smartstay.Reserve")){
+                    try{
+                        JSONObject jo = new JSONObject(msg);
+
+                        Reserve.officeCode = jo.getString("OfficeCode");
+                        Reserve.inform = jo.getString("Inform");
+
+                    }catch (Exception e){
+
+                    }
+
+                }
+
+                else if (clas.getName().equals("com.wap.smartstay.HotelList")){
+                    try{
+                        JSONObject wrapObject = new JSONObject(msg);
+                        JSONArray jo = new JSONArray(wrapObject);
+
+                        HotelListViewItem item = new HotelListViewItem();
+
+                        for (int i = 0; i < jo.length(); i++) {
+                            JSONObject dataJsonObject = (JSONObject) jo.getJSONObject(i);
+
+                            String officeCode = dataJsonObject.getString("OFFICECODE");
+                            String info = dataJsonObject.getString("INFORM");
+
+                            item.setLocation(info);
+                            item.setName(officeCode);
+
+                            HotelList.HotelList.add(item);
+                        }
+
+                    }catch (Exception e){
+
+                    }
+                }
+
+                else if (clas.getName().equals("com.wap.smartstay.Payment")){
+                    try{
+                        JSONObject jo = new JSONObject(msg);
+
+                        Payment.officeCode = jo.getString("OfficeCode");
+                        Payment.start = jo.getString("STARTDATE");
+                        Payment.end = jo.getString("ENDDATE");
+                        Payment.location = jo.getString("infor");
+                        Payment.rNum = jo.getString("RNUM");
+                        Payment.couponPrice = jo.getInt("Cost");
+
+                    }catch (Exception e){
+
+                    }
+                }
+
+
+
+
+
+
             }
 
         } catch (
