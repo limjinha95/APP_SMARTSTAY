@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity {
     Context cont;
 
     Socket client;
-    String ip = "13.124.213.57";
+    String ip = "52.78.227.27";
     int port = 9010;
     Thread thread;
     ClientThread clientThread;
@@ -155,12 +155,5 @@ public class Login extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         connect();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(Login.this, Main.class);
-        startActivity(i);
-        finish();
     }
 }

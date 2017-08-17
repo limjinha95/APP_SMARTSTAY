@@ -25,7 +25,7 @@ public class MyInfo extends AppCompatActivity {
     TextView Id, Name, Pnum;
 
     Socket client;
-    String ip = "13.124.213.57";
+    String ip = "52.78.227.27";
     int port = 9010;
 
     public static int delete = 0;

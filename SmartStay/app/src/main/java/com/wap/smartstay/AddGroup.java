@@ -24,7 +24,7 @@ public class AddGroup extends AppCompatActivity {
     TextView addGroupInfo;
 
     Socket client;
-    String ip = "13.124.213.57";
+    String ip = "52.78.227.27";
     int port = 9010;
     Thread thread;
     ClientThread clientThread;
@@ -38,19 +38,18 @@ public class AddGroup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addgroup);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("동숙객 추가");
+
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
         connect();
-
         inputId = (EditText) findViewById(R.id.addgroupInputId);
         addGroupInfo = (TextView) findViewById(R.id.addGroupInfo);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
-        toolbar.setTitle("동숙객 추가");
 
         Button addGroupCheckIdBtn = (Button) findViewById(R.id.addgroupCheckIdBtn);
         final Button addGroupSaveBtn = (Button) findViewById(R.id.addgroupSaveBtn);
@@ -63,11 +62,12 @@ public class AddGroup extends AppCompatActivity {
                 try {
                     jo.put("head", "SelectUser");
                     jo.put("ID", inputId.getText().toString());
-                } catch(Exception e) {
+                } catch (Exception e) {
 
                 }
 
                 String data = jo.toString();
+                Log.i("test",data);
                 clientThread.send(data);
 
                 if (idCheck == 1) {
@@ -79,6 +79,7 @@ public class AddGroup extends AppCompatActivity {
                     addGroupInfo.setText("* " + groupId + " " + groupName + " " + groupPnum);
 
                     addGroupSaveBtn.setEnabled(true);
+
                     addGroupSaveBtn.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -95,12 +96,14 @@ public class AddGroup extends AppCompatActivity {
                             idCheck = 0;
                         }
                     });
+
                 }
             }
         });
     }
 
     public void connect(){
+
         thread = new Thread(){
             public void run() {
                 super.run();
@@ -122,4 +125,7 @@ public class AddGroup extends AppCompatActivity {
         ClientThread.setRunningState(false);
         thread.interrupt();
     }
+
 }
+
+
