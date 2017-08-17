@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class SmartkeyCallingList extends AppCompatActivity {
+public class SmartKeyCallingList extends AppCompatActivity {
     Socket client;
 
     String ip = ServerInformation.serverIP;
@@ -151,7 +151,7 @@ public class SmartkeyCallingList extends AppCompatActivity {
                 super.run();
                 try {
                     client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, SmartkeyCallingList.class);
+                    clientThread = new ClientThread(client, handler, SmartKeyCallingList.class);
                     clientThread.start();
                 } catch (Exception e) {
                     e.printStackTrace();
