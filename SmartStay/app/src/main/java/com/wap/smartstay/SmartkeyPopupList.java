@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,6 +31,7 @@ public class SmartkeyPopupList extends AppCompatActivity {
 
     public static ArrayList<SmartkeyPopupListViewItem> smartkeyRoomList = new java.util.ArrayList<SmartkeyPopupListViewItem>();
     public static String smartKeyRoomInfo;
+    public static String smartKeyOfficeCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,24 +80,26 @@ public class SmartkeyPopupList extends AppCompatActivity {
 
         for (int i = 0; i < smartkeyRoomList.size(); i++) {
             smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
-            adapter.addItem(smartKeyRoomInfo);
+            smartKeyOfficeCode = smartkeyRoomList.get(i).getSmartkeyOfficeCode();
+            adapter.addItem(smartKeyRoomInfo,smartKeyOfficeCode);
         }
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String json = adapter.getItem(position).toString();
-                String[] datas = json.split(" ");
+                SmartkeyPopupListViewItem obj = adapter.getItem(position);
+                String[] datas = obj.getSmartkeyRoomInfo().split(" ");
                 JSONObject jo2 = new JSONObject();
 
                 try {
                     jo2.put("head", "Search_Room_Ip");
-                    jo2.put("OfficeCode", datas[0]);
+                    jo2.put("OfficeCode", obj.getSmartkeyOfficeCode());
                     jo2.put("RoomNumber", datas[1]);
                 } catch (Exception e) {
                 }
                 String data2 = jo2.toString();
+                Log.i("test",data2);
                 clientThread.send(data2);
             }
         });

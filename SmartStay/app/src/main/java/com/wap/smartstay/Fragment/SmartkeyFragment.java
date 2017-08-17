@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import com.wap.smartstay.AddGroup;
 import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
-import com.wap.smartstay.SmartkeyCallingList;
+import com.wap.smartstay.SmartKeyCallingList;
 import com.wap.smartstay.SmartkeyPopupList;
 
 public class SmartkeyFragment extends Fragment {
@@ -78,7 +78,7 @@ public class SmartkeyFragment extends Fragment {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loomInfo = new Intent(getContext(), SmartkeyCallingList.class);
+                Intent loomInfo = new Intent(getContext(), SmartKeyCallingList.class);
                 startActivity(loomInfo);
             }
         });

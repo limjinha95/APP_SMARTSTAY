@@ -5,11 +5,11 @@ public class SmartkeyPopupListViewItem {
     private String smartkeyOfficeCode;
 
     public void setSmartkeyRoomInfo(String roomInfo) {
-        smartkeyRoomInfo = roomInfo;
+        this.smartkeyRoomInfo = roomInfo;
     }
 
     public void setSmartkeyOfficeCode(String officeCode) {
-        smartkeyOfficeCode = officeCode;
+        this.smartkeyOfficeCode = officeCode;
     }
 
     public String getSmartkeyRoomInfo() {
