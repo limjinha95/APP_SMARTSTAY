@@ -245,8 +245,8 @@
                 android:layout_height="120dp"
                 android:layout_below="@+id/linearLayout6"
                 android:layout_marginTop="25dp"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
 
                 <TextView

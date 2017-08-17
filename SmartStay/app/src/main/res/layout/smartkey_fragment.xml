@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wap.smartstay.Main"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context="com.wap.smartstay.Main">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,34 +16,34 @@
             android:id="@+id/manualBackground"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="horizontal"
             android:background="#EAEAEA"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/manualBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/ic_help_black_24dp"/>
+                android:background="@drawable/ic_help_black_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SmartStay 매뉴얼 확인 >>"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="스마트 키를 사용하기 전에 매뉴얼을 읽으세요 !"
-                    android:textSize="13dp"/>
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -53,49 +52,49 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="40dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/smartkeyBtn"
                     android:layout_width="95dp"
                     android:layout_height="95dp"
                     android:layout_marginRight="30dp"
-                    android:background="@drawable/lock"/>
+                    android:background="@drawable/lock" />
 
                 <ImageButton
                     android:id="@+id/smartlightBtn"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@drawable/light"/>
+                    android:background="@drawable/light" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/addgroupBtn"
                     android:layout_width="95dp"
                     android:layout_height="95dp"
                     android:layout_marginRight="30dp"
-                    android:background="@drawable/addgroup"/>
+                    android:background="@drawable/addgroup" />
 
                 <ImageButton
                     android:id="@+id/callBtn"
                     android:layout_width="95dp"
                     android:layout_height="95dp"
-                    android:background="@drawable/phone1"/>
+                    android:background="@drawable/phone1" />
 
             </LinearLayout>
 

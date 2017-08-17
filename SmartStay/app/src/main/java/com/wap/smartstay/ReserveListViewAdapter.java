@@ -11,12 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by limjinha on 2017. 8. 13..
- */
-
 public class ReserveListViewAdapter extends BaseAdapter {
-    private ArrayList<ReserveListViewItem> reserveListViewItemList = new ArrayList<ReserveListViewItem>() ;
+    private ArrayList<ReserveListViewItem> reserveListViewItemList = new ArrayList<ReserveListViewItem>();
 
     public ReserveListViewAdapter() {
 
@@ -37,15 +33,15 @@ public class ReserveListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.reserve_list_item, parent, false);
         }
 
-        ImageView accomodationImageView = (ImageView) convertView.findViewById(R.id.reserveAccommodationImg) ;
-        TextView accomodationNameTextView = (TextView) convertView.findViewById(R.id.reserveAccommodationName) ;
-        TextView reservationDutyTextView = (TextView) convertView.findViewById(R.id.reserveAccommodationDuty) ;
-        TextView accomodationInfoTextView = (TextView) convertView.findViewById(R.id.reserveAccommodationInfo) ;
+        ImageView accomodationImageView = (ImageView) convertView.findViewById(R.id.reserveAccommodationImg);
+        TextView accomodationNameTextView = (TextView) convertView.findViewById(R.id.reserveAccommodationName);
+        TextView reservationDutyTextView = (TextView) convertView.findViewById(R.id.reserveAccommodationDuty);
+        TextView accomodationInfoTextView = (TextView) convertView.findViewById(R.id.reserveAccommodationInfo);
 
         ReserveListViewItem reserveListViewItem = reserveListViewItemList.get(position);
 
         accomodationImageView.setImageDrawable(reserveListViewItem.getAccomodationImg());
-        accomodationNameTextView.setText(reserveListViewItem.getAccomodationOfficeCode()+reserveListViewItem.getAccomodationRoomnumber());
+        accomodationNameTextView.setText(reserveListViewItem.getAccomodationName());
         reservationDutyTextView.setText(reserveListViewItem.getReservationDuty());
         accomodationInfoTextView.setText(reserveListViewItem.getAccomodationInfo());
 
@@ -62,12 +58,11 @@ public class ReserveListViewAdapter extends BaseAdapter {
         return reserveListViewItemList.get(position);
     }
 
-    public void addItem(Drawable img, String officecode, String roomnumber, String duty, String info) {
+    public void addItem(Drawable img, String name, String duty, String info) {
         ReserveListViewItem reserveItem = new ReserveListViewItem();
 
         reserveItem.setAccomodationImg(img);
-        reserveItem.setAccomodationOfficeCode(officecode);
-        reserveItem.setAccomodationRoomNumber(roomnumber);
+        reserveItem.setAccomodationName(name);
         reserveItem.setReservationDuty(duty);
         reserveItem.setAccomodationInfo(info);
 

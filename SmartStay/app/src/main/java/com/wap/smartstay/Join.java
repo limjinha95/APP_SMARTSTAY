@@ -1,12 +1,14 @@
 package com.wap.smartstay;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +30,7 @@ public class Join extends AppCompatActivity {
     EditText EpwdCheck;
     EditText Epnum;
     static int check=0;
-    Context cont;
+
     Socket client;
     String ip = "13.124.213.57";
     int port = 9010;
@@ -39,12 +41,17 @@ public class Join extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.join);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("회원가입");
+
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        setContentView(R.layout.join);
         handler = new Handler(){
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -52,7 +59,9 @@ public class Join extends AppCompatActivity {
                 Toast.makeText (Join.this, bundle.getString("msg"),Toast.LENGTH_SHORT).show();
             }
         };
+
         connect();
+
         Eid = (EditText)findViewById(R.id.joinIdEdit);
         Ename = (EditText)findViewById(R.id.joinNameEdit);
         Epwd = (EditText)findViewById(R.id.joinPwEdit);
@@ -66,22 +75,21 @@ public class Join extends AppCompatActivity {
         joinCheckIdBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : click event
-                Log.i("test",check+"");
                 JSONObject jo = new JSONObject();
+
                 try{
-                    jo.put("head","ID");
-                    jo.put("ID",Eid.getText().toString());
-                }catch (Exception e)
-                {
+                    jo.put("head", "ID");
+                    jo.put("ID", Eid.getText().toString());
+                } catch (Exception e) {
 
                 }
+
                 String data = jo.toString();
                 clientThread.send(data);
                 while(check==0)
                     Log.i("test",check+"");
-                if(check==1)
-                {
+
+                if(check==1) {
                     Toast.makeText(Join.this,"사용이 가능한 ID입니다.",Toast.LENGTH_SHORT).show();
                     joinBtn.setEnabled(true);
                 }
@@ -95,28 +103,26 @@ public class Join extends AppCompatActivity {
         joinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("test",Epwd.getText()+" "+EpwdCheck.getText());
                 if(Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
                     String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                     JSONObject jo = new JSONObject();
-                    try{
+
+                    try {
                         jo.put("head","Register");
                         jo.put("ID",Eid.getText().toString());
                         jo.put("PWD",Epwd.getText().toString());
                         jo.put("Name",Ename.getText().toString());
                         jo.put("Pnum",Epnum.getText().toString());
                         jo.put("Token",refreshedToken);
-                    }catch (Exception e)
-                    {
+                    } catch(Exception e) {
 
                     }
+
                     String data = jo.toString();
-                    Log.i("test",data);
                     clientThread.send(data);
                     Toast.makeText(Join.this, "가입 축하 드립니다.", Toast.LENGTH_SHORT).show();
                     finish();
-                }
-                else
+                } else
                     Toast.makeText(Join.this,"비밀번호를 다시 확인해 주세요.",Toast.LENGTH_SHORT).show();
             }
         });
@@ -124,7 +130,6 @@ public class Join extends AppCompatActivity {
     }
 
     public void connect(){
-
         thread = new Thread(){
             public void run() {
                 super.run();
@@ -141,28 +146,12 @@ public class Join extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.item_tool, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case android.R.id.home: {
-                // 해당 버튼을 눌렀을 때 적절한 액션을 넣는다.
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
     protected void onDestroy(){
         super.onDestroy();
         ClientThread.setRunningState(false);
         thread.interrupt();
     }
+
     @Override
     protected void onRestart(){
         super.onRestart();

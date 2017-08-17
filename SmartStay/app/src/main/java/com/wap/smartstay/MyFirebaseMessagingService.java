@@ -25,9 +25,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         pref = getSharedPreferences("Switch", Activity.MODE_PRIVATE);
-        if(!pref.getBoolean("sw4", false)){
-        }
-        else {
+        if (!pref.getBoolean("sw4", false)) {
+        } else {
             Map<String, String> data = remoteMessage.getData();
             if (data != null) {
                 Log.d(TAG, "data = " + data);
@@ -49,16 +48,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
         notificationBuilder.setSmallIcon(R.drawable.addgroup);
         notificationBuilder.setContentTitle("Smart Stay");
         notificationBuilder.setContentText(messageBody);
         notificationBuilder.setAutoCancel(true);
-        if(pref.getBoolean("sw2", false))
+        if (pref.getBoolean("sw2", false))
             notificationBuilder.setSound(defaultSoundUri);
-        if(pref.getBoolean("sw3", false))
-            notificationBuilder.setVibrate(new long[]{1000,1000,1000});
+        if (pref.getBoolean("sw3", false))
+            notificationBuilder.setVibrate(new long[]{1000, 1000, 1000});
         notificationBuilder.setContentIntent(pendingIntent);
         notificationBuilder.setPriority(Notification.PRIORITY_MAX);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

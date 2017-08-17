@@ -2,14 +2,9 @@ package com.wap.smartstay;
 
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by limjinha on 2017. 8. 13..
- */
-
 public class ReserveListViewItem {
     private Drawable accomodationImg;
-    private String accomodationOfficecode;
-    private String accomodationRoomnumber;
+    private String accomodationName;
     private String reservationDuty;
     private String accomodationInfo;
 
@@ -17,12 +12,8 @@ public class ReserveListViewItem {
         accomodationImg = img;
     }
 
-    public void setAccomodationOfficeCode(String officecode) {
-        accomodationOfficecode = officecode;
-    }
-
-    public void setAccomodationRoomNumber(String roomnumber) {
-        accomodationRoomnumber = roomnumber;
+    public void setAccomodationName(String name) {
+        accomodationName = name;
     }
 
     public void setReservationDuty(String duty) {
@@ -33,16 +24,13 @@ public class ReserveListViewItem {
         accomodationInfo = info;
     }
 
+
     public Drawable getAccomodationImg() {
         return this.accomodationImg;
     }
 
-    public String getAccomodationOfficeCode() {
-        return this.accomodationOfficecode;
-    }
-
-    public String getAccomodationRoomnumber() {
-        return this.accomodationRoomnumber;
+    public String getAccomodationName() {
+        return this.accomodationName;
     }
 
     public String getReservationDuty() {

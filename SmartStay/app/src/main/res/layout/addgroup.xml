@@ -14,9 +14,9 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -65,7 +65,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:text="* ID를 확인하시고 동숙객으로 추가하세요."
-            android:textSize="17dp"/>
+            android:textSize="17dp" />
 
         <Button
             android:id="@+id/addgroupSaveBtn"
@@ -95,9 +95,8 @@
                 <ListView
                     android:id="@+id/listview_addgroup"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/xml_border"
-                    >
+                    android:layout_height="300dp"
+                    android:background="@drawable/xml_border">
 
                 </ListView>
 

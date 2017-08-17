@@ -1,8 +1,5 @@
 package com.wap.smartstay;
 
-/**
- * Created by limjinha on 2017. 8. 13..
- */
 
 public class CouponListViewItem {
     private String couponName;

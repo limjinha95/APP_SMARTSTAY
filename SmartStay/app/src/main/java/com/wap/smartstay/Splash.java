@@ -16,10 +16,10 @@ public class Splash extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getBaseContext(), Main.class);  // Intent 선언
-                startActivity(intent);   // Intent 시작
+                Intent intent = new Intent(getBaseContext(), Login.class);
+                startActivity(intent);
                 finish();
             }
-        }, 2000);  // 로딩화면 시간
+        }, 2000);
     }
 }

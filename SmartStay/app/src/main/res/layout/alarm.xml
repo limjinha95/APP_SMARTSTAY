@@ -14,9 +14,9 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -57,7 +57,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:checked="true"/>
+                    android:checked="true" />
 
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:checked="true"/>
+                    android:checked="true" />
 
             </LinearLayout>
 
@@ -109,7 +109,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:checked="true"/>
+                    android:checked="true" />
 
             </LinearLayout>
 
@@ -132,7 +132,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:checked="true"/>
+                    android:checked="true" />
 
             </LinearLayout>
 
@@ -161,7 +161,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:checked="true"/>
+                    android:checked="true" />
 
             </LinearLayout>
 

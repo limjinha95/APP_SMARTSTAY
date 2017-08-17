@@ -17,51 +17,50 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class CouponList extends AppCompatActivity {
-    Context cont;
     Socket client;
     String ip = "13.124.213.57";
     int port = 9010;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
+    boolean check=false;
 
     public static ArrayList<CouponListViewItem> couponList = new ArrayList<CouponListViewItem>();
     public static String couponName, couponInfo, couponDuty;
+    public static boolean check2=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.coupon_list);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitle("내 쿠폰함");
+
         if(Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
-        toolbar.setTitle("내 쿠폰함");
 
         connect();
 
         JSONObject jo = new JSONObject();
 
         try {
-            jo.put("head","ReservationCheck");
+            jo.put("head","MyCoupon");
             jo.put("ID", Login.Id);
         } catch (Exception e) {}
 
         String data = jo.toString();
+        while(check==false);
         clientThread.send(data);
-        Log.i("test","대기");
+        while(check2==false);
 
         ListView listview;
         CouponListViewAdapter adapter;
-
-        // Adapter 생성
         adapter = new CouponListViewAdapter();
 
-        // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview_coupon);
         listview.setAdapter(adapter);
 
@@ -72,11 +71,9 @@ public class CouponList extends AppCompatActivity {
 
             adapter.addItem(couponName, couponInfo, couponDuty);
         }
-
     }
 
     public void connect(){
-
         thread = new Thread(){
             public void run() {
                 super.run();
@@ -84,12 +81,20 @@ public class CouponList extends AppCompatActivity {
                     client = new Socket(ip, port);
                     clientThread = new ClientThread(client,handler,CouponList.class);
                     clientThread.start();
+                    check=true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         };
         thread.start();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
     }
 
 }

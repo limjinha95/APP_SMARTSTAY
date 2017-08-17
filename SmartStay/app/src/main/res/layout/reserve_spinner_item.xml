@@ -19,4 +19,5 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:text="Demo"
         android:textColor="#000" />
+
 </LinearLayout>

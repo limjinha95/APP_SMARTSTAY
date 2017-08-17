@@ -13,7 +13,6 @@ import android.widget.ListView;
 import com.wap.smartstay.HotelListViewAdapter;
 
 public class HotelList extends ListFragment {
-    private ListView ListHotel;
     HotelListViewAdapter adapter;
 
     @Override

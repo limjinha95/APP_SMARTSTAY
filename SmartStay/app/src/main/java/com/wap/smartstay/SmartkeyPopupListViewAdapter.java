@@ -12,12 +12,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by limjinha on 2017. 8. 13..
- */
-
 public class SmartkeyPopupListViewAdapter extends BaseAdapter {
-    private ArrayList<SmartkeyPopupListViewItem> smartkeyPopupListViewItemList = new ArrayList<SmartkeyPopupListViewItem>() ;
+    private ArrayList<SmartkeyPopupListViewItem> smartkeyPopupListViewItemList = new ArrayList<SmartkeyPopupListViewItem>();
 
     public SmartkeyPopupListViewAdapter() {
 
@@ -38,7 +34,7 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.smartkey_list_pop_item, parent, false);
         }
 
-        TextView smartkeyRoomInfoTextView = (TextView) convertView.findViewById(R.id.smartkeyRoomInfo) ;
+        TextView smartkeyRoomInfoTextView = (TextView) convertView.findViewById(R.id.smartkeyRoomInfo);
 
         SmartkeyPopupListViewItem smartkeyPopupListViewItem = smartkeyPopupListViewItemList.get(position);
 
@@ -62,7 +58,6 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
         roomInfoItem.setSmartkeyRoomInfo(roomInfo);
         smartkeyPopupListViewItemList.add(roomInfoItem);
     }
-
 
 
 }

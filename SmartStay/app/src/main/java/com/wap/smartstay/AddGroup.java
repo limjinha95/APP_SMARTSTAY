@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ public class AddGroup extends AppCompatActivity {
     EditText inputId;
     TextView addGroupInfo;
 
-    Context cont;
     Socket client;
     String ip = "13.124.213.57";
     int port = 9010;
@@ -44,7 +42,9 @@ public class AddGroup extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
         connect();
+
         inputId = (EditText) findViewById(R.id.addgroupInputId);
         addGroupInfo = (TextView) findViewById(R.id.addGroupInfo);
 
@@ -63,12 +63,11 @@ public class AddGroup extends AppCompatActivity {
                 try {
                     jo.put("head", "SelectUser");
                     jo.put("ID", inputId.getText().toString());
-                } catch (Exception e) {
+                } catch(Exception e) {
 
                 }
 
                 String data = jo.toString();
-                Log.i("test",data);
                 clientThread.send(data);
 
                 if (idCheck == 1) {
@@ -80,7 +79,6 @@ public class AddGroup extends AppCompatActivity {
                     addGroupInfo.setText("* " + groupId + " " + groupName + " " + groupPnum);
 
                     addGroupSaveBtn.setEnabled(true);
-
                     addGroupSaveBtn.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -97,14 +95,12 @@ public class AddGroup extends AppCompatActivity {
                             idCheck = 0;
                         }
                     });
-
                 }
             }
         });
     }
 
     public void connect(){
-
         thread = new Thread(){
             public void run() {
                 super.run();
@@ -118,5 +114,12 @@ public class AddGroup extends AppCompatActivity {
             }
         };
         thread.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
     }
 }

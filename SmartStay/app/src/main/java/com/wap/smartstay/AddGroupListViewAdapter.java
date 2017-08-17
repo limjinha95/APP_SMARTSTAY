@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by limjinha on 2017. 8. 13..
- */
 
 public class AddGroupListViewAdapter extends BaseAdapter {
     private ArrayList<AddGroupListViewItem> addGroupListViewItemList = new ArrayList<AddGroupListViewItem>() ;
@@ -22,7 +19,7 @@ public class AddGroupListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return addGroupListViewItemList.size() ;
+        return addGroupListViewItemList.size();
     }
 
     @Override
@@ -50,12 +47,12 @@ public class AddGroupListViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position ;
+        return position;
     }
 
     @Override
     public Object getItem(int position) {
-        return addGroupListViewItemList.get(position) ;
+        return addGroupListViewItemList.get(position);
     }
 
     public void addItem(String name, String id, String pnum) {

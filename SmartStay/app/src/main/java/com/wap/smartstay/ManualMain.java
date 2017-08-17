@@ -27,41 +27,34 @@ import com.wap.smartstay.manualFragment.*;
 public class ManualMain extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    static Intent joinManual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_main);
 
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setTabTextColors(Color.BLACK, Color.BLACK);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         tabLayout.setupWithViewPager(mViewPager);
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-
     public static class PlaceholderFragment extends Fragment {
-
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
@@ -79,7 +72,7 @@ public class ManualMain extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = null;
-            switch (getArguments().getInt(ARG_SECTION_NUMBER)){
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
                     rootView = inflater.inflate(R.layout.fragment_join_manual, container, false);
                     break;
@@ -87,10 +80,10 @@ public class ManualMain extends AppCompatActivity {
                     rootView = inflater.inflate(R.layout.fragment_reserve_manual, container, false);
                     break;
                 case 3:
-                    rootView = inflater.inflate(R.layout.fragment_use_manual,container,false);
+                    rootView = inflater.inflate(R.layout.fragment_use_manual, container, false);
                     break;
                 case 4:
-                    rootView = inflater.inflate(R.layout.fragment_return_manual, container,false);
+                    rootView = inflater.inflate(R.layout.fragment_return_manual, container, false);
                     break;
                 default:
                     break;

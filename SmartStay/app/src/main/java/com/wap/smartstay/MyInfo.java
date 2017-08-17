@@ -23,7 +23,7 @@ import java.net.Socket;
 public class MyInfo extends AppCompatActivity {
     Button Logout, Delete, ChangePwd, ChangeUserPhoneNumberBtn;
     TextView Id, Name, Pnum;
-    Context cont;
+
     Socket client;
     String ip = "13.124.213.57";
     int port = 9010;
@@ -39,14 +39,14 @@ public class MyInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myinfo);
 
-        if(Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("내 정보");
+
+        if (Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         Logout = (Button) findViewById(R.id.logoutBtn);
         Delete = (Button) findViewById(R.id.deleteUser);
@@ -67,60 +67,66 @@ public class MyInfo extends AppCompatActivity {
                 Toast.makeText(MyInfo.this, bundle.getString("msg"), Toast.LENGTH_SHORT).show();
             }
         };
+
         ChangeUserPhoneNumberBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 2017. 7. 31. 전화번호 변경 구현
                 Intent i = new Intent(MyInfo.this, ChangePhone.class);
                 startActivity(i);
             }
         });
+
         ChangePwd.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : click event
                 Intent i = new Intent(MyInfo.this, ChangePw.class);
                 startActivity(i);
             }
         });
+
         connect();
+
         Logout.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : click event
-                Login.Islogin=0;
-                Login.Name="";
-                Login.Id="";
-                Login.Pnum="";
-                Toast.makeText(MyInfo.this,"로그아웃 하였습니다.",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(MyInfo.this,Main.class);
+                Login.Islogin = 0;
+                Login.Name = "";
+                Login.Id = "";
+                Login.Pnum = "";
+
+                Toast.makeText(MyInfo.this, "로그아웃 하였습니다.", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MyInfo.this, Main.class);
                 startActivity(i);
             }
         });
+
         Delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : click event
                 JSONObject jo = new JSONObject();
-                try{
-                    jo.put("head","Delete");
-                    jo.put("ID",Login.Id);
-                }catch (Exception e)
-                {
+
+                try {
+                    jo.put("head", "Delete");
+                    jo.put("ID", Login.Id);
+                } catch (Exception e) {
 
                 }
+
                 String data = jo.toString();
                 clientThread.send(data);
-                Login.Islogin=0;
-                Login.Name="";
-                Login.Id="";
-                Login.Pnum="";
+
+                Login.Islogin = 0;
+                Login.Name = "";
+                Login.Id = "";
+                Login.Pnum = "";
                 Toast.makeText(MyInfo.this, "탈퇴 성공 하였습니다.", Toast.LENGTH_SHORT).show();
+
                 Intent i = new Intent(MyInfo.this, Main.class);
                 startActivity(i);
             }
         });
     }
+
     public void connect() {
         thread = new Thread() {
             public void run() {
@@ -136,8 +142,9 @@ public class MyInfo extends AppCompatActivity {
         };
         thread.start();
     }
+
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         ClientThread.setRunningState(false);
         thread.interrupt();
