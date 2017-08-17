@@ -47,13 +47,13 @@ public class SmartkeyPopupList extends AppCompatActivity {
 
         connect();
         JSONObject jo = new JSONObject();
-
         try {
             jo.put("head", "MyKey");
             jo.put("ID", Login.Id);
             String data = jo.toString();
 
             while (check == false);
+
             clientThread.send(data);
 
             while (check2 == false);
@@ -71,10 +71,10 @@ public class SmartkeyPopupList extends AppCompatActivity {
 
         ListView listview;
         final SmartkeyPopupListViewAdapter adapter;
+
         adapter = new SmartkeyPopupListViewAdapter();
 
         listview = (ListView) findViewById(R.id.listview_smartkey);
-
         for (int i = 0; i < smartkeyRoomList.size(); i++) {
             smartKeyRoomInfo = smartkeyRoomList.get(i).getSmartkeyRoomInfo();
             adapter.addItem(smartKeyRoomInfo);
@@ -98,6 +98,7 @@ public class SmartkeyPopupList extends AppCompatActivity {
                 clientThread.send(data2);
             }
         });
+
     }
 
     public void connect() {

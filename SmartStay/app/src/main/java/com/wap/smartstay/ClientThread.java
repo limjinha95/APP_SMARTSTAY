@@ -88,7 +88,8 @@ public class ClientThread extends Thread {
                 } else if (clas.getName().equals("com.wap.smartstay.SmartkeyCallingList")) {
                     if (SmartkeyCallingList.number == 1) {
                         try {
-                            JSONArray ja = new JSONArray(msg);
+                            JSONObject wrapObject = new JSONObject(msg);
+                            JSONArray ja = new JSONArray(wrapObject);
 
                             SmartkeyPopupListViewItem item = new SmartkeyPopupListViewItem();
                             for (int i = 0; i < ja.length(); i++) {
@@ -99,13 +100,15 @@ public class ClientThread extends Thread {
                                 item.setSmartkeyOfficeCode(smartKeyOfficeCode);
                                 smartkeyRoomList.add(item);
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     } else if (SmartkeyCallingList.number == 2) {
                         try {
-                            JSONArray ja = new JSONArray(msg);
+                            JSONObject wrapObject = new JSONObject(msg);
+                            JSONArray ja = new JSONArray(wrapObject);
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(0);
                             SmartkeyCallingList.phoneNumber = dataJsonObject.getString("OfficePnum");
                         } catch (JSONException e) {
@@ -113,7 +116,6 @@ public class ClientThread extends Thread {
                         }
 
                     }
-
                 } else if (clas.getName().equals("com.wap.smartstay.UsageList")) {
                     try {
                         JSONArray ja = new JSONArray(msg);
@@ -121,9 +123,9 @@ public class ClientThread extends Thread {
 
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
+
                             String roomName = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
                             String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
-
                             String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "인 / 최대 " + dataJsonObject.getString("MAXNUM") + "인";
 
                             item = new ReserveListViewItem();
@@ -145,6 +147,7 @@ public class ClientThread extends Thread {
 
                         CouponListViewItem item;
 
+                        CouponList.check2 = false;
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
 
@@ -160,26 +163,25 @@ public class ClientThread extends Thread {
 
                             couponList.add(item);
                         }
+                        CouponList.check2 = true;
                     } catch (JSONException e) {
                     }
                 } else if (clas.getName().equals("com.wap.smartstay.SmartkeyPopupList")) {
                     try {
                         JSONArray ja = new JSONArray(msg);
-
                         SmartkeyPopupListViewItem item;
 
+                        SmartkeyPopupList.check2 = false;
                         for (int i = 0; i < ja.length(); i++) {
                             JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
 
-                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+                            String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " (" + dataJsonObject.getString("RNUM") + ")";
 
                             item = new SmartkeyPopupListViewItem();
                             item.setSmartkeyRoomInfo(smartKeyRoomInfo);
-
                             smartkeyRoomList.add(item);
                         }
-
-
+                        SmartkeyPopupList.check2 = true;
                     } catch (JSONException e) {
                     }
                 } else if (clas.getName().equals("com.wap.smartstay.AddGroup")) {
