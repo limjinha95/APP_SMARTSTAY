@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,8 +23,8 @@ import java.util.ArrayList;
 
 public class SmartkeyCallingList extends AppCompatActivity {
     Socket client;
-    String ip = "13.124.213.57";
-    int port = 9010;
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     android.os.Handler handler;

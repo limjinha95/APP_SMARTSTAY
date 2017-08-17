@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -18,8 +16,8 @@ import java.util.ArrayList;
 
 public class CouponList extends AppCompatActivity {
     Socket client;
-    String ip = "13.124.213.57";
-    int port = 9010;
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     Handler handler;

@@ -21,15 +21,13 @@ import org.json.JSONObject;
 
 import java.net.Socket;
 
-import static android.R.attr.port;
-
 public class Login extends AppCompatActivity {
     EditText Eid, Epwd;
     Context cont;
 
     Socket client;
-    String ip = "13.124.213.57";
-    int port = 9010;
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
