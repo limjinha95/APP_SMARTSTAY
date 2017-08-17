@@ -56,8 +56,7 @@
                     android:id="@+id/appAlarmSwitch"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:checked="true" />
+                    android:layout_marginLeft="60dp"/>
 
             </LinearLayout>
 
@@ -79,8 +78,7 @@
                     android:id="@+id/appSlienceAlarmSwitch"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:checked="true" />
+                    android:layout_marginLeft="60dp"/>
 
             </LinearLayout>
 
@@ -108,8 +106,7 @@
                     android:id="@+id/appRunningSoundAlarmSwitch"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:checked="true" />
+                    android:layout_marginLeft="60dp"/>
 
             </LinearLayout>
 
@@ -131,8 +128,7 @@
                     android:id="@+id/appRunningSlienceAlarmSwitch"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:checked="true" />
+                    android:layout_marginLeft="60dp"/>
 
             </LinearLayout>
 
@@ -160,8 +156,7 @@
                     android:id="@+id/openDoorAlarmSwitch"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:checked="true" />
+                    android:layout_marginLeft="60dp"/>
 
             </LinearLayout>
 
