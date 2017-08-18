@@ -88,7 +88,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text=" " />
+                            android:text="부경 대연 호텔 스탠다드룸" />
 
                     </LinearLayout>
 
@@ -116,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text=" " />
+                            android:text="17-09-18 ~ 17-09-20" />
 
                     </LinearLayout>
 
@@ -144,7 +144,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text=" " />
+                            android:text="부산광역시 대연3동" />
 
                     </LinearLayout>
 
@@ -234,7 +234,7 @@
                                 android:layout_width="180dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="원"
+                                android:text="100000 원"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/white"
                                 android:textSize="17dp"
@@ -264,7 +264,7 @@
                                 android:layout_width="180dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="원"
+                                android:text="0 원"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/white"
                                 android:textSize="17dp"
@@ -297,7 +297,7 @@
                                 android:layout_width="180dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="원"
+                                android:text="100000 원"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/white"
                                 android:textSize="17dp"
@@ -427,7 +427,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/tv17"
+                                android:id="@+id/tv18"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

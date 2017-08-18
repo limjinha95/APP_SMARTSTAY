@@ -188,6 +188,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
         if (view == btnPayment) {
             Intent Intent = new Intent(this, Payment.class);
             startActivity(Intent);
+            finish();
         }
     }
 }

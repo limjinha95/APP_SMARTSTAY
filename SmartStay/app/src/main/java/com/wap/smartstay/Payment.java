@@ -35,8 +35,8 @@ public class Payment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"예약되었습니다.",Toast.LENGTH_SHORT).show();
-//                Intent Intent = new Intent(Payment.this,Join.class);
-//                startActivity(Intent);
+                Intent Intent = new Intent(Payment.this, PayCheck.class);
+                startActivity(Intent);
             }
         });
 
