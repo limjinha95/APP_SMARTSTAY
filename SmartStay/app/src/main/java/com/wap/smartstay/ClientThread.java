@@ -8,12 +8,14 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 import android.os.Handler;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.wap.smartstay.CouponList.couponList;
+import static com.wap.smartstay.SmartKeyCallingList.smartCallingRoomList;
 import static com.wap.smartstay.SmartkeyPopupList.smartkeyRoomList;
 import static com.wap.smartstay.UsageList.reserveList;
 
@@ -84,37 +86,41 @@ public class ClientThread extends Thread {
                     } catch (Exception e) {
 
                     }
-                } else if (clas.getName().equals("com.wap.smartstay.SmartkeyCallingList")) {
+                } else if (clas.getName().equals("com.wap.smartstay.SmartKeyCallingList")) {
                     if (SmartKeyCallingList.number == 1) {
                         try {
-                            JSONObject wrapObject = new JSONObject(msg);
-                            JSONArray ja = new JSONArray(wrapObject);
+                            JSONArray ja = new JSONArray(msg);
+                            SmartKeyCallingList.check2 = false;
 
-                            SmartkeyPopupListViewItem item = new SmartkeyPopupListViewItem();
+                            SmartKeyCallingListViewItem item;
                             for (int i = 0; i < ja.length(); i++) {
+                                item = new SmartKeyCallingListViewItem();
                                 JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
                                 String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
-                                String smartKeyOfficeCode = dataJsonObject.getString("OfficeCode");
-                                item.setSmartkeyRoomInfo(smartKeyRoomInfo);
-                                item.setSmartkeyOfficeCode(smartKeyOfficeCode);
-                                smartkeyRoomList.add(item);
+                                String smartKeyOfficeCode = dataJsonObject.getString("OFFICECODE");
+                                item.setSmartCallingRoomInfo(smartKeyRoomInfo);
+                                item.setSmartCallingOfficeCode(smartKeyOfficeCode);
+                                smartCallingRoomList.add(item);
                             }
+                            SmartKeyCallingList.check2 = true;
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     } else if (SmartKeyCallingList.number == 2) {
+                        SmartKeyCallingList.check2 = false;
                         try {
-                            JSONObject wrapObject = new JSONObject(msg);
-                            JSONArray ja = new JSONArray(wrapObject);
-                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(0);
-                            SmartKeyCallingList.phoneNumber = dataJsonObject.getString("OfficePnum");
+                            JSONObject ja = new JSONObject(msg);
+                            String phone = ja.get("OfficePnum").toString();
+                            SmartKeyCallingList.phoneNumber = phone;
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        SmartKeyCallingList.check2 = true;
 
                     }
+
                 } else if (clas.getName().equals("com.wap.smartstay.UsageList")) {
                     try {
                         JSONArray ja = new JSONArray(msg);
@@ -204,92 +210,6 @@ public class ClientThread extends Thread {
                     }
 
                 }
-
-                else if (clas.getName().equals("com.wap.smartstay.SelectCouponList")) {
-                    try {
-                        JSONArray ja = new JSONArray(msg);
-
-                        CouponListViewItem item;
-
-                        CouponList.check2 = false;
-                        for (int i = 0; i < ja.length(); i++) {
-                            JSONObject dataJsonObject = (JSONObject) ja.getJSONObject(i);
-
-                            String couponName = dataJsonObject.getString("NAME");
-                            String couponInfo = dataJsonObject.getString("INFO");
-                            String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
-
-                            item = new CouponListViewItem();
-
-                            item.setCouponName(couponName);
-                            item.setCouponInfo(couponInfo);
-                            item.setCouponDuty(couponDuty);
-
-                            couponList.add(item);
-                        }
-                        CouponList.check2 = true;
-                    } catch (JSONException e) {
-                    }
-                }
-
-                else if (clas.getName().equals("com.wap.smartstay.Reserve")){
-                    try{
-                        JSONObject jo = new JSONObject(msg);
-
-                        Reserve.officeCode = jo.getString("OfficeCode");
-                        Reserve.inform = jo.getString("Inform");
-
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-                else if (clas.getName().equals("com.wap.smartstay.HotelList")){
-                    try{
-                        JSONObject wrapObject = new JSONObject(msg);
-                        JSONArray jo = new JSONArray(wrapObject);
-
-                        HotelListViewItem item = new HotelListViewItem();
-
-                        for (int i = 0; i < jo.length(); i++) {
-                            JSONObject dataJsonObject = (JSONObject) jo.getJSONObject(i);
-
-                            String officeCode = dataJsonObject.getString("OFFICECODE");
-                            String info = dataJsonObject.getString("INFORM");
-
-                            item.setLocation(info);
-                            item.setName(officeCode);
-
-                            HotelList.HotelList.add(item);
-                        }
-
-                    }catch (Exception e){
-
-                    }
-                }
-
-                else if (clas.getName().equals("com.wap.smartstay.Payment")){
-                    try{
-                        JSONObject jo = new JSONObject(msg);
-
-                        Payment.officeCode = jo.getString("OfficeCode");
-                        Payment.start = jo.getString("STARTDATE");
-                        Payment.end = jo.getString("ENDDATE");
-                        Payment.location = jo.getString("infor");
-                        Payment.rNum = jo.getString("RNUM");
-                        Payment.couponPrice = jo.getInt("Cost");
-
-                    }catch (Exception e){
-
-                    }
-                }
-
-
-
-
-
-
             }
 
         } catch (
