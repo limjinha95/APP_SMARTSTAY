@@ -1,16 +1,22 @@
 package com.wap.smartstay.Fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.wap.smartstay.AddGroup;
 import com.wap.smartstay.Manual;
@@ -29,6 +35,7 @@ public class SmartkeyFragment extends Fragment {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
     }
 
     @Override
@@ -77,11 +84,10 @@ public class SmartkeyFragment extends Fragment {
         ImageButton callBtn = (ImageButton) view.findViewById(R.id.callBtn);
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-//                Intent loomInfo = new Intent(getContext(), SmartKeyCallingList.class);
-//                startActivity(loomInfo);
+            public void onClick(View v) {
                 Intent smartkey = new Intent(getContext(), SmartKeyCallingList.class);
                 startActivity(smartkey);
+
             }
         });
         return view;

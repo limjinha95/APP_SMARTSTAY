@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import org.json.JSONObject;
@@ -103,8 +104,15 @@ public class SmartkeyPopupList extends AppCompatActivity {
                 clientThread.send(data2);
             }
         });
-    }
 
+        Button cancel = (Button) findViewById(R.id.cancel_action);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
     public void connect() {
         thread = new Thread() {
             public void run() {

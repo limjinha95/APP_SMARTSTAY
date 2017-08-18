@@ -110,15 +110,12 @@ public class ClientThread extends Thread {
 
                     } else if (SmartKeyCallingList.number == 2) {
                         SmartKeyCallingList.check2 = false;
-
                         try {
-                            Log.e("as","tt");
-
                             JSONObject ja = new JSONObject(msg);
-                            Log.e("as","tt");
-
                             String phone = ja.get("OfficePnum").toString();
-                            Log.e("as","tt");
+                        try {
+                            JSONObject ja = new JSONObject(msg);
+                            String phone = ja.get("OfficePnum").toString();
                             SmartKeyCallingList.phoneNumber = phone;
                         } catch (JSONException e) {
                             e.printStackTrace();
