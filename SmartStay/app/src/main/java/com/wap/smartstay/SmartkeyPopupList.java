@@ -113,7 +113,6 @@ public class SmartkeyPopupList extends AppCompatActivity {
             }
         });
     }
-
     public void connect() {
         thread = new Thread() {
             public void run() {

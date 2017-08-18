@@ -33,8 +33,8 @@ public class SmartKeyCallingList extends AppCompatActivity {
 
     public static String phoneNumber;
     public static String officeCode;
-    public static int number = 1;
 
+    public static int number = 1;
     boolean check = false;
     public static boolean check2 = false;
 
@@ -60,6 +60,7 @@ public class SmartKeyCallingList extends AppCompatActivity {
         connect();
 
         JSONObject jo = new JSONObject();
+
 
         try {
             jo.put("head", "MyKey");
@@ -103,6 +104,13 @@ public class SmartKeyCallingList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 number = 2;
+                callBtnEventDialog();
+            }
+        });
+
+    }
+
+    public void callBtnEventDialog() {
                 SmartKeyCallingListViewItem obj = adapter.getItem(position);
                 String[] datas = obj.getSmartCallingRoomInfo().split(" ");
 
@@ -156,9 +164,7 @@ public class SmartKeyCallingList extends AppCompatActivity {
         phoneNumber = null;
         intent = new Intent(Intent.ACTION_DIAL, number);
         startActivity(intent);
-
     }
-
     public void connect() {
         thread = new Thread() {
             public void run() {

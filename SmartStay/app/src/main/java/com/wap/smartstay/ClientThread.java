@@ -113,6 +113,9 @@ public class ClientThread extends Thread {
                         try {
                             JSONObject ja = new JSONObject(msg);
                             String phone = ja.get("OfficePnum").toString();
+                        try {
+                            JSONObject ja = new JSONObject(msg);
+                            String phone = ja.get("OfficePnum").toString();
                             SmartKeyCallingList.phoneNumber = phone;
                         } catch (JSONException e) {
                             e.printStackTrace();
