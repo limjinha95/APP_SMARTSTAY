@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,9 +21,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Reserve extends AppCompatActivity implements View.OnClickListener {
-    Button btnFromPicker, btnToPicker, btnCoupon, btnPayment;
+    Button btnFromPicker, btnToPicker, btnPayment;
     TextView textFrom, textTo, textPeriod;
-    TextView textStayPrice, textCouponPrice, textTotalPrice;
     private int from_Year, from_Month, from_Day;
     private int to_Year, to_Month, to_Day;
 
@@ -32,7 +32,8 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
     Long diffDate;
     String period;
 
-    private int stayPrice, couponPrice, totalPrice;
+    String[] roomType = {"스위트룸", "스탠다드", "슈페리얼"};
+    int pic[] = {R.drawable.one, R.drawable.two, R.drawable.three};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,30 +42,39 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
 
         btnFromPicker = (Button) findViewById(R.id.setFromBtn);
         btnToPicker = (Button) findViewById(R.id.setToBtn);
-        btnCoupon = (Button) findViewById(R.id.couponBtn);
         btnPayment = (Button) findViewById(R.id.paymentBtn);
 
         textFrom = (TextView) findViewById(R.id.textFrom);
         textTo = (TextView) findViewById(R.id.textTo);
         textPeriod = (TextView) findViewById(R.id.textPeriod);
 
-        textStayPrice = (TextView) findViewById(R.id.textStayPrice);
-        textCouponPrice = (TextView) findViewById(R.id.textCouponPrice);
-        textTotalPrice = (TextView) findViewById(R.id.textTotalPrice);
-
         btnFromPicker.setOnClickListener(this);
         btnToPicker.setOnClickListener(this);
-        btnCoupon.setOnClickListener(this);
         btnPayment.setOnClickListener(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         setSupportActionBar(toolbar);
 
-        Spinner Spinner = (Spinner) findViewById(R.id.Spinner);
-        ArrayAdapter Adapter = ArrayAdapter.createFromResource(this, R.array.payment,
-                android.R.layout.simple_spinner_item);
-        Spinner.setAdapter(Adapter);
+        Spinner spin = (Spinner) findViewById(R.id.spinner);
+        spin.setPrompt("방을 고르세요");
+
+        ArrayAdapter<String> spinAdap = new ArrayAdapter<String>(this, R.layout.reserve_spinner_item, R.id.information, roomType);
+        spin.setAdapter(spinAdap);
+
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), roomType[i], Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     @Override
@@ -84,25 +94,23 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             textFrom.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + " ~"); //N월 N일 ~ N월 N
-                            start_Year=year;
-                            start_Month=monthOfYear+1;
-                            start_Day=dayOfMonth;
-                            str_startDate="";
+                            start_Year = year;
+                            start_Month = monthOfYear + 1;
+                            start_Day = dayOfMonth;
+                            str_startDate = "";
 
                             if (start_Month < 10) {
-                                str_startDate+="0" + start_Month + "/";
+                                str_startDate += "0" + start_Month + "/";
                                 if (start_Day < 10) {
-                                    str_startDate+="0" + start_Day + "/" + start_Year;
-                                }
-                                else
-                                    str_startDate+=start_Day + "/" + start_Year;
+                                    str_startDate += "0" + start_Day + "/" + start_Year;
+                                } else
+                                    str_startDate += start_Day + "/" + start_Year;
                             } else {
-                                str_startDate+=start_Month + "/";
+                                str_startDate += start_Month + "/";
                                 if (start_Day < 10) {
-                                    str_startDate+="0" + start_Day + "/" + start_Year;
-                                }
-                                else
-                                    str_startDate+=start_Day + "/" + start_Year;
+                                    str_startDate += "0" + start_Day + "/" + start_Year;
+                                } else
+                                    str_startDate += start_Day + "/" + start_Year;
                             }
 
                             Log.i("start", str_startDate);
@@ -124,30 +132,28 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            textTo.setText(year + "."+ (monthOfYear + 1) + "." + dayOfMonth ); //N월 N일 ~ N월 N일
-                            end_Year=year;
-                            end_Month=monthOfYear+1;
-                            end_Day=dayOfMonth;
-                            str_endDate="";
-                            if(to_Month < 10){
-                                str_endDate+="0" + end_Month + "/";
-                                if(to_Day < 10){
-                                    str_endDate+="0" + end_Day + "/" + end_Year;
-                                }
-                                else
-                                    str_endDate+=end_Day + "/" + end_Year;
-                            }else {
-                                str_endDate+=end_Month + "/";
-                                if(to_Day < 10){
-                                    str_endDate+="0" + end_Day + "/" + end_Year;
-                                }
-                                else
-                                    str_endDate+=end_Day + "/" + end_Year;
+                            textTo.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth); //N월 N일 ~ N월 N일
+                            end_Year = year;
+                            end_Month = monthOfYear + 1;
+                            end_Day = dayOfMonth;
+                            str_endDate = "";
+                            if (to_Month < 10) {
+                                str_endDate += "0" + end_Month + "/";
+                                if (to_Day < 10) {
+                                    str_endDate += "0" + end_Day + "/" + end_Year;
+                                } else
+                                    str_endDate += end_Day + "/" + end_Year;
+                            } else {
+                                str_endDate += end_Month + "/";
+                                if (to_Day < 10) {
+                                    str_endDate += "0" + end_Day + "/" + end_Year;
+                                } else
+                                    str_endDate += end_Day + "/" + end_Year;
                             }
 
-                            Log.i("end",str_endDate);
+                            Log.i("end", str_endDate);
                             // get date period
-                            try{
+                            try {
                                 Date start;
                                 Date end;
 
@@ -156,20 +162,20 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
                                 start = date.parse(str_startDate);
                                 end = date.parse(str_endDate);
 
-                                long diff = Math.abs((int)(start.getTime()) - (int)(end.getTime()) );
+                                long diff = Math.abs((int) (start.getTime()) - (int) (end.getTime()));
                                 diffDate = diff / (24 * 60 * 60 * 1000);
 
                                 period = Long.toString(diffDate);
 
-                                if(diffDate == 0){
+                                if (diffDate == 0) {
                                     textPeriod.setText("1박");
-                                }else if(diffDate > 0){
+                                } else if (diffDate > 0) {
                                     textPeriod.setText(diffDate + "박" + (diffDate + 1) + "일");
-                                }else{
-                                    Toast.makeText(getApplicationContext(),"잘못된 날짜입니다",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "잘못된 날짜입니다", Toast.LENGTH_SHORT).show();
                                 }
 
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -179,16 +185,9 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
             dp2.show();
         }
 
-        if (view == btnCoupon) {
-            Intent couponlist = new Intent(view.getContext(), CouponList.class);
-            startActivity(couponlist);
-
-            textTotalPrice.setText((stayPrice - couponPrice) + "원");
-            textCouponPrice.setText(couponPrice + "원");
-        }
         if (view == btnPayment) {
-            Toast.makeText(getApplicationContext(), "예약완료", Toast.LENGTH_SHORT).show();
-//            Intent Intent = new Intent() // 이동
+            Intent Intent = new Intent(this, Payment.class);
+            startActivity(Intent);
         }
     }
 }

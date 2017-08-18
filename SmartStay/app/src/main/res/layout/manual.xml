@@ -42,13 +42,13 @@
 
         <Button
             android:id="@+id/manualStartBtn"
-            android:background="#EBF7FF"
             android:layout_width="200dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
-            android:textStyle="bold"
+            android:background="#EBF7FF"
+            android:text="START"
             android:textSize="23dp"
-            android:text="START">
+            android:textStyle="bold">
 
 
         </Button>

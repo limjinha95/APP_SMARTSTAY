@@ -17,12 +17,14 @@ public class Manual extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual);
-        manualMain = new Intent(this, ManualMain.class);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("Smart Stay 메뉴얼");
 
-        Button startBtn = (Button)findViewById(R.id.manualStartBtn);
+        manualMain = new Intent(this, ManualMain.class);
+
+        Button startBtn = (Button) findViewById(R.id.manualStartBtn);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

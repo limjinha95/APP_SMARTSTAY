@@ -18,20 +18,20 @@
         android:textSize="17dp" />
 
     <TextView
-    android:id="@+id/addgroupId"
-    android:layout_width="110dp"
-    android:layout_height="24dp"
-    android:gravity="center_vertical"
-    android:text="sexyboyds"
-    android:textSize="17dp" />
+        android:id="@+id/addgroupId"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:gravity="center_vertical"
+        android:text="sexyboyds"
+        android:textSize="17dp" />
 
     <TextView
-        android:id="@+id/addgroupAccommodationName"
+        android:id="@+id/addGroupPnum"
         android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
-        android:text="지니하우스 (101)"
+        android:text="010-8705-7115"
         android:textSize="17dp" />
 
 </LinearLayout>

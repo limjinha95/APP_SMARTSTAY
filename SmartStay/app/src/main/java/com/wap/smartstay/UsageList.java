@@ -1,41 +1,40 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class UsageList extends AppCompatActivity {
-    Context cont;
     Socket client;
-    String ip = "13.124.213.57";
-    int port = 9010;
+
+    String ip = ServerInformation.serverIP;
+    int port = ServerInformation.port;
     Thread thread;
     ClientThread clientThread;
     Handler handler;
 
+    boolean check = false;
+
     TextView accomodationName;
-    TextView accomodationDuty;
+    TextView reservationDuty;
     TextView accomodationInfo;
 
     public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>() ;
-
-    public static String roomName, reservationDuty, roomInfo;
+    public static boolean check2=false;
+    String name, duty, info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +45,15 @@ public class UsageList extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("이용 내역");
 
-        accomodationName = (TextView) findViewById(R.id.reserveAccommodationName);
-        accomodationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
-        accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
-
+        if(Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         connect();
+
+        accomodationName = (TextView) findViewById(R.id.reserveAccommodationName);
+        reservationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
+        accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
 
         JSONObject jo = new JSONObject();
 
@@ -60,39 +63,37 @@ public class UsageList extends AppCompatActivity {
         } catch (Exception e) {}
 
         String data = jo.toString();
+        while(check == false);
         clientThread.send(data);
-        Log.i("test","대기");
+        while(check2 == false);
 
         ListView listview ;
         ReserveListViewAdapter adapter;
-
-        // Adapter 생성
         adapter = new ReserveListViewAdapter() ;
 
-        // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview_reserve);
         listview.setAdapter(adapter);
 
         Drawable img = ContextCompat.getDrawable(this, R.drawable.one);
 
         for (int i = 0; i < reserveList.size(); i++) {
-            roomName = reserveList.get(i).getAccomodationName();
-            reservationDuty = reserveList.get(i).getReservationDuty();
-            roomInfo = reserveList.get(i).getAccomodationInfo();
+            name = reserveList.get(i).getAccomodationName();
+            duty = reserveList.get(i).getReservationDuty();
+            info = reserveList.get(i).getAccomodationInfo();
 
-            adapter.addItem(img, roomName, reservationDuty, roomInfo);
+            adapter.addItem(img, name, duty, info);
         }
     }
 
     public void connect(){
-
         thread = new Thread(){
             public void run() {
                 super.run();
                 try {
                     client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler,Login.class);
+                    clientThread = new ClientThread(client,handler, UsageList.class);
                     clientThread.start();
+                    check = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -101,5 +102,11 @@ public class UsageList extends AppCompatActivity {
         thread.start();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ClientThread.setRunningState(false);
+        thread.interrupt();
+    }
 
 }

@@ -20,31 +20,29 @@ import com.wap.smartstay.Fragment.SmartkeyFragment;
 public class Main extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
+
     private int[] tabIcons = {
             R.drawable.ic_home_black_24dp,
             R.drawable.ic_screen_lock_portrait_black_24dp,
             R.drawable.ic_person_outline_black_24dp
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("KDS", "Refreshed token: " + refreshedToken);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         setSupportActionBar(toolbar);
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
-
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -63,44 +61,37 @@ public class Main extends AppCompatActivity {
                     }
                 });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // 한 줄 코드
         getMenuInflater().inflate(R.menu.item_tool, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
         switch (item.getItemId()) {
             case R.id.search_main:
-                if(Login.Islogin==0) {
+                if (Login.Islogin == 0) {
                     Intent local_main = new Intent(this, Login.class);
                     startActivity(local_main);
                     finish();
-                }
-                else if(Login.Islogin==1)
-                    Toast.makeText(this,"이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.login_main:
-                if(Login.Islogin==0) {
-                    Intent local_main = new Intent(this, Login.class);
-                    startActivity(local_main);
-                    finish();
-                }
-                else if(Login.Islogin==1)
-                    Toast.makeText(this,"이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
+                } else if (Login.Islogin == 1)
+                    Toast.makeText(this, "이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
         adapter.addFragment(new HotelList(), "Home");
         adapter.addFragment(new SmartkeyFragment(), "SmartKey");
-        //if(Login.Islogin==1)
-        adapter.addFragment(new MypageFragment(), "Mypage");
+
+        if (Login.Islogin == 1)
+            adapter.addFragment(new MypageFragment(), "Mypage");
         viewPager.setAdapter(adapter);
     }
 }

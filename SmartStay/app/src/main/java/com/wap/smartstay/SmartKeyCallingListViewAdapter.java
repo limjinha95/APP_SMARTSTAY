@@ -1,27 +1,30 @@
 package com.wap.smartstay;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v7.util.AsyncListUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class SmartkeyPopupListViewAdapter extends BaseAdapter {
-    private ArrayList<SmartkeyPopupListViewItem> smartkeyPopupListViewItemList = new ArrayList<SmartkeyPopupListViewItem>();
+/**
+ * Created by ihyeon-yeong on 2017. 8. 18..
+ */
 
-    public SmartkeyPopupListViewAdapter() {
+
+
+public class SmartKeyCallingListViewAdapter extends BaseAdapter {
+
+    private ArrayList<SmartKeyCallingListViewItem> smartKeyCallingListViewItemList = new ArrayList<SmartKeyCallingListViewItem>();
+    public SmartKeyCallingListViewAdapter() {
 
     }
 
     @Override
     public int getCount() {
-        return smartkeyPopupListViewItemList.size();
+        return smartKeyCallingListViewItemList.size();
     }
 
     @Override
@@ -36,9 +39,9 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
 
         TextView smartkeyRoomInfoTextView = (TextView) convertView.findViewById(R.id.smartkeyRoomInfo);
 
-        SmartkeyPopupListViewItem smartkeyPopupListViewItem = smartkeyPopupListViewItemList.get(position);
+        SmartKeyCallingListViewItem smartkeyCallingListViewItem = smartKeyCallingListViewItemList.get(position);
 
-        smartkeyRoomInfoTextView.setText(smartkeyPopupListViewItem.getSmartkeyRoomInfo());
+        smartkeyRoomInfoTextView.setText(smartkeyCallingListViewItem.getSmartCallingRoomInfo());
 
         return convertView;
     }
@@ -49,16 +52,16 @@ public class SmartkeyPopupListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public SmartkeyPopupListViewItem getItem(int position) {
-        return smartkeyPopupListViewItemList.get(position);
+    public SmartKeyCallingListViewItem getItem(int position) {
+        return smartKeyCallingListViewItemList.get(position);
     }
 
     public void addItem(String roomInfo, String officeCode) {
-        SmartkeyPopupListViewItem roomInfoItem = new SmartkeyPopupListViewItem();
+        SmartKeyCallingListViewItem roomInfoItem = new SmartKeyCallingListViewItem();
 
-        roomInfoItem.setSmartkeyRoomInfo(roomInfo);
-        roomInfoItem.setSmartkeyOfficeCode(officeCode);
-        smartkeyPopupListViewItemList.add(roomInfoItem);
+        roomInfoItem.setSmartCallingRoomInfo(roomInfo);
+        roomInfoItem.setSmartCallingOfficeCode(officeCode);
+        smartKeyCallingListViewItemList.add(roomInfoItem);
     }
 
 

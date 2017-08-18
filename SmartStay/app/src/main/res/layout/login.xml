@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context="com.wap.smartstay.Main">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,7 +54,8 @@
             <EditText
                 android:id="@+id/loginPwEdit"
                 android:layout_width="210dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="textPassword" />
 
         </LinearLayout>
 
@@ -70,10 +70,10 @@
                 android:id="@+id/joinStartBtn"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"
                 android:layout_marginRight="10dp"
+                android:background="@color/colorPrimaryDark"
                 android:text="회원가입"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
 
             <Button
@@ -81,8 +81,8 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"
                 android:text="로그인"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
 
         </LinearLayout>

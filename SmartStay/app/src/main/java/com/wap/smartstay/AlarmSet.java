@@ -17,13 +17,13 @@ public class AlarmSet extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm);
+
         sw = new Switch[5];
+        pref = getSharedPreferences("Switch", Activity.MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("알림 설정");
-        pref = getSharedPreferences("Switch", Activity.MODE_PRIVATE);
-
 
         Switch.OnCheckedChangeListener onCheckedChangeListener = new Switch.OnCheckedChangeListener(){
             @Override
@@ -61,8 +61,8 @@ public class AlarmSet extends AppCompatActivity {
         sw[4] = (Switch)findViewById(R.id.openDoorAlarmSwitch);
         sw[4].setOnCheckedChangeListener(onCheckedChangeListener);
         switchInit();
-
     }
+
     public void switchInit(){
         for(int i = 0 ; i < 5; i++){
             if(pref.getBoolean("sw"+i+"", false))

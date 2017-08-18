@@ -37,12 +37,12 @@ public class MypageFragment extends Fragment {
         ImageButton mypageMyInfoBtn = (ImageButton) view.findViewById(R.id.mypageMyInfoBtn);
 
         mypageMyInfoBtn.setEnabled(false);
+
         if (Login.Islogin == 1) {
             id.setText(Login.Id);
             name.setText(Login.Name);
             mypageMyInfoBtn.setEnabled(true);
         }
-        // TODO: 2017. 7. 31. 마이페이지 버튼 이벤트들 여기다가 추가
 
         mypageMyInfoBtn.setOnClickListener(
                 new Button.OnClickListener() {

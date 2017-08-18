@@ -14,9 +14,9 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -29,10 +29,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:background="@drawable/xml_border"
             android:gravity="center_vertical"
-            android:padding="10dp">
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="70dp"
@@ -43,27 +43,35 @@
 
             <EditText
                 android:id="@+id/addgroupInputId"
-                android:layout_width="175dp"
-                android:layout_height="45dp"
+                android:layout_width="165dp"
+                android:layout_height="52dp"
                 android:gravity="center_vertical"
                 android:hint="동숙객 ID를 입력하세요"
                 android:textSize="16dp" />
 
             <Button
                 android:id="@+id/addgroupCheckIdBtn"
-                android:layout_width="55dp"
-                android:layout_height="25dp"
+                android:layout_width="65dp"
+                android:layout_height="32dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/xml_border"
                 android:text="ID확인" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/addGroupInfo"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:text="* ID를 확인하시고 동숙객으로 추가하세요."
+            android:textSize="17dp" />
+
         <Button
             android:id="@+id/addgroupSaveBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
             android:text="동숙객으로 지정"
             android:textColor="@color/white"
@@ -72,27 +80,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="동숙객" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ListView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/xml_border"
-                >
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            </ListView>
+                <ListView
+                    android:id="@+id/listview_addgroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/xml_border">
 
-        </LinearLayout>
+                </ListView>
+
+            </LinearLayout>
 
         </ScrollView>
 

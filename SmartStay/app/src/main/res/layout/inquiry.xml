@@ -14,9 +14,9 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -55,7 +55,7 @@
                 android:layout_marginTop="20dp"
                 android:imeOptions="actionDone"
                 android:text="제목"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
 
             <EditText
@@ -63,8 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/xml_border"
-                android:imeOptions="actionDone"
                 android:ems="10"
+                android:imeOptions="actionDone"
                 android:inputType="textMultiLine" />
 
             <LinearLayout
@@ -79,15 +79,15 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:text="문의 내용"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="@drawable/xml_border"
-                android:imeOptions="actionDone"
                 android:ems="10"
+                android:imeOptions="actionDone"
                 android:inputType="textMultiLine" />
 
             <LinearLayout

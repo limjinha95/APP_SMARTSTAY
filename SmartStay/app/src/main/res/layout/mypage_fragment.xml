@@ -4,128 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wap.smartstay.Main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.wap.smartstay.Main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#EAEAEA"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_person_outline_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mypageUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="임지짜"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/mypageUserId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="wlsgk0323"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/mypageMyInfoBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_settings_black_24dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:padding="10dp"
-                android:orientation="horizontal"
-                android:background="#EAEAEA"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/ic_person_outline_black_24dp"/>
+                <Button
+                    android:id="@+id/usagelistBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Usage List"
+                    android:textColor="@color/white" />
 
-                <LinearLayout
-                    android:layout_width="210dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/mypageUserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="임지짜"
-                        android:textSize="18dp"/>
-
-                    <TextView
-                        android:id="@+id/mypageUserId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="wlsgk0323"
-                        android:textSize="13dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageButton
-                        android:id="@+id/mypageMyInfoBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_settings_black_24dp"/>
-
-                </LinearLayout>
+                <Button
+                    android:id="@+id/mycouponBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="My Coupon"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                <Button
+                    android:id="@+id/alarmsetBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Alarm Setting"
+                    android:textColor="@color/white" />
 
-                    <Button
-                        android:id="@+id/usagelistBtn"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginRight="5dp"
-                        android:text="Usage List"
-                        android:textColor="@color/white"
-                        android:background="@color/colorPrimaryDark"/>
-
-                    <Button
-                        android:id="@+id/mycouponBtn"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:text="My Coupon"
-                        android:textColor="@color/white"
-                        android:background="@color/colorPrimaryDark"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <Button
-                        android:id="@+id/alarmsetBtn"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginRight="5dp"
-                        android:text="Alarm Setting"
-                        android:textColor="@color/white"
-                        android:background="@color/colorPrimaryDark"/>
-
-                    <Button
-                        android:id="@+id/inquireBtn"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:text="1 : 1 Inquire"
-                        android:textColor="@color/white"
-                        android:background="@color/colorPrimaryDark"/>
-
-                </LinearLayout>
-
-
+                <Button
+                    android:id="@+id/inquireBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="1 : 1 Inquire"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
 
         </LinearLayout>
 
+
+    </LinearLayout>
 
 
 </LinearLayout>
