@@ -1,0 +1,110 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/xml_gradient"
+    tools:context="com.wap.smartstay.manualFragment.joinManualFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:text="회원가입"
+                android:textColor="#5A5A5A"
+                android:textSize="30dp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="400dp"
+                android:layout_height="2dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="50dp"
+                android:background="#5A5A5A" />
+
+            <TextView
+                android:id="@+id/content1"
+                android:layout_width="64dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView3"
+                android:layout_toStartOf="@+id/content2"
+                android:text="간단한"
+                android:textColor="#ff0000"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content2"
+                android:layout_width="230dp"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/content1"
+                android:layout_alignEnd="@+id/imageView"
+                android:text="정보만으로 가입하세요!"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content3"
+                android:layout_width="64dp"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/content1"
+                android:layout_below="@+id/content1"
+                android:text="가입 후"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content4"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/content3"
+                android:layout_alignEnd="@+id/bottomText1"
+                android:text="스마트 회원으로"
+                android:textColor="#ff0000"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content5"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/content3"
+                android:layout_toEndOf="@+id/content4"
+                android:text="등록!"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/view_join" />
+
+            <TextView
+                android:id="@+id/bottomText1"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="#SMART STAY"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </ScrollView>
+</FrameLayout>
