@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SmartStay</string>
+    <string name="join">계정이 없다면 <u>회원가입</u> 하세요</string>
+    <string name="login">이미 계정이 있다면 <u>로그인</u> 하세요</string>
+</resources>
