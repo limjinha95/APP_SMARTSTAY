@@ -4,26 +4,26 @@
 package smartstay.model.dto;
 
 /**
- * µµ¾î¶ô Á¤º¸ µ¥ÀÌÅÍ
+ * ë„ì–´ë½ ì •ë³´ ë°ì´í„° 
  * @author limjinha
  * @version ver.1.0
  */
 public class Doorlock {
 	
-	/** ¼÷¹Ú¾÷¼Ò ¹øÈ£ */
+	/** ìˆ™ë°•ì—…ì†Œ ë²ˆí˜¸ */
 	private int officeNo;
-	/** °´½Ç ¹øÈ£ */
+	/** ê°ì‹¤ ë²ˆí˜¸ */
 	private int roomNo;
 	/** ip */
 	private String ip;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public Doorlock() {
 		super();
 	}
 	
-	/** ÀüÃ¼ »ı¼ºÀÚ */
+	/** ì „ì²´ ë°ì´í„° ìƒì„±ì */
 	public Doorlock(int officeNo, int roomNo, String ip) {
 		super();
 		this.officeNo = officeNo;

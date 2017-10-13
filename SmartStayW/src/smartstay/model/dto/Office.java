@@ -4,30 +4,30 @@
 package smartstay.model.dto;
 
 /**
- * ¼÷¹Ú¾÷¼Ò Á¤º¸ µ¥ÀÌÅÍ
+ * ìˆ™ë°•ì—…ì†Œ ì •ë³´ ë°ì´í„°
  * @author limjinha
  * @version ver.1.0
  */
 public class Office {
 	
-	/** ¼÷¹Ú¾÷¼Ò ¹øÈ£ */
+	/** ìˆ™ë°•ì—…ì†Œ ë²ˆí˜¸ */
 	private int officeNo;
-	/** ¼÷¹Ú¾÷¼Ò ÀÌ¸§ */
+	/** ìˆ™ë°•ì—…ì†Œ ì´ë¦„ */
 	private String officeName;
-	/** ¼÷¹Ú¾÷¼Ò ÁÖ¼Ò */
+	/** ìˆ™ë°•ì—…ì†Œ ì£¼ì†Œ */
 	private String officeAddress;
-	/** ¼÷¹Ú¾÷¼Ò ÀüÈ­¹øÈ£ */
+	/** ìˆ™ë°•ì—…ì†Œ ì „í™”ë²ˆí˜¸ */
 	private String officeCall;
-	/** ¼÷¹Ú¾÷¼Ò ¼Ò°³±Û */
+	/** ìˆ™ë°•ì—…ì†Œ ì†Œê°œê¸€ */
 	private String officeInform;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public Office() {
 		super();
 	}
 
-	/** ÀüÃ¼ µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ì „ì²´ ë°ì´í„° ìƒì„±ì */
 	public Office(int officeNo, String officeName, String officeAddress, String officeCall, String officeInform) {
 		super();
 		this.officeNo = officeNo;

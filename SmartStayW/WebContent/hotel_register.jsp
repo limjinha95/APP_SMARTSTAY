@@ -18,11 +18,9 @@
   html,body,h1,h2,h3,h4,h5 {
     font-family: "Raleway", sans-serif
   }
-
   body {
     background-color: #f9f6f2;
   }
-
   ul {
     list-style-type: none;
     margin: 0;
@@ -30,11 +28,9 @@
     overflow: hidden;
     background-color: #333;
   }
-
   li {
     float: left;
   }
-
   li a {
     display: block;
     color: white;
@@ -42,20 +38,16 @@
     padding: 14px 16px;
     text-decoration: none;
   }
-
   .mySlides {
     display: none
   }
-
   .btn {
     background-color: #ffd200;
     width: 180px;
   }
-
   h2 {
     color: #f7971e;
   }
-
   .mySlides {
     width: 60%;
     display: block;
@@ -63,7 +55,6 @@
     margin-right: auto;
     margin-bottom: -6px;
   }
-
   .hotel_img {
     width: 500px;
     border-radius: 3px;
@@ -72,18 +63,14 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: -6px"
-
   }
-
   .title {
     margin-top: 20px;
   }
-
   .logo {
     width: 300px;
     height: auto;
   }
-
   .main {
     margin-left: 300px;
     margin-top: 43px;
@@ -92,7 +79,7 @@
 
 <body>
   <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     <ul>
       <li><a href="#hotel_register.jsp">HOME</a></li>
       <li style="float:right"><a>SmartStay</a></li>
@@ -109,7 +96,7 @@
       <h5>MENU</h5>
     </div>
     <div class="w3-bar-block">
-      <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
       <a href="hotel_register.jsp" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
       <a href="room_manage.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
     </div>
@@ -161,7 +148,6 @@
 <script>
   var mySidebar = document.getElementById("mySidebar");
   var overlayBg = document.getElementById("myOverlay");
-
   function w3_open() {
     if (mySidebar.style.display === 'block') {
       mySidebar.style.display = 'none';
@@ -171,12 +157,10 @@
       overlayBg.style.display = "block";
     }
   }
-
   function w3_close() {
     mySidebar.style.display = "none";
     overlayBg.style.display = "none";
   }
-
 </script>
 
 </body>

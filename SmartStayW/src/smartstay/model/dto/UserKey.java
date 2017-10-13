@@ -4,24 +4,24 @@
 package smartstay.model.dto;
 
 /**
- * È¸¿ø ½º¸¶Æ®Å° Á¤º¸ µ¥ÀÌÅÍ
+ * íšŒì› ìŠ¤ë§ˆíŠ¸í‚¤ ì •ë³´ ë°ì´í„°
  * @author limjinha
  * @version ver.1.0
  */
 public class UserKey {
 	
-	/** ¿¹¾à È¸¿ø ¾ÆÀÌµğ */
+	/** ì˜ˆì•½ íšŒì› ì•„ì´ë”” */
 	private String userId;
-	/** ¿¹¾à È¸¿ø ¿¹¾à ¹øÈ£ */
+	/** ì˜ˆì•½ íšŒì› ì˜ˆì•½ ë²ˆí˜¸ */
 	private int reservationNo;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public UserKey() {
 		super();
 	}
 
-	/** ÀüÃ¼ »ı¼ºÀÚ */
+	/** ì „ì²´ ìƒì„±ì */
 	public UserKey(String userId, int reservationNo) {
 		super();
 		this.userId = userId;

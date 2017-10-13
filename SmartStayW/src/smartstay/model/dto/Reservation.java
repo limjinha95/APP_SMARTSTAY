@@ -4,32 +4,32 @@
 package smartstay.model.dto;
 
 /**
- * ¼÷¹Ú¾÷¼Ò ¿¹¾à Á¤º¸ µ¥ÀÌÅÍ
+ * ìˆ™ë°•ì—…ì†Œ ì˜ˆì•½ ì •ë³´ ë°ì´í„°
  * @author limjinha
  * @version ver.1.0
  */
 public class Reservation {
 	
-	/** ¿¹¾à ¹øÈ£ */
+	/** ì˜ˆì•½ ë²ˆí˜¸ */
 	private int reservationNo;
-	/** ¿¹¾à È¸¿ø ¾ÆÀÌµğ */
+	/** ì˜ˆì•½ íšŒì› ì´ì´ë”” */
 	private String userId;
-	/** ¿¹¾à ½ÃÀÛÀÏ */
+	/** ì˜ˆì•½ ì‹œì‘ì¼ */
 	private String startDate;
-	/** ¿¹¾à ¸¶Áö¸·ÀÏ */
+	/** ì˜ˆì•½ ë§ˆì§€ë§‰ì¼ */
 	private String endDate;
-	/** ¼÷¹Ú¾÷¼Ò ¹øÈ£ */
+	/** ìˆ™ë°•ì—…ì†Œ ë²ˆí˜¸ */
 	private int officeNo;
-	/** °´½Ç ¹øÈ£ */
+	/** ê°ì‹¤ ë²ˆí˜¸ */
 	private int roomNo;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public Reservation() {
 		super();
 	}
 	
-	/** ÀüÃ¼ µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ì „ì²´ ë°ì´í„° ìƒì„±ì */
 	public Reservation(int reservationNo, String userId, String startDate, String endDate, int officeNo, int roomNo) {
 		super();
 		this.reservationNo = reservationNo;

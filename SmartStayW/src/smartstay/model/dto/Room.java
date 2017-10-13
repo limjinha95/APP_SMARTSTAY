@@ -4,34 +4,34 @@
 package smartstay.model.dto;
 
 /**
- * °´½Ç Á¤º¸ µ¥ÀÌÅÍ
+ * ê°ì‹¤ ì •ë³´ ë°ì´í„°
  * @author limjinha
  * @version ver.1.0
  */
 public class Room {
 	
-	/** ¼÷¹Ú¾÷¼Ò ¹øÈ£ */
+	/** ìˆ™ë°•ì—…ì†Œ ë²ˆí˜¸ */
 	private int officeNo;
-	/** °´½Ç ¹øÈ£ */
+	/** ê°ì‹¤ ë²ˆí˜¸ */
 	private int roomNo;
-	/** °´½Ç ÀÌ¸§ */
+	/** ê°ì‹¤ ì´ë¦„ */
 	private String roomName;
-	/** °´½Ç Á¾·ù */
+	/** ê°ì‹¤ ì¢…ë¥˜ */
 	private String roomType;
-	/** °´½Ç ±âÁØ ÀÎ¿ø */
+	/** ê°ì‹¤ ê¸°ì¤€ ì¸ì› */
 	private int standardNum;
-	/** °´½Ç ÃÖ´ë ÀÎ¿ø */
+	/** ê°ì‹¤ ìµœëŒ€ ì¸ì› */
 	private int maximumNum;
-	/** °´½Ç 1ÀÏ ¼÷¹Ú ºñ¿ë */
+	/** ê°ì‹¤ 1ì¼ ìˆ™ë°• ë¹„ìš© */
 	private int cost;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public Room() {
 		super();
 	}
 	
-	/** °´½Ç ÇÊ¼ö µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ê°ì‹¤ í•„ìˆ˜ ë°ì´í„° ìƒì„±ì */
 	public Room(int officeNo, int roomNo, int standardNum, int maximumNum, int cost) {
 		super();
 		this.officeNo = officeNo;
@@ -41,7 +41,7 @@ public class Room {
 		this.cost = cost;
 	}
 
-	/** ÀüÃ¼ µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ì „ì²´ ë°ì´í„° ìƒì„±ì */
 	public Room(int officeNo, int roomNo, String roomName, String roomType, int standardNum, int maximumNum, int cost) {
 		super();
 		this.officeNo = officeNo;

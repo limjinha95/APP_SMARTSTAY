@@ -4,38 +4,38 @@
 package smartstay.model.dto;
 
 /**
- * È¸¿ø Á¤º¸ µ¥ÀÌÅÍ
- * ÀÏ¹İ È¸¿ø : È¸¿ø¹øÈ£ 1000 ~
- * ¼÷¹Ú¾÷ÁÖ È¸¿ø : È¸¿ø¹øÈ£ 0000 ~
+ * íšŒì› ì •ë³´ ë°ì´í„°
+ * ì¼ë°˜ íšŒì› : íšŒì›ë²ˆí˜¸ 1000 ~
+ * ìˆ™ë°•ì—…ì£¼ íšŒì› : íšŒì›ë²ˆí˜¸ 0000 ~
  * @author limjinha
  * @version ver.1.0
  */
 public class User {
 
-	/** È¸¿ø ¹øÈ£ */
+	/** íšŒì› ë²ˆí˜¸ */
 	private int userNo;
-	/** È¸¿ø ¾ÆÀÌµğ */
+	/** íšŒì› ì•„ì´ë”” */
 	private String userId;
-	/** È¸¿ø ÀÌ¸§ */
+	/** íšŒì› ì´ë¦„ */
 	private String userName;
-	/** È¸¿ø ºñ¹Ğ¹øÈ£ */
+	/** íšŒì› ë¹„ë°€ë²ˆí˜¸ */
 	private String userPw;
-	/** È¸¿ø ÀüÈ­¹øÈ£ */
+	/** íšŒì› ì „í™”ë²ˆí˜¸ */
 	private String userMobile;
-	/** È¸¿ø ÅäÅ« */
+	/** íšŒì› í† í° */
 	private String userToken;
-	/** È¸¿ø »ç¾÷ÀÚµî·Ï ¹øÈ£ (¼÷¹Ú¾÷ÁÖ) */
+	/** íšŒì› ì‚¬ì—…ìë“±ë¡ ë²ˆí˜¸ (ìˆ™ë°•ì—…ì£¼) */
 	private int userCorporateNumber;
-	/** È¸¿ø ÁÖ¼Ò (¼÷¹Ú¾÷ÁÖ) */
+	/** íšŒì› ì£¼ì†Œ (ìˆ™ë°•ì—…ì£¼) */
 	private String userAddress;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public User() {
 		super();
 	}
 
-	/** È¸¿ø ÇÊ¼ö µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** íšŒì› í•„ìˆ˜ ë°ì´í„° ìƒì„±ì */
 	public User(int userNo, String userId, String userName, String userPw, String userMobile) {
 		super();
 		this.userNo = userNo;
@@ -44,8 +44,19 @@ public class User {
 		this.userPw = userPw;
 		this.userMobile = userMobile;
 	}
+	
+	/** ì¼ë°˜íšŒì› í•„ìˆ˜ ë°ì´í„° ìƒì„±ì */
+	public User(int userNo, String userId, String userName, String userPw, String userMobile, String userToken) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userName = userName;
+		this.userPw = userPw;
+		this.userMobile = userMobile;
+		this.userToken = userToken;
+	}
 
-	/** ¼÷¹Ú¾÷ÁÖ ÇÊ¼ö µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ìˆ™ë°•ì—…ì£¼ í•„ìˆ˜ ë°ì´í„° ìƒì„±ì */
 	public User(int userNo, String userId, String userName, String userPw, String userMobile, int userCorporateNumber,
 			String userAddress) {
 		super();
@@ -58,7 +69,7 @@ public class User {
 		this.userAddress = userAddress;
 	}
 
-	/** ÀüÃ¼ µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ì „ì²´ ë°ì´í„° ìƒì„±ì */
 	public User(int userNo, String userId, String userName, String userPw, String userMobile, String userToken,
 			int userCorporateNumber, String userAddress) {
 		super();

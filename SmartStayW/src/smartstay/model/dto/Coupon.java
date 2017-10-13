@@ -4,31 +4,32 @@
 package smartstay.model.dto;
 
 /**
+ * ì¿ í° ì •ë³´ ë°ì´í„°
  * @author limjinha
  * @version ver.1.0
  */
 public class Coupon {
 	
-	/** ÄíÆù ¹øÈ£ */
+	/** ì¿ í° ë²ˆí˜¸ */
 	private int couponNo;
-	/** ÄíÆù ÀÌ¸§ */
+	/** ì¿ í° ì´ë¦„ */
 	private String couponName;
-	/** ÄíÆù »ç¿ë ±â°£ ½ÃÀÛÀÏ */
+	/** ì¿ í° ì‚¬ìš© ê¸°ê°„ ì‹œì‘ì¼ */
 	private String startDate;
-	/** ÄíÆù »ç¿ë ±â°£ ¸¶Áö¸·ÀÏ */
+	/** ì¿ í° ì‚¬ìš© ê¸°ê°„ ë§ˆì§€ë§‰ì¼ */
 	private String endDate;
-	/** ÄíÆù »ç¿ë Á¶°Ç */
+	/** ì¿ í° ì‚¬ìš© ì¡°ê±´ */
 	private String couponInfo;
-	/** ÄíÆù ÇÒÀÎ °¡°İ */
+	/** ì¿ í° í• ì¸ ê°€ê²© */
 	private int cost;
 	
 	
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	public Coupon() {
 		super();
 	}
 	
-	/** ÀüÃ¼ µ¥ÀÌÅÍ »ı¼ºÀÚ */
+	/** ì „ì²´ ë°ì´í„° ìƒì„±ì */
 	public Coupon(int couponNo, String couponName, String startDate, String endDate, String couponInfo, int cost) {
 		super();
 		this.couponNo = couponNo;
