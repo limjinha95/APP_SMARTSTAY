@@ -44,7 +44,7 @@ public class UserDao {
 		return 0;
 	}
 	
-	public int inserOwner(User dto) {
+	public int insertOwner(User dto) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -147,8 +147,30 @@ public class UserDao {
 		return 0;
 	}
 
+	public int selectOne(String userId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "select user_no from user_tb where user_id=?";
+
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("user_no");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Error(아이디 확인 오류) : " + e.getMessage());
+		} finally {
+			factory.close(rs, stmt, conn);
+		}
+		return 0;
+	}
 	
-	public int loginCheck(String userId, String userPw) {
+	public int selectOne(String userId, String userPw) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
