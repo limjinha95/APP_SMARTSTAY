@@ -23,7 +23,7 @@ public class FactoryDao {
 	private FactoryDao() {
 		try {
 			Context context = new InitialContext();
-			ds = (DataSource)context.lookup("java:comp/env/jdbc/Oracle");
+			ds = (DataSource)context.lookup("java:comp/env/jdbc/mysql");
 		} catch (NamingException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
