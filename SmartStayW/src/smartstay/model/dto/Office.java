@@ -10,6 +10,8 @@ package smartstay.model.dto;
  */
 public class Office {
 	
+	/** 업주 회원 번호 */
+	private int ownerNo;
 	/** 숙박업소 번호 */
 	private int officeNo;
 	/** 숙박업소 이름 */
@@ -28,15 +30,24 @@ public class Office {
 	}
 
 	/** 전체 데이터 생성자 */
-	public Office(int officeNo, String officeName, String officeAddress, String officeCall, String officeInform) {
+	public Office(int ownerNo, int officeNo, String officeName, String officeAddress, String officeCall, String officeInform) {
 		super();
+		this.ownerNo = ownerNo;
 		this.officeNo = officeNo;
 		this.officeName = officeName;
 		this.officeAddress = officeAddress;
 		this.officeCall = officeCall;
 		this.officeInform = officeInform;
 	}
+	
 
+	public int getOwnerNo() {
+		return ownerNo;
+	}
+
+	public void setOwnerNo(int ownerNo) {
+		this.ownerNo = ownerNo;
+	}
 	
 	public int getOfficeNo() {
 		return officeNo;

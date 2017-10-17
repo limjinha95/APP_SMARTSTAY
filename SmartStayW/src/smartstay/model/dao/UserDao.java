@@ -44,11 +44,12 @@ public class UserDao {
 		return 0;
 	}
 	
+	
 	public int insertOwner(User dto) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "insert into members_tb values(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into user_tb values(?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			conn = getConnection();
@@ -77,10 +78,7 @@ public class UserDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		StringBuilder sql = new StringBuilder();
-		sql.append("select * ");
-		sql.append("from user_tb ");
-		sql.append("where user_no = ?");
+		String sql = "select * from user_tb where user_no = ?";
 		
 		User dto = null;
 		String userId = null;
@@ -121,32 +119,6 @@ public class UserDao {
 	}
 	
 	
-	public int update(User dto) {
-		return 0;
-	}
-	
-	public int delete(int userNo) {
-		Connection conn = null;
-		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		String sql = "delete user_tb where user_no = ? ";
-
-		try {
-			conn = getConnection();
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, userNo);
-
-			return stmt.executeUpdate();
-
-		} catch(SQLException e) {
-			e.printStackTrace();
-			System.out.println("ERROR(회원탈퇴 오류) : " + e.getMessage());
-		} finally {
-			factory.close(rs, stmt, conn);
-		}
-		return 0;
-	}
-
 	public int selectOne(String userId) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -163,12 +135,13 @@ public class UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Error(아이디 확인 오류) : " + e.getMessage());
+			System.out.println("Error(아이디 중복 확인 오류) : " + e.getMessage());
 		} finally {
 			factory.close(rs, stmt, conn);
 		}
 		return 0;
 	}
+	
 	
 	public int selectOne(String userId, String userPw) {
 		Connection conn = null;
@@ -194,4 +167,32 @@ public class UserDao {
 		return 0;
 	}
 	
+	
+	public int update(User dto) {
+		return 0;
+	}
+	
+	
+	public int delete(int userNo) {
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		String sql = "delete from user_tb where user_no = ? ";
+
+		try {
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, userNo);
+
+			return stmt.executeUpdate();
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println("ERROR(회원탈퇴 오류) : " + e.getMessage());
+		} finally {
+			factory.close(rs, stmt, conn);
+		}
+		return 0;
+	}
+
 }

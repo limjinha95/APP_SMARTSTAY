@@ -45,6 +45,7 @@ DROP TABLE `user_key_tb`;
 	/*!40101 SET @saved_cs_client     = @@character_set_client */;
 	/*!40101 SET character_set_client = utf8 */;
 	CREATE TABLE `office_tb` (
+	  `owner_no` int(11) NOT NULL,
 	  `office_no` int(11) NOT NULL,
 	  `office_name` varchar(45) NOT NULL,
 	  `office_address` varchar(255) DEFAULT NULL,
@@ -90,7 +91,7 @@ DROP TABLE `user_key_tb`;
 	  `office_no` int(11) NOT NULL,
 	  `room_no` int(11) NOT NULL,
 	  `ip` varchar(15) NOT NULL,
-	  PRIMARY KEY (`office_code`,`room_no`)
+	  PRIMARY KEY (`office_no`,`room_no`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	/*!40101 SET character_set_client = @saved_cs_client */;
 	
