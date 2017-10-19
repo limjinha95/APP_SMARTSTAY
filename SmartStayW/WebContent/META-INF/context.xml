@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<Resource
+		name = "jdbc/java"
+		auth = "Container"
+		type="javax.sql.DataSource"
+		username="root"
+		password="q1905916"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/smartstay"
+		maxActive="100"
+		maxIdle="10"	
+	/>	
+</context>

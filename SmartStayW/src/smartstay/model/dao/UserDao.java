@@ -49,16 +49,17 @@ public class UserDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "insert into user_tb values(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into user_tb (user_id,user_name,user_pw,user_mobile,user_token,user_corporate_number,user_address) values(?,?,?,?,?,?,?);";
 
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, dto.getUserNo());
-			stmt.setString(2, dto.getUserId());
-			stmt.setString(3, dto.getUserName());
-			stmt.setString(4, dto.getUserPw());
-			stmt.setString(5, dto.getUserMobile());
+			
+			stmt.setString(1, dto.getUserId());
+			stmt.setString(2, dto.getUserName());
+			stmt.setString(3, dto.getUserPw());
+			stmt.setString(4, dto.getUserMobile());
+			stmt.setInt(5, 0);
 			stmt.setInt(6, dto.getUserCorporateNumber());
 			stmt.setString(7, dto.getUserAddress());
 

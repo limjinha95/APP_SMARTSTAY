@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <title>메인 페이지</title>
@@ -82,15 +84,17 @@
             <div class="cont_form_login">
               <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
               <h2>로그인</h2>
-              <input type="text" placeholder="아이디" />
-              <input type="password" placeholder="패스워드" />
-              <button class="btn_login" onclick="cambiar_login()">로그인</button>
+              <form action="userLoginAction.us" method="post">
+	              <input type="text" placeholder="아이디" name="uid" />
+	              <input type="password" placeholder="패스워드" name="upw" />
+	              <button class="btn_login" type="submit">로그인</button>
+			  </form>
             </div>
             <div class="cont_form_sign_up">
-              <a href="signup.html" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+              <a href="signup.jsp" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
               <h2>회원가입</h2>
               <h5>회원가입을 하면 SmartStay의</br>서비스를 사용할 수 있습니다.</h5>
-              <button class="btn_user"  onclick="location.href='signup.html'">회원가입</button>
+              <button class="btn_user"  onclick="location.href='signup.jsp'">회원가입</button>
             </div>
           </div>
 
