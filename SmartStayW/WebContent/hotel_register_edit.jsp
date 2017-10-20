@@ -87,9 +87,9 @@
     <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
         <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
         <ul>
-            <li><a href="#hotel_register.jsp">HOME</a></li>
+            <li><a href="./officeRegisterView.do">HOME</a></li>
             <li style="float:right"><a>SmartStay</a></li>
-            <li style="float:right"><a href="#index.jsp">로그아웃</a></li>
+            <li style="float:right"><a href="index.jsp">로그아웃</a></li>
         </ul>
     </div>
 
@@ -103,21 +103,22 @@
         </div>
         <div class="w3-bar-block">
             <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-            <a href="hotel_register.jsp" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
-            <a href="room_manage.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
+            <a href="./officeRegisterView.do" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
+            <a href="./roomList.rc" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
         </div>
     </nav>
+    <form action="officeRegisterAction.do" method="post" enctype="multipart/form-data">
 
     <div class="main">
 
-        <form>
+        
             <div class="w3-container" style="margin-top : 50px;">
                 <h2 class="title">호텔 정보 수정</h2>
             </div>
 
             <div class="container">
                 <h4><strong>호텔 사진</strong></h4>
-                <input type="file" name="m_file">
+                <input type="file" name="name">
                 <hr>
                 <h4><strong>호텔 정보</strong></h4>
 
@@ -126,7 +127,7 @@
                         <p><i class="fa fa-fw fa-bed" style="margin-right : 5px;"></i> 호텔 이름 </p>
                     </div>
                     <div class="w3-col s4">
-                        <input type="text" class="form-control" id="hotel_name">
+                        <input type="text" class="form-control" id="hotel_name" name="hotelname">
                     </div>
                 </div>
 
@@ -135,7 +136,7 @@
                         <p><i class="fa fa-map-marker" style="margin-right : 17px;"></i> 호텔 위치 </p>
                     </div>
                     <div class="w3-col s4">
-                        <input type="text" class="form-control" id="hotel_location">
+                        <input type="text" class="form-control" id="hotel_location" name="hoteladdress">
                     </div>
                 </div>
 
@@ -144,23 +145,24 @@
                         <p><i class="fa fa-phone" style="margin-right : 16px;"></i> 전화번호 </p>
                     </div>
                     <div class="w3-col s4">
-                        <input type="text" class="form-control" id="hotel_phone">
+                        <input type="text" class="form-control" id="hotel_phone" name="hotelphone">
                     </div>
                 </div>
                 <hr>
                 <div class="w3-row w3-large">
                     <div class="w3-col s7">
                         <p><i class="fa fa-question-circle" style="margin-right : 5px;"></i> 호텔 소개</p>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="hotelinfo"></textarea>
                     </div>
                 </div>
-        </form>
-
+                
         <hr>
 
         <h4><strong>수정완료</strong></h4>
-        <p><button class="btn" onclick="location.href='hotel_register.jsp'">저장</button></p>
+        <p><button class="btn" type="submit">저장</button></p>
         </div>
+        
+        </form>
     </div>
 
     <script>

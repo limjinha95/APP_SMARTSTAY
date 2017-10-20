@@ -23,14 +23,26 @@ public class Office {
 	/** 숙박업소 소개글 */
 	private String officeInform;
 	
-	
+	private String officeImage;
+
+
 	/** 기본 생성자 */
 	public Office() {
 		super();
 	}
 
 	/** 전체 데이터 생성자 */
-	public Office(int ownerNo, int officeNo, String officeName, String officeAddress, String officeCall, String officeInform) {
+	public Office(int ownerNo, String officeName, String officeAddress, String officeCall, String officeInform, String officeImage) {
+		super();
+		this.ownerNo = ownerNo;
+		this.officeName = officeName;
+		this.officeAddress = officeAddress;
+		this.officeCall = officeCall;
+		this.officeInform = officeInform;
+		this.officeImage = officeImage;
+	}
+	
+	public Office(int ownerNo, int officeNo, String officeName, String officeAddress, String officeCall, String officeInform, String officeImage) {
 		super();
 		this.ownerNo = ownerNo;
 		this.officeNo = officeNo;
@@ -38,6 +50,7 @@ public class Office {
 		this.officeAddress = officeAddress;
 		this.officeCall = officeCall;
 		this.officeInform = officeInform;
+		this.officeImage = officeImage;
 	}
 	
 
@@ -88,5 +101,14 @@ public class Office {
 	public void setOfficeInform(String officeInform) {
 		this.officeInform = officeInform;
 	}
+	
+	public String getOfficeImage() {
+		return officeImage;
+	}
+
+	public void setOfficeImage(String officeImage) {
+		this.officeImage = officeImage;
+	}
+	
 
 }

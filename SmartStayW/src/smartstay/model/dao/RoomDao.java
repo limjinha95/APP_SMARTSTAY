@@ -21,18 +21,19 @@ public class RoomDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "insert into office_tb values(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into room_tb values(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, dto.getOfficeNo());
-			stmt.setInt(2, dto.getRoomNo());
-			stmt.setString(3, dto.getRoomName());
-			stmt.setString(4, dto.getRoomType());
-			stmt.setInt(5, dto.getStandardNum());
-			stmt.setInt(6, dto.getMaximumNum());
-			stmt.setInt(7, dto.getCost());
+			stmt.setInt(1, dto.getRoomNo());
+			stmt.setString(2, dto.getRoomName());
+			stmt.setString(3, dto.getRoomType());
+			stmt.setInt(4, dto.getStandardNum());
+			stmt.setInt(5, dto.getMaximumNum());
+			stmt.setInt(6, dto.getCost());
+			stmt.setInt(7, dto.getOfficeNo());
+			stmt.setString(8, dto.getimage());
 
 			return stmt.executeUpdate();
 
@@ -65,6 +66,7 @@ public class RoomDao {
 			int standardNum = 0;
 			int maximumNum = 0;
 			int cost = 0;
+			String image=null;
 
 			Room dto = null;
 
@@ -76,8 +78,9 @@ public class RoomDao {
 				standardNum = rs.getInt("standard_num");
 				maximumNum = rs.getInt("maximum_num");
 				cost = rs.getInt("cost");
+				image = rs.getString("image");
 
-				dto = new Room(officeNo, roomNo, roomName, roomType, standardNum, maximumNum, cost);
+				dto = new Room(officeNo, roomNo, roomName, roomType, standardNum, maximumNum, cost, image);
 				list.add(dto);
 			}
 
@@ -106,6 +109,7 @@ public class RoomDao {
 		int standardNum = 0;
 		int maximumNum = 0;
 		int cost = 0;
+		String image=null;
 
 		try {
 			conn = getConnection();
@@ -115,16 +119,21 @@ public class RoomDao {
 			rs = stmt.executeQuery();
 
 			while(rs.next()) {
-				officeNo = rs.getInt(1);
-				roomNo = rs.getInt(2);
-				roomName = rs.getString(3);
-				roomType = rs.getString(4);
-				standardNum = rs.getInt(5);
-				maximumNum = rs.getInt(6);
-				cost = rs.getInt(7);
+				officeNo = rs.getInt("office_no");
+				roomNo = rs.getInt("room_no");
+				roomName= rs.getString("room_name");
+				roomType = rs.getString("room_type");
+				standardNum = rs.getInt("standard_num");
+				maximumNum = rs.getInt("maximum_num");
+				cost = rs.getInt("cost");
+				image = rs.getString("image");
+				System.out.println(officeNo);
+				System.out.println("12"+roomNo);
+				System.out.println("room"+roomName);
+				System.out.println("stand"+standardNum);
 				
 
-				dto = new Room(officeNo, roomNo, roomName, roomType, standardNum, maximumNum, cost);
+				dto = new Room(officeNo, roomNo, roomName, roomType, standardNum, maximumNum, cost, image);
 				return dto;
 			}
 
@@ -137,14 +146,14 @@ public class RoomDao {
 		return null;
 	}
 	
-	public int updateRoom(int officeNo, int roomNo, String roomName, String roomType, int standardNum, int maximumNum, int cost) {
+	public int updateRoom(int officeNo, int roomNo, String roomName, String roomType, int standardNum, int maximumNum, int cost, String image) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("update room_tb set ");
-		sql.append("room_name = ?, room_type = ?, standard_num = ?, maximun_num = ?, cost = ? ");
+		sql.append("room_name = ?, room_type = ?, standard_num = ?, maximun_num = ?, cost = ?, image = ?");
 		sql.append("where office_no = ? and room_no = ?");
 		
 		try {
@@ -155,8 +164,9 @@ public class RoomDao {
 			stmt.setInt(3, standardNum);
 			stmt.setInt(4, maximumNum);
 			stmt.setInt(5, cost);
-			stmt.setInt(6, officeNo);
-			stmt.setInt(7, roomNo);
+			stmt.setString(6, image);
+			stmt.setInt(7, officeNo);
+			stmt.setInt(8, roomNo);
 			
 			return stmt.executeUpdate();
 			
