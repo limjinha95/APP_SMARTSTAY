@@ -19,14 +19,15 @@
             android:layout_height="50dp"
             android:text="결제가 완료되었습니다"
             android:textAlignment="center"
-            android:textSize="22dp" />
+            android:textSize="22dp"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/paycheckBtn"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/xml_gradient"
             android:text="결제완료"
             android:textColor="@color/white"
             android:textSize="17dp" />

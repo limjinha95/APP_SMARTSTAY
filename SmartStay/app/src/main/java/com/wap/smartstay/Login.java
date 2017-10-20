@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -65,7 +66,7 @@ public class Login extends AppCompatActivity {
 
         connect();
 
-        Button startJoinBtn = (Button) findViewById(R.id.joinStartBtn);
+        TextView startJoinBtn = (TextView)findViewById(R.id.joinStartBtn);
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
