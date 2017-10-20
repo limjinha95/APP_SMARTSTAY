@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <title>객실 관리</title>
@@ -82,12 +84,12 @@
     <ul>
       <li><a href="#hotel_register.jsp">HOME</a></li>
       <li style="float:right"><a>SmartStay</a></li>
-      <li style="float:right"><a href="#index.jsp">로그아웃</a></li>
+      <li style="float:right"><a href="./userLogoutAction.us">로그아웃</a></li>
     </ul>
   </div>
 
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-    <img class="logo" src="pic/logo_2.png" style="width:300px; height:auto;">
+    <img class="logo" src="./static/img/logo_2.png" style="width:300px; height:auto;">
     <div class="w3-container w3-row">
     </div>
     <hr>
@@ -110,22 +112,22 @@
     <div class="w3-container" style="margin-top : 50px;">
       <h2 class="tittle" style="margin-top : 20px;">객실 이름</h2>
       <div class="w3-display-container mySlides">
-        <img src="pic/room.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
+        <img src="./static/img/room.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
         <div class="w3-display-bottomleft w3-container w3-black">
         </div>
       </div>
       <div class="w3-display-container mySlides">
-        <img src="pic/room2.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
+        <img src="./static/img/room2.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
         <div class="w3-display-bottomleft w3-container w3-black">
         </div>
       </div>
       <div class="w3-display-container mySlides">
-        <img src="pic/room.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
+        <img src="./static/img/room.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
         <div class="w3-display-bottomleft w3-container w3-black">
         </div>
       </div>
       <div class="w3-display-container mySlides">
-        <img src="pic/room.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
+        <img src="./static/img/room.jpg" style="width:500px;height:300px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-6px">
         <div class="w3-display-bottomleft w3-container w3-black">
         </div>
       </div>
@@ -133,13 +135,13 @@
     
     <div class="w3-row-padding w3-section">
       <div class="w3-col s4">
-        <img class="demo w3-opacity w3-hover-opacity-off" src="pic/room.jpg" style="width:290px;height:160px;cursor:pointer" onclick="currentDiv(1)">
+        <img class="demo w3-opacity w3-hover-opacity-off" src="./static/img/room.jpg" style="width:290px;height:160px;cursor:pointer" onclick="currentDiv(1)">
       </div>
       <div class="w3-col s4">
-        <img class="demo w3-opacity w3-hover-opacity-off" src="pic/room2.jpg" style="width:290px;height:160px;cursor:pointer" onclick="currentDiv(2)">
+        <img class="demo w3-opacity w3-hover-opacity-off" src="./static/img/room2.jpg" style="width:290px;height:160px;cursor:pointer" onclick="currentDiv(2)">
       </div>
       <div class="w3-col s4">
-        <img class="demo w3-opacity w3-hover-opacity-off" src="pic/room.jpg" style="width:290px;height:160px;cursor:pointer" onclick="currentDiv(3)">
+        <img class="demo w3-opacity w3-hover-opacity-off" src="./static/img/room.jpg" style="width:290px;height:160px;cursor:pointer" onclick="currentDiv(3)">
       </div>
     </div>
     </form>

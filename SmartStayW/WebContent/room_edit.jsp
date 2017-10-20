@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <title>객실 정보 수정</title>
@@ -85,7 +87,7 @@
     </div>
 
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-        <img class="logo" src="pic/logo_2.png" style="width:300px; height:auto;">
+        <img class="logo" src="./static/img/logo_2.png" style="width:300px; height:auto;">
         <div class="w3-container w3-row">
         </div>
         <hr>
