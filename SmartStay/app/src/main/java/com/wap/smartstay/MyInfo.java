@@ -16,21 +16,11 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.net.Socket;
-
 public class MyInfo extends AppCompatActivity {
     Button Logout, Delete, ChangePwd, ChangeUserPhoneNumberBtn;
     TextView Id, Name, Pnum;
+    HttpConnection httpConnectionClient;
 
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-
-    public static int delete = 0;
-
-    Thread thread;
-    ClientThread clientThread;
     Handler handler;
 
     @Override
@@ -67,6 +57,9 @@ public class MyInfo extends AppCompatActivity {
             }
         };
 
+    }
+
+    public void MyInfoEvent() {
         ChangeUserPhoneNumberBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +76,6 @@ public class MyInfo extends AppCompatActivity {
             }
         });
 
-        connect();
 
         Logout.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -102,17 +94,19 @@ public class MyInfo extends AppCompatActivity {
         Delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject jo = new JSONObject();
+                JSONObject object = new JSONObject();
 
                 try {
-                    jo.put("head", "Delete");
-                    jo.put("ID", Login.Id);
+                    object.put("head", "Delete");
+                    object.put("ID", Login.Id);
+                    String data = object.toString();
+
+                    httpConnectionClient = new HttpConnection();
+                    httpConnectionClient.sendObject(data);
+
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
-
-                String data = jo.toString();
-                clientThread.send(data);
 
                 Login.Islogin = 0;
                 Login.Name = "";
@@ -124,28 +118,5 @@ public class MyInfo extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-    public void connect() {
-        thread = new Thread() {
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, MyInfo.class);
-                    clientThread.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
     }
 }

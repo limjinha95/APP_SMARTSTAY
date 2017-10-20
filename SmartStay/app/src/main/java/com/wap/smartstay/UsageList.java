@@ -12,18 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class UsageList extends AppCompatActivity {
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-    Thread thread;
-    ClientThread clientThread;
     Handler handler;
 
     boolean check = false;
@@ -32,9 +26,12 @@ public class UsageList extends AppCompatActivity {
     TextView reservationDuty;
     TextView accomodationInfo;
 
-    public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>() ;
-    public static boolean check2=false;
+    public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>();
+    public static boolean check2 = false;
     String name, duty, info;
+
+    HttpConnection httpConnectionClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,31 +42,50 @@ public class UsageList extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("이용 내역");
 
-        if(Build.VERSION.SDK_INT > 9) {
+        if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        connect();
 
         accomodationName = (TextView) findViewById(R.id.reserveAccommodationName);
         reservationDuty = (TextView) findViewById(R.id.reserveAccommodationDuty);
         accomodationInfo = (TextView) findViewById(R.id.reserveAccommodationInfo);
 
-        JSONObject jo = new JSONObject();
 
         try {
-            jo.put("head","ReservationCheck");
-            jo.put("ID", Login.Id);
-        } catch (Exception e) {}
+            JSONObject object = new JSONObject();
+            object.put("head", "ReservationCheck");
+            object.put("ID", Login.Id);
+            String data = object.toString();
+            httpConnectionClient = new HttpConnection();
+            httpConnectionClient.sendObject(data);
+            String receiveMsg = httpConnectionClient.receiveObject();
 
-        String data = jo.toString();
-        while(check == false);
-        clientThread.send(data);
-        while(check2 == false);
+            JSONArray jsonArray = new JSONArray(receiveMsg);
+            ReserveListViewItem item;
 
-        ListView listview ;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
+
+                String roomName = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+                String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+                String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "인 / 최대 " + dataJsonObject.getString("MAXNUM") + "인";
+
+                item = new ReserveListViewItem();
+
+                item.setAccomodationName(roomName);
+                item.setReservationDuty(reservationDuty);
+                item.setAccomodationInfo(roomInfo);
+                reserveList.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        ListView listview;
         ReserveListViewAdapter adapter;
-        adapter = new ReserveListViewAdapter() ;
+        adapter = new ReserveListViewAdapter();
 
         listview = (ListView) findViewById(R.id.listview_reserve);
         listview.setAdapter(adapter);
@@ -84,29 +100,4 @@ public class UsageList extends AppCompatActivity {
             adapter.addItem(img, name, duty, info);
         }
     }
-
-    public void connect(){
-        thread = new Thread(){
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler, UsageList.class);
-                    clientThread.start();
-                    check = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
-    }
-
 }

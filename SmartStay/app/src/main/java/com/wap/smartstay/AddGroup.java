@@ -16,24 +16,19 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class AddGroup extends AppCompatActivity {
     EditText inputId;
     TextView addGroupInfo;
-
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-    Thread thread;
-    ClientThread clientThread;
     Handler handler;
+    Button addGroupCheckIdBtn, addGroupSaveBtn;
 
-    public static int idCheck = 0;
+    public int idCheck = 0;
     public static String groupId, groupName, groupPnum;
-    public static ArrayList<AddGroupListViewItem> groupList = new java.util.ArrayList<AddGroupListViewItem>();
+    public static ArrayList<AddGroupListViewItem> groupList = new ArrayList<AddGroupListViewItem>();
+
+    HttpConnection httpConnectionClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +39,23 @@ public class AddGroup extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("동숙객 추가");
 
-        if(Build.VERSION.SDK_INT > 9) {
+        if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        connect();
         inputId = (EditText) findViewById(R.id.addgroupInputId);
         addGroupInfo = (TextView) findViewById(R.id.addGroupInfo);
 
-        Button addGroupCheckIdBtn = (Button) findViewById(R.id.addgroupCheckIdBtn);
-        final Button addGroupSaveBtn = (Button) findViewById(R.id.addgroupSaveBtn);
+        addGroupCheckIdBtn = (Button) findViewById(R.id.addgroupCheckIdBtn);
+        addGroupSaveBtn = (Button) findViewById(R.id.addgroupSaveBtn);
         addGroupSaveBtn.setEnabled(false);
 
+        addGroupEvent();
+
+    }
+
+    public void addGroupEvent() {
         addGroupCheckIdBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,12 +63,31 @@ public class AddGroup extends AppCompatActivity {
                 try {
                     jo.put("head", "SelectUser");
                     jo.put("ID", inputId.getText().toString());
-                } catch (Exception e) {
 
+                    String data = jo.toString();
+                    httpConnectionClient = new HttpConnection();
+                    httpConnectionClient.sendObject(data);
+                    String receiveMsg = httpConnectionClient.receiveObject();
+
+
+                    if (receiveMsg.toString().equals("-")) {
+                        idCheck = 1;
+                    } else {
+                        try {
+                            jo = new JSONObject(receiveMsg);
+                            AddGroup.groupName = jo.getString("NAME");
+                            AddGroup.groupId = jo.getString("ID");
+                            AddGroup.groupPnum = jo.getString("Pnum");
+                            idCheck = 2;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
-                String data = jo.toString();
-                clientThread.send(data);
 
                 if (idCheck == 1) {
                     Toast.makeText(AddGroup.this, "존재하지 않는 ID입니다.", Toast.LENGTH_SHORT).show();
@@ -102,31 +120,6 @@ public class AddGroup extends AppCompatActivity {
             }
         });
     }
-
-    public void connect(){
-
-        thread = new Thread(){
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler,AddGroup.class);
-                    clientThread.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
-    }
-
 }
 
 

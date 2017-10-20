@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.wap.smartstay.HotelListViewAdapter;
-
 public class HotelList extends ListFragment {
     HotelListViewAdapter adapter;
 
