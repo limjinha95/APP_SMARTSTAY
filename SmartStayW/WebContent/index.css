@@ -9,7 +9,7 @@
       background-size: cover;
       font-family: 'Source Sans Pro', sans-serif;
       font-weight: 200;
-      background-image: url(pic/logo.png);
+      background-image: url(./static/img/logo.png);
     }
 
     .scene header {

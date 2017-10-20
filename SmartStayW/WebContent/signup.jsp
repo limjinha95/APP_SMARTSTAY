@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <title>회원가입</title>
@@ -48,7 +50,7 @@
 </head>
 
 <body>
-    <form>
+    <form action="userJoinAction.us" method="post">
     <div class="container">
         <h1 class="well">회원가입</h1>
         <div class="col-lg-12 well">
@@ -58,13 +60,13 @@
                     <div class="row">
                         <div class="col-sm-3 form-group">
                             <label>아이디</label>
-                            <input type="text" placeholder="아이디" class="form-control">
+                            <input type="text" placeholder="아이디" class="form-control" name="uid">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <label>패스워드</label>
-                            <input type="password" placeholder="패스워드" class="form-control">
+                            <input type="password" placeholder="패스워드" class="form-control" name="upw">
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>패스워드 확인</label>
@@ -76,54 +78,52 @@
                     <div class="row">
                         <div class="col-sm-3 form-group">
                             <label>성함</label>
-                            <input type="text" placeholder="성함" class="form-control">
+                            <input type="text" placeholder="성함" class="form-control" name="uname">
                         </div>
                         <div class="col-sm-3 form-group">
                             <label>전화번호</label>
-                            <input type="text" placeholder="전화번호" class="form-control">
+                            <input type="text" placeholder="전화번호" class="form-control" name="utel">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6 form-group">
                             <label>사업자 등록번호</label>
-                            <input type="text" placeholder="사업자 등록번호" class="form-control">
+                            <input type="text" placeholder="사업자 등록번호" class="form-control" name="businessnum">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3 form-group">
                             <label>시,도</label>
-                            <select class="form-control">
+                            <select class="form-control" name="city">
                                                 <optgroup label="시 / 도">
-                                                  <option>서울특별시</option>
-                                                  <option>인천광역시</option>
-                                                  <option>부산광역시</option>                                          
-                                                  <option>광주광역시</option>
-                                                  <option>대구광역시</option>
-                                                  <option>울산광역시</option>                                         산
-                                                  <option>경기도</option>
-                                                  <option>강원도</option>                                         도
-                                                  <option>충청북도</option>
-                                                  <option>충청남도</option>
-                                                  <option>전라북도</option>                                         도
-                                                  <option>전라남도</option>
-                                                  <option>경상북도</option>
-                                                  <option>경상남도</option>                                          
+                                                  <option value="서울특별시">서울특별시</option>
+                                                  <option value="인천광역시">인천광역시</option>
+                                                  <option value="부산광역시">부산광역시</option>                                          
+                                                  <option value="광주광역시">광주광역시</option>
+                                                  <option value="대구광역시">대구광역시</option>
+                                                  <option value="울산광역시">울산광역시</option>                                         산
+                                                  <option value="경기도">경기도</option>
+                                                  <option value="강원도">강원도</option>                                         도
+                                                  <option value="충청북도">충청북도</option>
+                                                  <option value="충청남도">충청남도</option>
+                                                  <option value="전라북도">전라북도</option>                                         도
+                                                  <option value="전라남도">전라남도</option>
+                                                  <option value="경상북도">경상북도</option>
+                                                  <option value="경상남도">경상남도</option>                                          
                                                 </optgroup>
                                         </select>
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>상세주소</label>
-                            <input type="text" placeholder="상세주소" class="form-control">
+                            <input type="text" placeholder="상세주소" class="form-control" name="detailaddress">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </form>
 
-    <form>
     <div class="container">
         <div class="col-lg-12 well">
             <div class="row">
@@ -140,8 +140,8 @@
                         <div class="col-sm-1" style="background:#f5f6f7"></div>
                     </div>
                     <div class="row btn_form">
-                        <button type="button" class="btn btn-lg btn-info">회원가입</button>
-                        <button type="button" class="btn btn-lg btn-success" onclick="location.href='index.html'">취소</button>
+                        <button type="submit" class="btn btn-lg btn-info">회원가입</button>
+                        <button type="button" class="btn btn-lg btn-success" onclick="location.href='index.jsp'">취소</button>
                     </div>
                 </div>
             </div>

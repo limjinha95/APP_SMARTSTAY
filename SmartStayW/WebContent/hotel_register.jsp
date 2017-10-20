@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <title>호텔 관리</title>
@@ -83,12 +85,12 @@
     <ul>
       <li><a href="#hotel_register.jsp">HOME</a></li>
       <li style="float:right"><a>SmartStay</a></li>
-      <li style="float:right"><a href="#index.jsp">로그아웃</a></li>
+      <li style="float:right"><a href="./userLogoutAction.us">로그아웃</a></li>
     </ul>
   </div>
 
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-    <img class="logo" src="pic/logo_2.png">
+    <img class="logo" src="./static/img/logo_2.png">
     <div class="w3-container w3-row">
     </div>
     <hr>
@@ -107,7 +109,7 @@
     <div class="w3-container" style="margin-top : 50px;">
       <h2 class="title">호텔 관리</h2>
       <div class="w3-display-container">
-        <img src="pic/room.jpg" class="hotel_img">
+        <img src="./static/img/room.jpg" class="hotel_img">
       </div>
       <hr>
 
@@ -116,7 +118,7 @@
     <div class="container">
       <h4><strong>호텔 정보</strong></h4>
 
-      <form>
+      
       <div class="w3-row w3-large">
         <div class="w3-col s4">
           <p><i class="fa fa-fw fa-bed" style="margin-right : 5px;"></i> 호텔 이름 : </p>
@@ -138,9 +140,9 @@
       <hr>
 
       <h4><strong>수정</strong></h4>
-      <p><button class="btn" onclick="location.href='hotel_register_edit.jsp'">수정</button></p>
+      <p><button class="btn" onclick="location.href='./hotel_register_edit.jsp'">수정</button></p>
     </div>
-    <form>
+    
 
   </div>
 </body>

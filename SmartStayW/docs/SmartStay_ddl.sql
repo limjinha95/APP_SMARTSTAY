@@ -29,7 +29,7 @@ DROP TABLE `user_key_tb`;
 	/*!40101 SET @saved_cs_client     = @@character_set_client */;
 	/*!40101 SET character_set_client = utf8 */;
 	CREATE TABLE `user_tb` (
-	`user_no` int(11) NOT NULL,
+	`user_no` int(11) NOT NULL AUTO_INCREMENT,
 	  `user_id` varchar(45) NOT NULL,
 	  `user_name` varchar(10) NOT NULL,
 	  `user_pw` varchar(255) NOT NULL,
@@ -46,12 +46,13 @@ DROP TABLE `user_key_tb`;
 	/*!40101 SET character_set_client = utf8 */;
 	CREATE TABLE `office_tb` (
 	  `owner_no` int(11) NOT NULL,
-	  `office_no` int(11) NOT NULL,
+	  `office_no` int(11) NOT NULL AUTO_INCREMENT,
 	  `office_name` varchar(45) NOT NULL,
 	  `office_address` varchar(255) DEFAULT NULL,
 	  `office_call` varchar(45) DEFAULT NULL,
 	  `office_inform` varchar(255) DEFAULT NULL,
-	  PRIMARY KEY (`office_no`)
+	  PRIMARY KEY (`office_no`),
+	  FOREIGN KEY(`owner_no`) REFERENCES user_tb(`user_no`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	/*!40101 SET character_set_client = @saved_cs_client */;
 	
@@ -66,7 +67,8 @@ DROP TABLE `user_key_tb`;
 	  `maximum_num` int(11) NOT NULL,
 	  `cost` int(11) NOT NULL,
 	  `office_no` int(11) NOT NULL,
-	  PRIMARY KEY (`room_no`)
+	  PRIMARY KEY (`room_no`),
+	  FOREIGN KEY(`office_no`) REFERENCES office_tb(`office_no`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	/*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -142,4 +144,4 @@ DROP TABLE `user_key_tb`;
 	/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 	/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 	/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-	
+		
