@@ -11,36 +11,29 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class SmartKeyCallingList extends AppCompatActivity {
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-    Thread thread;
-    ClientThread clientThread;
     android.os.Handler handler;
 
-    public static String phoneNumber;
-    public static String officeCode;
-    public static int number = 1;
-
-    boolean check = false;
-    public static boolean check2 = false;
+    String phoneNumber, officeCode;
+    Button cancel;
+    ListView listview;
+    SmartKeyCallingListViewAdapter adapter;
 
     public static ArrayList<SmartKeyCallingListViewItem> smartCallingRoomList = new ArrayList<SmartKeyCallingListViewItem>();
     public static String smartKeyRoomInfo;
     public ArrayList<String> officeCodeList = new ArrayList<String>();
+    HttpConnection httpConnectionClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,33 +41,13 @@ public class SmartKeyCallingList extends AppCompatActivity {
 
         setContentView(R.layout.smartkey_list_pop);
 
+        listview = (ListView) findViewById(R.id.listview_smartkey);
+        cancel = (Button) findViewById(R.id.cancel_action);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("연락처 목록");
-
-        if (Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
-        connect();
-
-        JSONObject jo = new JSONObject();
-
-        try {
-            jo.put("head", "MyKey");
-            jo.put("ID", Login.Id);
-
-            String data = jo.toString();
-
-            while (check == false) ;
-
-            clientThread.send(data);
-
-            while (check2 == false) ;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -84,41 +57,80 @@ public class SmartKeyCallingList extends AppCompatActivity {
 
         getWindow().setLayout((int) (width * .7), (int) (height * .3));
 
-        final ListView listview;
-        final SmartKeyCallingListViewAdapter adapter;
+
+        if (Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put("head", "MyKey");
+            jo.put("ID", Login.Id);
+            String data = jo.toString();
+            httpConnectionClient = new HttpConnection();
+            httpConnectionClient.sendObject(data);
+            String receiveMsg = httpConnectionClient.receiveObject();
+
+            JSONArray jsonArray = new JSONArray(receiveMsg);
+
+            SmartKeyCallingListViewItem item;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                item = new SmartKeyCallingListViewItem();
+                JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
+                String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
+                String smartKeyOfficeCode = dataJsonObject.getString("OFFICECODE");
+                item.setSmartCallingRoomInfo(smartKeyRoomInfo);
+                item.setSmartCallingOfficeCode(smartKeyOfficeCode);
+                smartCallingRoomList.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         adapter = new SmartKeyCallingListViewAdapter();
-
-        listview = (ListView) findViewById(R.id.listview_smartkey);
         listview.setAdapter(adapter);
 
         for (int i = 0; i < smartCallingRoomList.size(); i++) {
             smartKeyRoomInfo = smartCallingRoomList.get(i).getSmartCallingRoomInfo();
             officeCode = smartCallingRoomList.get(i).getSmartCallingOfficeCode();
-            adapter.addItem(smartKeyRoomInfo,officeCode);
+            adapter.addItem(smartKeyRoomInfo, officeCode);
             officeCodeList.add(officeCode);
         }
 
+
+        SmartKeyCallingEvent();
+    }
+
+    public void SmartKeyCallingEvent() {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                number = 2;
                 SmartKeyCallingListViewItem obj = adapter.getItem(position);
                 String[] datas = obj.getSmartCallingRoomInfo().split(" ");
-
-                JSONObject jo2 = new JSONObject();
+                JSONObject object = new JSONObject();
                 try {
-                    jo2.put("head", "SearchOfficePnum");
-                    jo2.put("OfficeCode", obj.getSmartCallingOfficeCode());
+                    object.put("head", "SearchOfficePnum");
+                    object.put("OfficeCode", obj.getSmartCallingOfficeCode());
+
+                    String sendData = object.toString();
+                    httpConnectionClient = new HttpConnection();
+                    httpConnectionClient.sendObject(sendData);
+
+                    String receiveMsg = httpConnectionClient.receiveObject();
+                    object = new JSONObject(receiveMsg);
+
+                    String phone = object.get("OfficePnum").toString();
+                    phoneNumber = phone;
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                String data2 = jo2.toString();
-                clientThread.send(data2);
                 callBtnEventDialog(datas[0]);
             }
         });
 
-        Button cancel = (Button) findViewById(R.id.cancel_action);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,11 +138,12 @@ public class SmartKeyCallingList extends AppCompatActivity {
             }
         });
 
+
     }
 
     public void callBtnEventDialog(final String roomName) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("*" +roomName + "* Call")
+        alertDialogBuilder.setTitle("*" + roomName + "* Call")
                 .setMessage("전화를 하시겠습니까?")
                 .setCancelable(false)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -158,29 +171,4 @@ public class SmartKeyCallingList extends AppCompatActivity {
         startActivity(intent);
 
     }
-
-    public void connect() {
-        thread = new Thread() {
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, SmartKeyCallingList.class);
-                    clientThread.start();
-                    check = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
-    }
-
 }

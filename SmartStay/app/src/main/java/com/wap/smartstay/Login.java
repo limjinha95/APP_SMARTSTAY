@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,29 +14,18 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.net.Socket;
 
 public class Login extends AppCompatActivity {
     EditText Eid, Epwd;
-    Context cont;
-
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-    Thread thread;
-    ClientThread clientThread;
     Handler handler;
 
     public static String Id, Pnum, Name;
     public static int Islogin = 0;
+    HttpConnection httpConnectionClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        cont = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
@@ -47,7 +34,6 @@ public class Login extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        JSONArray ja = new JSONArray();
 
         Eid = (EditText) findViewById(R.id.loginIdEdit);
         Epwd = (EditText) findViewById(R.id.loginPwEdit);
@@ -63,8 +49,11 @@ public class Login extends AppCompatActivity {
             }
         };
 
-        connect();
+        LoginEvent();
 
+    }
+
+    public void LoginEvent() {
         Button startJoinBtn = (Button) findViewById(R.id.joinStartBtn);
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -82,28 +71,40 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    JSONObject jo = new JSONObject();
-
+                    JSONObject object = new JSONObject();
                     try {
-                        jo.put("head", "Login");
-                        jo.put("ID", Eid.getText().toString());
-                        jo.put("PWD", Epwd.getText().toString());
+                        object.put("head", "Login");
+                        object.put("ID", Eid.getText().toString());
+                        object.put("PWD", Epwd.getText().toString());
 
                         String myToken = FirebaseInstanceId.getInstance().getToken();
-                        jo.put("Token", myToken);
+                        object.put("Token", myToken);
+
+                        String data = object.toString();
+
+                        httpConnectionClient = new HttpConnection();
+                        httpConnectionClient.sendObject(data);
+
+                        String receiveMsg = httpConnectionClient.receiveObject();
+                        object = new JSONObject(receiveMsg);
+
+                        if (object.toString().equals("-")) {
+                            Islogin = 2;
+                        } else {
+                            JSONObject jo = new JSONObject(receiveMsg);
+                            Id = jo.getString("ID");
+                            Name = jo.getString("NAME");
+                            Pnum = jo.getString("Pnum");
+                            Islogin = 1;
+
+                        }
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
-
-                    String data = jo.toString();
-                    clientThread.send(data);
 
                     Eid.setText("");
                     Epwd.setText("");
 
-                    while (Islogin == 0)
-                        Log.i("test", Islogin + "");
-                    Log.i("test", "대기끝");
 
                     if (Islogin == 1) {
                         Toast.makeText(Login.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
@@ -120,39 +121,5 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void connect() {
 
-        thread = new Thread() {
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, Login.class);
-                    clientThread.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        connect();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        connect();
-    }
 }

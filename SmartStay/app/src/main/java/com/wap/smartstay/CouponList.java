@@ -9,24 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class CouponList extends AppCompatActivity {
-    Socket client;
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-
-    Thread thread;
-    ClientThread clientThread;
     Handler handler;
-    boolean check = false;
-
     public static ArrayList<CouponListViewItem> couponList = new ArrayList<CouponListViewItem>();
     public static String couponName, couponInfo, couponDuty;
-    public static boolean check2 = false;
+    boolean check2 = false;
+    HttpConnection httpConnectionClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +36,44 @@ public class CouponList extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        connect();
-
-        JSONObject jo = new JSONObject();
+        //쿠폰데이터 가져오기
+        JSONObject object = new JSONObject();
 
         try {
-            jo.put("head", "MyCoupon");
-            jo.put("ID", Login.Id);
-        } catch (Exception e) {
+            object.put("head", "MyCoupon");
+            object.put("ID", Login.Id);
+
+            String sendData = object.toString();
+            httpConnectionClient = new HttpConnection();
+            httpConnectionClient.sendObject(sendData);
+
+            String receiveMsg = httpConnectionClient.receiveObject();
+            JSONArray jsonArray = new JSONArray(receiveMsg);
+            CouponListViewItem item;
+            check2 = false;
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
+
+                String couponName = dataJsonObject.getString("NAME");
+                String couponInfo = dataJsonObject.getString("INFO");
+                String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
+
+                item = new CouponListViewItem();
+
+                item.setCouponName(couponName);
+                item.setCouponInfo(couponInfo);
+                item.setCouponDuty(couponDuty);
+
+                couponList.add(item);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        String data = jo.toString();
-        while (check == false) ;
-        clientThread.send(data);
-        while (check2 == false) ;
+
 
         ListView listview;
         CouponListViewAdapter adapter;
@@ -71,30 +89,7 @@ public class CouponList extends AppCompatActivity {
 
             adapter.addItem(couponName, couponInfo, couponDuty);
         }
-    }
 
-    public void connect() {
-        thread = new Thread() {
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, CouponList.class);
-                    clientThread.start();
-                    check = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
     }
 
 }
