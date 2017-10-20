@@ -16,6 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/xml_gradient"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
@@ -34,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:background="@drawable/xml_gradient">
 
                 <ImageView
                     android:id="@+id/userImg"
@@ -55,7 +57,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#EAEAEA"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -240,7 +241,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@drawable/xml_gradient_red"
                     android:text="로그아웃"
                     android:textColor="@color/white"
                     android:textSize="18dp" />

@@ -3,6 +3,8 @@
     <string name="Home">Home</string>
     <string name="SmartKey">SmartKey</string>
     <string name="MyPage">MyPage</string>
+    <string name="join">계정이 없다면 <u>회원가입</u> 하세요</string>
+
     <string name="reservation">예약</string>
     <string name="name1">부경 대연 호텔</string>
     <string name="name2">부경 용당 호텔</string>

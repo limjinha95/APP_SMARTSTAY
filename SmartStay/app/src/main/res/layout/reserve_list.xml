@@ -16,6 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/xml_gradient"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
