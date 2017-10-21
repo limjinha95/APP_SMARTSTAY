@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        android:background="#C8C9CA"
+        android:background="@drawable/xml_border"
         android:layout_centerHorizontal="true"
         android:innerRadius="0dp"
         android:shape="ring"
@@ -30,6 +30,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="HotelName"
                 android:textStyle="bold"
+                android:textColor="#F77062"
                 android:textSize="20dp"/>
 
             <LinearLayout

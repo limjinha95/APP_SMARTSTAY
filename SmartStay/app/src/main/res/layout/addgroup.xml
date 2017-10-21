@@ -55,6 +55,7 @@
                 android:layout_height="32dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/xml_border"
+                android:textColor="#F77062"
                 android:text="ID확인" />
 
         </LinearLayout>

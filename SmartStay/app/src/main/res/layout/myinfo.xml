@@ -119,7 +119,8 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/xml_border"
-                        android:text="변경하기" />
+                        android:text="변경하기"
+                        android:textColor="#F77062" />
 
                 </LinearLayout>
 
@@ -152,7 +153,8 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/xml_border"
-                        android:text="변경하기" />
+                        android:text="변경하기"
+                        android:textColor="#F77062" />
 
                 </LinearLayout>
 
@@ -232,7 +234,8 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
                         android:background="@drawable/xml_border"
-                        android:text="탈퇴하기" />
+                        android:text="탈퇴하기"
+                        android:textColor="#F77062" />
 
                 </LinearLayout>
 
@@ -241,10 +244,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/xml_gradient_red"
+                    android:background="@drawable/xml_border"
                     android:text="로그아웃"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
+                    android:textColor="#F77062"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
 
 
             </LinearLayout>
