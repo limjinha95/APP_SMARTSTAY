@@ -1,31 +1,37 @@
 package com.wap.smartstay.Fragment;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.Spinner;
 
 import com.wap.smartstay.AddGroup;
+import com.wap.smartstay.HttpConnection;
+import com.wap.smartstay.Login;
 import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
 import com.wap.smartstay.SmartKeyCallingList;
 import com.wap.smartstay.SmartkeyPopupList;
+import com.wap.smartstay.SmartkeyRoomAdapter;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SmartkeyFragment extends Fragment {
-    public static String phoneNumber;
+    public HttpConnection httpConnectionClient;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,31 @@ public class SmartkeyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.smartkey_fragment, container, false);
+        SmartkeyRoomAdapter adapter;
+        Spinner spinner = (Spinner) view.findViewById(R.id.reserveListSpinner);
+        List<String> data = new ArrayList<>();
+        String[] roomNames = {"1호", "2호", "3호"};
+        for (String str : roomNames) {
+            data.add(str);
+        }
+
+
+        adapter = new SmartkeyRoomAdapter(view.getContext(), data);
+        spinner.setAdapter(adapter);
+
+        try {
+            JSONObject object = new JSONObject();
+            object.put("head", "MyKey");
+            object.put("ID", Login.Id);
+            String sendData = object.toString();
+            httpConnectionClient = new HttpConnection();
+            httpConnectionClient.sendObject(sendData);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         ImageButton manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBtn.setOnClickListener(

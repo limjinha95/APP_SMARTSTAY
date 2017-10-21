@@ -18,6 +18,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class Join extends AppCompatActivity {
     EditText Eid;
     EditText Ename;
@@ -25,10 +27,8 @@ public class Join extends AppCompatActivity {
     EditText EpwdCheck;
     EditText Epnum;
     int check = 0;
-    Button joinCheckIdBtn, joinBtn;
-
-    HttpConnection httpConnectionClient;
-
+    public Button joinCheckIdBtn, joinBtn;
+    public HttpConnection httpConnectionClient;
     Handler handler;
 
     @Override
@@ -69,22 +69,28 @@ public class Join extends AppCompatActivity {
     }
 
     public void joinEvent() {
-
         joinCheckIdBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject object = new JSONObject();
-
+                Log.d("abcd", "ee");
                 try {
+                    JSONObject object = new JSONObject();
                     object.put("head", "ID");
                     object.put("ID", Eid.getText().toString());
-                    String sendData = object.toString();
 
+                    String sendData = object.toString();
                     httpConnectionClient = new HttpConnection();
                     httpConnectionClient.sendObject(sendData);
+
                     String receiveMsg = httpConnectionClient.receiveObject();
-                    object = new JSONObject(receiveMsg);
-                    String data = object.get("Unique").toString();
+
+                    Log.e("abcd", "ee5");
+                    Log.e("abcd", receiveMsg);
+                    JSONObject object2 = new JSONObject(receiveMsg);
+                    Log.e("abcd", "ee6");
+                    Log.e("abcd", object2 + "");
+                    String data = object2.get("Unique").toString();
+                    Log.e("abcd", "ee7");
 
                     if (data.equals("Y"))
                         check = 1;
@@ -96,8 +102,6 @@ public class Join extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                while (check == 0)
-                    Log.i("test", check + "");
 
                 if (check == 1) {
                     Toast.makeText(Join.this, "사용이 가능한 ID입니다.", Toast.LENGTH_SHORT).show();
@@ -125,7 +129,6 @@ public class Join extends AppCompatActivity {
                         object.put("Pnum", Epnum.getText().toString());
                         object.put("Token", refreshedToken);
                         String data = object.toString();
-
                         httpConnectionClient = new HttpConnection();
                         httpConnectionClient.sendObject(data);
                     } catch (Exception e) {
@@ -137,5 +140,6 @@ public class Join extends AppCompatActivity {
                     Toast.makeText(Join.this, "비밀번호를 다시 확인해 주세요.", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

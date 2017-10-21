@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity {
     EditText Eid, Epwd;
     Handler handler;
+    Button loginBtn, startJoinBtn;
+    ;
 
     public static String Id, Pnum, Name;
     public static int Islogin = 0;
@@ -37,6 +40,10 @@ public class Login extends AppCompatActivity {
 
         Eid = (EditText) findViewById(R.id.loginIdEdit);
         Epwd = (EditText) findViewById(R.id.loginPwEdit);
+        loginBtn = (Button) findViewById(R.id.loginStartBtn);
+        startJoinBtn = (Button) findViewById(R.id.joinStartBtn);
+
+
         Eid.setText("");
         Epwd.setText("");
 
@@ -54,7 +61,6 @@ public class Login extends AppCompatActivity {
     }
 
     public void LoginEvent() {
-        Button startJoinBtn = (Button) findViewById(R.id.joinStartBtn);
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +69,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        Button loginBtn = (Button) findViewById(R.id.loginStartBtn);
         loginBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,32 +91,42 @@ public class Login extends AppCompatActivity {
                         httpConnectionClient.sendObject(data);
 
                         String receiveMsg = httpConnectionClient.receiveObject();
-                        object = new JSONObject(receiveMsg);
 
-                        if (object.toString().equals("-")) {
+                        Log.e("dd", receiveMsg.toString());
+                        if (receiveMsg.equals("-")) {
                             Islogin = 2;
+                            Log.e("dd", "d11");
                         } else {
+                            Log.e("dd", "d2");
                             JSONObject jo = new JSONObject(receiveMsg);
-                            Id = jo.getString("ID");
-                            Name = jo.getString("NAME");
-                            Pnum = jo.getString("Pnum");
-                            Islogin = 1;
+                            Log.e("dd", "d3");
+                            Id = jo.getString("user_id");
+                            Log.e("dd", "d4");
 
+                            Name = jo.getString("user_name");
+                            Log.e("dd", "d5");
+
+                            Pnum = jo.getString("user_mobile");
+                            Log.e("dd", "d6");
+
+                            Islogin = 1;
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    Log.e("dd", Islogin + "");
 
                     Eid.setText("");
                     Epwd.setText("");
 
-
                     if (Islogin == 1) {
+                        Log.e("dd", "logind1");
                         Toast.makeText(Login.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(Login.this, Main.class);
                         startActivity(i);
                         finish();
                     } else if (Islogin == 2) {
+                        Log.e("dd", "logind2");
                         Toast.makeText(Login.this, "잘못된 ID 혹은 PWD 입니다.", Toast.LENGTH_SHORT).show();
                         Islogin = 0;
                     }

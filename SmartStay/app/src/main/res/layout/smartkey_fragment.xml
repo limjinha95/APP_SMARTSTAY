@@ -51,6 +51,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/reserveListSpinner"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_view"></Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -99,8 +113,5 @@
             </LinearLayout>
 
         </LinearLayout>
-
     </LinearLayout>
-
-
 </LinearLayout>

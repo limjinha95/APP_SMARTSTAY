@@ -82,7 +82,6 @@ public class UsageList extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         ListView listview;
         ReserveListViewAdapter adapter;
         adapter = new ReserveListViewAdapter();

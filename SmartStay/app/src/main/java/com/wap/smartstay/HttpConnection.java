@@ -1,10 +1,13 @@
 package com.wap.smartstay;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -16,17 +19,19 @@ import javax.net.ssl.HttpsURLConnection;
 public class HttpConnection {
     String serverUrl;
     URL url;
-    HttpsURLConnection connection;
+    HttpURLConnection connection;
 
     BufferedReader bufferedReader;
     BufferedWriter bufferedWriter;
 
     public HttpConnection() {
         try {
-            String serverUrl = "";
+            serverUrl = "http://52.79.135.132:8080/ServerTest/first";
             url = new URL(serverUrl);
-            connection = (HttpsURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
+            connection.setReadTimeout(20000);
+            connection.setUseCaches(false);
             connection.setDoInput(true);
             connection.setDoOutput(true);
         } catch (IOException e) {
@@ -34,14 +39,12 @@ public class HttpConnection {
         }
     }
 
-    public HttpsURLConnection getConnection() {
-        return connection;
-    }
 
     public void sendObject(String sendData) {
         try {
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-            bufferedWriter.write(sendData);
+            bufferedWriter.write("data=" + sendData);
+            Log.e("Send","data="+sendData);
             bufferedWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,13 +52,17 @@ public class HttpConnection {
     }
 
     public String receiveObject() {
-        String receiveMessage="";
+        String receiveMessage = null;
         try {
+            Log.e("receive", "r1");
             bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            Log.e("receive", "r2");
             receiveMessage = bufferedReader.readLine();
+            Log.e("receive", "r3" + receiveMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.e("receive", receiveMessage);
         return receiveMessage;
     }
 }
