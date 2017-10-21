@@ -42,7 +42,7 @@
                 android:layout_below="@+id/textView3"
                 android:layout_toStartOf="@+id/content2"
                 android:text="간단한"
-                android:textColor="#ff0000"
+                android:textColor="#F98D82"
                 android:textSize="22dp"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:layout_alignBottom="@+id/content3"
                 android:layout_alignEnd="@+id/bottomText1"
                 android:text="스마트 회원으로"
-                android:textColor="#ff0000"
+                android:textColor="#F98D82"
                 android:textSize="22dp"
                 android:textStyle="bold" />
 
@@ -90,7 +90,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_height="420dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/view_join" />

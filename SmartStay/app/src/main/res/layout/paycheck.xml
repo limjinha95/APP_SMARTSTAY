@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="@drawable/xml_gradient"
         android:orientation="vertical">
 
 
@@ -19,6 +20,7 @@
             android:layout_height="50dp"
             android:text="결제가 완료되었습니다"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="22dp"
             android:textStyle="bold"/>
 
@@ -27,9 +29,9 @@
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/xml_gradient"
+            android:background="@drawable/xml_border"
             android:text="결제완료"
-            android:textColor="@color/white"
+            android:textColor="#F77062"
             android:textSize="17dp" />
 
     </LinearLayout>

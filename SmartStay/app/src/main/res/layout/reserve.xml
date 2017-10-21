@@ -16,7 +16,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/xml_gradient"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            android:titleTextColor="@color/white"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -32,7 +33,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 android:background="@color/white">
@@ -51,14 +52,14 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="1dp"
                 android:layout_weight="1"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:background="@drawable/xml_gradient">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/xml_gradient"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -74,7 +75,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="방정보"
-                            android:textSize="19dp"
+                            android:textColor="@color/white"
+                            android:textSize="22dp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -83,27 +85,40 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/xml_gradient"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/t9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="부경 대연 호텔"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
+                        <TextView
+                            android:id="@+id/t9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="부경 대연 호텔"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:orientation="horizontal"></LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="63dp"
                     android:orientation="vertical"
-                    android:background="@drawable/xml_gradient"
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp">
 
@@ -124,35 +139,39 @@
                             android:layout_gravity="center"
                             android:layout_weight="0.32"
                             android:text="방종류"
+                            android:textSize="22dp"
+                            android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <Spinner
                             android:id="@+id/spinner"
                             android:layout_width="196dp"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical">
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.38"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="1dp"
-                        android:background="@drawable/xml_gradient"
                         android:orientation="horizontal">
 
                         <TextView
@@ -163,7 +182,8 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:text="날짜 선택"
-                            android:textSize="20dp"
+                            android:textColor="@color/white"
+                            android:textSize="22dp"
                             android:textStyle="bold" />
 
                         <Button
@@ -174,10 +194,10 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="0.12"
-                            android:background="@drawable/xml_gradient_red"
+                            android:background="@drawable/xml_border"
                             android:text="From"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"/>
+                            android:textColor="#F77062"
+                            android:textStyle="bold" />
 
                         <Button
                             android:id="@+id/setToBtn"
@@ -187,10 +207,10 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="0.12"
-                            android:background="@drawable/xml_gradient_red"
+                            android:background="@drawable/xml_border"
                             android:text="To"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"/>
+                            android:textColor="#F77062"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -198,7 +218,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:orientation="horizontal"
-                        android:background="@drawable/xml_gradient"
                         android:weightSum="1">
 
                         <TextView
@@ -209,6 +228,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="0.04"
                             android:text="숙박기간"
+                            android:textColor="@color/white"
                             android:textSize="15dp" />
 
                         <TextView
@@ -228,6 +248,7 @@
                             android:layout_weight="0.45"
                             android:text="N박 N일"
                             android:textAlignment="textEnd"
+                            android:textColor="@color/white"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -236,9 +257,16 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="1dp"
-                    android:background="@drawable/xml_gradient"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -254,6 +282,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:text="입실시간"
+                            android:textColor="@color/white"
                             android:textSize="18dp" />
 
                         <TextView
@@ -262,6 +291,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="퇴실시간"
+                            android:textColor="@color/white"
                             android:textSize="18dp" />
 
                     </LinearLayout>
@@ -279,6 +309,7 @@
                             android:layout_marginLeft="7dp"
                             android:layout_weight="1"
                             android:text="9:00"
+                            android:textColor="@color/white"
                             android:textSize="15dp"
                             android:textStyle="bold" />
 
@@ -289,6 +320,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:text="12:00"
+                            android:textColor="@color/white"
                             android:textSize="15dp"
                             android:textStyle="bold" />
 
@@ -296,23 +328,23 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp">
+
+                <Button
+                    android:id="@+id/paymentBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="1dp">
-
-                    <Button
-                        android:id="@+id/paymentBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/xml_gradient_red"
-                        android:text="예약하기"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:textSize="18dp" />
-                </LinearLayout>
-
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/xml_border"
+                    android:text="예약하기"
+                    android:textColor="#F77062"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
