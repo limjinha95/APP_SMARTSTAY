@@ -9,17 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import smartstay.action.Action;
+import smartstay.action.RoomListViewAction;
+import smartstay.action.RoomRegistAction;
 import smartstay.action.UserJoinAction;
-import smartstay.action.UserLoginAction;
-import smartstay.action.UserLogoutAction;
 import smartstay.vo.ActionForward;
 
-public class UserFrontController extends HttpServlet {
+public class RoomFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public UserFrontController() {
+    public RoomFrontController() {
         super();
     }
+    
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     	String requestURI = request.getRequestURI();
     	String contextPath = request.getContextPath();
@@ -27,15 +28,23 @@ public class UserFrontController extends HttpServlet {
     	Action action = null;
     	ActionForward forward = null;
     	
-    	if(command.equals("/userLoginAction.us")) {
-    		action = new UserLoginAction();
+    	if(command.equals("/roomList.rc")) {
+    		action = new RoomListViewAction();
     		try {
     			forward = action.execute(request, response);
     		}catch(Exception e) {
     			e.printStackTrace();
     		}
     	}
-    	else if(command.equals("/userJoinAction.us")) {
+    	else if(command.equals("/roomRegist.rc")) {
+    		action = new RoomRegistAction();
+    		try {
+    			forward = action.execute(request, response);
+    		}catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	else if(command.equals("/roomView.rc")) {
     		action = new UserJoinAction();
     		try {
     			forward = action.execute(request, response);
@@ -43,16 +52,7 @@ public class UserFrontController extends HttpServlet {
     			e.printStackTrace();
     		}
     	}
-    	else if(command.equals("/userLogoutAction.us")) {
-    		action = new UserLogoutAction();
-    		try {
-    			forward = action.execute(request, response);
-    		}catch(Exception e) {
-    			e.printStackTrace();
-    		}
-   
-    	}
-  
+    	
     	if(forward !=null) {
     		if(forward.isRedirect()) {
     			response.sendRedirect(forward.getPath());

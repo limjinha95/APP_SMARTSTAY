@@ -45,4 +45,14 @@
     <servlet-name>OfficeFrontController</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RoomFrontController</display-name>
+    <servlet-name>RoomFrontController</servlet-name>
+    <servlet-class>smartstay.controller.RoomFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RoomFrontController</servlet-name>
+    <url-pattern>*.rc</url-pattern>
+  </servlet-mapping>
 </web-app>

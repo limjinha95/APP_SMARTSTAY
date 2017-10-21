@@ -18,17 +18,17 @@ public class OfficeDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "insert into office_tb values(?, ?, ?, ?, ?, ?)";
+		String sql = " insert into office_tb(owner_no, office_name, office_address, office_call, office_inform, image) values(?, ?, ?, ?, ?, ?)";
 
 		try {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, dto.getOwnerNo());
-			stmt.setInt(2, dto.getOfficeNo());
-			stmt.setString(3, dto.getOfficeName());
-			stmt.setString(4, dto.getOfficeAddress());
-			stmt.setString(5, dto.getOfficeCall());
-			stmt.setString(6, dto.getOfficeInform());
+			stmt.setString(2, dto.getOfficeName());
+			stmt.setString(3, dto.getOfficeAddress());
+			stmt.setString(4, dto.getOfficeCall());
+			stmt.setString(5, dto.getOfficeInform());
+			stmt.setString(6, dto.getOfficeImage());
 
 			return stmt.executeUpdate();
 
@@ -54,6 +54,7 @@ public class OfficeDao {
 		String officeAddress = null;
 		String officeCall = null;
 		String officeInform = null;
+		String officeImage = null;
 
 		try {
 			conn = getConnection();
@@ -68,8 +69,9 @@ public class OfficeDao {
 				officeAddress = rs.getString(4);
 				officeCall = rs.getString(5);
 				officeInform = rs.getString(6);
+				officeImage = rs.getString(7);
 
-				dto = new Office(ownerNo, officeNo, officeName, officeAddress, officeCall, officeInform);
+				dto = new Office(ownerNo, officeNo, officeName, officeAddress, officeCall, officeInform, officeImage);
 				return dto;
 			}
 
@@ -83,14 +85,14 @@ public class OfficeDao {
 	}
 	
 	
-	public int updateOffice(int ownerNo, String officeName, String officeAddress, String officeCall, String officeInform) {
+	public int updateOffice(int ownerNo, String officeName, String officeAddress, String officeCall, String officeInform, String officeImage) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append("update office_tb set ");
-		sql.append("office_name = ?, office_address = ?, office_call = ?, office_inform = ? ");
+		sql.append("office_name = ?, office_address = ?, office_call = ?, office_inform = ?, image = ?");
 		sql.append("where owner_no = ?");
 		
 		try {
@@ -100,7 +102,9 @@ public class OfficeDao {
 			stmt.setString(2, officeAddress);
 			stmt.setString(3, officeCall);
 			stmt.setString(4, officeInform);
-			stmt.setInt(5, ownerNo);
+			stmt.setString(5, officeImage);
+			stmt.setInt(6, ownerNo);
+
 			
 			return stmt.executeUpdate();
 			

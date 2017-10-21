@@ -82,7 +82,7 @@
   <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     <ul>
-      <li><a href="#hotel_register.jsp">HOME</a></li>
+      <li><a href="./officeRegisterView.do">HOME</a></li>
       <li style="float:right"><a>SmartStay</a></li>
       <li style="float:right"><a href="./userLogoutAction.us">로그아웃</a></li>
     </ul>
@@ -98,8 +98,8 @@
     </div>
     <div class="w3-bar-block">
       <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a href="hotel_register.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
-      <a href="room_manage.jsp" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
+      <a href="./officeRegisterView.do" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
+      <a href="./roomList.rc" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
     </div>
   </nav>
 
