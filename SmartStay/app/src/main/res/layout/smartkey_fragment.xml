@@ -25,7 +25,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/ic_help_black_24dp" />
+                android:background="@drawable/ic_help" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,9 +53,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="115dp"
             android:gravity="center"
+            android:background="@color/bgcolor"
             android:orientation="vertical">
 
             <Spinner
@@ -72,8 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            android:paddingTop="30dp"
+            android:orientation="vertical"
+            android:background="@color/bgcolor">
 
             <LinearLayout
                 android:layout_width="match_parent"

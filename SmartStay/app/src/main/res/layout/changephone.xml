@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/buttonshape_basic_orange"
+            android:background="@drawable/buttonshape_basic_dark"
             android:text="휴대폰인증 완료"
             android:textColor="@color/white"
             android:textSize="18dp" />

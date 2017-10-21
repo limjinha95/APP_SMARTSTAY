@@ -53,7 +53,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
         btnPayment.setOnClickListener(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
 
         Spinner spin = (Spinner) findViewById(R.id.spinner);
