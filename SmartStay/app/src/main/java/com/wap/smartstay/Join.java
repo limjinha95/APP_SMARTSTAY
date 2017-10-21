@@ -18,7 +18,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONObject;
 
-import java.net.Socket;
+import javax.net.ssl.HttpsURLConnection;
 
 public class Join extends AppCompatActivity {
     EditText Eid;
@@ -26,14 +26,9 @@ public class Join extends AppCompatActivity {
     EditText Epwd;
     EditText EpwdCheck;
     EditText Epnum;
-    static int check=0;
-
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-    Thread thread;
-    ClientThread clientThread;
+    int check = 0;
+    public Button joinCheckIdBtn, joinBtn;
+    public HttpConnection httpConnectionClient;
     Handler handler;
 
     @Override
@@ -45,55 +40,75 @@ public class Join extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
         toolbar.setTitle("회원가입");
 
-        if(Build.VERSION.SDK_INT > 9) {
+        if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        handler = new Handler(){
+        handler = new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 Bundle bundle = msg.getData();
-                Toast.makeText (Join.this, bundle.getString("msg"),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Join.this, bundle.getString("msg"), Toast.LENGTH_SHORT).show();
             }
         };
 
-        connect();
 
-        Eid = (EditText)findViewById(R.id.joinIdEdit);
-        Ename = (EditText)findViewById(R.id.joinNameEdit);
-        Epwd = (EditText)findViewById(R.id.joinPwEdit);
-        EpwdCheck = (EditText)findViewById(R.id.joinCheckPwEdit);
-        Epnum = (EditText)findViewById(R.id.joinPhoneEdit);
+        Eid = (EditText) findViewById(R.id.joinIdEdit);
+        Ename = (EditText) findViewById(R.id.joinNameEdit);
+        Epwd = (EditText) findViewById(R.id.joinPwEdit);
+        EpwdCheck = (EditText) findViewById(R.id.joinCheckPwEdit);
+        Epnum = (EditText) findViewById(R.id.joinPhoneEdit);
 
-        Button joinCheckIdBtn = (Button) findViewById(R.id.joinCheckIdBtn) ;
-        final Button joinBtn = (Button) findViewById(R.id.joinSaveBtn) ;
+        joinCheckIdBtn = (Button) findViewById(R.id.joinCheckIdBtn);
+        joinBtn = (Button) findViewById(R.id.joinSaveBtn);
         joinBtn.setEnabled(false);
 
+        joinEvent();
+
+    }
+
+    public void joinEvent() {
         joinCheckIdBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject jo = new JSONObject();
+                Log.d("abcd", "ee");
+                try {
+                    JSONObject object = new JSONObject();
+                    object.put("head", "ID");
+                    object.put("ID", Eid.getText().toString());
 
-                try{
-                    jo.put("head", "ID");
-                    jo.put("ID", Eid.getText().toString());
+                    String sendData = object.toString();
+                    httpConnectionClient = new HttpConnection();
+                    httpConnectionClient.sendObject(sendData);
+
+                    String receiveMsg = httpConnectionClient.receiveObject();
+
+                    Log.e("abcd", "ee5");
+                    Log.e("abcd", receiveMsg);
+                    JSONObject object2 = new JSONObject(receiveMsg);
+                    Log.e("abcd", "ee6");
+                    Log.e("abcd", object2 + "");
+                    String data = object2.get("Unique").toString();
+                    Log.e("abcd", "ee7");
+
+                    if (data.equals("Y"))
+                        check = 1;
+                    else
+                        check = 2;
+
+
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
 
-                String data = jo.toString();
-                clientThread.send(data);
-                while(check==0)
-                    Log.i("test",check+"");
 
-                if(check==1) {
-                    Toast.makeText(Join.this,"사용이 가능한 ID입니다.",Toast.LENGTH_SHORT).show();
+                if (check == 1) {
+                    Toast.makeText(Join.this, "사용이 가능한 ID입니다.", Toast.LENGTH_SHORT).show();
                     joinBtn.setEnabled(true);
-                }
-                else if(check==2) {
+                } else if (check == 2) {
                     Toast.makeText(Join.this, "중복된 ID가 존재합니다.", Toast.LENGTH_SHORT).show();
-                    check=0;
+                    check = 0;
                 }
             }
         });
@@ -101,58 +116,30 @@ public class Join extends AppCompatActivity {
         joinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
+                if (Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
                     String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-                    JSONObject jo = new JSONObject();
+
+                    JSONObject object = new JSONObject();
 
                     try {
-                        jo.put("head","Register");
-                        jo.put("ID",Eid.getText().toString());
-                        jo.put("PWD",Epwd.getText().toString());
-                        jo.put("Name",Ename.getText().toString());
-                        jo.put("Pnum",Epnum.getText().toString());
-                        jo.put("Token",refreshedToken);
-                    } catch(Exception e) {
-
+                        object.put("head", "Register");
+                        object.put("ID", Eid.getText().toString());
+                        object.put("PWD", Epwd.getText().toString());
+                        object.put("Name", Ename.getText().toString());
+                        object.put("Pnum", Epnum.getText().toString());
+                        object.put("Token", refreshedToken);
+                        String data = object.toString();
+                        httpConnectionClient = new HttpConnection();
+                        httpConnectionClient.sendObject(data);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                    String data = jo.toString();
-                    clientThread.send(data);
                     Toast.makeText(Join.this, "가입 축하 드립니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else
-                    Toast.makeText(Join.this,"비밀번호를 다시 확인해 주세요.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Join.this, "비밀번호를 다시 확인해 주세요.", Toast.LENGTH_SHORT).show();
             }
         });
 
-    }
-
-    public void connect(){
-        thread = new Thread(){
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client,handler,Join.class);
-                    clientThread.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
-    }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        connect();
     }
 }

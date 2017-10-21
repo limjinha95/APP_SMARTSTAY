@@ -8,49 +8,110 @@
     tools:context="com.wap.smartstay.Main">
 
     <LinearLayout
-        android:id="@+id/manualBackground"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/xml_gradient"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/manualBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:background="@drawable/ic_help_white_24dp" />
+        <LinearLayout
+            android:id="@+id/manualBackground"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#EAEAEA"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/manualBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/ic_help_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SmartStay 매뉴얼 확인 >>"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="스마트 키를 사용하기 전에 매뉴얼을 읽으세요 !"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/reserveListSpinner"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_view"></Spinner>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SmartStay 매뉴얼 확인 >>"
-                android:textSize="17dp"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/smartkeyBtn"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/lock" />
+
+                <ImageButton
+                    android:id="@+id/smartlightBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/light" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="스마트 키를 사용하기 전에 매뉴얼을 읽으세요 !"
-                android:textSize="13dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/addgroupBtn"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/addgroup" />
+
+                <ImageButton
+                    android:id="@+id/callBtn"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:background="@drawable/phone1" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
     </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
 </LinearLayout>

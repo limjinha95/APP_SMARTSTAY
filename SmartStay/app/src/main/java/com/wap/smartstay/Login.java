@@ -1,6 +1,5 @@
 package com.wap.smartstay;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,34 +11,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.net.Socket;
 
 public class Login extends AppCompatActivity {
     EditText Eid, Epwd;
-    Context cont;
-
-    Socket client;
-
-    String ip = ServerInformation.serverIP;
-    int port = ServerInformation.port;
-    Thread thread;
-    ClientThread clientThread;
     Handler handler;
+    Button loginBtn, startJoinBtn;
+    ;
 
     public static String Id, Pnum, Name;
     public static int Islogin = 0;
+    HttpConnection httpConnectionClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        cont = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
@@ -48,10 +37,13 @@ public class Login extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        JSONArray ja = new JSONArray();
 
         Eid = (EditText) findViewById(R.id.loginIdEdit);
         Epwd = (EditText) findViewById(R.id.loginPwEdit);
+        loginBtn = (Button) findViewById(R.id.loginStartBtn);
+        startJoinBtn = (Button) findViewById(R.id.joinStartBtn);
+
+
         Eid.setText("");
         Epwd.setText("");
 
@@ -64,9 +56,11 @@ public class Login extends AppCompatActivity {
             }
         };
 
-        connect();
+        LoginEvent();
 
-        TextView startJoinBtn = (TextView)findViewById(R.id.joinStartBtn);
+    }
+
+    public void LoginEvent() {
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +69,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        Button loginBtn = (Button) findViewById(R.id.loginStartBtn);
         loginBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,35 +76,57 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    JSONObject jo = new JSONObject();
-
+                    JSONObject object = new JSONObject();
                     try {
-                        jo.put("head", "Login");
-                        jo.put("ID", Eid.getText().toString());
-                        jo.put("PWD", Epwd.getText().toString());
+                        object.put("head", "Login");
+                        object.put("ID", Eid.getText().toString());
+                        object.put("PWD", Epwd.getText().toString());
 
                         String myToken = FirebaseInstanceId.getInstance().getToken();
-                        jo.put("Token", myToken);
+                        object.put("Token", myToken);
+
+                        String data = object.toString();
+
+                        httpConnectionClient = new HttpConnection();
+                        httpConnectionClient.sendObject(data);
+
+                        String receiveMsg = httpConnectionClient.receiveObject();
+
+                        Log.e("dd", receiveMsg.toString());
+                        if (receiveMsg.equals("-")) {
+                            Islogin = 2;
+                            Log.e("dd", "d11");
+                        } else {
+                            Log.e("dd", "d2");
+                            JSONObject jo = new JSONObject(receiveMsg);
+                            Log.e("dd", "d3");
+                            Id = jo.getString("user_id");
+                            Log.e("dd", "d4");
+
+                            Name = jo.getString("user_name");
+                            Log.e("dd", "d5");
+
+                            Pnum = jo.getString("user_mobile");
+                            Log.e("dd", "d6");
+
+                            Islogin = 1;
+                        }
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
-
-                    String data = jo.toString();
-                    clientThread.send(data);
+                    Log.e("dd", Islogin + "");
 
                     Eid.setText("");
                     Epwd.setText("");
 
-                    while (Islogin == 0)
-                        Log.i("test", Islogin + "");
-                    Log.i("test", "대기끝");
-
                     if (Islogin == 1) {
+                        Log.e("dd", "logind1");
                         Toast.makeText(Login.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(Login.this, Main.class);
                         startActivity(i);
                         finish();
                     } else if (Islogin == 2) {
+                        Log.e("dd", "logind2");
                         Toast.makeText(Login.this, "잘못된 ID 혹은 PWD 입니다.", Toast.LENGTH_SHORT).show();
                         Islogin = 0;
                     }
@@ -121,39 +136,5 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void connect() {
 
-        thread = new Thread() {
-            public void run() {
-                super.run();
-                try {
-                    client = new Socket(ip, port);
-                    clientThread = new ClientThread(client, handler, Login.class);
-                    clientThread.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ClientThread.setRunningState(false);
-        thread.interrupt();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        connect();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        connect();
-    }
 }
