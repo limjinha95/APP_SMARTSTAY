@@ -39,7 +39,7 @@ public class UsageList extends AppCompatActivity {
         setContentView(R.layout.reserve_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("이용 내역");
 
         if (Build.VERSION.SDK_INT > 9) {

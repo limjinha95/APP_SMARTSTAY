@@ -22,7 +22,7 @@ public class AlarmSet extends AppCompatActivity {
         pref = getSharedPreferences("Switch", Activity.MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("알림 설정");
 
         Switch.OnCheckedChangeListener onCheckedChangeListener = new Switch.OnCheckedChangeListener(){

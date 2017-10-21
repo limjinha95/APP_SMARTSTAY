@@ -36,7 +36,7 @@ public class AddGroup extends AppCompatActivity {
         setContentView(R.layout.addgroup);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("동숙객 추가");
 
         if (Build.VERSION.SDK_INT > 9) {

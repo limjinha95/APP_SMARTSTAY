@@ -32,7 +32,7 @@ public class Inquire extends AppCompatActivity {
                 .permitNetwork().build());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("1:1 문의");
 
         identify = (EditText) findViewById(R.id.identify);

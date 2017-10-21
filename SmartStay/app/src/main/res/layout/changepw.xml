@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/xml_gradient"
+            android:background="@color/colorPrimaryDark"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
@@ -25,6 +25,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bgcolor"
         android:orientation="vertical"
         android:padding="15dp">
 
@@ -112,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/xml_gradient"
+            android:background="@drawable/buttonshape_basic_orange"
             android:text="변경완료"
             android:textColor="@color/white"
             android:textSize="18dp" />
@@ -121,8 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="30dp"
-            android:text="* 비밀번호는 영문/숫자가 모두 포함되어야 합니다."
-            android:textStyle="bold"/>
+            android:text="* 비밀번호는 영문/숫자가 모두 포함되어야 합니다." />
 
 
     </LinearLayout>

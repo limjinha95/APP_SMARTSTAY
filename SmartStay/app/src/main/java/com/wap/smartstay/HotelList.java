@@ -21,7 +21,7 @@ public class HotelList extends ListFragment {
         ListHotel.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) View.findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
 
         adapter = new HotelListViewAdapter();
 

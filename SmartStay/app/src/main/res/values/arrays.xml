@@ -14,16 +14,4 @@
         <item>스탠다드</item>
         <item>슈페리얼</item>
     </string-array>
-    <string-array name="hotelNames">
-        <item>A호텔</item>
-        <item>B호텔</item>
-    </string-array>
-    <string-array name="roomNames">
-        <item>101호</item>
-        <item>102호</item>
-    </string-array>
-    <array name="roomPics">
-        <item>@drawable/one</item>
-        <item>@drawable/one</item>
-    </array>
 </resources>

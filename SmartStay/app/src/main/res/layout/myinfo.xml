@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/xml_gradient"
+            android:background="@color/colorPrimaryDark"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
@@ -35,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="15dp"
-                android:background="@drawable/xml_gradient">
+                android:background="@color/colorPrimaryDark"
+                android:padding="15dp">
 
                 <ImageView
                     android:id="@+id/userImg"
@@ -50,13 +50,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="임진하"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/bgcolor"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -118,9 +120,8 @@
                         android:layout_width="65dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/xml_border"
-                        android:text="변경하기"
-                        android:textColor="#F77062" />
+                        android:background="@drawable/buttonshape_basic_white"
+                        android:text="변경" />
 
                 </LinearLayout>
 
@@ -152,9 +153,8 @@
                         android:layout_width="65dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/xml_border"
-                        android:text="변경하기"
-                        android:textColor="#F77062" />
+                        android:background="@drawable/buttonshape_basic_white"
+                        android:text="변경" />
 
                 </LinearLayout>
 
@@ -233,9 +233,8 @@
                         android:layout_width="65dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
-                        android:background="@drawable/xml_border"
-                        android:text="탈퇴하기"
-                        android:textColor="#F77062" />
+                        android:background="@drawable/buttonshape_basic_white"
+                        android:text="탈퇴" />
 
                 </LinearLayout>
 
@@ -244,11 +243,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/xml_border"
+                    android:background="@drawable/buttonshape_basic_orange"
                     android:text="로그아웃"
-                    android:textColor="#F77062"
-                    android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
 
             </LinearLayout>

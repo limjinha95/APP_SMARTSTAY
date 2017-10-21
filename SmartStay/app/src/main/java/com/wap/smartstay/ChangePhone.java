@@ -13,7 +13,7 @@ public class ChangePhone extends AppCompatActivity {
         setContentView(R.layout.changephone);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("휴대폰 인증");
     }
 }

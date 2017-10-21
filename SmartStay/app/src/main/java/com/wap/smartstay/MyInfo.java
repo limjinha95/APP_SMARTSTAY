@@ -29,7 +29,7 @@ public class MyInfo extends AppCompatActivity {
         setContentView(R.layout.myinfo);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("내 정보");
 
         if (Build.VERSION.SDK_INT > 9) {

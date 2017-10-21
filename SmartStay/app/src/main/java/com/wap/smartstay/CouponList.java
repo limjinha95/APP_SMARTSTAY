@@ -28,7 +28,7 @@ public class CouponList extends AppCompatActivity {
         setContentView(R.layout.coupon_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("내 쿠폰함");
 
         if (Build.VERSION.SDK_INT > 9) {

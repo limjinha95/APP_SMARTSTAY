@@ -19,7 +19,7 @@ public class Manual extends AppCompatActivity {
         setContentView(R.layout.manual);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("Smart Stay 메뉴얼");
 
         manualMain = new Intent(this, ManualMain.class);

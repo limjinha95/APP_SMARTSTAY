@@ -13,7 +13,7 @@ import com.wap.smartstay.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link returnManualFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link returnManualFragment#newInstance} factory method to
  * create an instance of this fragment.

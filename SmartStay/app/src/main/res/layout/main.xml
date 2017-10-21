@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="4dp"
-            android:background="@drawable/xml_gradient"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimaryDark"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -26,10 +26,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimaryDark"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav" />
+        app:itemBackground="@color/white"
+        app:itemIconTint="@drawable/nav_color"
+        app:itemTextColor="@drawable/nav_color"
+        app:menu="@menu/bottom_nav"
+        app:elevation="4dp"
+        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

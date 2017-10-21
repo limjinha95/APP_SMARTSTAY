@@ -33,7 +33,7 @@ public class ChangePw extends AppCompatActivity {
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("비밀번호 변경");
 
         if (Build.VERSION.SDK_INT > 9) {

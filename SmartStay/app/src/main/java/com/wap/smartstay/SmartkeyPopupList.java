@@ -42,7 +42,7 @@ public class SmartkeyPopupList extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.cancel_action);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setTitle("스마트키 목록");
 
         DisplayMetrics dm = new DisplayMetrics();

@@ -36,9 +36,6 @@ public class Join extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
-        toolbar.setTitle("회원가입");
 
         if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -52,7 +49,6 @@ public class Join extends AppCompatActivity {
                 Toast.makeText(Join.this, bundle.getString("msg"), Toast.LENGTH_SHORT).show();
             }
         };
-
 
         Eid = (EditText) findViewById(R.id.joinIdEdit);
         Ename = (EditText) findViewById(R.id.joinNameEdit);

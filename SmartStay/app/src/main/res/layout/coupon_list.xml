@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/xml_gradient"
+            android:background="@color/colorPrimaryDark"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
@@ -24,13 +24,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/xml_gradient">
+        android:background="@color/bgcolor">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#EAEAEA"
             android:orientation="vertical">
 
             <ListView

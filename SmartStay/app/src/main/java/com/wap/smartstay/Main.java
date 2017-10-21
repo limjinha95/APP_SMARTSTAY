@@ -33,7 +33,7 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(Color.parseColor("#000000"));
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
 
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
@@ -57,10 +57,18 @@ public class Main extends AppCompatActivity {
                                 viewPager.setCurrentItem(2);
                                 break;
                         }
-                        return false;
+                        return true;
                     }
+
+                    private MenuItem prevBottomNavigation;
+
+
                 });
+
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

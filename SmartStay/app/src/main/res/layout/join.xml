@@ -5,155 +5,149 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.wap.smartstay.Main"
-    android:background="@drawable/xml_gradient"
-    android:weightSum="1">
+    tools:context="com.wap.smartstay.Main">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="15dp"
-        android:weightSum="1"
-        android:layout_weight="2.54">
-
+        android:layout_height="230dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/trans_logo"
-            android:layout_weight="4.49" />
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/img_logo_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.12"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="118dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:text="연락처"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/joinPhoneEdit"
-                    android:layout_width="240dp"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:text="확인"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/joinCheckPwEdit"
-                    android:layout_width="240dp"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:text="비밀번호"
-                    android:textSize="18dp" />
-
-                <EditText
-                    android:id="@+id/joinPwEdit"
-                    android:layout_width="240dp"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:text="아이디"
+                android:textSize="18dp" />
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:text="이름"
-                    android:textSize="18dp" />
+            <EditText
+                android:id="@+id/joinIdEdit"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:inputType="textUri"
+                android:background="@null"/>
 
-                <EditText
-                    android:id="@+id/joinNameEdit"
-                    android:layout_width="240dp"
-                    android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/joinCheckIdBtn"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/buttonshape_basic_orange"
+                android:text="중복확인"
+                android:textColor="@color/white" />
 
-            </LinearLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="192dp"
-                android:background="@color/white"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:text="이름"
+                android:textSize="18dp"
+                />
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:text="아이디"
-                    android:textSize="18dp" />
+            <EditText
+                android:id="@+id/joinNameEdit"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="@null"/>
 
-                <EditText
-                    android:id="@+id/joinIdEdit"
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent" />
+        </LinearLayout>
 
-                <Button
-                    android:id="@+id/joinCheckIdBtn"
-                    android:layout_width="75dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/xml_border"
-                    android:text="중복확인"
-                    android:textColor="#F77062" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="비밀번호"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/joinPwEdit"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="확인"
+                android:textSize="18dp"
+                android:background="@null"/>
+
+            <EditText
+                android:id="@+id/joinCheckPwEdit"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="연락처"
+                android:textSize="18dp"
+                />
+
+            <EditText
+                android:id="@+id/joinPhoneEdit"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:background="@null"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -161,18 +155,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/joinSaveBtn"
-                android:layout_width="130dp"
-                android:layout_height="63dp"
-                android:background="@drawable/xml_border"
-                android:text="회원가입 완료"
-                android:textColor="#F77062"
-                android:textSize="18dp"
-                android:layout_weight="0.99" />
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:background="@drawable/buttonshape_basic_orange"
+                android:text="회원가입"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
 
         </LinearLayout>
 

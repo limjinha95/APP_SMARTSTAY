@@ -40,7 +40,7 @@ public class ManualMain extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setTabTextColors(Color.BLACK, Color.BLACK);
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#ffffff"));
         tabLayout.setupWithViewPager(mViewPager);
     }
 
@@ -99,7 +99,7 @@ public class ManualMain extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ManualMain.PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -20,9 +21,8 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity {
     EditText Eid, Epwd;
     Handler handler;
-    Button loginBtn, startJoinBtn;
-    ;
-
+    Button loginBtn;
+    TextView startJoinBtn;
     public static String Id, Pnum, Name;
     public static int Islogin = 0;
     HttpConnection httpConnectionClient;
@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         Eid = (EditText) findViewById(R.id.loginIdEdit);
         Epwd = (EditText) findViewById(R.id.loginPwEdit);
         loginBtn = (Button) findViewById(R.id.loginStartBtn);
-        startJoinBtn = (Button) findViewById(R.id.joinStartBtn);
+        startJoinBtn = (TextView) findViewById(R.id.joinStartBtn);
 
 
         Eid.setText("");
@@ -55,9 +55,7 @@ public class Login extends AppCompatActivity {
 
             }
         };
-
         LoginEvent();
-
     }
 
     public void LoginEvent() {
@@ -68,7 +66,6 @@ public class Login extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         loginBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,17 +78,12 @@ public class Login extends AppCompatActivity {
                         object.put("head", "Login");
                         object.put("ID", Eid.getText().toString());
                         object.put("PWD", Epwd.getText().toString());
-
                         String myToken = FirebaseInstanceId.getInstance().getToken();
                         object.put("Token", myToken);
-
                         String data = object.toString();
-
                         httpConnectionClient = new HttpConnection();
                         httpConnectionClient.sendObject(data);
-
                         String receiveMsg = httpConnectionClient.receiveObject();
-
                         Log.e("dd", receiveMsg.toString());
                         if (receiveMsg.equals("-")) {
                             Islogin = 2;
@@ -102,13 +94,10 @@ public class Login extends AppCompatActivity {
                             Log.e("dd", "d3");
                             Id = jo.getString("user_id");
                             Log.e("dd", "d4");
-
                             Name = jo.getString("user_name");
                             Log.e("dd", "d5");
-
                             Pnum = jo.getString("user_mobile");
                             Log.e("dd", "d6");
-
                             Islogin = 1;
                         }
                     } catch (Exception e) {
