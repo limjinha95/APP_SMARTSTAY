@@ -39,7 +39,6 @@ public class UserJoinAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 		}
-		
 		return forward;
 	}
 	

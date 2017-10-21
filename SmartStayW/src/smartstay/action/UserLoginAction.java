@@ -19,7 +19,6 @@ public class UserLoginAction implements Action {
 		User user = new User();
 		user.setUserId(request.getParameter("uid"));
 		user.setUserPw(request.getParameter("upw"));
-		
 		UserService userService = new UserService();
 		int loginResult = userService.checkLoginInfo(request.getParameter("uid"), request.getParameter("upw"));
 		ActionForward forward = null;
@@ -27,7 +26,7 @@ public class UserLoginAction implements Action {
 			forward = new ActionForward();
 			session.setAttribute("id", user.getUserId());
 			forward.setRedirect(true);
-			forward.setPath("./hotel_register.jsp");
+			forward.setPath("./officeRegisterView.do");
 		}
 		else {
 			response.setContentType("text/html;charset=utf-8");

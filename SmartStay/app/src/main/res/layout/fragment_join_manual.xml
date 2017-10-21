@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/xml_gradient"
     tools:context="com.wap.smartstay.manualFragment.joinManualFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="25dp"
-        android:background="#EAEAEA"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -20,6 +20,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
                 android:text="회원가입"
                 android:textColor="#5A5A5A"
@@ -41,7 +42,7 @@
                 android:layout_below="@+id/textView3"
                 android:layout_toStartOf="@+id/content2"
                 android:text="간단한"
-                android:textColor="#0054FF"
+                android:textColor="#F98D82"
                 android:textSize="22dp"
                 android:textStyle="bold" />
 
@@ -72,7 +73,7 @@
                 android:layout_alignBottom="@+id/content3"
                 android:layout_alignEnd="@+id/bottomText1"
                 android:text="스마트 회원으로"
-                android:textColor="#0054FF"
+                android:textColor="#F98D82"
                 android:textSize="22dp"
                 android:textStyle="bold" />
 
@@ -89,7 +90,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_height="420dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/view_join" />

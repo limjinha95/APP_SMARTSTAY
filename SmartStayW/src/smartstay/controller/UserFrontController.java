@@ -27,32 +27,32 @@ public class UserFrontController extends HttpServlet {
     	Action action = null;
     	ActionForward forward = null;
     	
-    	if(command.equals("/")) {
-//    		action = new UserLoginAction();
+    	if(command.equals("/userLoginAction.us")) {
+    		action = new UserLoginAction();
     		try {
     			forward = action.execute(request, response);
     		}catch(Exception e) {
     			e.printStackTrace();
     		}
     	}
-    	else if(command.equals("/")) {
-//    		action = new UserJoinAction();
+    	else if(command.equals("/userJoinAction.us")) {
+    		action = new UserJoinAction();
     		try {
     			forward = action.execute(request, response);
     		}catch(Exception e) {
     			e.printStackTrace();
     		}
     	}
-    	else if(command.equals("/")) {
-//    		action = new UserLogoutAction();
+    	else if(command.equals("/userLogoutAction.us")) {
+    		action = new UserLogoutAction();
     		try {
     			forward = action.execute(request, response);
     		}catch(Exception e) {
     			e.printStackTrace();
     		}
-    		
+   
     	}
-    	
+  
     	if(forward !=null) {
     		if(forward.isRedirect()) {
     			response.sendRedirect(forward.getPath());

@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="#EAEAEA"
+            android:background="@drawable/xml_gradient"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_person_outline_black_24dp" />
+                android:background="@drawable/ic_person_outline_white_24dp" />
 
             <LinearLayout
                 android:layout_width="210dp"
@@ -37,6 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="임지짜"
+                    android:textColor="@color/white"
                     android:textSize="18dp" />
 
                 <TextView
@@ -44,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="wlsgk0323"
+                    android:textColor="@color/white"
                     android:textSize="13dp" />
 
             </LinearLayout>
@@ -56,7 +58,7 @@
                     android:id="@+id/mypageMyInfoBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/ic_settings_black_24dp" />
+                    android:background="@drawable/ic_settings_white_24dp" />
 
             </LinearLayout>
 
@@ -69,52 +71,73 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/usagelistBtn"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="Usage List"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/mycouponBtn"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="My Coupon"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/alarmsetBtn"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/xml_round_corner"
                     android:text="Alarm Setting"
+                    android:textStyle="bold"
                     android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/usagelistBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/xml_round_corner"
+                    android:text="Usage List"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/mycouponBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/xml_round_corner"
+                    android:text="My Coupon"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/inquireBtn"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/xml_round_corner"
                     android:text="1 : 1 Inquire"
+                    android:textStyle="bold"
                     android:textColor="@color/white" />
 
             </LinearLayout>

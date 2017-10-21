@@ -51,6 +51,7 @@ DROP TABLE `user_key_tb`;
 	  `office_address` varchar(255) DEFAULT NULL,
 	  `office_call` varchar(45) DEFAULT NULL,
 	  `office_inform` varchar(255) DEFAULT NULL,
+	  `image` varchar(20) DEFAULT NULL,
 	  PRIMARY KEY (`office_no`),
 	  FOREIGN KEY(`owner_no`) REFERENCES user_tb(`user_no`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -67,7 +68,8 @@ DROP TABLE `user_key_tb`;
 	  `maximum_num` int(11) NOT NULL,
 	  `cost` int(11) NOT NULL,
 	  `office_no` int(11) NOT NULL,
-	  PRIMARY KEY (`room_no`),
+	  `image` varchar(20) NOT NULL,
+	  PRIMARY KEY (`room_no`, `office_no`),
 	  FOREIGN KEY(`office_no`) REFERENCES office_tb(`office_no`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	/*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,4 +146,4 @@ DROP TABLE `user_key_tb`;
 	/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 	/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 	/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-		
+			

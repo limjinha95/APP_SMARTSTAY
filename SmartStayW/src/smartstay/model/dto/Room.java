@@ -25,24 +25,28 @@ public class Room {
 	/** 객실 1일 숙박 비용 */
 	private int cost;
 	
+	private String image;
 	
+
+
 	/** 기본 생성자 */
 	public Room() {
 		super();
 	}
 	
 	/** 객실 필수 데이터 생성자 */
-	public Room(int officeNo, int roomNo, int standardNum, int maximumNum, int cost) {
+	public Room(int officeNo, int roomNo, int standardNum, int maximumNum, int cost, String image) {
 		super();
 		this.officeNo = officeNo;
 		this.roomNo = roomNo;
 		this.standardNum = standardNum;
 		this.maximumNum = maximumNum;
 		this.cost = cost;
+		this.image = image;
 	}
 
 	/** 전체 데이터 생성자 */
-	public Room(int officeNo, int roomNo, String roomName, String roomType, int standardNum, int maximumNum, int cost) {
+	public Room(int officeNo, int roomNo, String roomName, String roomType, int standardNum, int maximumNum, int cost, String image) {
 		super();
 		this.officeNo = officeNo;
 		this.roomNo = roomNo;
@@ -51,6 +55,7 @@ public class Room {
 		this.standardNum = standardNum;
 		this.maximumNum = maximumNum;
 		this.cost = cost;
+		this.image = image;
 	}
 	
 
@@ -108,6 +113,14 @@ public class Room {
 
 	public void setCost(int cost) {
 		this.cost = cost;
+	}
+	
+	public String getimage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

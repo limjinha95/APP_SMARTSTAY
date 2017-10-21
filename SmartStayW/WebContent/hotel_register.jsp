@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="smartstay.model.dto.Office"%>
+<%
+	Office office = (Office)request.getAttribute("office");
+%>
 <!DOCTYPE html>
 <html>
 <title>호텔 관리</title>
@@ -83,7 +86,7 @@
   <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
     <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
     <ul>
-      <li><a href="#hotel_register.jsp">HOME</a></li>
+      <li><a href="./officeRegisterView.do">HOME</a></li>
       <li style="float:right"><a>SmartStay</a></li>
       <li style="float:right"><a href="./userLogoutAction.us">로그아웃</a></li>
     </ul>
@@ -99,8 +102,8 @@
     </div>
     <div class="w3-bar-block">
       <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a href="hotel_register.jsp" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
-      <a href="room_manage.jsp" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
+      <a href="./officeRegisterView.do" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> 호텔 관리</a>
+      <a href="./roomList.rc" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i> 객실 관리</a>
     </div>
   </nav>
 
@@ -109,7 +112,16 @@
     <div class="w3-container" style="margin-top : 50px;">
       <h2 class="title">호텔 관리</h2>
       <div class="w3-display-container">
-        <img src="./static/img/room.jpg" class="hotel_img">
+      <%
+      	if(office==null){
+      %>
+      	<img src="./static/img/room.jpg" class="hotel_img">
+      <%	
+      }else{%>
+      	<img src="static/img/<%=office.getOfficeImage() %>" class="hotel_img">
+      <%}
+      %>
+        
       </div>
       <hr>
 
@@ -121,19 +133,19 @@
       
       <div class="w3-row w3-large">
         <div class="w3-col s4">
-          <p><i class="fa fa-fw fa-bed" style="margin-right : 5px;"></i> 호텔 이름 : </p>
+          <p><i class="fa fa-fw fa-bed" style="margin-right : 5px;"></i> 호텔 이름 : ${office.officeName }</p>
         </div>
         <div class="w3-col s4">
-          <p><i class="fa fa-map-marker" style="margin-right : 5px;"></i> 호텔 위치 : </p>
+          <p><i class="fa fa-map-marker" style="margin-right : 5px;"></i> 호텔 위치 : ${office.officeAddress }</p>
         </div>
         <div class="w3-col s4">
-          <p><i class="fa fa-phone" style="margin-right : 5px;"></i> 전화번호 : </p>
+          <p><i class="fa fa-phone" style="margin-right : 5px;"></i> 전화번호 : ${office.officeCall } </p>
         </div>
       </div>
       <hr>
       <div class="w3-row w3-large">
         <div class="w3-col s6">
-          <p><i class="fa fa-question-circle" style="margin-right : 5px;"></i> 호텔 소개</p>
+          <p><i class="fa fa-question-circle" style="margin-right : 5px;"></i> 호텔 소개 <br>${office.officeInform }</p>
         </div>
       </div>
 

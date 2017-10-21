@@ -16,6 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/xml_gradient"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
@@ -24,7 +25,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EAEAEA"
         android:orientation="vertical"
         android:padding="15dp">
 
@@ -56,6 +56,7 @@
                 android:layout_width="90dp"
                 android:layout_height="25dp"
                 android:background="@drawable/xml_border"
+                android:textColor="#F77062"
                 android:text="인증번호 발송" />
 
         </LinearLayout>
@@ -87,6 +88,7 @@
                 android:layout_width="90dp"
                 android:layout_height="25dp"
                 android:background="@drawable/xml_border"
+                android:textColor="#F77062"
                 android:text="인증번호 확인" />
 
 
@@ -97,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/xml_gradient"
             android:text="휴대폰인증 완료"
             android:textColor="@color/white"
             android:textSize="18dp" />

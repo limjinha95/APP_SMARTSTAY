@@ -16,6 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/xml_gradient"
             android:elevation="4dp" />
 
     </android.support.design.widget.AppBarLayout>
@@ -34,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:background="@drawable/xml_gradient">
 
                 <ImageView
                     android:id="@+id/userImg"
@@ -55,7 +57,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#EAEAEA"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -118,7 +119,8 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/xml_border"
-                        android:text="변경하기" />
+                        android:text="변경하기"
+                        android:textColor="#F77062" />
 
                 </LinearLayout>
 
@@ -151,7 +153,8 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/xml_border"
-                        android:text="변경하기" />
+                        android:text="변경하기"
+                        android:textColor="#F77062" />
 
                 </LinearLayout>
 
@@ -231,7 +234,8 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
                         android:background="@drawable/xml_border"
-                        android:text="탈퇴하기" />
+                        android:text="탈퇴하기"
+                        android:textColor="#F77062" />
 
                 </LinearLayout>
 
@@ -240,10 +244,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@drawable/xml_border"
                     android:text="로그아웃"
-                    android:textColor="@color/white"
-                    android:textSize="18dp" />
+                    android:textColor="#F77062"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
 
 
             </LinearLayout>
