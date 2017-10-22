@@ -19,20 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import smartstay.model.dao.UserDao;
+import smartstay.model.dto.User;
+
 @WebServlet(name = "first", urlPatterns = { "/first" })
 public class First extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public First() {
-		// TODO Auto-generated constructor stub
-		try {
-			ServerSocket mainServerSocket = null;
-			mainServerSocket = new ServerSocket();
-			mainServerSocket.bind(new InetSocketAddress(InetAddress.getLocalHost(), 9010));
-			ConnectThread connectThread = new ConnectThread(mainServerSocket);
-			connectThread.start();
-		} catch (Exception e) {
-		}
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -147,7 +142,16 @@ public class First extends HttpServlet {
 			} else if (head.equals("MyKey")) {
 				String ID = (String) jsonObj.get("ID");
 				response.getWriter().append(jc.MyKey(ID));
-			}
+			} else if(head.equals("Search_Room_Ip")) {
+            	String id = (String) jsonObj.get("ID");
+            	UserDao ud = new UserDao();
+            	int userNo = ud.selectOne(id);
+            	User user = ud.selectOne(userNo);
+            	
+				MessageService ms = new MessageService();
+				ms.push(user.getUserToken());
+            }
+			
 			jc.closeDB();
 		} catch (Exception e) {
 
@@ -155,103 +159,4 @@ public class First extends HttpServlet {
 
 	}
 
-}
-
-class UserInfo {
-	Socket serverSocket;
-
-	UserInfo(Socket serverSocket) {
-		this.serverSocket = serverSocket;
-	}
-}
-
-class UserThread extends Thread {
-	Socket serverSocket;
-	static public List<UserInfo> li = new ArrayList<UserInfo>();
-
-	@SuppressWarnings("rawtypes")
-	UserThread(Socket serverSocket, List li) {
-		this.serverSocket = serverSocket;
-		this.li = li;
-	}
-
-	public void sendmsg(String data, Socket soc) {
-		try {
-			data += "\r\n";
-			byte[] sendByteArray = data.getBytes("UTF-8");
-			OutputStream outputStream = soc.getOutputStream();
-			outputStream.write(sendByteArray);
-		} catch (Exception e) {
-		}
-	}
-
-	@Override
-	public void run() {
-		try {
-			while (true) {
-				InputStream inputStream = serverSocket.getInputStream();
-                byte[] byteArray = new byte[256];
-                int size = inputStream.read(byteArray);
-                if (size == -1) break;
-                String sendMessage = new String(byteArray, 0, size, "UTF-8");
-                System.out.println(sendMessage);
-                JSONParser parser = new JSONParser();
-                Object obj = parser.parse( sendMessage );
-                JSONObject jsonObj = (JSONObject)obj;
-                String head = (String) jsonObj.get("head");
-                JdbcConnect jc = new JdbcConnect("smartstay");
-                
-                if(head.equals("Search_Room_Ip"))
-                {
-                	String OfficeCode = (String) jsonObj.get("OfficeCode");
-                	String RoomNumber = (String) jsonObj.get("RoomNumber");
-                	String ip=jc.Search_ip(OfficeCode, RoomNumber);
-                	for (int i = 0; i < li.size(); i++) {
-            			if (li.get(i).serverSocket.getInetAddress().equals(ip)) {
-            				String openData = "open";
-            				sendmsg(openData,li.get(i).serverSocket);
-            				break;
-            			}
-            		}
-            		MessageService ms = new MessageService();
-            		String tok = jc.GetToken(OfficeCode, RoomNumber);
-            		String [] token = tok.split("|");
-            		for(int i=0;i<token.length;i++)
-            			ms.push(token[i]);
-                }
-                jc.closeDB();
-			}
-		} catch (Exception e) {
-			for (int i = 0; i < li.size();) {
-				if (serverSocket == li.get(i).serverSocket) {
-					li.remove(i);
-				} else {
-					i++;
-				}
-			}
-		}
-	}
-}
-
-class ConnectThread extends Thread {
-	ServerSocket mainServerSocket = null;
-	List<UserInfo> li = new ArrayList<UserInfo>();
-
-	ConnectThread(ServerSocket mainServerSocket) {
-		this.mainServerSocket = mainServerSocket;
-	}
-
-	@Override
-	public void run() {
-		try {
-			while (true) {
-				Socket serverSocket = mainServerSocket.accept();
-				System.out.println(serverSocket.getRemoteSocketAddress().toString());
-				li.add(new UserInfo(serverSocket));
-				UserThread userThread = new UserThread(serverSocket, li);
-				userThread.start();
-			}
-		} catch (Exception e) {
-		}
-	}
 }
