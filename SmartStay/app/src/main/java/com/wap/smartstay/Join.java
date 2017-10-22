@@ -125,6 +125,7 @@ public class Join extends AppCompatActivity {
                         String data = object.toString();
                         httpConnectionClient = new HttpConnection();
                         httpConnectionClient.sendObject(data);
+                        String receivedata = httpConnectionClient.receiveObject();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

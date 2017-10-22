@@ -75,9 +75,9 @@ public class AddGroup extends AppCompatActivity {
                     } else {
                         try {
                             jo = new JSONObject(receiveMsg);
-                            AddGroup.groupName = jo.getString("NAME");
-                            AddGroup.groupId = jo.getString("ID");
-                            AddGroup.groupPnum = jo.getString("Pnum");
+                            AddGroup.groupName = jo.getString("user_name");
+                            AddGroup.groupId = jo.getString("user_id");
+                            AddGroup.groupPnum = jo.getString("user_mobile");
                             idCheck = 2;
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -121,5 +121,3 @@ public class AddGroup extends AppCompatActivity {
         });
     }
 }
-
-
