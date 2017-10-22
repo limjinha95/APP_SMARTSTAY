@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.wap.smartstay.AddGroup;
 import com.wap.smartstay.HttpConnection;
 import com.wap.smartstay.Login;
 import com.wap.smartstay.Manual;
+import com.wap.smartstay.MyBounceInterpolator;
 import com.wap.smartstay.R;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
@@ -60,6 +63,12 @@ public class SmartkeyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.smartkey_fragment, container, false);
+
+        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
+
+
         spinner = (Spinner) view.findViewById(R.id.reserveListSpinner);
         manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBackground = (LinearLayout) view.findViewById(R.id.manualBackground);
@@ -149,6 +158,7 @@ public class SmartkeyFragment extends Fragment {
         smartkeyBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        v.startAnimation(myAnim);
                         SmartkeyOpenKey();
                     }
                 }
@@ -161,14 +171,25 @@ public class SmartkeyFragment extends Fragment {
                             Intent addgroup = new Intent(getContext(), AddGroup.class);
                             startActivity(addgroup);
                         }
+                    }
+                }
+        );
+      
+      smartLightBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        v.startAnimation(myAnim);
+                        Toast.makeText(getContext(), "현재 준비 중인 서비스입니다.", Toast.LENGTH_SHORT).show();
 
                     }
                 }
         );
 
+
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(myAnim);
                 if (officeCode != null) {
                     JSONObject object = new JSONObject();
                     try {

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,8 +18,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class HotelListViewAdapter extends BaseAdapter {
-    private ArrayList<HotelListViewItem> hotelViewItemList = new ArrayList<HotelListViewItem>();
+    MyBounceInterpolator interpolator;
 
+    private ArrayList<HotelListViewItem> hotelViewItemList = new ArrayList<HotelListViewItem>() ;
     public HotelListViewAdapter() {
 
     }
@@ -31,6 +34,10 @@ public class HotelListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
+
+        final Animation myAnim = AnimationUtils.loadAnimation(context,R.anim.bounce);
+        interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,6 +58,7 @@ public class HotelListViewAdapter extends BaseAdapter {
         reserveBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        v.startAnimation(myAnim);
                         Intent Intent = new Intent(context, Reserve.class);
                         Intent.putExtra("roomName", HotelListItem.getName());
                         Intent.putExtra("roomNumber", HotelListItem.getRoomNum());

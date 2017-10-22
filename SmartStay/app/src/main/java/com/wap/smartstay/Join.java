@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -65,9 +67,14 @@ public class Join extends AppCompatActivity {
     }
 
     public void joinEvent() {
+        final Animation myAnim = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
+
         joinCheckIdBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 Log.d("abcd", "ee");
                 try {
                     JSONObject object = new JSONObject();
@@ -112,6 +119,7 @@ public class Join extends AppCompatActivity {
         joinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 if (Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
                     try {
                         String refreshedToken = FirebaseInstanceId.getInstance().getToken();

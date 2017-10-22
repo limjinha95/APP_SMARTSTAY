@@ -26,8 +26,8 @@ public class HttpConnection {
 
     public HttpConnection() {
         try {
-//            serverUrl = "http://52.79.135.132:8080/ServerTest/first";
             serverUrl = "http://192.168.60.179:8081/SmartStay/first";
+            //serverUrl = "http://52.79.135.132:8080/SmartStay/first";
 
             url = new URL(serverUrl);
             connection = (HttpURLConnection) url.openConnection();

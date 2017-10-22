@@ -10,6 +10,8 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,9 +62,14 @@ public class MyInfo extends AppCompatActivity {
     }
 
     public void MyInfoEvent() {
+        final Animation myAnim = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
+
         ChangeUserPhoneNumberBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 Intent i = new Intent(MyInfo.this, ChangePhone.class);
                 startActivity(i);
             }
@@ -71,6 +78,7 @@ public class MyInfo extends AppCompatActivity {
         ChangePwd.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 Intent i = new Intent(MyInfo.this, ChangePw.class);
                 startActivity(i);
             }
@@ -80,6 +88,7 @@ public class MyInfo extends AppCompatActivity {
         Logout.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 Login.Islogin = 0;
                 Login.Name = "";
                 Login.Id = "";
@@ -94,6 +103,7 @@ public class MyInfo extends AppCompatActivity {
         Delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 JSONObject object = new JSONObject();
 
                 try {
