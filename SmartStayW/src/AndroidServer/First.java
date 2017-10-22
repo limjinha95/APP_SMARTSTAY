@@ -43,6 +43,7 @@ public class First extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String data = request.getParameter("data");
 		System.out.println(data);
 		JSONParser parser = new JSONParser();

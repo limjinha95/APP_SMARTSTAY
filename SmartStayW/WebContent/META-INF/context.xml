@@ -5,7 +5,7 @@
 		auth = "Container"
 		type="javax.sql.DataSource"
 		username="root"
-		password="1q2w3e4r"
+		password="ckdgns1016!"
 		driverClassName="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/smartstay"
 		maxActive="100"

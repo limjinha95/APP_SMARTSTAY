@@ -21,7 +21,7 @@ public class JdbcConnect {
 
 		String url = "jdbc:mysql://localhost:3306/smartstay";
 		String id = "root";
-		String pw = "1q2w3e4r";
+		String pw = "ckdgns1016!";
 		try {
 			con = DriverManager.getConnection(url, id, pw);
 			System.out.println("Connection Complete");
