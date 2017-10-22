@@ -78,7 +78,7 @@ public class JdbcConnect {
 	}
 	
 	public String SelectUser(String id) throws SQLException {
-		String query = "SELECT user_id, user_name, user_mobile FROM user_tb where user_id=?";
+		String query = "SELECT user_id, user_name, user_mobile, user_token FROM user_tb where user_id=?";
 		psmt = con.prepareStatement(query);
 		psmt.setString(1, id);
 		rs = psmt.executeQuery();
