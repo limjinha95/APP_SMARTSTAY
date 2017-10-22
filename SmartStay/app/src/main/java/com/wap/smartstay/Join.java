@@ -113,11 +113,9 @@ public class Join extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Epwd.getText().toString().equals(EpwdCheck.getText().toString())) {
-                    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
-                    JSONObject object = new JSONObject();
-
                     try {
+                        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+                        JSONObject object = new JSONObject();
                         object.put("head", "Register");
                         object.put("ID", Eid.getText().toString());
                         object.put("PWD", Epwd.getText().toString());
