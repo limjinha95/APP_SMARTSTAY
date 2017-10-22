@@ -26,7 +26,9 @@ public class HttpConnection {
 
     public HttpConnection() {
         try {
-            serverUrl = "http://52.79.135.132:8080/SmartStay/first";
+            serverUrl = "http://192.168.60.179:8081/SmartStay/first";
+            //serverUrl = "http://52.79.135.132:8080/SmartStay/first";
+
             url = new URL(serverUrl);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -42,9 +44,9 @@ public class HttpConnection {
 
     public void sendObject(String sendData) {
         try {
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
             bufferedWriter.write("data=" + sendData);
-            Log.e("Send","data="+sendData);
+            Log.e("Send", "data=" + sendData);
             bufferedWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +57,7 @@ public class HttpConnection {
         String receiveMessage = null;
         try {
             Log.e("receive", "r1");
-            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
             Log.e("receive", "r2");
             receiveMessage = bufferedReader.readLine();
             Log.e("receive", "r3" + receiveMessage);

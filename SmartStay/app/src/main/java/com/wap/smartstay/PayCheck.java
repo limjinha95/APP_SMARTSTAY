@@ -17,20 +17,27 @@ public class PayCheck extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paycheck);
-//
-//        Button payCheckBtn = (Button) findViewById(R.id.paycheckBtn);
-//        payCheckBtn.setOnClickListener(
-//                new Button.OnClickListener() {
-//                    public void onClick(View v) {
-//                        Intent i = new Intent(PayCheck.this, Main.class);
-//                        startActivity(i);
-//                        finish();
-//                    }
-//                }
-//        );
+
+        Button payCheckBtn = (Button) findViewById(R.id.paycheckBtn);
+        payCheckBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent i = new Intent(PayCheck.this, Main.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+        );
 
 
 
+    }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent i = new Intent(PayCheck.this, Main.class);
+        startActivity(i);
+        finish();
     }
 
 }

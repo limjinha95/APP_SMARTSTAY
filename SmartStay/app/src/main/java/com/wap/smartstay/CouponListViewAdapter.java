@@ -55,12 +55,13 @@ public class CouponListViewAdapter extends BaseAdapter {
         return couponListViewItemList.get(position);
     }
 
-    public void addItem(String name, String info, String duty) {
+    public void addItem(String name, String info, String duty, String cost) {
         CouponListViewItem couponItem = new CouponListViewItem();
 
         couponItem.setCouponName(name);
         couponItem.setCouponInfo(info);
         couponItem.setCouponDuty(duty);
+        couponItem.setCouponCost(cost);
 
         couponListViewItemList.add(couponItem);
     }

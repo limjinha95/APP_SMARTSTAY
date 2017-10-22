@@ -94,7 +94,7 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/t9"
+                        android:id="@+id/room_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="부경 대연 호텔"

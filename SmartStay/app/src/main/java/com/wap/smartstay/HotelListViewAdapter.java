@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class HotelListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return hotelViewItemList.size() ;
+        return hotelViewItemList.size();
     }
 
     @Override
@@ -43,11 +44,11 @@ public class HotelListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.hotel_list_item, null);
         }
 
-        ImageView pic = (ImageView) convertView.findViewById(R.id.pic) ;
-        TextView name = (TextView) convertView.findViewById(R.id.name) ;
-        TextView location = (TextView) convertView.findViewById(R.id.location) ;
+        ImageView pic = (ImageView) convertView.findViewById(R.id.pic);
+        TextView name = (TextView) convertView.findViewById(R.id.name);
+        TextView location = (TextView) convertView.findViewById(R.id.location);
 
-        HotelListViewItem HotelListItem = hotelViewItemList.get(position);
+        final HotelListViewItem HotelListItem = hotelViewItemList.get(position);
 
         pic.setImageDrawable(HotelListItem.getPic());
         location.setText(HotelListItem.getLocation());
@@ -59,6 +60,12 @@ public class HotelListViewAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         v.startAnimation(myAnim);
                         Intent Intent = new Intent(context, Reserve.class);
+                        Intent.putExtra("roomName", HotelListItem.getName());
+                        Intent.putExtra("roomNumber", HotelListItem.getRoomNum());
+                        Intent.putExtra("officeCode", HotelListItem.getOfficeCode());
+                        Intent.putExtra("roomType", HotelListItem.getRoomType());
+                        Intent.putExtra("roomPrice", HotelListItem.getRoomPrice());
+                        Log.e("roomPrice", HotelListItem.getRoomPrice());
                         context.startActivity(Intent);
                     }
                 }
@@ -68,21 +75,25 @@ public class HotelListViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position ;
+        return position;
     }
 
     @Override
     public Object getItem(int position) {
-        return hotelViewItemList.get(position) ;
+        return hotelViewItemList.get(position);
     }
 
-    public void addItem(Drawable pic, String name, String location) {
+    public void addItem(Drawable pic, String room_name, String office_name, String address, String roomPrice, String roomType, String office_code, String room_no) {
         HotelListViewItem item = new HotelListViewItem();
 
         item.setPic(pic);
-        item.setName(name);
-        item.setLocation(location);
-
+        item.setOfficeName(office_name);
+        item.setName(room_name);
+        item.setLocation(address);
+        item.setRoomPrice(roomPrice);
+        item.setRoomType(roomType);
+        item.setroomNum(room_no);
+        item.setOfficeCode(office_code);
         hotelViewItemList.add(item);
     }
 }

@@ -16,13 +16,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Reserve extends AppCompatActivity implements View.OnClickListener {
     Button btnFromPicker, btnToPicker, btnPayment;
-    TextView textFrom, textTo, textPeriod;
+    TextView textFrom, textTo, textPeriod, roomText;
     private int from_Year, from_Month, from_Day;
     private int to_Year, to_Month, to_Day;
 
@@ -32,6 +35,11 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
     Long diffDate;
     String period;
 
+    String roomName, roomPrice, roomType1, officeCode, roomNumber;
+
+    public HttpConnection httpConnectionClient;
+
+
     String[] roomType = {"스위트룸", "스탠다드", "슈페리얼"};
     int pic[] = {R.drawable.one, R.drawable.two, R.drawable.three};
 
@@ -39,6 +47,12 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reserve);
+        Intent intent = getIntent();
+        roomName = intent.getExtras().getString("roomName");
+        roomPrice = intent.getExtras().getString("roomPrice");
+        roomType1 = intent.getExtras().getString("roomType");
+        officeCode = intent.getExtras().getString("officeCode");
+        roomNumber = intent.getExtras().getString("roomNumber");
 
         btnFromPicker = (Button) findViewById(R.id.setFromBtn);
         btnToPicker = (Button) findViewById(R.id.setToBtn);
@@ -47,7 +61,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
         textFrom = (TextView) findViewById(R.id.textFrom);
         textTo = (TextView) findViewById(R.id.textTo);
         textPeriod = (TextView) findViewById(R.id.textPeriod);
-
+        roomText = (TextView) findViewById(R.id.room_text);
         btnFromPicker.setOnClickListener(this);
         btnToPicker.setOnClickListener(this);
         btnPayment.setOnClickListener(this);
@@ -61,6 +75,9 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
 
         ArrayAdapter<String> spinAdap = new ArrayAdapter<String>(this, R.layout.reserve_spinner_item, R.id.information, roomType);
         spin.setAdapter(spinAdap);
+
+        roomText.setText(roomName);
+        roomType[0] = roomType1;
 
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -76,6 +93,8 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
         });
 
     }
+
+    String startDate, endDate;
 
     @Override
     public void onClick(View view) {
@@ -93,6 +112,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            startDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             textFrom.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth + " ~"); //N월 N일 ~ N월 N
                             start_Year = year;
                             start_Month = monthOfYear + 1;
@@ -132,6 +152,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            endDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                             textTo.setText(year + "." + (monthOfYear + 1) + "." + dayOfMonth); //N월 N일 ~ N월 N일
                             end_Year = year;
                             end_Month = monthOfYear + 1;
@@ -187,6 +208,11 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
 
         if (view == btnPayment) {
             Intent Intent = new Intent(this, Payment.class);
+            Intent.putExtra("roomNumber", roomNumber);
+            Intent.putExtra("officeCode", officeCode);
+            Intent.putExtra("roomPrice", roomPrice);
+            Intent.putExtra("startDate", startDate);
+            Intent.putExtra("endDate", endDate);
             startActivity(Intent);
             finish();
         }
