@@ -26,7 +26,7 @@ public class HttpConnection {
 
     public HttpConnection() {
         try {
-            serverUrl = "http://13.125.39.91:8080/SmartStay/first";
+            serverUrl = "http://13.125.39.91:8080/SmartStayW/first";
             //serverUrl = "http://52.79.135.132:8080/SmartStay/first";
 
             url = new URL(serverUrl);
