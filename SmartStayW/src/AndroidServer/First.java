@@ -42,7 +42,7 @@ public class First extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 		String data = request.getParameter("data");
 		System.out.println(data);
 		JSONParser parser = new JSONParser();
@@ -128,12 +128,12 @@ public class First extends HttpServlet {
 					check = jc.ReservationCancel(Ridx);
 				while (check == false);
 			} else if (head.equals("Reservation")) {
-				String OfficeName = (String) jsonObj.get("OfficeName");
-				String RoomNumber = (String) jsonObj.get("RoomNumber");
+				String RoomNumber = (String) jsonObj.get("room_no");
 				String ID = (String) jsonObj.get("ID");
 				String StartDate = (String) jsonObj.get("StartDate");
 				String EndDate = (String) jsonObj.get("EndDate");
-				String officeCode = jc.CheckOfficeCode(OfficeName);
+				String officeCode = (String) jsonObj.get("office_no");
+				System.out.println("ID "+ID+" Rno "+RoomNumber+" Ono "+officeCode+" S "+StartDate+" D "+EndDate);
 				boolean check = false;
 				do
 					check = jc.RegisterReservation(officeCode, RoomNumber, ID, StartDate, EndDate);

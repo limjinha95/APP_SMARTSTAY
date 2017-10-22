@@ -1,6 +1,7 @@
 package AndroidServer;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -208,7 +209,7 @@ public class JdbcConnect {
 	}
 
 	public String ReservationCheck(String ID) throws SQLException {
-		String query = "select reservation_tb.office_no, reservation_tb.room_no, office_tb.office_name,reservation_tb.start_date, reservation_tb.end_date, room_tb.standard_num, room_tb.maximum_num from (reservation_tb join room_tb on reservation_tb.room_no = room_tb.room_no and reservation_tb.office_no = room_tb.office_no) join office_tb on reservation_tb.office_no = office_tb.office_no where user_id = ?";
+		String query = "select reservation_tb.office_no, reservation_tb.room_no, office_tb.office_name,room_tb.room_name,reservation_tb.start_date, reservation_tb.end_date, room_tb.standard_num, room_tb.maximum_num from (reservation_tb join room_tb on reservation_tb.room_no = room_tb.room_no and reservation_tb.office_no = room_tb.office_no) join office_tb on reservation_tb.office_no = office_tb.office_no where user_id = ?";
 		psmt = con.prepareStatement(query);
 		psmt.setString(1, ID);
 		rs = psmt.executeQuery();
@@ -309,7 +310,7 @@ public class JdbcConnect {
 	}
 
 	public String RoomList() throws SQLException {
-		String query = "select office_tb.office_name, room_tb.room_name, office_tb.office_address, room_tb.room_type, room_tb.cost from room_tb join office_tb on room_tb.office_no = office_tb.office_no";
+		String query = "select office_tb.office_name, office_tb.office_no,room_tb.room_name,room_tb.room_no, office_tb.office_address, room_tb.room_type, room_tb.cost from room_tb join office_tb on room_tb.office_no = office_tb.office_no";
 		psmt = con.prepareStatement(query);
 		rs = psmt.executeQuery();
 		if (rs.next() == false) {
@@ -407,16 +408,27 @@ public class JdbcConnect {
 
 	public boolean RegisterReservation(String officecode, String rnum, String id, String start, String end)
 			throws SQLException {
-		String query = "insert into reservation_tb (user_id, start_date, end_date, officec_no, room_no) values( ? , ? , ? , ? , ? )";
+		String query = "insert into reservation_tb (user_id, start_date, end_date, office_no, room_no) values( ? , ? , ? , ? , ? )";
 		psmt = con.prepareStatement(query);
 		psmt.setString(1, id);
-		psmt.setString(2, start);
-		psmt.setString(3, end);
-		psmt.setString(4, officecode);
-		psmt.setString(5, rnum);
+		SimpleDateFormat trans = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date startD,endD;
+		startD = endD = null;
+		try {
+			startD = (java.util.Date)trans.parse(start);
+			endD = (java.util.Date)trans.parse(end);
+		}catch(Exception e) {
+			
+		}
+		psmt.setDate(2, new java.sql.Date(startD.getTime()));
+		psmt.setDate(3, new java.sql.Date(endD.getTime()));
+		psmt.setInt(4, Integer.parseInt(officecode));
+		psmt.setInt(5, Integer.parseInt(rnum));
 		int check = psmt.executeUpdate();
-		if (check > 0)
+		if (check > 0) {
+			System.out.println("reserve");
 			return true;
+		}
 		else
 			return false;
 	}

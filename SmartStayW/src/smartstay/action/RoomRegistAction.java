@@ -42,7 +42,7 @@ public class RoomRegistAction implements Action{
 		String file = (String)e.nextElement();
 		origFileName = multi.getOriginalFileName(file);
 		imgPath = realFolder+"\\"+origFileName;
-		Room room = new Room(officeNum, Integer.parseInt(multi.getParameter("roomnum")), multi.getParameter("roomname"), multi.getParameter("roomtype"), Integer.parseInt(multi.getParameter("max")), Integer.parseInt(multi.getParameter("max")), Integer.parseInt(multi.getParameter("cost")), origFileName);
+		Room room = new Room(officeNum, Integer.parseInt(multi.getParameter("roomnum")), multi.getParameter("roomname"), multi.getParameter("roomtype"), Integer.parseInt(multi.getParameter("standard")), Integer.parseInt(multi.getParameter("max")), Integer.parseInt(multi.getParameter("cost")), origFileName);
 
 		boolean isRegistSuccess = rrs.registRoom(room);
 		ActionForward forward = null;
