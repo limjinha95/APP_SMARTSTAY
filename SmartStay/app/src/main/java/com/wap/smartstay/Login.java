@@ -9,6 +9,8 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -59,6 +61,10 @@ public class Login extends AppCompatActivity {
     }
 
     public void LoginEvent() {
+        final Animation myAnim = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
+
         startJoinBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +75,7 @@ public class Login extends AppCompatActivity {
         loginBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 if (Islogin == 1) {
                     Toast.makeText(Login.this, "이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
                     finish();

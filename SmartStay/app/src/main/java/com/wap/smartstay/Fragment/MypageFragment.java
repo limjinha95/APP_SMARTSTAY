@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.wap.smartstay.AlarmSet;
 import com.wap.smartstay.CouponList;
 import com.wap.smartstay.Inquire;
 import com.wap.smartstay.Login;
+import com.wap.smartstay.MyBounceInterpolator;
 import com.wap.smartstay.MyInfo;
 import com.wap.smartstay.R;
 import com.wap.smartstay.UsageList;
@@ -31,6 +34,10 @@ public class MypageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.mypage_fragment, container, false);
+
+        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
 
         id = (TextView) view.findViewById(R.id.mypageUserId);
         name = (TextView) view.findViewById(R.id.mypageUserName);
@@ -57,6 +64,7 @@ public class MypageFragment extends Fragment {
         usagelistBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        v.startAnimation(myAnim);
                         Intent usagelist = new Intent(getContext(), UsageList.class);
                         startActivity(usagelist);
                     }
@@ -67,6 +75,7 @@ public class MypageFragment extends Fragment {
         mycouponBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        v.startAnimation(myAnim);
                         Intent mycoupon = new Intent(getContext(), CouponList.class);
                         startActivity(mycoupon);
                     }
@@ -77,6 +86,7 @@ public class MypageFragment extends Fragment {
         alarmsetBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        v.startAnimation(myAnim);
                         Intent alarmset = new Intent(getContext(), AlarmSet.class);
                         startActivity(alarmset);
                     }
@@ -87,6 +97,7 @@ public class MypageFragment extends Fragment {
         inquireBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        v.startAnimation(myAnim);
                         Intent inquire = new Intent(getContext(), Inquire.class);
                         startActivity(inquire);
                     }
