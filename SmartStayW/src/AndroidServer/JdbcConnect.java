@@ -1,4 +1,4 @@
-package and;
+package AndroidServer;
 
 import java.sql.*;
 
