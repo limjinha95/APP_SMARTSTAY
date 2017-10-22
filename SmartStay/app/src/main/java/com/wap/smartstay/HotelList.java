@@ -28,6 +28,7 @@ public class HotelList extends ListFragment {
         Toolbar toolbar = (Toolbar) View.findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         adapter = new HotelListViewAdapter();
+        int[] roomName = {R.drawable.room1, R.drawable.room2, R.drawable.room3, R.drawable.room4};
         try {
             JSONObject object = new JSONObject();
             object.put("head", "RoomList");
@@ -40,7 +41,8 @@ public class HotelList extends ListFragment {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
-                String room_name = dataJsonObject.getString("room_name");
+                String room_name;
+                room_name = dataJsonObject.getString("room_name");
                 String office_name = dataJsonObject.getString("office_name");
                 String office_address = dataJsonObject.getString("office_address");
                 String room_price = dataJsonObject.getString("cost");
@@ -48,14 +50,14 @@ public class HotelList extends ListFragment {
                 String office_code = dataJsonObject.getString("office_no");
                 String room_number = dataJsonObject.getString("room_no");
 
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.one)
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), roomName[i])
                         , room_name
                         , office_name
                         , office_address
                         , room_price
                         , room_type
                         , office_code
-                        ,room_number
+                        , room_number
                 );
             }
         } catch (Exception e) {
