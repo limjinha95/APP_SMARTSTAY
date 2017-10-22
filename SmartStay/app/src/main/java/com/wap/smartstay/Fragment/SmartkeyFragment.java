@@ -40,9 +40,9 @@ public class SmartkeyFragment extends Fragment {
     ImageButton smartkeyBtn, smartLightBtn, addgroupBtn, callBtn;
     Spinner spinner;
     List<String> data = new ArrayList<>();
-    String[] roomNames = {"1호", "2호", "3호"};
-    String[] officeCode = {};
-    String[] roomNumber = {};
+    String[] roomNames;
+    String[] officeCode;
+    String[] roomNumber;
     public static int roomChoice = 0;
     public static String phoneNumber = "";
 
@@ -67,23 +67,33 @@ public class SmartkeyFragment extends Fragment {
         smartLightBtn = (ImageButton) view.findViewById(R.id.smartlightBtn);
         addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         callBtn = (ImageButton) view.findViewById(R.id.callBtn);
+        Log.e("smartkey", "check1");
         try {
+            Log.e("smartkey", "check2");
             JSONObject object = new JSONObject();
             object.put("head", "MyKey");
             object.put("ID", Login.Id);
+            Log.e("smartkey", "check3");
+
             String sendData = object.toString();
+            Log.e("smartkey", sendData);
             httpConnectionClient = new HttpConnection();
             httpConnectionClient.sendObject(sendData);
             String receiveMsg = httpConnectionClient.receiveObject();
+            Log.e("smartkey", receiveMsg);
             JSONArray jsonArray = new JSONArray(receiveMsg);
+            roomNames = new String[jsonArray.length()];
+            officeCode = new String[jsonArray.length()];
+            roomNumber = new String[jsonArray.length()];
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
-                String smartKeyOfficeCode = dataJsonObject.getString("OFFICECODE");
-
-                String roomName = dataJsonObject.getString("NAME");
-                String roomNum = dataJsonObject.getString("RNUM");
+                String smartKeyOfficeCode = dataJsonObject.getString("office_no");
+                Log.e("smartkey", smartKeyOfficeCode);
+                String roomName = dataJsonObject.getString("office_name");
+                String roomNum = dataJsonObject.getString("room_no");
                 String smartKeyRoomInfo = roomName + roomNum;
+                Log.e("smartkey", smartKeyRoomInfo);
 
 //                String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
 
@@ -96,9 +106,10 @@ public class SmartkeyFragment extends Fragment {
         }
 
         for (String str : roomNames) {
+            Log.e("str", str);
             data.add(str);
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,data);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, data);
 
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -172,8 +183,8 @@ public class SmartkeyFragment extends Fragment {
 
                     String receiveMsg = httpConnectionClient.receiveObject();
                     JSONObject object2 = new JSONObject(receiveMsg);
-
-                    String phone = object2.get("OfficePnum").toString();
+                    Log.e("str", receiveMsg);
+                    String phone = object2.get("office_call").toString();
                     phoneNumber = phone;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -202,7 +213,6 @@ public class SmartkeyFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }
