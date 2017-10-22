@@ -25,9 +25,6 @@ import com.wap.smartstay.HttpConnection;
 import com.wap.smartstay.Login;
 import com.wap.smartstay.Manual;
 import com.wap.smartstay.R;
-import com.wap.smartstay.SmartKeyCallingList;
-import com.wap.smartstay.SmartkeyPopupList;
-import com.wap.smartstay.SmartkeyPopupListViewItem;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import org.json.JSONArray;
@@ -40,7 +37,7 @@ public class SmartkeyFragment extends Fragment {
     public HttpConnection httpConnectionClient;
     ImageButton manualBtn;
     LinearLayout manualBackground;
-    ImageButton smartkeyBtn, addgroupBtn, callBtn;
+    ImageButton smartkeyBtn, smartLightBtn, addgroupBtn, callBtn;
     Spinner spinner;
     List<String> data = new ArrayList<>();
     String[] roomNames = {"1호", "2호", "3호"};
@@ -67,6 +64,7 @@ public class SmartkeyFragment extends Fragment {
         manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBackground = (LinearLayout) view.findViewById(R.id.manualBackground);
         smartkeyBtn = (ImageButton) view.findViewById(R.id.smartkeyBtn);
+        smartLightBtn = (ImageButton) view.findViewById(R.id.smartlightBtn);
         addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         callBtn = (ImageButton) view.findViewById(R.id.callBtn);
         try {
@@ -138,6 +136,15 @@ public class SmartkeyFragment extends Fragment {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         SmartkeyOpenKey();
+                    }
+                }
+        );
+
+        smartLightBtn.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "현재 준비 중인 서비스입니다.", Toast.LENGTH_SHORT).show();
+
                     }
                 }
         );

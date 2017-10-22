@@ -68,8 +68,6 @@ public class Main extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item_tool, menu);
@@ -80,12 +78,7 @@ public class Main extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.search_main:
-                if (Login.Islogin == 0) {
-                    Intent local_main = new Intent(this, Login.class);
-                    startActivity(local_main);
-                    finish();
-                } else if (Login.Islogin == 1)
-                    Toast.makeText(this, "이미 로그인 하였습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "현재 준비 중인 서비스입니다.", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

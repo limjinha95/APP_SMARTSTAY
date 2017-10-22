@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/cardview_dark_background"
-                android:layout_marginBottom="45dp"
+                android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -57,7 +57,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:text="예약 정보"
                             android:textSize="20dp"
@@ -201,7 +200,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="결제 금액"
-                            android:textSize="19dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -346,7 +345,9 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="29dp"
+                        android:layout_height="35dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
                         android:background="@color/white"
                         android:orientation="horizontal">
 
@@ -355,8 +356,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginLeft="5dp"
                             android:text="주문자 동의"
-                            android:textSize="20dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -364,6 +366,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
+                        android:paddingTop="5dp"
                         android:layout_marginTop="1dp"
                         android:background="@color/white"
                         android:orientation="horizontal">
@@ -384,6 +387,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.24"
                         android:background="@color/white"
+                        android:layout_marginBottom="5dp"
                         android:orientation="vertical">
 
                         <LinearLayout
