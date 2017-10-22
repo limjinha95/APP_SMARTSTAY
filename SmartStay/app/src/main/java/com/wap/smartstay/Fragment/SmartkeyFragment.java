@@ -28,7 +28,7 @@ import com.wap.smartstay.R;
 import com.wap.smartstay.SmartKeyCallingList;
 import com.wap.smartstay.SmartkeyPopupList;
 import com.wap.smartstay.SmartkeyPopupListViewItem;
-import com.wap.smartstay.SmartkeyRoomAdapter;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,15 +63,12 @@ public class SmartkeyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.smartkey_fragment, container, false);
-        SmartkeyRoomAdapter adapter;
-
         spinner = (Spinner) view.findViewById(R.id.reserveListSpinner);
         manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBackground = (LinearLayout) view.findViewById(R.id.manualBackground);
         smartkeyBtn = (ImageButton) view.findViewById(R.id.smartkeyBtn);
         addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         callBtn = (ImageButton) view.findViewById(R.id.callBtn);
-
         try {
             JSONObject object = new JSONObject();
             object.put("head", "MyKey");
@@ -103,10 +100,9 @@ public class SmartkeyFragment extends Fragment {
         for (String str : roomNames) {
             data.add(str);
         }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,data);
 
-        adapter = new SmartkeyRoomAdapter(view.getContext(), data);
-        spinner.setAdapter(adapter);
-
+        spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {

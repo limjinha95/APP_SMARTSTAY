@@ -37,15 +37,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SmartStay 매뉴얼 확인 >>"
-                    android:textSize="17dp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="스마트 키를 사용하기 전에 매뉴얼을 읽으세요 !"
-                    android:textSize="13dp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -59,6 +59,7 @@
             android:orientation="vertical">
 
             <Spinner
+                android:layout_gravity="center"
                 android:id="@+id/reserveListSpinner"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
@@ -71,8 +72,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
             android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <LinearLayout
