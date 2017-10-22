@@ -28,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="vertical">
 
@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/cardview_dark_background"
+                android:layout_marginBottom="45dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -174,7 +175,7 @@
                         android:id="@+id/couponBtn"
                         android:layout_width="match_parent"
                         android:layout_height="33dp"
-                        android:background="@drawable/buttonshape_basic_orange"
+                        android:background="@drawable/buttonshape_basic_dark"
                         android:text="쿠폰"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -444,17 +445,16 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:layout_marginTop="1dp"
-                    android:layout_marginBottom="50dp"
                     android:background="@color/white">
 
                     <Button
                         android:id="@+id/paymentBtn"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/buttonshape_basic_orange"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/buttonshape_basic_dark"
                         android:text="결제하기"
                         android:textColor="@color/white"
                         android:textSize="18dp" />

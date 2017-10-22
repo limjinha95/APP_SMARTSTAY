@@ -115,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/buttonshape_basic_orange"
+                    android:background="@drawable/buttonshape_basic_dark"
                     android:text="보내기"
                     android:textColor="@color/white"
                     android:textSize="20dp" />

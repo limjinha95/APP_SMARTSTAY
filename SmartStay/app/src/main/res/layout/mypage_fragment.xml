@@ -14,21 +14,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_person_outline_black_24dp" />
-
             <LinearLayout
-                android:layout_width="210dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -56,9 +50,9 @@
 
                 <ImageButton
                     android:id="@+id/mypageMyInfoBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/ic_settings_black_24dp" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/ic_settings" />
 
             </LinearLayout>
 
@@ -68,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/bgcolor">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,7 +76,7 @@
                     android:layout_width="115dp"
                     android:layout_height="115dp"
                     android:layout_marginRight="15dp"
-                    android:background="@drawable/buttonshape_basic_orange"
+                    android:background="@drawable/buttonshape_basic_dark"
                     android:text="이용내역"
                     android:textSize="17dp"
                     android:textColor="@color/white" />
@@ -90,7 +85,7 @@
                     android:id="@+id/mycouponBtn"
                     android:layout_width="115dp"
                     android:layout_height="115dp"
-                    android:background="@drawable/buttonshape_basic_orange"
+                    android:background="@drawable/buttonshape_basic_dark"
                     android:text="내 쿠폰함"
                     android:textSize="17dp"
                     android:textColor="@color/white" />
@@ -109,7 +104,7 @@
                     android:layout_width="115dp"
                     android:layout_height="115dp"
                     android:layout_marginRight="15dp"
-                    android:background="@drawable/buttonshape_basic_orange"
+                    android:background="@drawable/buttonshape_basic_dark"
                     android:text="알람 설정"
                     android:textSize="17dp"
                     android:textColor="@color/white" />
@@ -118,7 +113,7 @@
                     android:id="@+id/inquireBtn"
                     android:layout_width="115dp"
                     android:layout_height="115dp"
-                    android:background="@drawable/buttonshape_basic_orange"
+                    android:background="@drawable/buttonshape_basic_dark"
                     android:text="1 : 1 문의"
                     android:textSize="17dp"
                     android:textColor="@color/white" />
