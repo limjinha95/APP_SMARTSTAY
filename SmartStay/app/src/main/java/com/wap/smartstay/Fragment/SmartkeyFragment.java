@@ -224,8 +224,7 @@ public class SmartkeyFragment extends Fragment {
 
         try {
             object.put("head", "Search_Room_Ip");
-            object.put("OfficeCode", officeCode[roomChoice]);
-            object.put("RoomNumber", roomNumber);
+            object.put("ID", Login.Id);
 
             String data = object.toString();
             httpConnectionClient = new HttpConnection();
