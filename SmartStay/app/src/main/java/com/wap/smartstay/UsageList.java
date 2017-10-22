@@ -9,6 +9,7 @@ import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,16 +19,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class UsageList extends AppCompatActivity {
-    Handler handler;
-
-    boolean check = false;
-
     TextView accomodationName;
     TextView reservationDuty;
     TextView accomodationInfo;
 
     public static ArrayList<ReserveListViewItem> reserveList = new ArrayList<ReserveListViewItem>();
-    public static boolean check2 = false;
     String name, duty, info;
 
     HttpConnection httpConnectionClient;
@@ -62,16 +58,19 @@ public class UsageList extends AppCompatActivity {
             String receiveMsg = httpConnectionClient.receiveObject();
 
             JSONArray jsonArray = new JSONArray(receiveMsg);
-            ReserveListViewItem item;
+//            ReserveListViewItem item;
 
+            Log.e("UsageList", receiveMsg);
+            Log.e("UsageList", jsonArray.length() + "");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
-
-                String roomName = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
-                String reservationDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
-                String roomInfo = "기준 " + dataJsonObject.getString("MINNUM") + "인 / 최대 " + dataJsonObject.getString("MAXNUM") + "인";
-
-                item = new ReserveListViewItem();
+                Log.e("aa","aa");
+                Log.e("aa",dataJsonObject.toString());
+                String roomName = dataJsonObject.getString("office_no") + " " + dataJsonObject.getString("room_no") + " " + dataJsonObject.getString("room_name") + " " + dataJsonObject.getString("office_name");
+                Log.e("aa",dataJsonObject.getString("office_no") + " " + dataJsonObject.getString("room_no") + " " + dataJsonObject.getString("room_name") + " " + dataJsonObject.getString("office_name"));
+                String reservationDuty = dataJsonObject.getString("start_date") + "~" + dataJsonObject.getString("end_date");
+                String roomInfo = "기준 " + dataJsonObject.getString("standard_num") + "인 / 최대 " + dataJsonObject.getString("maximum_num") + "인";
+                ReserveListViewItem item = new ReserveListViewItem();
 
                 item.setAccomodationName(roomName);
                 item.setReservationDuty(reservationDuty);

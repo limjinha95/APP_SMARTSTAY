@@ -18,8 +18,7 @@ import java.util.ArrayList;
 public class CouponList extends AppCompatActivity {
     Handler handler;
     public static ArrayList<CouponListViewItem> couponList = new ArrayList<CouponListViewItem>();
-    public static String couponName, couponInfo, couponDuty;
-    boolean check2 = false;
+    public static String couponName, couponInfo, couponDuty, couponCost;
     HttpConnection httpConnectionClient;
 
     @Override
@@ -46,27 +45,26 @@ public class CouponList extends AppCompatActivity {
             String sendData = object.toString();
             httpConnectionClient = new HttpConnection();
             httpConnectionClient.sendObject(sendData);
-
             String receiveMsg = httpConnectionClient.receiveObject();
+
             JSONArray jsonArray = new JSONArray(receiveMsg);
             CouponListViewItem item;
-            check2 = false;
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
 
-                String couponName = dataJsonObject.getString("NAME");
-                String couponInfo = dataJsonObject.getString("INFO");
-                String couponDuty = dataJsonObject.getString("STARTDATE") + "~" + dataJsonObject.getString("ENDDATE");
-
+                String couponName = dataJsonObject.getString("coupon_name");
+                String couponInfo = dataJsonObject.getString("coupon_info");
+                String couponDuty = dataJsonObject.getString("start_date") + "~" + dataJsonObject.getString("end_date");
+                String couponCost = dataJsonObject.getString("cost");
                 item = new CouponListViewItem();
 
                 item.setCouponName(couponName);
                 item.setCouponInfo(couponInfo);
                 item.setCouponDuty(couponDuty);
+                item.setCouponCost(couponCost);
 
                 couponList.add(item);
-
             }
 
         } catch (JSONException e) {
@@ -86,8 +84,9 @@ public class CouponList extends AppCompatActivity {
             couponName = couponList.get(i).getCouponName();
             couponInfo = couponList.get(i).getCouponInfo();
             couponDuty = couponList.get(i).getCouponDuty();
+            couponCost = couponList.get(i).getCouponCost();
 
-            adapter.addItem(couponName, couponInfo, couponDuty);
+            adapter.addItem(couponName, couponInfo, couponDuty, couponCost);
         }
 
     }

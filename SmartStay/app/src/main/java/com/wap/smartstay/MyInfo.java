@@ -56,7 +56,7 @@ public class MyInfo extends AppCompatActivity {
                 Toast.makeText(MyInfo.this, bundle.getString("msg"), Toast.LENGTH_SHORT).show();
             }
         };
-
+        MyInfoEvent();
     }
 
     public void MyInfoEvent() {
@@ -86,7 +86,7 @@ public class MyInfo extends AppCompatActivity {
                 Login.Pnum = "";
 
                 Toast.makeText(MyInfo.this, "로그아웃 하였습니다.", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(MyInfo.this, Main.class);
+                Intent i = new Intent(MyInfo.this, Login.class);
                 startActivity(i);
             }
         });
@@ -103,6 +103,7 @@ public class MyInfo extends AppCompatActivity {
 
                     httpConnectionClient = new HttpConnection();
                     httpConnectionClient.sendObject(data);
+                    String receive = httpConnectionClient.receiveObject();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -114,7 +115,7 @@ public class MyInfo extends AppCompatActivity {
                 Login.Pnum = "";
                 Toast.makeText(MyInfo.this, "탈퇴 성공 하였습니다.", Toast.LENGTH_SHORT).show();
 
-                Intent i = new Intent(MyInfo.this, Main.class);
+                Intent i = new Intent(MyInfo.this, Login.class);
                 startActivity(i);
             }
         });

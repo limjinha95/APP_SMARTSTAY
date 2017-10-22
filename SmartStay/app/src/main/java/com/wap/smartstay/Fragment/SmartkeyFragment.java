@@ -37,10 +37,10 @@ public class SmartkeyFragment extends Fragment {
     public HttpConnection httpConnectionClient;
     ImageButton manualBtn;
     LinearLayout manualBackground;
-    ImageButton smartkeyBtn, smartLightBtn, addgroupBtn, callBtn;
+    ImageButton smartkeyBtn, addgroupBtn, callBtn;
     Spinner spinner;
     List<String> data = new ArrayList<>();
-    String[] roomNames;
+    public static String[] roomNames;
     String[] officeCode;
     String[] roomNumber;
     public static int roomChoice = 0;
@@ -64,7 +64,6 @@ public class SmartkeyFragment extends Fragment {
         manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBackground = (LinearLayout) view.findViewById(R.id.manualBackground);
         smartkeyBtn = (ImageButton) view.findViewById(R.id.smartkeyBtn);
-        smartLightBtn = (ImageButton) view.findViewById(R.id.smartlightBtn);
         addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         callBtn = (ImageButton) view.findViewById(R.id.callBtn);
         Log.e("smartkey", "check1");
@@ -81,11 +80,11 @@ public class SmartkeyFragment extends Fragment {
             httpConnectionClient.sendObject(sendData);
             String receiveMsg = httpConnectionClient.receiveObject();
             Log.e("smartkey", receiveMsg);
+
             JSONArray jsonArray = new JSONArray(receiveMsg);
             roomNames = new String[jsonArray.length()];
             officeCode = new String[jsonArray.length()];
             roomNumber = new String[jsonArray.length()];
-
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject dataJsonObject = (JSONObject) jsonArray.getJSONObject(i);
                 String smartKeyOfficeCode = dataJsonObject.getString("office_no");
@@ -94,21 +93,25 @@ public class SmartkeyFragment extends Fragment {
                 String roomNum = dataJsonObject.getString("room_no");
                 String smartKeyRoomInfo = roomName + roomNum;
                 Log.e("smartkey", smartKeyRoomInfo);
-
-//                String smartKeyRoomInfo = dataJsonObject.getString("NAME") + " " + dataJsonObject.getString("RNUM");
-
                 roomNames[i] = smartKeyRoomInfo;
                 officeCode[i] = smartKeyOfficeCode;
                 roomNumber[i] = roomNum;
             }
+            if (receiveMsg != "-") {
+                for (String str : roomNames) {
+                    Log.e("str", str);
+                    data.add(str);
+                }
+
+            } else {
+                data.add("예약하신 방이 없습니다");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        for (String str : roomNames) {
-            Log.e("str", str);
-            data.add(str);
-        }
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, data);
 
         spinner.setAdapter(arrayAdapter);
@@ -151,20 +154,14 @@ public class SmartkeyFragment extends Fragment {
                 }
         );
 
-        smartLightBtn.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "현재 준비 중인 서비스입니다.", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-        );
-
         addgroupBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent addgroup = new Intent(getContext(), AddGroup.class);
-                        startActivity(addgroup);
+                        if (officeCode != null) {
+                            Intent addgroup = new Intent(getContext(), AddGroup.class);
+                            startActivity(addgroup);
+                        }
+
                     }
                 }
         );
@@ -172,24 +169,27 @@ public class SmartkeyFragment extends Fragment {
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("head", "SearchOfficePnum");
-                    object.put("OfficeCode", officeCode[roomChoice]);
+                if (officeCode != null) {
+                    JSONObject object = new JSONObject();
+                    try {
+                        object.put("head", "SearchOfficePnum");
+                        object.put("OfficeCode", officeCode[roomChoice]);
 
-                    String sendData = object.toString();
-                    httpConnectionClient = new HttpConnection();
-                    httpConnectionClient.sendObject(sendData);
+                        String sendData = object.toString();
+                        httpConnectionClient = new HttpConnection();
+                        httpConnectionClient.sendObject(sendData);
 
-                    String receiveMsg = httpConnectionClient.receiveObject();
-                    JSONObject object2 = new JSONObject(receiveMsg);
-                    Log.e("str", receiveMsg);
-                    String phone = object2.get("office_call").toString();
-                    phoneNumber = phone;
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        String receiveMsg = httpConnectionClient.receiveObject();
+                        JSONObject object2 = new JSONObject(receiveMsg);
+                        Log.e("str", receiveMsg);
+                        String phone = object2.get("office_call").toString();
+                        phoneNumber = phone;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    callBtnEventDialog(roomNames[roomChoice]);
                 }
-                callBtnEventDialog(roomNames[roomChoice]);
+
             }
         });
 
