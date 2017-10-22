@@ -160,10 +160,10 @@
 
                 <div class="w3-row w3-large">
                     <div class="w3-col s3">
-                        <p><i class="fa fa-fw fa-male"></i>기준인원 수 </p>
+                        <p><i class="fa fa-fw fa-male"></i>최소인원 수 </p>
                     </div>
                     <div class="w3-col s4">
-                        <input type="text" class="form-control" id="usr" name="standard">
+                        <input type="text" class="form-control" id="usr" name="max">
                     </div>
                 </div>
         

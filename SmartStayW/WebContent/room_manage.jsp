@@ -164,6 +164,8 @@ p {
 							호
 						</b>
 					</p>
+					<p><i class="fa fa-users"></i> <b>최대 인원 : <%=roomList.get(i).getMaximumNum() %> 명</b></p>
+					<p><i class="fa fa-fw fa-male"></i> <b>기준 인원 : <%=roomList.get(i).getStandardNum() %> 명</b></p>
 				</div>
 			</div>
 			
