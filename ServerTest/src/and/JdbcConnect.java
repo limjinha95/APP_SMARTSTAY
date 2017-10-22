@@ -309,7 +309,7 @@ public class JdbcConnect {
 	}
 
 	public String RoomList() throws SQLException {
-		String query = "select office_tb.office_name, doorlock_tb.room_no, office_tb.office_inform from doorlock_tb join office_tb on doorlock_tb.office_no = office_tb.office_no";
+		String query = "select office_tb.office_name, room_tb.room_name, office_tb.office_address, room_tb.room_type, room_tb.cost from room_tb join office_tb on room_tb.office_no = office_tb.office_no";
 		psmt = con.prepareStatement(query);
 		rs = psmt.executeQuery();
 		if (rs.next() == false) {
