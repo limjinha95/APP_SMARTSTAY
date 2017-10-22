@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,6 +49,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reserve);
+
         Intent intent = getIntent();
         roomName = intent.getExtras().getString("roomName");
         roomPrice = intent.getExtras().getString("roomPrice");
@@ -98,6 +101,9 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        final Animation myAnim = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
 
         if (view == btnFromPicker) { // startDate
 
@@ -207,6 +213,7 @@ public class Reserve extends AppCompatActivity implements View.OnClickListener {
         }
 
         if (view == btnPayment) {
+            view.startAnimation(myAnim);
             Intent Intent = new Intent(this, Payment.class);
             Intent.putExtra("roomNumber", roomNumber);
             Intent.putExtra("officeCode", officeCode);

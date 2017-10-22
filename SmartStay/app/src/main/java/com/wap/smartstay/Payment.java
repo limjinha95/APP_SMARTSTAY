@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,11 +27,16 @@ public class Payment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payscreen);
 
+        final Animation myAnim = AnimationUtils.loadAnimation(this,R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1,1);
+        myAnim.setInterpolator(interpolator);
+
         Button btnCoupon = (Button) findViewById(R.id.couponBtn);
 
         btnCoupon.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 Intent Intent = new Intent(Payment.this, CouponList.class);
                 startActivity(Intent);
             }
@@ -53,6 +60,7 @@ public class Payment extends AppCompatActivity {
         btnPayment.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(myAnim);
                 try {
                     JSONObject object = new JSONObject();
                     object.put("head", "Reservation");

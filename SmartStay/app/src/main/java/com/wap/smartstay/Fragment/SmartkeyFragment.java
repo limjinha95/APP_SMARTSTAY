@@ -40,7 +40,7 @@ public class SmartkeyFragment extends Fragment {
     public HttpConnection httpConnectionClient;
     ImageButton manualBtn;
     LinearLayout manualBackground;
-    ImageButton smartkeyBtn, addgroupBtn, callBtn;
+    ImageButton smartkeyBtn, smartLightBtn, addgroupBtn, callBtn;
     Spinner spinner;
     List<String> data = new ArrayList<>();
     public static String[] roomNames;
@@ -73,6 +73,7 @@ public class SmartkeyFragment extends Fragment {
         manualBtn = (ImageButton) view.findViewById(R.id.manualBtn);
         manualBackground = (LinearLayout) view.findViewById(R.id.manualBackground);
         smartkeyBtn = (ImageButton) view.findViewById(R.id.smartkeyBtn);
+        smartLightBtn = (ImageButton) view.findViewById(R.id.smartlightBtn);
         addgroupBtn = (ImageButton) view.findViewById(R.id.addgroupBtn);
         callBtn = (ImageButton) view.findViewById(R.id.callBtn);
         Log.e("smartkey", "check1");
@@ -174,8 +175,8 @@ public class SmartkeyFragment extends Fragment {
                     }
                 }
         );
-      
-      smartLightBtn.setOnClickListener(
+
+        smartLightBtn.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         v.startAnimation(myAnim);
@@ -184,7 +185,6 @@ public class SmartkeyFragment extends Fragment {
                     }
                 }
         );
-
 
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
